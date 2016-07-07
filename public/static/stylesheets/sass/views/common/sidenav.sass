@@ -1,0 +1,36 @@
+.sidenav-backdrop
+	background: rgba(0,0,0,0.3)
+	position: absolute
+	top: 0
+	left: 0
+	right: 0 
+	bottom: 0
+	display: none
+	opacity: 0
+	z-index: 0
+	will-change: opacity
+
+	&.sidenav-visible
+		display: block
+
+.sidenav
+	position: fixed
+	right: -310px
+	top: 0
+	height: 100%
+	z-index: 9999
+	overflow-y: auto
+	will-change: transform
+	box-shadow: 0 0 30px rgba(0,0,0,0.6)
+
+.sidenav-content
+	position: relative
+	z-index: 500
+	height: 100%
+
+html
+	height: 100%
+
+body
+	min-height: 100%
+

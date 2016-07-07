@@ -34,5 +34,5 @@ function listening() {
 
 }(WebServer));
 
-server.listen(config.server.port, listening);
+server.listen(config.server.port);
 global.server = server;

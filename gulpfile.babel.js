@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import sourcemaps from 'gulp-sourcemaps';
 import sassdoc from 'sassdoc';
-import livereload from 'gulp-livereload';
 import babel from 'gulp-babel';
 import notify from 'gulp-notify';
 import cache from 'gulp-cache';
@@ -13,7 +12,8 @@ import autoprefixer from 'gulp-autoprefixer';
 import rename from 'gulp-rename';
 import uglifyJs from 'gulp-uglify';
 import uglifyCss from 'gulp-uglifycss';
-import browserSync from 'browser-sync';
+import browserify from 'browserify';
+import babelify from 'babelify';
 
 
 var config = {

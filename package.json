@@ -26,7 +26,9 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "browser-sync": "^2.13.0",
+    "browserify": "^13.0.1",
     "connect-livereload": "^0.5.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
@@ -45,6 +47,7 @@
     "gulp-uglify": "^1.5.4",
     "gulp-uglifycss": "^1.0.6",
     "sassdoc": "^2.1.20",
-    "tiny-lr": "^0.2.1"
+    "tiny-lr": "^0.2.1",
+    "watchify": "^3.7.0"
   }
 }
