@@ -37,6 +37,8 @@
 		position: relative
 		height: 250px
 		width: 100%
+		margin-bottom: 8px
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
 
 		img
 			height: 250px
@@ -52,13 +54,14 @@
 			.projects-overlay
 				background: rgba(0,0,0,0.6)
 
-				> div
-					opacity: 1
-					transition: all .4s ease
+				a
+					> div
+						opacity: 1
+						transition: all .4s ease
 
-					&:hover
-						color: #fff
-						border: 1px solid #fff
+						&:hover
+							color: #fff
+							border: 1px solid #fff
 
 	p
 		&:first-of-type	
@@ -82,14 +85,17 @@
 	background: transparent
 	transition: all .4s ease
 
-	> div
-		opacity: 0
-		@include lato
-		font-weight: 300
-		color: #9a9a9a
-		padding: 15px 50px
-		border: 1px solid #9a9a9a
-		transition: all .4s ease
+	a
+		text-decoration: none
+
+		> div
+			opacity: 0
+			@include lato
+			font-weight: 300
+			color: #9a9a9a
+			padding: 15px 50px
+			border: 1px solid #9a9a9a
+			transition: all .4s ease
 
 #portfolio-opinionated-content
 	display: none

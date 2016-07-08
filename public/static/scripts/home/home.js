@@ -1,13 +1,6 @@
 var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-var myContent = document.getElementById('portfolio-opinionated-content');
-var myModal = new Modal({
-	content: myContent
-});
-var triggerButton = document.getElementById('trigger-opinionated-dialog');
-triggerButton.addEventListener('click', function() {
-	myModal.open();
-});
+
 
 var menuToggleButton = document.getElementById('offside-toggle');
 var menuCloseButton = document.getElementById('close-button');
