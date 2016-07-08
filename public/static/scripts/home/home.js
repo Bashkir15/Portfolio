@@ -1,17 +1,35 @@
 var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
-
 var menuToggleButton = document.getElementById('offside-toggle');
 var menuCloseButton = document.getElementById('close-button');
 var offsideBackdrop = document.getElementById('offside-backdrop');
+var opinionContent = document.getElementById('opinionated-content');
+var opinionTrigger = document.getElementById('open-opinionated');
+
+var portfolio = portfolio || {};
+
+var homePage = {
+	setMaxHeight: setMaxHeight,
+	alterNav: alterNav,
+	openSideNav: openSideNav,
+	closeSideNav: closeSideNav,
+	myModal: myModal
+};
 
 menuToggleButton.addEventListener('click', openSideNav);
 
+window.onresize = function() {
+	setMaxHeight();
+}
+window.addEventListener('scroll', alterNav)
 function setMaxHeight() {
 	document.getElementById("home-header").style.height = viewportHeight - 2 + "px";
 	document.getElementById("home-header").style.width = viewportWidth + "px";
 }
+
+opinionTrigger.addEventListener('click', function() {
+	myModal.open();
+});
 
 function alterNav() {
 	var offset = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop
@@ -33,8 +51,6 @@ function alterNav() {
 	}
 }
 
-setMaxHeight();
-
 function openSideNav() {
 	var sidenav = document.getElementById('offside-menu');
 	sidenav.classList.add('open');
@@ -49,9 +65,8 @@ function closeSideNav() {
 	offsideBackdrop.classList.remove('open');
 }
 
+var myModal = new portfolio.Modal.Modal({
+	content: opinionContent,
+});
 
-window.onresize = function() {
-	setMaxHeight();
-}
-
-window.addEventListener('scroll', alterNav);
+setMaxHeight();

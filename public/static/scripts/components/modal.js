@@ -1,138 +1,139 @@
-(function() {
+'use strict';
 
-	var extend = function (to, from) {
-		for (var p in from) {
-			if (from.hasOwnProperty(p)) {
-				to[p] = from[p];
+var portfolio = portfolio || {};
+
+portfolio.Modal = (function() {
+
+	// Constructor Function
+	function Modal() {
+
+		this.closeButton = null;
+		this.modal = null;
+		this.overlay = null;
+
+		this.transitionEnd = transitionSelect();
+
+		var defaults = {
+			className: 'fade-in-from-above',
+			closeButton: true,
+			content: "",
+			maxWidth: 600,
+			minWidth: 280,
+			overlay: true
+		};
+
+		if (arguments[0] && typeof arguments[0] === 'object') {
+			this.options = extendDefaults(defaults, arguments[0]);
+		}
+	}
+
+	// Public Fields
+
+	Modal.prototype.close = function() {
+		var self = this;
+
+		this.modal.className = this.modal.className.replace(" modal-open", "");
+		this.overlay.className = this.overlay.className.replace(" modal-open", "");
+
+		this.modal.addEventListener(this.transitionEnd, function() {
+			self.modal.parentNode.removeChild(self.modal);
+		});
+		this.overlay.addEventListener(this.transitionEnd, function() {
+			self.overlay.parentNode.removeChild(self.overlay);
+		});
+	}
+
+	Modal.prototype.open = function() {
+		buildOut.call(this);
+		initializeEvents.call(this);
+		window.getComputedStyle(this.modal).height;
+		this.modal.className = this.modal.className + (this.modal.offsetHeight > window.innerHeight ? " modal-open modal-anchored" : " modal-open");
+		this.overlay.className = this.overlay.className + " modal-open";
+	}
+
+	// Private Fields
+
+	function buildOut() {
+		var content,
+		contentHolder,
+		docFrag;
+
+		if (typeof this.content === 'string') {
+			content = this.options.content;
+		} else {
+			content = this.options.content.innerHTML;
+		}
+
+		//var offset = window.pageYOffset ? window.pageYOffset || document.documentElement.scrollTop
+
+		docFrag = document.createDocumentFragment();
+
+		this.modal = document.createElement("div");
+		this.modal.className = "profile-modal " + this.options.className;
+		this.modal.style.minWidth = this.options.minWidth + "px";
+		this.modal.style.maxWidth = this.options.maxWidth + "px";
+		this.modal.style.top = window.pageYOffset + (window.innerHeight / 4) + "px";
+		this.modal.style.left = (window.innerWidth - this.modal.offsetWidth) / 2 + "px";
+
+		if (this.options.closeButton === true) {
+			this.closeButton = document.createElement("button");
+			this.closeButton.className = "modal-close close-button";
+			this.closeButton.innerHTML = "x";
+			this.modal.appendChild(this.closeButton);
+		}
+
+		if (this.options.overlay === true) {
+			this.overlay = document.createElement("div");
+			this.overlay.className = "modal-overlay " + this.options.className;
+			docFrag.appendChild(this.overlay);
+		}
+
+		contentHolder = document.createElement("div");
+		contentHolder.className = "modal-content";
+		contentHolder.innerHTML = content;
+		this.modal.appendChild(contentHolder);
+
+		docFrag.appendChild(this.modal);
+		document.body.appendChild(docFrag);
+	}
+
+	function extendDefaults (source, properties) {
+		var property;
+		for (var property in properties) {
+			if (properties.hasOwnProperty(property)) {
+				source[property] = properties[property];
 			}
 		}
 
-		return p;
+		return source;
 	}
 
-	var winW = function() {
-		return window.innerHeight || document.documentElement.clientWidth;
-	}
+	function initializeEvents() {
+		if (this.closeButton) {
+			this.closeButton.addEventListener('click', this.close.bind(this));
+		}
 
-	var winH = function() {
-		return window.innerHeight || document.documentElement.clientHeight;
-	}
-
-	var scrollX = function() {
-		return window.pageXOffset || document.documentElement.scrollLeft;
-	}
-
-	var scrollY = function() {
-		return window.pageYOffset || document.documentElement.scrollTop;
-	}
-
-	var byClass = function (cls, el) {
-		el = el || document;
-
-		if (el.getElementsByClassName) {
-			return el.getElementsByClassName(cls);
-		} else {
-			var ret = [];
-			var re = new RegExp('^|\\s+' + cls + '\\s+|$');
-			var tags = el.getElementByTagName('*');
-
-			for (tag in tags) {
-				if (re.test(tags[tag].className)) {
-					ret.push(tags[tag]);
-				}
-			}
-
-			return ret;
+		if (this.overlay) {
+			this.overlay.addEventListener('click', this.close.bind(this));
 		}
 	}
 
-	var bind = function (el, type, listener) {
-		if (el.addEventListener) {
-			el.addEventListener(type, listener, false);
-		} else {
-			el.attachEvent('on' + type, listener);
+	function transitionSelect() {
+		var el = document.createElement("div");
+		if (el.style.WebkitTransition) {
+			return "WebkitTransitionEnd";
 		}
+
+		if (el.style.OTransition) {
+			return "oTransitionEnd";
+		}
+
+		return "transitionend";
 	}
 
-	var defaults = {
-		width: 500,
-		height: 400,
-		offsetX: 0,
-		offsetY: 0,
-		zIndex: 9999,
-		closeButtonClass: 'popup-close'
+	return {
+		Modal: Modal
 	};
-
-	function Modal(el, opts) {
-		if (!(this instanceof Modal)) {
-			return new Modal(el, opts);
-		}
-
-		this.opts = extend({}, extend(defaults, opts));
-		this.el = el;
-		this.init();
-	}
-
-	extend(Modal.prototype, {
-		init: function() {
-			var opts = this.opts;
-
-			extend(this.el.style, {
-				position: 'absolute',
-				width: opts.width + 'px',
-				height: opts.height + 'px',
-				zIndex: opts.zIndex
-			});
-
-			this.bindEvent();
-		},
-
-		bindEvent: function() {
-			var self = this;
-			var closeBtn = byClass(this.opts.closeButtonClass)[0];
-
-			bind(closeBtn, 'click', function() {
-				self.close();
-			});
-
-			bind(document, 'keydown', function (e) {
-				e = e || window.event;
-				var keycode = e.which || e.keycode;
-
-				if (keycode === 27) {
-					self.close();
-				}
-			});
-
-			bind(window, 'resize', function() {
-				self.setPosition();
-			});
-		},
-
-		open: function() {
-			this.el.style.display = 'block';
-			this.setPosition();
-		},
-
-		close: function() {
-			this.el.style.display = 'none';
-		},
-
-		setPosition: function() {
-			var opts = this.opts;
-
-			var top = scrollY() + Math.max(0, (winH() - opts.height) / 2);
-			var left = scrollX() + Math.max(0, (winW() - opts.width) / 2);
-
-			extend(this.el.style, {
-				top: top + opts.offsetY + 'px',
-				left: left + opts.offsetX + 'px'
-			});
-		},
-	});
-
-	window.Modal = Modal;
-	return Modal;
 }());
 
 	
