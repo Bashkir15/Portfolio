@@ -10,49 +10,35 @@
 
 	<body>
 		<div id='backdrop'></div>
-		<div id='sidenav'>
-			<ul>
-				<li>Test</li>
-				<li>Other test</li>
-				<li id='close-sidenav'>Close</li>
-			</ul>
-		</div>
-		<div id='content'>
-			<% include ./templates/main-header %>
 
-			<section class='home-header'>
-				<% include ./templates/home/home-header %>
-			</section>
+		<section id='intro'>
+			<div class='intro-content' class='mask'>
+				<div class='intro-content-container'>
+					<div class='intro-content-left'>
+						<div>
+							<h3>Forrest Collins</h3>
+							<p>The Design is in the Details</p>
+						</div>
 
-			<section class='home-skills'>
-				<% include ./templates/home/home-skills %>
-			</section>
+						<div class='intro-content-left-button'>
+							<button id='home-button'>
+								<span>
+									<i class='mdi mdi-arrow-right'></i>
+								</span>
+							</button>
+							<span>View Profile</span>
+						</div>
+					</div>
 
-			<section class='home-about'>
-				<% include ./templates/home/home-about %>
-			</section>
+					<div class='intro-content-right'>
+						<div class='intro-content-image'>
+							<div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-			<section class='home-projects'>
-				<% include ./templates/home/home-projects %>
-			</section>
-
-			<footer class='footer'>
-				<% include ./templates/main-footer %>
-			</footer>
-		</div>
-
-		<script src='/static/scripts/home/home.js'></script>
-		<script src='/static/scripts/components/sidenav.js'></script>
-		<script>
-			var sidenav = new Sidenav({
-				content: document.getElementById("content"),
-				sidenav: document.getElementById("sidenav"),
-				backdrop: document.getElementById("backdrop")
-			});
-
-			document.getElementById("sidenav-button").addEventListener('click', function() {
-				sidenav.open();
-			});
-		</script>
+		<script src='/static/scripts/main.js'></script>
 	</body>
 </html>

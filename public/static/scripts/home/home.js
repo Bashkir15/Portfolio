@@ -1,6 +1,19 @@
 var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var viewportHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+var myContent = document.getElementById('portfolio-opinionated-content');
+var myModal = new Modal({
+	content: myContent
+});
+var triggerButton = document.getElementById('trigger-opinionated-dialog');
+triggerButton.addEventListener('click', function() {
+	myModal.open();
+});
 
+var menuToggleButton = document.getElementById('offside-toggle');
+var menuCloseButton = document.getElementById('close-button');
+var offsideBackdrop = document.getElementById('offside-backdrop');
+
+menuToggleButton.addEventListener('click', openSideNav);
 
 function setMaxHeight() {
 	document.getElementById("home-header").style.height = viewportHeight - 2 + "px";
@@ -28,6 +41,21 @@ function alterNav() {
 }
 
 setMaxHeight();
+
+function openSideNav() {
+	var sidenav = document.getElementById('offside-menu');
+	sidenav.classList.add('open');
+	offsideBackdrop.classList.add('open');
+
+	menuCloseButton.addEventListener('click', closeSideNav);
+}
+
+function closeSideNav() {
+	var sidenav = document.getElementById('offside-menu');
+	sidenav.classList.remove('open');
+	offsideBackdrop.classList.remove('open');
+}
+
 
 window.onresize = function() {
 	setMaxHeight();

@@ -1,2 +1,119 @@
 @import "common/common"
 @import "home/home"
+
+#intro
+	position: relative
+	height: 100vh
+	width: 100%
+	display: flex
+	background: #BBBCBC
+	align-items: center
+	overflow: hidden
+
+	&.transition-start
+		@include fade-out($duration: 1s)
+
+.intro-content
+	display: flex
+	padding: 0 5% 0 0
+	margin: 0 auto
+	text-align: center
+	width: 75%
+	border: 1px solid rgba(0,0,0,0.12)
+	background: #D6D8D7
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
+
+.intro-content-container
+	display: flex
+	flex-direction: row
+	width: 100%
+
+	> div
+		display: flex
+		flex-direction: column
+
+.intro-content-left
+	flex: 1
+
+	> div
+		display: flex
+		flex-direction: column
+		align-items: center
+		margin-top: 85px
+
+		h3
+			margin-bottom: 28px
+			opacity: 1
+			@include lato
+			font-weight: 300
+			letter-spacing: 5px
+			line-height: 18px
+			font-size: 30px
+			color: #373838
+
+		p
+			@include lato
+			font-weight: 300
+			letter-spacing: 1px
+			line-height: 16px
+			font-size: 22px
+			color: #373838
+
+
+		&:nth-of-type(2)
+			padding-top: 45px
+
+			button
+				display: flex
+				align-items: center
+				justify-content: center
+				height: 35px
+				width: 35px
+				border: 1px solid rgba(0,0,0,0.35)
+				border-radius: 50%
+				background: #373838
+				outline: none
+				transition: all .4s ease
+
+				span
+					padding: 0
+
+					i
+						font-size: 16px
+						color: #dfe1df
+						display: inline-block
+						transition: all .4s ease
+
+				&:hover
+					background: lighten(#373838, 10%)
+					span
+						i
+							transform: rotate(90deg)
+
+			> span
+				@include lato
+				font-weight: 300
+				letter-spacing: 1px
+				line-height: 14px
+				font-size: 18px
+				padding-top: 12px
+				color: #373838
+
+
+.intro-content-right
+	flex: 2
+
+	> div
+		height: 450px
+		width: 100%
+
+		> div
+			margin: 25px 0
+			height: 400px
+			width: 100%
+			border: 1px solid rgba(0,0,0,0.35)
+
+
+
+
+

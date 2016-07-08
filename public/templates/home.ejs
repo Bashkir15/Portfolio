@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Forrest Collins - Home</title>
+		<meta charset='utf-8'>
+		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic|Pacifico|Lato:300,100' rel='stylesheet' type='text/css'>
+		<link href='/vendor/mdi/css/materialdesignicons.css' rel='stylesheet'>
+		<link rel='stylesheet' href='../vendor/offside/dist/offside.css'>
+		<link rel='stylesheet' href='../static/stylesheets/css/main.css'>
+	</head>
+
+	<body>
+		<div id='offside-backdrop'></div>
+		<div id='offside-menu'>
+
+			<div class='offside-menu-header'>
+				<div>
+					<div>
+						<div>
+							<span>FC</span>
+						</div>
+					</div>
+				</div>
+
+				<div class='offside-menu-close'>
+					<button id='close-button'>
+						<span>X</span>
+					</button>
+				</div>
+			</div>
+
+			<div class='offside-menu-body'>
+				<ul>
+					<li>
+						<a href='/home'>
+							<button aria-label='go home button'>
+								<span>Home</span>
+							</button>
+						</a>
+					</li>
+
+					<li>
+						<a href='/work'>
+							<button aria-label='go to works'>
+								<span>Projects</span>
+							</button>
+						</a>
+					</li>
+
+					<li>
+						<button aria-label='contact me'>
+							<span>Contact Me</span>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id='content'>
+			<% include ./main-header %>
+
+			<section class='home-header'>
+				<% include ./home/home-header %>
+			</section>
+
+			<section class='home-skills'>
+				<% include ./home/home-skills %>
+			</section>
+
+			<section class='home-about'>
+				<% include ./home/home-about %>
+			</section>
+
+			<section class='home-projects'>
+				<% include ./home/home-projects %>
+			</section>
+
+			<footer class='footer'>
+				<% include ./main-footer %>
+			</footer>
+		</div>
+
+		<script src='../static/scripts/components/modal.js'></script>
+		<script src='../static/scripts/home/home.js'></script>
+	</body>
+</html>
