@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Forrest - Contact</title>
+		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic|Pacifico|Lato:300,100' rel='stylesheet' type='text/css'>
+		<link href='/vendor/mdi/css/materialdesignicons.css' rel='stylesheet'>
+		<link rel='stylesheet' href='/static/stylesheets/css/main.css'>
+	</head>
+
+	<body>
+		<nav class='contact-me-nav'>
+			<ul>
+				<li>
+					<a href='/home' class='nav-link'>
+						<button aria-label='go home button'>
+							<span>Home</span>
+						</button>
+					</a>
+				</li>
+
+				<li>
+					<a href='/contact' class='nav-link'>
+						<button aria-label='go to contact button'>
+							<span>Contact</span>
+						</button>
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<section class='contact-me-container'>
+			<div class='contact-me-content'>
+				<div class='contact-me-header'>
+					<h3>Contact me</h3>
+					<p>If social media isn't your thing, you can send me a message directly like this</p>
+				</div>
+
+				<div class='contact-me-form'>
+					<form id='contact-form'>
+						<div class='contact-me-row-1'>
+							<div>
+								<div>
+									<span>
+										<input id='contact-name' placeholder='Enter your name...' required>
+										<label for='contact-name'>Name</label>
+									</span>
+								</div>
+							</div>
+
+							<div>
+								<div>
+									<span>
+										<input id='contact-email' placeholder='Enter your email...' required>
+										<label for='contact-email'>Email</label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class='contact-me-row-2'>
+							<div>
+								<div>
+									<span>
+										<textarea id='contact-message' placeholder='Enter your message...' rows='10' cols='50' required></textarea>
+										<label for='contact-message'>Message</label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class='contact-me-submit'>
+							<button aria-label='send me a message' id='contact-submit'>
+								<span>Contact Me</span>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<script src='/vendor/jquery/dist/jquery.js'></script>
+		<script src='/static/scripts/contact/contact.js'></script>
+	</body>
+</html>

@@ -4,20 +4,14 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'path';
-import browserSync from 'browser-sync';
 import compression from 'compression';
 import indexRoutes from './routes/index.server.routes';
+import contactRoutes from './routes/contact.server.routes';
 
 var config = require('./config/env/' + (process.env.NODE_ENV || 'development'));
 var WebServer = express();
 var server = require('http').createServer(WebServer);
 
-function listening() {
-	browserSync({
-		proxy: 'localhost:' + config.server.port,
-		files: ['../public/**/**/.{js,css}']
-	});
-}
 
 (function (app) {
 
@@ -29,6 +23,7 @@ function listening() {
 		app.use(morgan('dev'));
 		app.use(compression());
 		app.use('/', indexRoutes);
+		app.use('/contact', contactRoutes);
 		app.use(express.static(path.join(__dirname, '../public')));
 		app.use(express.static(path.join(__dirname, '../dist')));
 

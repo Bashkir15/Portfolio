@@ -17,7 +17,7 @@ portfolio.Modal = (function() {
 			className: 'fade-in-from-above',
 			closeButton: true,
 			content: "",
-			maxWidth: 600,
+			maxWidth: 800,
 			minWidth: 280,
 			overlay: true
 		};
@@ -72,7 +72,7 @@ portfolio.Modal = (function() {
 		this.modal.className = "profile-modal " + this.options.className;
 		this.modal.style.minWidth = this.options.minWidth + "px";
 		this.modal.style.maxWidth = this.options.maxWidth + "px";
-		this.modal.style.top = window.pageYOffset + (window.innerHeight / 4) + "px";
+		this.modal.style.top = window.pageYOffset + (window.innerHeight / 2) + "px";
 		this.modal.style.left = (window.innerWidth - this.modal.offsetWidth) / 2 + "px";
 
 		if (this.options.closeButton === true) {

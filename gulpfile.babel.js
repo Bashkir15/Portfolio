@@ -85,7 +85,6 @@ gulp.task('minifyJs', () => {
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(babel())
-		.pipe(concat('main.js'))
 		.pipe(uglifyJs())
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(config.prod.js))

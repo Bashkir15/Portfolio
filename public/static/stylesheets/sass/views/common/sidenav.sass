@@ -1,6 +1,6 @@
 #offside-backdrop
 	display: none
-	position: absolute
+	position: fixed
 	top: 0
 	left: 0
 	height: 100%
@@ -11,15 +11,17 @@
 	&.open
 		display: block
 		background: rgba(0,0,0,0.6)
+		transition: all .4s ease
+		@include fade-in($duration: .4s)
 
 #offside-menu
 	position: fixed
 	top: 0
-	right: -220px
+	right: -300px
 	transition: all .4s ease
 	z-index: 9999
 	height: 100%
-	width: 220px
+	width: 300px
 
 	&.open
 		right: 0px
@@ -31,7 +33,7 @@
 	position: relative
 	z-index: 9999
 	height: 20%
-	background: #244359
+	background: #212834
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.45)
 
 	> div
