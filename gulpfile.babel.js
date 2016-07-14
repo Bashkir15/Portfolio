@@ -25,7 +25,7 @@ var config = {
 		sass: './public/static/stylesheets/sass/**/*.sass',
 		js: './public/static/scripts/**/*.js',
 		mainJs: './public/static/scripts/main.js',
-		images: './public/static/images'
+		images: './public/static/images/*'
 	},
 
 	prod: {
@@ -111,6 +111,8 @@ gulp.task('watch', () => {
 );
 
 gulp.task('default', ['sass', 'watch']);
+
+gulp.task('build', ['minifyCss', 'minifyJs', 'images']);
 
 
 
