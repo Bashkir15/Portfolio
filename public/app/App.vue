@@ -9,15 +9,29 @@
 
 			<div class='nav-right'>
 				<div class='nav-item'>
-					<button>
+					<button @click="$refs.sidenav.show">
 						Menu
 					</button>
 				</div>
 			</div>
 		</nav>
+
+		<sidenav v-ref:sidenav=''>
+			<p>Hello!</p>
+		</sidenav>
 	</div>
 
 	<div>
 		<router-view></router-view>
 	</div>
 </template>
+
+<script>
+	import sidenav from './components/sidenav/sidenav.vue';
+
+	export default {
+		components: {
+			sidenav
+		}
+	}
+</script>

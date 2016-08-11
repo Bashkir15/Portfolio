@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fd3d3bd7ff3eec9a44b9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "735b6b09d433fe33c5f4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -589,17 +589,21 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _vueRouter = __webpack_require__(3);
+	var _vueRouter = __webpack_require__(5);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _App = __webpack_require__(6);
+	var _App = __webpack_require__(11);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _home = __webpack_require__(8);
+	var _home = __webpack_require__(12);
 
 	var _home2 = _interopRequireDefault(_home);
+
+	var _sidenav = __webpack_require__(13);
+
+	var _sidenav2 = _interopRequireDefault(_sidenav);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3382,7 +3386,7 @@
 	   */config._assetTypes.forEach(function(type){Vue[type]=function(id,definition){if(!definition){return this.options[type+'s'][id];}else{/* istanbul ignore if */if(process.env.NODE_ENV!=='production'){if(type==='component'&&(commonTagRE.test(id)||reservedTagRE.test(id))){warn('Do not use built-in or reserved HTML elements as component '+'id: '+id);}}if(type==='component'&&isPlainObject(definition)){if(!definition.name){definition.name=id;}definition=Vue.extend(definition);}this.options[type+'s'][id]=definition;return definition;}};});// expose internal transition API
 	extend(Vue.transition,transition);}installGlobalAPI(Vue);Vue.version='1.0.26';// devtools global hook
 	/* istanbul ignore next */setTimeout(function(){if(config.devtools){if(devtools){devtools.emit('init',Vue);}else if(process.env.NODE_ENV!=='production'&&inBrowser&&/Chrome\/\d+/.test(window.navigator.userAgent)){console.log('Download the Vue Devtools for a better development experience:\n'+'https://github.com/vuejs/vue-devtools');}}},0);module.exports=Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(7)))
 
 /***/ },
 /* 2 */
@@ -3685,6 +3689,117 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _sidenav = __webpack_require__(13);
+
+	var _sidenav2 = _interopRequireDefault(_sidenav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+		components: {
+			sidenav: _sidenav2.default
+		}
+	};
+	// </script>
+	// <template>
+	// 	<div id='wrapper'>
+	// 		<nav class='main-nav'>
+	// 			<div class='nav-left'>
+	// 				<div class='nav-item'>
+	// 					<h3>Forrest Collins</h3>
+	// 				</div>
+	// 			</div>
+	//
+	// 			<div class='nav-right'>
+	// 				<div class='nav-item'>
+	// 					<button @click="$refs.sidenav.show">
+	// 						Menu
+	// 					</button>
+	// 				</div>
+	// 			</div>
+	// 		</nav>
+	//
+	// 		<sidenav v-ref:sidenav=''>
+	// 			<p>Hello!</p>
+	// 		</sidenav>
+	// 	</div>
+	//
+	// 	<div>
+	// 		<router-view></router-view>
+	// 	</div>
+	// </template>
+	//
+	// <script>
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _utils = __webpack_require__(6);
+
+	var _utils2 = _interopRequireDefault(_utils);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+		name: 'sidenav',
+
+		props: {
+			visible: Boolean
+		},
+
+		methods: {
+			show: function show() {
+				this.visible = true;
+			},
+			hide: function hide() {
+				this.visible = false;
+			},
+			toggle: function toggle() {
+				this.visible ? this.hide() : this.show();
+			}
+		}
+	};
+
+	// </script>
+	// <template>
+	// 	<div class='sidenav'>
+	// 		<div class='sidenav-content' v-if="visible">
+	// 			<div class='sidenav-header'>
+	// 				<button @click="hide">
+	// 					<span>X</span>
+	// 				</button>
+	//
+	// 				<p>Something</p>
+	// 			</div>
+	//
+	// 			<div class='sidenav-body'>
+	// 				<p>Body!</p>
+	// 			</div>
+	// 		</div>
+	//
+	// 		<div class='overlay' v-if="visible"></div>
+	// 	</div>
+	// </template>
+	//
+	// <script>
+
+/***/ },
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -6399,7 +6514,88 @@
 	});
 
 /***/ },
-/* 4 */
+/* 6 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	function classes(options) {
+		var cls = [];
+
+		for (var p in options) {
+			if (options[p]) {
+				cls.push(p);
+			}
+
+			return cls;
+		}
+	}
+
+	function listen(target, eventType, callback) {
+		if (target.addEventListener) {
+			target.addEventListener(eventType, callback, false);
+			return {
+				remove: function remove() {
+					target.removeEventListener(eventType, callback, false);
+				}
+			};
+		} else if (target.attachEvent) {
+			target.attachEvent('on' + eventType, callback);
+			return {
+				remove: function remove() {
+					target.detachEvent('on' + eventType, callback);
+				}
+			};
+		}
+	}
+
+	function coerceBoolean(val) {
+		typeof val !== 'string' ? val : val === 'true' ? true : val === 'false' ? false : val === 'null' ? false : val === 'undefined' ? false : val;
+	}
+
+	function getScrollBarWidth() {
+		if (document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
+			return 0;
+		}
+
+		var inner = document.createElement('p');
+		inner.style.width = "100%";
+		inner.style.height = "200px";
+
+		var outer = document.createElement('div');
+		outer.style.position = 'abosolute';
+		outer.style.top = '0px';
+		outer.style.left = '0px';
+		outer.style.visibility = 'hidden';
+		outer.style.width = '200px';
+		outer.style.height = '150px';
+		outer.style.overflow = 'hidden';
+		outer.appendChild(inner);
+
+		document.body.appendChild(outer);
+
+		var w1 = inner.offsetWidth;
+		var w2 = inner.offsetWidth;
+		outer.style.overflow = 'scroll';
+
+		if (w1 === w2) {
+			w2 = outer.clientWidth;
+		}
+
+		document.body.removeChild(outer);
+
+		return w1 - w2;
+	}
+
+	module.exports = {
+		classes: classes,
+		listen: listen,
+		coerceBoolean: coerceBoolean,
+		getScrollBarWidth: getScrollBarWidth
+	};
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -6540,17 +6736,34 @@
 	};
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id='wrapper'>\n\t<nav class='main-nav'>\n\t\t<div class='nav-left'>\n\t\t\t<div class='nav-item'>\n\t\t\t\t<h3>Forrest Collins</h3>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class='nav-right'>\n\t\t\t<div class='nav-item'>\n\t\t\t\t<button>\n\t\t\t\t\tMenu\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t</nav>\n</div>\n\n<div>\n\t<router-view></router-view>\n</div>\n";
+	module.exports = "\n<div id='wrapper'>\n\t<nav class='main-nav'>\n\t\t<div class='nav-left'>\n\t\t\t<div class='nav-item'>\n\t\t\t\t<h3>Forrest Collins</h3>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<div class='nav-right'>\n\t\t\t<div class='nav-item'>\n\t\t\t\t<button @click=\"$refs.sidenav.show\">\n\t\t\t\t\tMenu\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</div>\n\t</nav>\n\n\t<sidenav v-ref:sidenav=''>\n\t\t<p>Hello!</p>\n\t</sidenav>\n</div>\n\n<div>\n\t<router-view></router-view>\n</div>\n";
 
 /***/ },
-/* 6 */
+/* 9 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div>\n\t<p>Home</p>\n</div>\n";
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class='sidenav'>\n\t<div class='sidenav-content' v-if=\"visible\">\n\t\t<div class='sidenav-header'>\n\t\t\t<button @click=\"hide\">\n\t\t\t\t<span>X</span>\n\t\t\t</button>\n\n\t\t\t<p>Something</p>\n\t\t</div>\n\n\t\t<div class='sidenav-body'>\n\t\t\t<p>Body!</p>\n\t\t</div>\n\t</div>\n\n\t<div class='overlay' v-if=\"visible\"></div>\n</div>\n";
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(5)
+	__vue_script__ = __webpack_require__(3)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] ../public/app/App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(8)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -6569,17 +6782,11 @@
 	})()}
 
 /***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<div>\n\t<p>Home</p>\n</div>\n";
-
-/***/ },
-/* 8 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(7)
+	__vue_template__ = __webpack_require__(9)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -6590,6 +6797,34 @@
 	  hotAPI.install(__webpack_require__(1), false)
 	  if (!hotAPI.compatible) return
 	  var id = "_v-4bf53a0a/home.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(4)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] ../public/app/components/sidenav/sidenav.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(10)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (true) {(function () {  module.hot.accept()
+	  var hotAPI = __webpack_require__(2)
+	  hotAPI.install(__webpack_require__(1), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-06cbd484/sidenav.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
