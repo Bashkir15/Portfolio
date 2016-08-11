@@ -1,4 +1,14 @@
-.main-nav
+body
+	height: 100vh
+	min-height: 100vh
+	overflow-x: hidden
+	background: none
+	transition: all .4s ease
+
+	&.modal-open
+		background: rgba(0,0,0,0.3)
+
+.nav
 	display: flex
 	align-items: stretch
 	justify-content: stretch
@@ -22,3 +32,60 @@
 	align-items: center
 	justify-content: center
 	padding: 10px
+
+#sidenav
+	position: fixed
+	top: 0
+	left: 0
+	height: 100vh
+	width: 0
+	overflow-x: hidden
+	z-index: 10
+	background: #fff
+	transition: all .4s ease
+
+.sidenav-header
+	display: flex
+	flex-direction: column
+	align-items: center
+	justify-content: stretch
+	position: relative
+	height: 150px
+	border-bottom: 1px solid rgba(0,0,0,0.35)
+
+	button
+		position: absolute
+		top: 10px
+		right: 10px
+
+	div
+		width: 50px
+		height: 50px
+		margin-top: 30px
+		border: 1px solid rgba(0,0,0,0.35)
+		border-radius: 50%
+
+.sidenav-body
+
+	ul
+		width: 100%
+
+		li
+			width: 100%
+			height: 50px
+
+			button
+				border: none
+				background: none
+				width: 100%
+				height: 50px
+
+.sidenav-backdrop
+	position: fixed
+	top: 0 
+	left: 0
+	right: 0
+	left: 0
+	z-index: 5
+	height: 100vh
+	width: 100%

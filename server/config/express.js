@@ -4,24 +4,14 @@ import bodyParser from 'body-parser';
 import compression from 'compression';
 import path from 'path';
 import webpack from 'webpack';
-import webpackConfig from '../../webpack/webpack.config.js';
+import ejs from 'ejs';
+import indexRoutes from '../routes/index.server.routes';
 
 module.exports = function () {
 	let app = express();
-	const compiler = webpack(webpackConfig);
 
-	app.use(require('connect-history-api-fallback')(compiler, {
-		publicPath: webpackConfig.output.publicPath,
-		stats: {
-			colors: true
-		}
-	}));
-
-	app.use(require('webpack-hot-middleware')(compiler));
-
-	app.get('/', (req, res) => {
-		res.sendFile(path.join(__dirname, '../../public/index.html'));
-	});
+	app.set('views', path.join(__dirname, '../../public'));
+	app.set('view engine', 'ejs');
 
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({extended: true}));
@@ -31,6 +21,8 @@ module.exports = function () {
 	app.use(express.static(path.join(__dirname, '../../public')));
 	app.use(express.static(path.join(__dirname, '../../node_modules')));
 	app.use(express.static(path.join(__dirname, '../../dist')));
+
+	app.use('/', indexRoutes);
 
 	return app;
 }
