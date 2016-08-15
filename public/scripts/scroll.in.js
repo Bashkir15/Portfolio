@@ -5,13 +5,33 @@ function init() {
 
 	Array.prototype.map.call(elements, (item) => {
 		var anim = item.getAttribute('data-entrance');
+		var delay = item.getAttribute("data-entrance-delay");
 
 		item.style.transition = "all 1s ease";
 
+		if (delay) {
+			elem.style.transitionDelay = (delay / 1000) + 's';
+		}
 		if (anim == "fade") {
 			item.style.opacity = "0";
 		}
+
+		if (isInViewPort(item)) {
+			addEventListener('load', () => {
+				enter(item);
+			}, false);
+		}
 	});
+}
+
+function isInViewPort(elem) {
+	var rect = elem.getBoundingClientRect();
+
+	return(
+		((rect.top + 200) >= 0 && (rect.top + 200) <= window.innerHeight) ||
+		((rect.bottom + 200) >= 0 && (rect.bottom + 200) <= window.innerHeight) ||
+		((rect.top + 200) < 0 && (rect.bottom + 200) > window.innerHeight)
+	);
 }
 
 function enter (elem) {
@@ -25,16 +45,19 @@ function viewportChange() {
 	var elements = document.querySelectorAll('[data-entrance]');
 
 	Array.prototype.map.call(elements, (item) => {
-		var hasEntered = item.classList.contains("has-entered");
+		if (isInViewPort(item)) {
+			var hasEntered = item.classList.contains("has-entered");
 
-		if (!hasEntered) {
-			enter(item);
+			if (!hasEntered) {
+				enter(item);
+			}
 		}
 	});
 }
 
 module.exports = {
 	init: init,
+	isInViewPort: isInViewPort,
 	enter: enter,
 	viewportChange: viewportChange
 }

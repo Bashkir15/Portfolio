@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8e047a7589c73af4d81e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "da0c87847f70aae8b90d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -774,13 +774,29 @@
 
 		Array.prototype.map.call(elements, function (item) {
 			var anim = item.getAttribute('data-entrance');
+			var delay = item.getAttribute("data-entrance-delay");
 
 			item.style.transition = "all 1s ease";
 
+			if (delay) {
+				elem.style.transitionDelay = delay / 1000 + 's';
+			}
 			if (anim == "fade") {
 				item.style.opacity = "0";
 			}
+
+			if (isInViewPort(item)) {
+				addEventListener('load', function () {
+					enter(item);
+				}, false);
+			}
 		});
+	}
+
+	function isInViewPort(elem) {
+		var rect = elem.getBoundingClientRect();
+
+		return rect.top + 200 >= 0 && rect.top + 200 <= window.innerHeight || rect.bottom + 200 >= 0 && rect.bottom + 200 <= window.innerHeight || rect.top + 200 < 0 && rect.bottom + 200 > window.innerHeight;
 	}
 
 	function enter(elem) {
@@ -794,16 +810,19 @@
 		var elements = document.querySelectorAll('[data-entrance]');
 
 		Array.prototype.map.call(elements, function (item) {
-			var hasEntered = item.classList.contains("has-entered");
+			if (isInViewPort(item)) {
+				var hasEntered = item.classList.contains("has-entered");
 
-			if (!hasEntered) {
-				enter(item);
+				if (!hasEntered) {
+					enter(item);
+				}
 			}
 		});
 	}
 
 	module.exports = {
 		init: init,
+		isInViewPort: isInViewPort,
 		enter: enter,
 		viewportChange: viewportChange
 	};
@@ -889,7 +908,7 @@
 		backdrop.style.opacity = "0.5";
 
 		if (scrollBarWidth !== 0) {
-			body.style.paddingRight = scrollBarWidth + 'px';
+			document.body.style.paddingRight = scrollBarWidth + 'px';
 		}
 
 		backdrop.addEventListener('click', closeNav);

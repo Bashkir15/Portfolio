@@ -11,7 +11,7 @@ function openNav() {
 	backdrop.style.opacity = "0.5"
 
 	if (scrollBarWidth !== 0) {
-		body.style.paddingRight = scrollBarWidth + 'px';
+		document.body.style.paddingRight = scrollBarWidth + 'px';
 	}
 
 	backdrop.addEventListener('click', closeNav);
