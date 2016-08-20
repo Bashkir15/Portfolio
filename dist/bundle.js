@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0a724d4b3c103843d947"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "01bf718cfba2051dd188"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -604,11 +604,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var sidenavTrigger = document.getElementById('open-sidenav');
+	var sidenavMenu = document.getElementById('sidenav-container');
 	var canvas = document.getElementById('banner');
 	var opinionDialogTrigger = document.getElementById('open-opinionated');
 
 	if (sidenavTrigger) {
-		sidenavTrigger.addEventListener('click', _sidenav2.default.openNav);
+		var leftNav = new _sidenav2.default();
+
+		sidenavTrigger.addEventListener('click', leftNav.open, false);
+		//sidenavMenu.addEventListener('transitionend', sidenav.onTransitionEnd, false);
 	}
 
 	if (canvas) {
@@ -898,25 +902,124 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
-	var _getScrollbar = __webpack_require__(4);
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
-	var _getScrollbar2 = _interopRequireDefault(_getScrollbar);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var sideNav = function () {
+		function sideNav() {
+			_classCallCheck(this, sideNav);
+
+			this.container = document.getElementById('sidenav-container');
+			this.nav = document.getElementById('sidenav');
+			this.overlay = null;
+			this.open = this._open.bind(this);
+			this.close = this._close.bind(this);
+		}
+
+		_createClass(sideNav, [{
+			key: '_open',
+			value: function _open() {
+				var docFrag = document.createDocumentFragment();
+
+				this.nav.style.willChange = "transform";
+				this.container.classList.add('sidenav-container--animatable');
+				this.overlay = document.createElement('div');
+				this.overlay.className = "sidenav-overlay";
+				this.overlay.style.willChange = "opacity";
+
+				if (!this.container.classList.contains("sidenav-container--visible")) {
+					this.container.classList.add('sidenav-container--visible');
+					this.overlay.classList.add('overlay--visible');
+					docFrag.appendChild(this.overlay);
+					document.body.appendChild(docFrag);
+
+					this.overlay.addEventListener('click', this.close, false);
+				}
+
+				this.overlay.style.willChange = "auto";
+				this.nav.style.willChange = "auto";
+			}
+		}, {
+			key: '_close',
+			value: function _close() {
+				this.nav.style.willChange = "transform";
+				this.overlay.style.willChange = "opacity";
+
+				if (this.container.classList.contains("sidenav-container--visible")) {
+					this.container.classList.remove("sidenav-container--visible");
+					document.body.removeChild(this.overlay);
+				}
+
+				this.nav.style.willChange = "auto";
+			}
+		}]);
+
+		return sideNav;
+	}();
+
+	/*
+	function openSideNav() {
+		const navContainer = document.getElementById('sidenav-container');
+		const nav = document.getElementById('sidenav');
+
+		nav.style.willChange = "transform";
+		navContainer.classList.add('sidenav-container--animatable');
+
+		if (!navContainer.classList.contains("sidenav-container--visible")) {
+			navContainer.classList.add("sidenav-container--visible");
+			overlay.classList.add("overlay--visible");
+			docFrag.appendChild(overlay);
+			document.body.appendChild(docFrag);
+		}
+
+		overlay.style.willChange = "auto";
+		nav.style.willChange = "auto";
+	}
+
+	function toggleSideNav() {
+		const navContainer = document.getElementById('sidenav-container');
+		const nav = document.getElementById('sidenav');
+
+		nav.style.willChange = "transform";
+		navContainer.classList.add("sidenav-container--animatable");
+
+		if (!navContainer.classList.contains("sidenav-container--visible")) {
+			navContainer.classList.add("sidenav-container--visible");
+			document.body.classList.add("backdrop--visible");
+		} else {
+			navContainer.classList.remove("sidenav-container--visible");
+			document.body.classList.remove("backdrop--visible");
+		}
+
+		nav.style.willChange = 'auto';
+	}
+
+
+
+	function onTransitionEnd() {
+		const navContainer = document.getElementById('sidenav-container');
+
+		navContainer.classList.remove("sidenav-container--animatable");
+	}
 
 	function openNav() {
-		var scrollBarWidth = (0, _getScrollbar2.default)();
-		var backdrop = document.createElement('div');
-		var closeSidenav = document.getElementById('close-sidenav');
+		const scrollBarWidth = getScrollBarWidth();
+		const backdrop = document.createElement('div');
+		const closeSidenav = document.getElementById('close-sidenav');
 		backdrop.className = "sidenav-backdrop";
 		document.body.appendChild(backdrop);
 		document.body.classList.add('modal-open');
 		document.getElementById('sidenav').style.width = "250px";
-		backdrop.style.opacity = "0.5";
+		backdrop.style.opacity = "0.7"
 
 		if (scrollBarWidth !== 0) {
 			document.body.style.paddingRight = scrollBarWidth + 'px';
@@ -935,55 +1038,17 @@
 	}
 
 	module.exports = {
-		openNav: openNav,
-		closeNav: closeNav
+		openSideNav: openSideNav,
+		onTransitionEnd: onTransitionEnd
 	};
 
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
+	*/
 
-	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	exports.default = function () {
-		if (document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
-			return 0;
-		}
-
-		var inner = document.createElement('p');
-		inner.style.width = "100%";
-		inner.style.height = "200px";
-
-		var outer = document.createElement('div');
-		outer.style.position = "absolute";
-		outer.style.top = "0px";
-		outer.style.left = "0px";
-		outer.style.visibility = "hidden";
-		outer.style.width = "200px";
-		outer.style.height = "150px";
-		outer.style.overflow = "hidden";
-		outer.appendChild(inner);
-
-		document.body.appendChild(outer);
-
-		var w1 = inner.offsetWidth;
-		outer.style.overflow = 'scroll';
-		var w2 = inner.offsetWidth;
-
-		if (w1 === w2) {
-			w2 = outer.clientWidth;
-		}
-
-		document.body.removeChild(outer);
-
-		return w1 - w2;
-	};
+	exports.default = sideNav;
 
 /***/ },
+/* 4 */,
 /* 5 */
 /***/ function(module, exports) {
 

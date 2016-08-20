@@ -1,4 +1,92 @@
-import getScrollBarWidth from './utils/get.scrollbar.width';
+
+export default class sideNav {
+	constructor () {
+		this.container = document.getElementById('sidenav-container');
+		this.nav = document.getElementById('sidenav');
+		this.overlay = null;
+		this.open = this._open.bind(this);
+		this.close = this._close.bind(this);
+	}
+
+	_open() {
+		var docFrag = document.createDocumentFragment();
+
+		this.nav.style.willChange = "transform";
+		this.container.classList.add('sidenav-container--animatable');
+		this.overlay = document.createElement('div');
+		this.overlay.className = "sidenav-overlay";
+		this.overlay.style.willChange = "opacity";
+
+		if (!this.container.classList.contains("sidenav-container--visible")) {
+			this.container.classList.add('sidenav-container--visible');
+			this.overlay.classList.add('overlay--visible');
+			docFrag.appendChild(this.overlay);
+			document.body.appendChild(docFrag);
+
+			this.overlay.addEventListener('click', this.close, false);
+		}
+
+		this.overlay.style.willChange = "auto";
+		this.nav.style.willChange = "auto";
+	}
+
+	_close() {
+		this.nav.style.willChange = "transform";
+		this.overlay.style.willChange = "opacity";
+
+		if (this.container.classList.contains("sidenav-container--visible")) {
+			this.container.classList.remove("sidenav-container--visible");
+			document.body.removeChild(this.overlay);
+		}
+
+		this.nav.style.willChange = "auto";
+	}
+}
+
+/*
+function openSideNav() {
+	const navContainer = document.getElementById('sidenav-container');
+	const nav = document.getElementById('sidenav');
+
+	nav.style.willChange = "transform";
+	navContainer.classList.add('sidenav-container--animatable');
+
+	if (!navContainer.classList.contains("sidenav-container--visible")) {
+		navContainer.classList.add("sidenav-container--visible");
+		overlay.classList.add("overlay--visible");
+		docFrag.appendChild(overlay);
+		document.body.appendChild(docFrag);
+	}
+
+	overlay.style.willChange = "auto";
+	nav.style.willChange = "auto";
+}
+
+function toggleSideNav() {
+	const navContainer = document.getElementById('sidenav-container');
+	const nav = document.getElementById('sidenav');
+
+	nav.style.willChange = "transform";
+	navContainer.classList.add("sidenav-container--animatable");
+
+	if (!navContainer.classList.contains("sidenav-container--visible")) {
+		navContainer.classList.add("sidenav-container--visible");
+		document.body.classList.add("backdrop--visible");
+	} else {
+		navContainer.classList.remove("sidenav-container--visible");
+		document.body.classList.remove("backdrop--visible");
+	}
+
+	nav.style.willChange = 'auto';
+}
+
+
+
+function onTransitionEnd() {
+	const navContainer = document.getElementById('sidenav-container');
+
+	navContainer.classList.remove("sidenav-container--animatable");
+}
 
 function openNav() {
 	const scrollBarWidth = getScrollBarWidth();
@@ -8,7 +96,7 @@ function openNav() {
 	document.body.appendChild(backdrop);
 	document.body.classList.add('modal-open');
 	document.getElementById('sidenav').style.width = "250px";
-	backdrop.style.opacity = "0.5"
+	backdrop.style.opacity = "0.7"
 
 	if (scrollBarWidth !== 0) {
 		document.body.style.paddingRight = scrollBarWidth + 'px';
@@ -27,6 +115,8 @@ function closeNav() {
 }
 
 module.exports = {
-	openNav: openNav,
-	closeNav: closeNav
+	openSideNav: openSideNav,
+	onTransitionEnd: onTransitionEnd
 };
+
+*/

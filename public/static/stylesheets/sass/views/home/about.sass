@@ -1,6 +1,6 @@
 #home-about
-	height: 500px
-	background: #bdc5c8
+	height: 600px
+	background: #e9e9e9
 
 .home-about-header
 	display: flex
@@ -9,14 +9,17 @@
 	padding-top: 55px
 
 	h2
-		color: darken(#bdc5c8, 18%)
+		@include lato
+		font-weight: 300
+		letter-spacing: 2px
+		color: rgba(0,0,0,0.8)
 
 
 .home-about-image
 	display: flex
 	align-items: center
 	justify-content: center
-	padding-top: 45px
+	padding-top: 65px
 
 	div
 		height: 60px
@@ -35,16 +38,16 @@
 
 	p
 		display: inline-block
-		color: darken(#bdc5c8, 15%)
-		line-height: 26px
+		color: rgba(0,0,0,0.8)
+		line-height: 30px
 		@include lato
 		font-weight: 300
 
 		span
 			@include muli
 			font-weight: 400
-			color: #e9e9e9
-			text-shadow: 1px 1px rgba(0,0,0,0.35)
+			color: darken(#bdc5c8, 15%)
+			//text-shadow: 1px 1px rgba(0,0,0,0.35)
 
 
 .home-about-learn-more
@@ -57,10 +60,10 @@
 	button
 		height: 50px
 		width: 140px
-		border: 1px solid #e9e9e9
+		border: 1px solid darken(#bdc5c8, 15%)
 		background: transparent
 
 		span
 			@include muli
 			font-weight: 400
-			color: #e9e9e9
+			color: #bdc5c8

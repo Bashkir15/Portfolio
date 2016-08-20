@@ -1,0 +1,48 @@
+.sidenav-container
+	position: fixed
+	left: 0
+	top: 0
+	width: 200px
+	height: 100vh
+	overflow: hidden
+	pointer-events: none
+	z-index: 150
+
+.sidenav-container--visible
+
+	.sidenav
+		transform: none
+
+	&.sidenav-container--animatable
+		.sidenav
+			transition: all .4s ease-out
+
+.sidenav-container--animatable
+	.sidenav
+		transition: all .4s ease-in
+
+.sidenav
+	display: flex
+	flex-direction: column
+	position: relative
+	width: 200px
+	height: 100%
+	box-shadow: 0 2px 6px rgba(0,0,0,0.35)
+	background: #e9e9e9
+	transform: translateX(-103%)
+	z-index: 160
+
+.sidenav-overlay
+	position: fixed
+	top: 0
+	left: 0
+	opacity: 0
+	width: 100%
+	height: 100%
+	z-index: 149
+	opacity: 0
+	background: rgba(0,0,0,0.4)
+	transition: opacity .7s cubic-bezier(0,0,0.3,1)
+
+	&.overlay--visible
+		opacity: 1

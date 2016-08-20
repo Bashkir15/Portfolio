@@ -4,11 +4,15 @@ import entrance from './scripts/scroll.in.js';
 import dialog from './scripts/dialog.js';
 
 var sidenavTrigger = document.getElementById('open-sidenav');
+var sidenavMenu = document.getElementById('sidenav-container');
 var canvas = document.getElementById('banner');
 var opinionDialogTrigger = document.getElementById('open-opinionated');
 
 if (sidenavTrigger) {
-	sidenavTrigger.addEventListener('click', sidenav.openNav);
+	var leftNav = new sidenav();
+
+	sidenavTrigger.addEventListener('click', leftNav.open, false);
+	//sidenavMenu.addEventListener('transitionend', sidenav.onTransitionEnd, false);
 }
 
 if (canvas) {
