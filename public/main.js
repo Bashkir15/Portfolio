@@ -2,6 +2,7 @@ import sidenav from './scripts/sidenav.js';
 import canvasDraw from './scripts/canvas.js';
 import entrance from './scripts/scroll.in.js';
 import dialog from './scripts/dialog.js';
+import scrollNav from './scripts/scroll.nav.js';
 
 var sidenavTrigger = document.getElementById('open-sidenav');
 var sidenavMenu = document.getElementById('sidenav-container');
@@ -21,7 +22,10 @@ if (canvas) {
 }
 
 if (opinionDialogTrigger) {
-	var opinionDialog = new dialog();
+	var opinionDialogContent = document.getElementById('opinionated-dialog');
+	var opinionDialog = new dialog({
+		content: opinionDialogContent
+	});
 
 	opinionDialogTrigger.addEventListener('click', opinionDialog.open);
 }
@@ -29,3 +33,4 @@ if (opinionDialogTrigger) {
 addEventListener('DOMContentLoaded', entrance.init, false);
 addEventListener('scroll', entrance.viewportChange, false);
 addEventListener('resize', entrance.viewportChange, false);
+window.onload = scrollNav.init();

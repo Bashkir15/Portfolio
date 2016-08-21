@@ -1,107 +1,104 @@
-export default class Dialog {
-	constructor() {
-		this.closeButton = null;
+export default class dialog {
+	constructor(options) {
 		this.modal = null;
 		this.overlay = null;
-
+		this.container = null;
+		
 		this.defaults = {
-			closeButton: true,
+			className: 'fade-and-fall',
 			content: "",
 			overlay: true,
-			clickOutside: true,
-			closeKeys: [27],
-			className: 'fade-and-drop',
-			maxWidth: 600,
-			minWidth: 280
-		}
+			closeKeys: [27]
+		};
 
-		if (arguments[0] && typeof arguments[0] === 'object') {
-			this.options = extendDefaults(this.defaults, arguments[0]);
-		}
+		this._applySettings(options);
+		this.open = this._open.bind(this);
+		this.close = this._close.bind(this);
 	}
 
-	extendDefaults (source, properties) {
-		var property;
-
-		for (property in properties) {
-			if (properties.hasOwnProperty(property)) {
-				source[property] = properties[property]
+	_applySettings(options) {
+		if (typeof options === 'object') {
+			for (var i in options) {
+				if (options.hasOwnProperty(i)) {
+					this.defaults[i] = options[i];
+				}
 			}
 		}
-
-		return source;
 	}
 
-	buildOut() {
-		var content;
-		var contentHolder;
-		var docFrag;
-
-		if (typeof this.options.content === "string") {
-			content = this.options.content;
-		} else {
-			content = this.options.content.innerHTML;
-		}
-
-		docFrag = document.createDocumentFragment();
-
-		this.modal = document.createElement('div');
-		this.modal.className = "modal " + this.options.className;
-		this.modal.style.minWidth = this.options.minWidth + "px";
-		this.modal.style.maxWidth = this.options.maxWidth + "px";
-
-		if (this.options.overlay === true) {
-			this.overlay = document.createElement("div");
-			this.overlay.className = "modal-overlay " + this.options.className;
-			docFrag.appendChild(this.overlay);
-		}
-
-		contentHolder = document.createElement("div");
-		contentHolder.className = 'modal-content';
-		contentHolder.innerHTML = content;
-
-		docFrag.appendChild(this.modal);
-
-		document.body.appendChild(docFrag);
-	}
-
-	initializeEvents() {
-		if (this.overlay) {
-			this.overlay.addEventListener('click', this.close.bind(this));
-		}
-
-		if (Object.prototype.toString.call(this.defaults.closeKeys) === '[object Array]' || this.defults.closeKeys.length !== 0) {
-			document.addEventListener('keydown', this.close.bind(this));
-		}
-	}
-
-	open() {
-		buildOut();
-
-		this.initializeEvents.bind(this);
+	_open() {
+		this._buildOut.call(this);
 
 		window.getComputedStyle(this.modal).height;
-
-		this.modal.className = this.modal.className + (this.modal.offsetHeight > window.innerHeight ? " modal-open modal-anchored" : " modal open");
-		this.overlay.className = this.overlay.className + ' modal-open';
+		this.modal.className = this.modal.className + 
+			(this.modal.offsetHeight > window.innerHeight ? 
+				" modal-open modal-anchored" : " modal-open");
+		this.overlay.className = this.overlay.className + " modal-open";
+		this._attachEvents();
 	}
 
-	close() {
+	_close() {
 		var self = this;
 
 		this.modal.className = this.modal.className.replace(" modal-open", "");
 		this.overlay.className = this.overlay.className.replace(" modal-open", "");
 
-		this.modal.addEventListener(this.transitionEnd, () => {
-			self.parentNode.removeChild(self.modal);
-		});
+		this.modal.addEventListener('transitionend', function() {
+			self.modal.parentNode.removeChild(self.modal);
+		}, false);
 
-		this.overlay.addEventListener(this.transitionEnd, () => {
-			this.overlay.className = this.overlay.className.replace(" modal-open", "");
-		});
+		this.overlay.addEventListener('transitionend', function() {
+			self.overlay.parentNode.removeChild(self.overlay);
+		}, false);
 
-		this.overlay.removeEventListener('click', false);
-		document.removeEventListener('keydown', false);
+		
+		
 	}
+
+	_buildOut() {
+		var content;
+		var contentHolder;
+		this.container = document.createDocumentFragment();
+		var overlayFrag 
+
+		if (typeof this.defaults.content === 'string') {
+			content = this.defaults.content;
+		} else {
+			content = this.defaults.content.innerHTML;
+		}
+
+		this.modal = document.createElement('div');
+		this.modal.className = "modal " + this.defaults.className;
+		this.modal.style.top = window.pageYOffset + (window.innerHeight / 2) + "px";
+		this.modal.style.left = (window.innerWidth - this.modal.offsetWidth) / 2 + "px";
+
+			this.overlay = document.createElement('div');
+			this.overlay.className = 'modal-overlay ' + this.defaults.className;
+
+		contentHolder = document.createElement('div');
+		contentHolder.className = "modal-content";
+		contentHolder.innerHTML = content;
+		this.modal.appendChild(contentHolder);
+
+		this.container.appendChild(this.modal);
+		this.container.appendChild(this.overlay);
+
+		document.body.appendChild(this.container);
+	}
+
+	_closeKeyHandler(e) {
+		if (this.defaults.closeKeys.indexOf(e.which) > -1) {
+			e.preventDefault();
+			this.close();
+		}
+	}
+
+	_attachEvents() {
+		let _closeKeyHandler = this._closeKeyHandler.bind(this);
+
+		this.overlay.addEventListener('click', this.close, false);
+		document.body.addEventListener('keydown', _closeKeyHandler, false);
+	}
+
 
 }

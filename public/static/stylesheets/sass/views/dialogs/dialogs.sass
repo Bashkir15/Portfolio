@@ -1,0 +1,39 @@
+.modal-overlay
+	position: fixed
+	top: 0
+	left: 0
+	height: 100%
+	width: 100%
+	opacity: 0
+	z-index: 9998
+	background: rgba(0,0,0,0.4)
+	transition: .6s opacity .4s ease
+
+	&.modal-open
+		opacity: 1
+		transition: .4s opacity .4s ease
+
+.modal
+	position: absolute
+	top: 0
+	left: 0
+	z-index: 9999
+	width: 94%
+	opacity: 0
+	padding: 24px 20px
+	border-radius: 2px
+	transition: .6s opacity .4s ease
+	transform: translate(-50%, -50%)
+	background: #fff
+
+	&.modal-open
+		opacity: 1
+		display: block
+		transition: .6s opacity .4s ease
+
+		&.modal-anchored
+			top: 20px
+			transform: translate(-50%, 0)
+
+#opinionated-dialog
+	display: none

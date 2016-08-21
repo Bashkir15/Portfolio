@@ -3,7 +3,8 @@
 	<head>
 		<meta charset='utf-8'>
 		<link rel='stylesheet' href='./vendor/font-awesome/css/font-awesome.css'>
-		<link href='https://fonts.googleapis.com/css?family=Muli:400,400italic|Playfair+Display:400,700|Lato:300italic,300' rel='stylesheet'>
+		<link rel='stylesheet' href='./vendor/etlinefont-bower/style.css'>
+		<link href='https://fonts.googleapis.com/css?family=Muli:400,400italic|Playfair+Display:400,700|Lato:300italic,300|Montserrat:400,700' rel='stylesheet'>
 		<link rel='stylesheet' href='./main.min.css'>
 	</head>
 
@@ -18,7 +19,7 @@
 			<div class='nav-right'>
 				<div class='nav-item'>
 					<button id="open-sidenav">
-						<span>Menu</span>
+						<i class='icon icon-layers'></i>
 					</button>
 				</div>
 			</div>
@@ -27,17 +28,7 @@
 
 		<div id='sidenav-container' class='sidenav-container'>
 			<div class='sidenav' id='sidenav'>
-				<div class='sidenav-header'>
-					<button id='close-sidenav'>
-						<span>x</span>
-					</button>
-
-					<div></div>
-				</div>
-
-				<div class='sidenav-body'>
-					<p>Stuff</p>
-				</div>
+				<% include ./templates/shared/sidenav %>
 			</div>
 		</div>
 
