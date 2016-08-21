@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "01bf718cfba2051dd188"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c3970bd40a6df79ca6d3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -920,29 +920,23 @@
 
 			this.container = document.getElementById('sidenav-container');
 			this.nav = document.getElementById('sidenav');
-			this.overlay = null;
-			this.open = this._open.bind(this);
+			this.clickOutside = true, this.closeKeys = [27], this.overlay = null, this.open = this._open.bind(this);
 			this.close = this._close.bind(this);
 		}
 
 		_createClass(sideNav, [{
 			key: '_open',
 			value: function _open() {
-				var docFrag = document.createDocumentFragment();
 
 				this.nav.style.willChange = "transform";
 				this.container.classList.add('sidenav-container--animatable');
-				this.overlay = document.createElement('div');
-				this.overlay.className = "sidenav-overlay";
-				this.overlay.style.willChange = "opacity";
 
 				if (!this.container.classList.contains("sidenav-container--visible")) {
 					this.container.classList.add('sidenav-container--visible');
+					this._buildOverlay.call(this);
 					this.overlay.classList.add('overlay--visible');
-					docFrag.appendChild(this.overlay);
-					document.body.appendChild(docFrag);
 
-					this.overlay.addEventListener('click', this.close, false);
+					this._addEvents();
 				}
 
 				this.overlay.style.willChange = "auto";
@@ -950,8 +944,9 @@
 			}
 		}, {
 			key: '_close',
-			value: function _close() {
+			value: function _close(event) {
 				this.nav.style.willChange = "transform";
+				this.container.classList.add('sidenav-container--animatable');
 				this.overlay.style.willChange = "opacity";
 
 				if (this.container.classList.contains("sidenav-container--visible")) {
@@ -960,6 +955,39 @@
 				}
 
 				this.nav.style.willChange = "auto";
+			}
+		}, {
+			key: '_onTransitionEnd',
+			value: function _onTransitionEnd() {
+				this.container.classList.remove('sidenav-container--animatable');
+			}
+		}, {
+			key: '_buildOverlay',
+			value: function _buildOverlay() {
+				var docFrag = document.createDocumentFragment();
+				this.overlay = document.createElement('div');
+				this.overlay.className = "sidenav-overlay";
+				this.overlay.style.willChange = "opacity";
+				docFrag.appendChild(this.overlay);
+				document.body.appendChild(docFrag);
+			}
+		}, {
+			key: '_closeKeyHandler',
+			value: function _closeKeyHandler(e) {
+				if (this.closeKeys.indexOf(e.which) > -1) {
+					e.preventDefault();
+					this.close();
+				}
+			}
+		}, {
+			key: '_addEvents',
+			value: function _addEvents() {
+				var _closeKeyHandler = this._closeKeyHandler.bind(this);
+				var _onTransitionEnd = this._onTransitionEnd.bind(this);
+
+				this.container.addEventListener('transitionend', _onTransitionEnd, false);
+				this.container.addEventListener('click', this.close, false);
+				document.body.addEventListener('keydown', _closeKeyHandler, false);
 			}
 		}]);
 
