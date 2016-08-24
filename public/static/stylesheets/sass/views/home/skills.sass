@@ -1,6 +1,5 @@
 #home-skills
-	height: 750px
-	padding-bottom: 30px
+	padding: 40px 0
 
 .home-skills-header
 	height: 100px
@@ -76,3 +75,24 @@
 			@include lato
 			font-weight: 300
 			color: #52b588
+
+@media screen and (max-width: 760px)
+	#home-skills
+		//height: 900px
+
+	.home-skills-body
+		flex-direction: row
+
+	.home-skills-group
+		flex-direction: column
+
+@media screen and (max-width: 550px)
+	#home-skills
+		//height: 1400px
+
+	.home-skills-body
+		flex-direction: column
+
+@media screen and (max-width: 400px)
+	#home-skills
+		//height: 1700px
