@@ -87,16 +87,21 @@
 
 	if (opinionDialogTrigger) {
 		var opinionDialogContent = document.getElementById('opinionated-dialog');
+		var opinionClose = document.getElementById('close-opinionated');
 		var opinionDialog = new _dialog2.default({
 			content: opinionDialogContent
 		});
 
-		opinionDialogTrigger.addEventListener('click', opinionDialog.open);
+		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
+		opinionClose.addEventListener('click', opinionDialog.close, false);
 	}
 
-	addEventListener('DOMContentLoaded', _scrollIn2.default.init, false);
-	addEventListener('scroll', _scrollIn2.default.viewportChange, false);
-	addEventListener('resize', _scrollIn2.default.viewportChange, false);
+	var scrollEntrance = new _scrollIn2.default();
+
+	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+	window.addEventListener('scroll', scrollEntrance.viewPortChange);
+	window.addEventListener('resize', scrollEntrance.viewPortChange);
+
 	window.onload = _scrollNav2.default.init();
 
 /***/ },
@@ -379,123 +384,105 @@
 /* 3 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	function init() {
-		var elements = document.querySelectorAll('[data-entrance]');
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
-		Array.prototype.map.call(elements, function (item) {
-			var anim = item.getAttribute('data-entrance');
-			var delay = item.getAttribute("data-entrance-delay");
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-			item.style.transition = "all 1s ease";
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-			if (delay) {
-				elem.style.transitionDelay = delay / 1000 + 's';
+	var scrollIn = function () {
+		function scrollIn() {
+			_classCallCheck(this, scrollIn);
+
+			this.elements = null;
+
+			this.defaults = {
+				duration: "1000",
+				distance: "200",
+				heightOffset: 200
+			};
+
+			this.enter = this._enter.bind(this);
+			this.init = this._init.bind(this);
+			this.viewPortChange = this._viewPortChange.bind(this);
+		}
+
+		_createClass(scrollIn, [{
+			key: "_isInView",
+			value: function _isInView(elem) {
+				var rect = elem.getBoundingClientRect();
+
+				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
 			}
-			if (anim == "fade") {
-				item.style.opacity = "0";
-			}
+		}, {
+			key: "_setInitialStyles",
+			value: function _setInitialStyles(elem) {
+				document.body.style.overflowX = "hidden";
 
-			if (isInViewPort(item)) {
-				addEventListener('load', function () {
-					enter(item);
-				}, false);
-			}
-		});
-	}
+				var anim = elem.getAttribute("data-entrance");
+				var delay = elem.getAttribute("data-entrnace-delay");
 
-	function isInViewPort(elem) {
-		var rect = elem.getBoundingClientRect();
+				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease";
 
-		return rect.top + 200 >= 0 && rect.top + 200 <= window.innerHeight || rect.bottom + 200 >= 0 && rect.bottom + 200 <= window.innerHeight || rect.top + 200 < 0 && rect.bottom + 200 > window.innerHeight;
-	}
+				if (delay) {
+					elem.style.transitionDelay = delay / 1000 + 's';
+				}
 
-	function enter(elem) {
-		elem.style.visibility = "visible";
-		elem.style.opacity = "1";
-		elem.style.transform = "translate(0,0)";
-		elem.className += " has-entered";
-	}
-
-	function viewportChange() {
-		var elements = document.querySelectorAll('[data-entrance]');
-
-		Array.prototype.map.call(elements, function (item) {
-			if (isInViewPort(item)) {
-				var hasEntered = item.classList.contains("has-entered");
-
-				if (!hasEntered) {
-					enter(item);
+				if (anim == "fade") {
+					elem.style.opacity = "0";
 				}
 			}
-		});
-	}
-
-	module.exports = {
-		init: init,
-		isInViewPort: isInViewPort,
-		enter: enter,
-		viewportChange: viewportChange
-	};
-	/*entrance.isElemInView = function() {
-	var rect = elem.getBoundingClientRect();
-		return(
-		((rect.top + entrance.heightOffset) >= 0 && (rect.top + entrance.heightOffset) <= window.innerHeight) ||
-		((rect.bottom + entrance.heightOffset) >= 0 && (rect.bottom + entrance.heightOffset) <= window.innerHeight) ||
-		((rect.top + entrance.heightOffset) < 0 && (rect.bottom + entrance.heightOffset) > window.innerHeight)
-	);
-	}
-
-
-	entrance.setInitialStyles = function (elem) {
-		document.body.style.overflowX = "hidden";
-			var anim = elem.getAttribute('data-entrace');
-		var delay = elem.getAttribute("data-entrace-delay");
-			elem.style.transition = "all " + (entrance.duration / 1000) + "s ease";
-			if (delay) {
-			elem.style.transitionDelay = (delay/1000) + 's';
-		}
-			if (anim == "fade") {
-			elem.style.opacity = "0";
-		}
-			if (anim == "from-bottom") {
-			elem.style.opacity = "0";
-			elem.style.transform = "translate(0, " + entrance.distance + "px)";
-		}
-	}
-	entrance.enter = function (elem) {
-	elem.style.visibility = "visible";
-	elem.style.opacity = "1";
-	elem.style.transform = "translate(0,0)";
-	elem.className += " has-entered";
-	}
-
-	entrance.viewportChange = function() {
-		Array.prototype.map.call(entrance.elements, (item) => {
-			if (entrance.elements.isElemInView(item)) {
-				var hasEntered = item.classList.contains('has-entered');
+		}, {
+			key: "_enter",
+			value: function _enter(elem) {
+				elem.style.visibility = "visible";
+				elem.style.opacity = "1";
+				elem.style.transform = "translate(0, 0)";
+				elem.classList.add('has-entered');
 			}
-				if (!hasEntered) {
-				enter(item);
-			}
-		});
-	}
-	entrance.init =	function() {
-		entrance.elements = document.querySelectorAll('[data-entrance]');
-			Array.prototype.map.call(entrance.elements, (item) => {
-			setInitialStyles(item);
-				if (isElemInView(item)) {
-				addEventListener('load', () => {
-					enter(item);
-				}, false);
-			}
-		});
-	}
+		}, {
+			key: "_viewPortChange",
+			value: function _viewPortChange() {
+				var _this = this;
 
-	module.exports = {
-	entrance: entrance
-	} */
+				Array.prototype.map.call(this.elements, function (item) {
+					var isInView = _this._isInView(item);
+					if (isInView) {
+						var hasEntered = item.classList.contains("has-entered");
+
+						if (!hasEntered) {
+							_this._enter(item);
+						}
+					}
+				});
+			}
+		}, {
+			key: "_init",
+			value: function _init() {
+				var _this2 = this;
+
+				this.elements = document.querySelectorAll('[data-entrance]');
+
+				Array.prototype.map.call(this.elements, function (item) {
+					_this2._setInitialStyles(item);
+
+					if (_this2._isInView(item)) {
+						window.addEventListener('load', function () {
+							_this2.enter(item);
+						}, false);
+					}
+				});
+			}
+		}]);
+
+		return scrollIn;
+	}();
+
+	exports.default = scrollIn;
 
 /***/ },
 /* 4 */

@@ -1,6 +1,6 @@
 import sidenav from './scripts/sidenav.js';
 import canvasDraw from './scripts/canvas.js';
-import entrance from './scripts/scroll.in.js';
+import scrollIn from './scripts/scroll.in.js';
 import dialog from './scripts/dialog.js';
 import scrollNav from './scripts/scroll.nav.js';
 
@@ -23,14 +23,19 @@ if (canvas) {
 
 if (opinionDialogTrigger) {
 	var opinionDialogContent = document.getElementById('opinionated-dialog');
+	var opinionClose = document.getElementById('close-opinionated');
 	var opinionDialog = new dialog({
 		content: opinionDialogContent
 	});
 
-	opinionDialogTrigger.addEventListener('click', opinionDialog.open);
+	opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
+	opinionClose.addEventListener('click', opinionDialog.close, false);
 }
 
-addEventListener('DOMContentLoaded', entrance.init, false);
-addEventListener('scroll', entrance.viewportChange, false);
-addEventListener('resize', entrance.viewportChange, false);
+var scrollEntrance = new scrollIn();
+
+window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+window.addEventListener('scroll', scrollEntrance.viewPortChange);
+window.addEventListener('resize', scrollEntrance.viewPortChange);
+
 window.onload = scrollNav.init();
