@@ -227,6 +227,10 @@
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
+	var _notify = __webpack_require__(10);
+
+	var _notify2 = _interopRequireDefault(_notify);
+
 	var _scrollIn = __webpack_require__(3);
 
 	var _scrollIn2 = _interopRequireDefault(_scrollIn);
@@ -261,6 +265,15 @@
 		var sendMessage = document.getElementById('contact-send');
 
 		sendMessage.addEventListener('click', _contact2.default.message);
+
+		// Home notifications
+
+
+		//	var contactSuccessContent = document.getElementById('contact-success');
+		//	var contactSuccess = new notify({
+		//		content: contactSuccessContent
+		//	});
+
 	}
 
 	exports.default = {
@@ -615,6 +628,93 @@
 
 
 	exports.default = sideNav;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var notify = function () {
+		function notify(options) {
+			_classCallCheck(this, notify);
+
+			this.settings = {
+				container: null,
+				notification: null,
+				timeout: 0,
+				type: 'alert',
+				content: ""
+			};
+
+			this._applySettings(options);
+			this.open = this._open.bind(this);
+			this.close = this._close.bind(this);
+		}
+
+		_createClass(notify, [{
+			key: '_applySettings',
+			value: function _applySettings(options) {
+				if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+					for (var i in options) {
+						if (options.hasOwnProperty(i)) {
+							this.settings[i] = options[i];
+						}
+					}
+				}
+			}
+		}, {
+			key: '_buildOut',
+			value: function _buildOut() {
+				var _container = document.createElement('div');
+				var _contentHolder = document.createElement('div');
+				var _content;
+
+				_container.className = "notify-container";
+				this.settings.container = _container;
+
+				if (this.settings.content === 'string') {
+					_content = this.settings.content;
+				} else {
+					_content = this.settings.content.innerHTML;
+				}
+
+				_contentHolder.innerHTML = _content;
+				this.settings.container.appendChild(_contentHolder);
+				document.body.appendChild(this.settings.container);
+			}
+		}, {
+			key: '_open',
+			value: function _open() {
+				this._buildOut.call(this);
+				this.settings.container.classList.add('notify-shown');
+			}
+		}, {
+			key: '_close',
+			value: function _close() {
+				var self = this;
+
+				this.container.classList.remove('notify-shown');
+				this.container.addEventListener('transitionend', function () {
+					self.container.parentNode.removeChild(self.container);
+				});
+			}
+		}]);
+
+		return notify;
+	}();
+
+	exports.default = notify;
 
 /***/ }
 /******/ ]);

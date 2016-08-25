@@ -1,5 +1,6 @@
 import contact from './contact.js';
 import dialog from '../components/dialog.js';
+import notify from '../components/notify.js';
 import scrollIn from '../scroll.in.js';
 
 function init() {
@@ -33,6 +34,17 @@ function init() {
 	var sendMessage = document.getElementById('contact-send');
 
 	sendMessage.addEventListener('click', contact.message);
+
+
+	// Home notifications
+
+
+//	var contactSuccessContent = document.getElementById('contact-success');
+//	var contactSuccess = new notify({
+//		content: contactSuccessContent
+//	});
+
+
 }
 
 export default {
