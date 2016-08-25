@@ -38,11 +38,16 @@ function init() {
 
 	// Home notifications
 
+	var contactTrigger = document.getElementById('contact-trigger');
+	var contactSuccessContent = document.getElementById('contact-success');
+	var contactSuccess = new notify({
+		content: contactSuccessContent,
+		posY: 'bottom',
+		posX: 'right',
+		timeout: 100
+	});
 
-//	var contactSuccessContent = document.getElementById('contact-success');
-//	var contactSuccess = new notify({
-//		content: contactSuccessContent
-//	});
+	contactTrigger.addEventListener('click', contactSuccess.open);
 
 
 }

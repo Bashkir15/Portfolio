@@ -268,12 +268,16 @@
 
 		// Home notifications
 
+		var contactTrigger = document.getElementById('contact-trigger');
+		var contactSuccessContent = document.getElementById('contact-success');
+		var contactSuccess = new _notify2.default({
+			content: contactSuccessContent,
+			posY: 'bottom',
+			posX: 'right',
+			timeout: 100
+		});
 
-		//	var contactSuccessContent = document.getElementById('contact-success');
-		//	var contactSuccess = new notify({
-		//		content: contactSuccessContent
-		//	});
-
+		contactTrigger.addEventListener('click', contactSuccess.open);
 	}
 
 	exports.default = {
@@ -654,9 +658,12 @@
 				notification: null,
 				timeout: 0,
 				type: 'alert',
-				content: ""
+				content: "",
+				posX: 'right',
+				posY: 'bottom'
 			};
 
+			this.count = 0;
 			this._applySettings(options);
 			this.open = this._open.bind(this);
 			this.close = this._close.bind(this);
@@ -682,7 +689,7 @@
 
 				_container.className = "notify-container";
 				this.settings.container = _container;
-
+				this.settings.container.style.position = "fixed";
 				if (this.settings.content === 'string') {
 					_content = this.settings.content;
 				} else {
@@ -690,24 +697,65 @@
 				}
 
 				_contentHolder.innerHTML = _content;
+
+				if (this.settings.posX === 'right') {
+					this.settings.container.style.right = 20 + "px";
+				}
+
+				if (this.settings.posX === 'left') {
+					this.settings.continer.style.left = 20 + "px";
+				}
+
+				if (this.settings.posY === 'top') {
+					this.settings.container.style.top = 20 + "px";
+				}
+
+				if (this.settings.posY === 'bottom') {
+					this.settings.container.style.bottom = 20 + "px";
+				}
+
 				this.settings.container.appendChild(_contentHolder);
 				document.body.appendChild(this.settings.container);
 			}
 		}, {
 			key: '_open',
 			value: function _open() {
+				var _this = this;
+
+				var notifyId = 'notify-' + this.count;
 				this._buildOut.call(this);
-				this.settings.container.classList.add('notify-shown');
+
+				setTimeout(function () {
+					_this.settings.container.classList.add('shown');
+					_this.settings.container.setAttribute('id', notifyId);
+				}, 100);
+
+				if (this.settings.timeout > 0) {
+					setTimeout(function () {
+						_this.close(notifyId);
+					}, this.settings.timeout);
+				}
+
+				this.count += 1;
+
+				return notifyId;
 			}
 		}, {
 			key: '_close',
-			value: function _close() {
-				var self = this;
+			value: function _close(notificationId) {
+				var notification = document.getElementById(notificationId);
 
-				this.container.classList.remove('notify-shown');
-				this.container.addEventListener('transitionend', function () {
-					self.container.parentNode.removeChild(self.container);
-				});
+				if (notification) {
+					notification.classList.remove('shown');
+
+					setTimeout(function () {
+						notification.parentNode.removeChild(notification);
+					}, 600);
+
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}]);
 
