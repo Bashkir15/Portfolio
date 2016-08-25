@@ -66,6 +66,10 @@
 
 	var _scrollNav2 = _interopRequireDefault(_scrollNav);
 
+	var _home = __webpack_require__(6);
+
+	var _home2 = _interopRequireDefault(_home);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var sidenavTrigger = document.getElementById('open-sidenav');
@@ -103,6 +107,7 @@
 	window.addEventListener('resize', scrollEntrance.viewPortChange);
 
 	window.onload = _scrollNav2.default.init();
+	window.onload = _home2.default.init();
 
 /***/ },
 /* 1 */
@@ -687,6 +692,78 @@
 
 
 	exports.default = sideNav;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _contact = __webpack_require__(7);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init() {
+		var sendMessage = document.getElementById('contact-send');
+
+		sendMessage.addEventListener('click', _contact2.default.message);
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function message() {
+		var data = {};
+		data.name = document.getElementById('contact-name');
+		data.email = document.getElementById('contact-email');
+		data.subject = document.getElementById('contact-subject');
+		data.message = document.getElementById('contact-message');
+
+		var promise = new Promise(function (resolve, reject) {
+			var req = new XMLHttpRequest();
+
+			req.open('POST', '/contact', true);
+			req.onload = function () {
+				if (req.status == 200) {
+					resolve(req.response);
+				} else {
+					reject(Error(req.statusText));
+				}
+			};
+
+			req.onError = function () {
+				reject(Error("Error"));
+			};
+
+			req.send();
+		});
+
+		promise.then(function (response) {
+			console.log("Success", response);
+		}, function (error) {
+			console.log('Failed');
+		});
+	}
+
+	exports.default = {
+		message: message
+	};
 
 /***/ }
 /******/ ]);

@@ -3,6 +3,7 @@ import canvasDraw from './scripts/canvas.js';
 import scrollIn from './scripts/scroll.in.js';
 import dialog from './scripts/dialog.js';
 import scrollNav from './scripts/scroll.nav.js';
+import home from './scripts/home/home.js';
 
 var sidenavTrigger = document.getElementById('open-sidenav');
 var sidenavMenu = document.getElementById('sidenav-container');
@@ -39,3 +40,4 @@ window.addEventListener('scroll', scrollEntrance.viewPortChange);
 window.addEventListener('resize', scrollEntrance.viewPortChange);
 
 window.onload = scrollNav.init();
+window.onload = home.init();

@@ -19,8 +19,8 @@ module.exports = function() {
 			text: req.body.message
 		};
 
-		transporter.sendMail(mailOptions, (error, info) {
-			if (err) {
+		transporter.sendMail(mailOptions, (error, info) => {
+			if (error) {
 				console.log(error);
 				res.json({message: 'error'});
 			} else {
