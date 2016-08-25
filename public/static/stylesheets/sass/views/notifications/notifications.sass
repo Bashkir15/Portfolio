@@ -1,0 +1,18 @@
+.notify-container
+	max-width: 98%
+	z-index: 999
+
+	&.shown
+		.notify
+			opacity: 1
+			transform: translateX(0)
+
+.notify
+	position: relative
+	width: 100%
+	min-height: 62px
+	padding: 8px
+	opacity: 0
+	transform: translateX(100%)
+	transition: all .6s cubic-bezier(0.5, -0.5, 0.3, 1.4), opacity .6s ease
+

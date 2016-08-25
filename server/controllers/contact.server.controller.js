@@ -24,6 +24,7 @@ module.exports = function() {
 				console.log(error);
 				res.json({message: 'error'});
 			} else {
+				res.json({message: 'yay!'});
 				console.log('Message sent: ' + info.response);
 			}
 		});

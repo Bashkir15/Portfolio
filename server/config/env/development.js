@@ -5,7 +5,7 @@ module.exports = {
 	},
 	secret: 'ajdfhasd0askdjasdbwd asdas',
 	mailer: {
-		service: 'Gmail',
+		service: '',
 		auth: {
 			user: '',
 			pass: ''

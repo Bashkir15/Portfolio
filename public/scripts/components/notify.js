@@ -32,6 +32,7 @@ export default class notify {
 		var _content;
 
 		_container.className = "notify-container";
+		_contentHolder.className = "notify";
 		this.settings.container = _container;
 		this.settings.container.style.position = "fixed";
 		if (this.settings.content === 'string') {

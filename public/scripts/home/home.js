@@ -30,26 +30,16 @@ function init() {
 	window.addEventListener('resize', scrollEntrance.viewPortChange);
 
 	// Home Contact
+	var contactSubmit = document.getElementById('contact-send');
 
-	var sendMessage = document.getElementById('contact-send');
+	contactSubmit.addEventListener('click', contact.message);
+		var successContent = document.getElementById('contact-success');
+		var successNotify = new notify({
+			content: successContent,
+			timeout: 1000
+		});
 
-	sendMessage.addEventListener('click', contact.message);
-
-
-	// Home notifications
-
-	var contactTrigger = document.getElementById('contact-trigger');
-	var contactSuccessContent = document.getElementById('contact-success');
-	var contactSuccess = new notify({
-		content: contactSuccessContent,
-		posY: 'bottom',
-		posX: 'right',
-		timeout: 100
-	});
-
-	contactTrigger.addEventListener('click', contactSuccess.open);
-
-
+	window.addEventListener('message-delivered', successNotify.open);
 }
 
 export default {

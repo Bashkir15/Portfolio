@@ -46,15 +46,15 @@
 
 	'use strict';
 
-	var _sidenav = __webpack_require__(9);
+	var _sidenav = __webpack_require__(3);
 
 	var _sidenav2 = _interopRequireDefault(_sidenav);
 
-	var _scrollNav = __webpack_require__(4);
+	var _scrollNav = __webpack_require__(7);
 
 	var _scrollNav2 = _interopRequireDefault(_scrollNav);
 
-	var _home = __webpack_require__(6);
+	var _home = __webpack_require__(5);
 
 	var _home2 = _interopRequireDefault(_home);
 
@@ -74,264 +74,7 @@
 	window.onload = _home2.default.init();
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var scrollIn = function () {
-		function scrollIn() {
-			_classCallCheck(this, scrollIn);
-
-			this.elements = null;
-
-			this.defaults = {
-				duration: "1000",
-				distance: "200",
-				heightOffset: 200
-			};
-
-			this.enter = this._enter.bind(this);
-			this.init = this._init.bind(this);
-			this.viewPortChange = this._viewPortChange.bind(this);
-		}
-
-		_createClass(scrollIn, [{
-			key: "_isInView",
-			value: function _isInView(elem) {
-				var rect = elem.getBoundingClientRect();
-
-				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
-			}
-		}, {
-			key: "_setInitialStyles",
-			value: function _setInitialStyles(elem) {
-				document.body.style.overflowX = "hidden";
-
-				var anim = elem.getAttribute("data-entrance");
-				var delay = elem.getAttribute("data-entrnace-delay");
-
-				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease";
-
-				if (delay) {
-					elem.style.transitionDelay = delay / 1000 + 's';
-				}
-
-				if (anim == "fade") {
-					elem.style.opacity = "0";
-				}
-			}
-		}, {
-			key: "_enter",
-			value: function _enter(elem) {
-				elem.style.visibility = "visible";
-				elem.style.opacity = "1";
-				elem.style.transform = "translate(0, 0)";
-				elem.classList.add('has-entered');
-			}
-		}, {
-			key: "_viewPortChange",
-			value: function _viewPortChange() {
-				var _this = this;
-
-				Array.prototype.map.call(this.elements, function (item) {
-					var isInView = _this._isInView(item);
-					if (isInView) {
-						var hasEntered = item.classList.contains("has-entered");
-
-						if (!hasEntered) {
-							_this._enter(item);
-						}
-					}
-				});
-			}
-		}, {
-			key: "_init",
-			value: function _init() {
-				var _this2 = this;
-
-				this.elements = document.querySelectorAll('[data-entrance]');
-
-				Array.prototype.map.call(this.elements, function (item) {
-					_this2._setInitialStyles(item);
-
-					if (_this2._isInView(item)) {
-						window.addEventListener('load', function () {
-							_this2.enter(item);
-						}, false);
-					}
-				});
-			}
-		}]);
-
-		return scrollIn;
-	}();
-
-	exports.default = scrollIn;
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	function init() {
-		window.addEventListener('scroll', function (e) {
-			var distanceY = window.pageYOffset || document.documentElement.scrollTop;
-			var nav = document.querySelector('nav');
-
-			if (distanceY > 10) {
-				nav.classList.add('nav--scrolled');
-			} else {
-				if (nav.classList.contains('nav--scrolled')) {
-					nav.classList.remove('nav--scrolled');
-				}
-			}
-		});
-	}
-
-	exports.default = {
-		init: init
-	};
-
-/***/ },
-/* 5 */,
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _contact = __webpack_require__(7);
-
-	var _contact2 = _interopRequireDefault(_contact);
-
-	var _dialog = __webpack_require__(8);
-
-	var _dialog2 = _interopRequireDefault(_dialog);
-
-	var _notify = __webpack_require__(10);
-
-	var _notify2 = _interopRequireDefault(_notify);
-
-	var _scrollIn = __webpack_require__(3);
-
-	var _scrollIn2 = _interopRequireDefault(_scrollIn);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function init() {
-
-		// Home Dialogs
-
-
-		var opinionDialogTrigger = document.getElementById('open-opinionated');
-		var opinionDialogContent = document.getElementById('opinionated-dialog');
-		var opinionClose = document.getElementById('close-opinionated');
-
-		var opinionDialog = new _dialog2.default({
-			content: opinionDialogContent
-		});
-
-		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
-		opinionClose.addEventListener('click', opinionDialog.close, false);
-
-		// Home Skills Scroll In
-		var scrollEntrance = new _scrollIn2.default();
-
-		window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
-		window.addEventListener('scroll', scrollEntrance.viewPortChange);
-		window.addEventListener('resize', scrollEntrance.viewPortChange);
-
-		// Home Contact
-
-		var sendMessage = document.getElementById('contact-send');
-
-		sendMessage.addEventListener('click', _contact2.default.message);
-
-		// Home notifications
-
-		var contactTrigger = document.getElementById('contact-trigger');
-		var contactSuccessContent = document.getElementById('contact-success');
-		var contactSuccess = new _notify2.default({
-			content: contactSuccessContent,
-			posY: 'bottom',
-			posX: 'right',
-			timeout: 100
-		});
-
-		contactTrigger.addEventListener('click', contactSuccess.open);
-	}
-
-	exports.default = {
-		init: init
-	};
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function message() {
-		var data = {};
-		data.name = document.getElementById('contact-name');
-		data.email = document.getElementById('contact-email');
-		data.subject = document.getElementById('contact-subject');
-		data.message = document.getElementById('contact-message');
-
-		var promise = new Promise(function (resolve, reject) {
-			var req = new XMLHttpRequest();
-
-			req.open('POST', '/contact', true);
-			req.onload = function () {
-				if (req.status == 200) {
-					resolve(req.response);
-				} else {
-					reject(Error(req.statusText));
-				}
-			};
-
-			req.onError = function () {
-				reject(Error("Error"));
-			};
-
-			req.send();
-		});
-
-		promise.then(function (response) {
-			console.log("Success", response);
-		}, function (error) {
-			console.log('Failed');
-		});
-	}
-
-	exports.default = {
-		message: message
-	};
-
-/***/ },
-/* 8 */
+/* 1 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -459,7 +202,139 @@
 	exports.default = dialog;
 
 /***/ },
-/* 9 */
+/* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var notify = function () {
+		function notify(options) {
+			_classCallCheck(this, notify);
+
+			this.settings = {
+				container: null,
+				notification: null,
+				timeout: 0,
+				type: 'alert',
+				content: "",
+				posX: 'right',
+				posY: 'bottom'
+			};
+
+			this.count = 0;
+			this._applySettings(options);
+			this.open = this._open.bind(this);
+			this.close = this._close.bind(this);
+		}
+
+		_createClass(notify, [{
+			key: '_applySettings',
+			value: function _applySettings(options) {
+				if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+					for (var i in options) {
+						if (options.hasOwnProperty(i)) {
+							this.settings[i] = options[i];
+						}
+					}
+				}
+			}
+		}, {
+			key: '_buildOut',
+			value: function _buildOut() {
+				var _container = document.createElement('div');
+				var _contentHolder = document.createElement('div');
+				var _content;
+
+				_container.className = "notify-container";
+				_contentHolder.className = "notify";
+				this.settings.container = _container;
+				this.settings.container.style.position = "fixed";
+				if (this.settings.content === 'string') {
+					_content = this.settings.content;
+				} else {
+					_content = this.settings.content.innerHTML;
+				}
+
+				_contentHolder.innerHTML = _content;
+
+				if (this.settings.posX === 'right') {
+					this.settings.container.style.right = 20 + "px";
+				}
+
+				if (this.settings.posX === 'left') {
+					this.settings.continer.style.left = 20 + "px";
+				}
+
+				if (this.settings.posY === 'top') {
+					this.settings.container.style.top = 20 + "px";
+				}
+
+				if (this.settings.posY === 'bottom') {
+					this.settings.container.style.bottom = 20 + "px";
+				}
+
+				this.settings.container.appendChild(_contentHolder);
+				document.body.appendChild(this.settings.container);
+			}
+		}, {
+			key: '_open',
+			value: function _open() {
+				var _this = this;
+
+				var notifyId = 'notify-' + this.count;
+				this._buildOut.call(this);
+
+				setTimeout(function () {
+					_this.settings.container.classList.add('shown');
+					_this.settings.container.setAttribute('id', notifyId);
+				}, 100);
+
+				if (this.settings.timeout > 0) {
+					setTimeout(function () {
+						_this.close(notifyId);
+					}, this.settings.timeout);
+				}
+
+				this.count += 1;
+
+				return notifyId;
+			}
+		}, {
+			key: '_close',
+			value: function _close(notificationId) {
+				var notification = document.getElementById(notificationId);
+
+				if (notification) {
+					notification.classList.remove('shown');
+
+					setTimeout(function () {
+						notification.parentNode.removeChild(notification);
+					}, 600);
+
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}]);
+
+		return notify;
+	}();
+
+	exports.default = notify;
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -634,7 +509,233 @@
 	exports.default = sideNav;
 
 /***/ },
-/* 10 */
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _notify = __webpack_require__(2);
+
+	var _notify2 = _interopRequireDefault(_notify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function message() {
+		var data = {};
+		data.name = document.getElementById('contact-name');
+		data.email = document.getElementById('contact-email');
+		data.subject = document.getElementById('contact-subject');
+		data.message = document.getElementById('contact-message');
+
+		var promise = new Promise(function (resolve, reject) {
+			var req = new XMLHttpRequest();
+
+			req.open('POST', '/contact', true);
+			req.onload = function () {
+				if (req.status == 200) {
+					resolve(req.response);
+				} else {
+					reject(Error(req.statusText));
+				}
+			};
+
+			req.onError = function () {
+				reject(Error("Error"));
+			};
+
+			req.send();
+		});
+
+		promise.then(function (response) {
+			var success = new Event('message-delivered');
+			window.dispatchEvent(success);
+		}, function (error) {
+			console.log('Failed');
+		});
+	}
+
+	exports.default = {
+		message: message
+	};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _contact = __webpack_require__(4);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	var _dialog = __webpack_require__(1);
+
+	var _dialog2 = _interopRequireDefault(_dialog);
+
+	var _notify = __webpack_require__(2);
+
+	var _notify2 = _interopRequireDefault(_notify);
+
+	var _scrollIn = __webpack_require__(6);
+
+	var _scrollIn2 = _interopRequireDefault(_scrollIn);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init() {
+
+		// Home Dialogs
+
+
+		var opinionDialogTrigger = document.getElementById('open-opinionated');
+		var opinionDialogContent = document.getElementById('opinionated-dialog');
+		var opinionClose = document.getElementById('close-opinionated');
+
+		var opinionDialog = new _dialog2.default({
+			content: opinionDialogContent
+		});
+
+		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
+		opinionClose.addEventListener('click', opinionDialog.close, false);
+
+		// Home Skills Scroll In
+		var scrollEntrance = new _scrollIn2.default();
+
+		window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+		window.addEventListener('scroll', scrollEntrance.viewPortChange);
+		window.addEventListener('resize', scrollEntrance.viewPortChange);
+
+		// Home Contact
+		var contactSubmit = document.getElementById('contact-send');
+
+		contactSubmit.addEventListener('click', _contact2.default.message);
+		var successContent = document.getElementById('contact-success');
+		var successNotify = new _notify2.default({
+			content: successContent,
+			timeout: 1000
+		});
+
+		window.addEventListener('message-delivered', successNotify.open);
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var scrollIn = function () {
+		function scrollIn() {
+			_classCallCheck(this, scrollIn);
+
+			this.elements = null;
+
+			this.defaults = {
+				duration: "1000",
+				distance: "200",
+				heightOffset: 200
+			};
+
+			this.enter = this._enter.bind(this);
+			this.init = this._init.bind(this);
+			this.viewPortChange = this._viewPortChange.bind(this);
+		}
+
+		_createClass(scrollIn, [{
+			key: "_isInView",
+			value: function _isInView(elem) {
+				var rect = elem.getBoundingClientRect();
+
+				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
+			}
+		}, {
+			key: "_setInitialStyles",
+			value: function _setInitialStyles(elem) {
+				document.body.style.overflowX = "hidden";
+
+				var anim = elem.getAttribute("data-entrance");
+				var delay = elem.getAttribute("data-entrnace-delay");
+
+				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease";
+
+				if (delay) {
+					elem.style.transitionDelay = delay / 1000 + 's';
+				}
+
+				if (anim == "fade") {
+					elem.style.opacity = "0";
+				}
+			}
+		}, {
+			key: "_enter",
+			value: function _enter(elem) {
+				elem.style.visibility = "visible";
+				elem.style.opacity = "1";
+				elem.style.transform = "translate(0, 0)";
+				elem.classList.add('has-entered');
+			}
+		}, {
+			key: "_viewPortChange",
+			value: function _viewPortChange() {
+				var _this = this;
+
+				Array.prototype.map.call(this.elements, function (item) {
+					var isInView = _this._isInView(item);
+					if (isInView) {
+						var hasEntered = item.classList.contains("has-entered");
+
+						if (!hasEntered) {
+							_this._enter(item);
+						}
+					}
+				});
+			}
+		}, {
+			key: "_init",
+			value: function _init() {
+				var _this2 = this;
+
+				this.elements = document.querySelectorAll('[data-entrance]');
+
+				Array.prototype.map.call(this.elements, function (item) {
+					_this2._setInitialStyles(item);
+
+					if (_this2._isInView(item)) {
+						window.addEventListener('load', function () {
+							_this2.enter(item);
+						}, false);
+					}
+				});
+			}
+		}]);
+
+		return scrollIn;
+	}();
+
+	exports.default = scrollIn;
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -643,126 +744,24 @@
 		value: true
 	});
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	function init() {
+		window.addEventListener('scroll', function (e) {
+			var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+			var nav = document.querySelector('nav');
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var notify = function () {
-		function notify(options) {
-			_classCallCheck(this, notify);
-
-			this.settings = {
-				container: null,
-				notification: null,
-				timeout: 0,
-				type: 'alert',
-				content: "",
-				posX: 'right',
-				posY: 'bottom'
-			};
-
-			this.count = 0;
-			this._applySettings(options);
-			this.open = this._open.bind(this);
-			this.close = this._close.bind(this);
-		}
-
-		_createClass(notify, [{
-			key: '_applySettings',
-			value: function _applySettings(options) {
-				if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-					for (var i in options) {
-						if (options.hasOwnProperty(i)) {
-							this.settings[i] = options[i];
-						}
-					}
+			if (distanceY > 10) {
+				nav.classList.add('nav--scrolled');
+			} else {
+				if (nav.classList.contains('nav--scrolled')) {
+					nav.classList.remove('nav--scrolled');
 				}
 			}
-		}, {
-			key: '_buildOut',
-			value: function _buildOut() {
-				var _container = document.createElement('div');
-				var _contentHolder = document.createElement('div');
-				var _content;
+		});
+	}
 
-				_container.className = "notify-container";
-				this.settings.container = _container;
-				this.settings.container.style.position = "fixed";
-				if (this.settings.content === 'string') {
-					_content = this.settings.content;
-				} else {
-					_content = this.settings.content.innerHTML;
-				}
-
-				_contentHolder.innerHTML = _content;
-
-				if (this.settings.posX === 'right') {
-					this.settings.container.style.right = 20 + "px";
-				}
-
-				if (this.settings.posX === 'left') {
-					this.settings.continer.style.left = 20 + "px";
-				}
-
-				if (this.settings.posY === 'top') {
-					this.settings.container.style.top = 20 + "px";
-				}
-
-				if (this.settings.posY === 'bottom') {
-					this.settings.container.style.bottom = 20 + "px";
-				}
-
-				this.settings.container.appendChild(_contentHolder);
-				document.body.appendChild(this.settings.container);
-			}
-		}, {
-			key: '_open',
-			value: function _open() {
-				var _this = this;
-
-				var notifyId = 'notify-' + this.count;
-				this._buildOut.call(this);
-
-				setTimeout(function () {
-					_this.settings.container.classList.add('shown');
-					_this.settings.container.setAttribute('id', notifyId);
-				}, 100);
-
-				if (this.settings.timeout > 0) {
-					setTimeout(function () {
-						_this.close(notifyId);
-					}, this.settings.timeout);
-				}
-
-				this.count += 1;
-
-				return notifyId;
-			}
-		}, {
-			key: '_close',
-			value: function _close(notificationId) {
-				var notification = document.getElementById(notificationId);
-
-				if (notification) {
-					notification.classList.remove('shown');
-
-					setTimeout(function () {
-						notification.parentNode.removeChild(notification);
-					}, 600);
-
-					return true;
-				} else {
-					return false;
-				}
-			}
-		}]);
-
-		return notify;
-	}();
-
-	exports.default = notify;
+	exports.default = {
+		init: init
+	};
 
 /***/ }
 /******/ ]);

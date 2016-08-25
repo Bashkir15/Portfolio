@@ -1,3 +1,5 @@
+import notify from '../components/notify.js';
+
 function message() {
 	var data = {};
 	data.name = document.getElementById('contact-name');
@@ -25,7 +27,8 @@ function message() {
 	});
 
 	promise.then((response) => {
-		console.log("Success", response);
+		var success = new Event('message-delivered');
+		window.dispatchEvent(success);
 	}, function (error) {
 		console.log('Failed');
 	});
