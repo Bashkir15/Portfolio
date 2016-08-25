@@ -46,21 +46,9 @@
 
 	'use strict';
 
-	var _sidenav = __webpack_require__(5);
+	var _sidenav = __webpack_require__(9);
 
 	var _sidenav2 = _interopRequireDefault(_sidenav);
-
-	var _canvas = __webpack_require__(1);
-
-	var _canvas2 = _interopRequireDefault(_canvas);
-
-	var _scrollIn = __webpack_require__(3);
-
-	var _scrollIn2 = _interopRequireDefault(_scrollIn);
-
-	var _dialog = __webpack_require__(2);
-
-	var _dialog2 = _interopRequireDefault(_dialog);
 
 	var _scrollNav = __webpack_require__(4);
 
@@ -74,8 +62,6 @@
 
 	var sidenavTrigger = document.getElementById('open-sidenav');
 	var sidenavMenu = document.getElementById('sidenav-container');
-	var canvas = document.getElementById('banner');
-	var opinionDialogTrigger = document.getElementById('open-opinionated');
 
 	if (sidenavTrigger) {
 		var leftNav = new _sidenav2.default();
@@ -84,308 +70,12 @@
 		//sidenavMenu.addEventListener('transitionend', sidenav.onTransitionEnd, false);
 	}
 
-	if (canvas) {
-		canvas.addEventListener('mousemove', _canvas2.default.MouseMove, false);
-		canvas.addEventListener('mouseout', _canvas2.default.MouseOut, false);
-	}
-
-	if (opinionDialogTrigger) {
-		var opinionDialogContent = document.getElementById('opinionated-dialog');
-		var opinionClose = document.getElementById('close-opinionated');
-		var opinionDialog = new _dialog2.default({
-			content: opinionDialogContent
-		});
-
-		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
-		opinionClose.addEventListener('click', opinionDialog.close, false);
-	}
-
-	var scrollEntrance = new _scrollIn2.default();
-
-	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
-	window.addEventListener('scroll', scrollEntrance.viewPortChange);
-	window.addEventListener('resize', scrollEntrance.viewPortChange);
-
 	window.onload = _scrollNav2.default.init();
 	window.onload = _home2.default.init();
 
 /***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var keyword = "Forrest",
-	    canvas,
-	    context,
-	    bgCanvas,
-	    bgContext,
-	    density = 13,
-	    particles = [],
-	    color = '#fff0a4',
-	    mouse = { x: 0, y: 0 },
-	    isDrawing = false,
-	    canvasW,
-	    canvasH;
-
-	function initialize(canvas_id) {
-		reload(canvas_id);
-
-		window.onresize = function (event) {
-			reload(canvas_id);
-		};
-	}
-
-	function reload(canvas_id) {
-		canvas = document.getElementById(canvas_id);
-
-		if (!window.HTMLCanvasElement) {
-			return false;
-		}
-
-		context = canvas.getContext('2d');
-		canvasW = window.innerWidth;
-		canvasH = 300;
-
-		canvas.width = canvasW;
-		canvas.height = canvasH;
-
-		bgCanvas = document.createElement('canvas');
-		bgContext = bgCanvas.getContext('2d');
-
-		bgCanvas.width = canvasW;
-		bgCanvas.height = canvasH;
-
-		prepare();
-		setupParticles();
-		draw();
-	}
-
-	function prepare() {
-		bgContext.font = "300px 'sans-serif'";
-		bgContext.fillText(keyword, canvasW / 2 - Math.round(bgContext.measureText(keyword).width / 2), 260);
-	}
-
-	function setupParticles() {
-		particles = [];
-
-		var imageData,
-		    image_Data,
-		    pixel,
-		    width = 0,
-		    i = 0,
-		    slide = false;
-
-		imageData = bgContext.getImageData(0, 0, canvasW, canvasH);
-		image_Data = imageData.data;
-
-		for (var height = 0; height < canvasH; height += density) {
-			++i;
-			slide = (i & 2) == 0;
-			width = 0;
-
-			if (slide == true) {
-				width += 6;
-			}
-
-			for (width; width < canvasW; width += density) {
-				pixel = image_Data[(width + height * canvasW) * 4 - 1];
-
-				if (pixel == 255) {
-					particles.push({
-						color: color,
-						x: width,
-						y: height
-					});
-				}
-			}
-		}
-	}
-
-	function draw() {
-		context.clearRect(0, 0, canvasW, canvasH);
-
-		var dx,
-		    dy,
-		    sqrDist,
-		    scale = 1;
-
-		for (var i = 0, len = particles.length; i < len; ++i) {
-			context.beginPath();
-
-			context.moveTo(x, y - height / 2);
-			context.lineTo(x + width / 2, y - height / 4);
-			context.lineTo(x + width / 2, y + height / 4);
-			context.lineTo(x, y + height / 2);
-			context.lineTo(x - width / 2, y + height / 4);
-			context.lineTo(x - width / 2, y - height / 4);
-			context.lineTo(x, y - height / 2);
-
-			context.closePath();
-			context.fill();
-		}
-	}
-
-	var mouse = {
-		x: 0,
-		y: 0,
-		o: false
-	};
-
-	function MouseMove(e) {
-		mouse.x = e.offsetX || e.layerX - canvas.offsetLeft;
-		mouse.y = e.offsetY || e.layerY - canvas.offsetTop;
-
-		if (!isDrawing) {
-			isDrawing = true;
-
-			var drawTimeout = setTimeout(function () {
-				draw();
-				isDrawing = false;
-			}, 60);
-		}
-	}
-
-	function MouseOut(e) {
-		isDrawing = false;
-		clearTimeout(drawTimeout);
-		draw();
-	}
-
-	module.exports = {
-		MouseMove: MouseMove,
-		MouseOut: MouseOut
-	};
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var dialog = function () {
-		function dialog(options) {
-			_classCallCheck(this, dialog);
-
-			this.modal = null;
-			this.overlay = null;
-			this.container = null;
-
-			this.defaults = {
-				className: 'fade-and-fall',
-				content: "",
-				overlay: true,
-				closeKeys: [27]
-			};
-
-			this._applySettings(options);
-			this.open = this._open.bind(this);
-			this.close = this._close.bind(this);
-		}
-
-		_createClass(dialog, [{
-			key: '_applySettings',
-			value: function _applySettings(options) {
-				if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
-					for (var i in options) {
-						if (options.hasOwnProperty(i)) {
-							this.defaults[i] = options[i];
-						}
-					}
-				}
-			}
-		}, {
-			key: '_open',
-			value: function _open() {
-				this._buildOut.call(this);
-
-				window.getComputedStyle(this.modal).height;
-				this.modal.className = this.modal.className + (this.modal.offsetHeight > window.innerHeight ? " modal-open modal-anchored" : " modal-open");
-				this.overlay.className = this.overlay.className + " modal-open";
-				this._attachEvents();
-			}
-		}, {
-			key: '_close',
-			value: function _close() {
-				var self = this;
-
-				this.modal.className = this.modal.className.replace(" modal-open", "");
-				this.overlay.className = this.overlay.className.replace(" modal-open", "");
-
-				this.modal.addEventListener('transitionend', function () {
-					self.modal.parentNode.removeChild(self.modal);
-				}, false);
-
-				this.overlay.addEventListener('transitionend', function () {
-					self.overlay.parentNode.removeChild(self.overlay);
-				}, false);
-			}
-		}, {
-			key: '_buildOut',
-			value: function _buildOut() {
-				var content;
-				var contentHolder;
-				this.container = document.createDocumentFragment();
-				var overlayFrag;
-
-				if (typeof this.defaults.content === 'string') {
-					content = this.defaults.content;
-				} else {
-					content = this.defaults.content.innerHTML;
-				}
-
-				this.modal = document.createElement('div');
-				this.modal.className = "modal " + this.defaults.className;
-				this.modal.style.top = window.pageYOffset + window.innerHeight / 2 + "px";
-				this.modal.style.left = (window.innerWidth - this.modal.offsetWidth) / 2 + "px";
-
-				this.overlay = document.createElement('div');
-				this.overlay.className = 'modal-overlay ' + this.defaults.className;
-
-				contentHolder = document.createElement('div');
-				contentHolder.className = "modal-content";
-				contentHolder.innerHTML = content;
-				this.modal.appendChild(contentHolder);
-
-				this.container.appendChild(this.modal);
-				this.container.appendChild(this.overlay);
-
-				document.body.appendChild(this.container);
-			}
-		}, {
-			key: '_closeKeyHandler',
-			value: function _closeKeyHandler(e) {
-				if (this.defaults.closeKeys.indexOf(e.which) > -1) {
-					e.preventDefault();
-					this.close();
-				}
-			}
-		}, {
-			key: '_attachEvents',
-			value: function _attachEvents() {
-				var _closeKeyHandler = this._closeKeyHandler.bind(this);
-
-				this.overlay.addEventListener('click', this.close, false);
-				document.body.addEventListener('keydown', _closeKeyHandler, false);
-			}
-		}]);
-
-		return dialog;
-	}();
-
-	exports.default = dialog;
-
-/***/ },
+/* 1 */,
+/* 2 */,
 /* 3 */
 /***/ function(module, exports) {
 
@@ -519,7 +209,240 @@
 	};
 
 /***/ },
-/* 5 */
+/* 5 */,
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _contact = __webpack_require__(7);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	var _dialog = __webpack_require__(8);
+
+	var _dialog2 = _interopRequireDefault(_dialog);
+
+	var _scrollIn = __webpack_require__(3);
+
+	var _scrollIn2 = _interopRequireDefault(_scrollIn);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init() {
+
+		// Home Dialogs
+
+
+		var opinionDialogTrigger = document.getElementById('open-opinionated');
+		var opinionDialogContent = document.getElementById('opinionated-dialog');
+		var opinionClose = document.getElementById('close-opinionated');
+
+		var opinionDialog = new _dialog2.default({
+			content: opinionDialogContent
+		});
+
+		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
+		opinionClose.addEventListener('click', opinionDialog.close, false);
+
+		// Home Skills Scroll In
+		var scrollEntrance = new _scrollIn2.default();
+
+		window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+		window.addEventListener('scroll', scrollEntrance.viewPortChange);
+		window.addEventListener('resize', scrollEntrance.viewPortChange);
+
+		// Home Contact
+
+		var sendMessage = document.getElementById('contact-send');
+
+		sendMessage.addEventListener('click', _contact2.default.message);
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function message() {
+		var data = {};
+		data.name = document.getElementById('contact-name');
+		data.email = document.getElementById('contact-email');
+		data.subject = document.getElementById('contact-subject');
+		data.message = document.getElementById('contact-message');
+
+		var promise = new Promise(function (resolve, reject) {
+			var req = new XMLHttpRequest();
+
+			req.open('POST', '/contact', true);
+			req.onload = function () {
+				if (req.status == 200) {
+					resolve(req.response);
+				} else {
+					reject(Error(req.statusText));
+				}
+			};
+
+			req.onError = function () {
+				reject(Error("Error"));
+			};
+
+			req.send();
+		});
+
+		promise.then(function (response) {
+			console.log("Success", response);
+		}, function (error) {
+			console.log('Failed');
+		});
+	}
+
+	exports.default = {
+		message: message
+	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var dialog = function () {
+		function dialog(options) {
+			_classCallCheck(this, dialog);
+
+			this.modal = null;
+			this.overlay = null;
+			this.container = null;
+
+			this.defaults = {
+				className: 'fade-and-fall',
+				content: "",
+				overlay: true,
+				closeKeys: [27]
+			};
+
+			this._applySettings(options);
+			this.open = this._open.bind(this);
+			this.close = this._close.bind(this);
+		}
+
+		_createClass(dialog, [{
+			key: '_applySettings',
+			value: function _applySettings(options) {
+				if ((typeof options === 'undefined' ? 'undefined' : _typeof(options)) === 'object') {
+					for (var i in options) {
+						if (options.hasOwnProperty(i)) {
+							this.defaults[i] = options[i];
+						}
+					}
+				}
+			}
+		}, {
+			key: '_open',
+			value: function _open() {
+				this._buildOut.call(this);
+
+				window.getComputedStyle(this.modal).height;
+				this.modal.className = this.modal.className + (this.modal.offsetHeight > window.innerHeight ? " modal-open modal-anchored" : " modal-open");
+				this.overlay.className = this.overlay.className + " modal-open";
+				this._attachEvents();
+			}
+		}, {
+			key: '_close',
+			value: function _close() {
+				var self = this;
+
+				this.modal.className = this.modal.className.replace(" modal-open", "");
+				this.overlay.className = this.overlay.className.replace(" modal-open", "");
+
+				this.modal.addEventListener('transitionend', function () {
+					self.modal.parentNode.removeChild(self.modal);
+				}, false);
+
+				this.overlay.addEventListener('transitionend', function () {
+					self.overlay.parentNode.removeChild(self.overlay);
+				}, false);
+			}
+		}, {
+			key: '_buildOut',
+			value: function _buildOut() {
+				var content;
+				var contentHolder;
+				this.container = document.createDocumentFragment();
+				var overlayFrag;
+
+				if (typeof this.defaults.content === 'string') {
+					content = this.defaults.content;
+				} else {
+					content = this.defaults.content.innerHTML;
+				}
+
+				this.modal = document.createElement('div');
+				this.modal.className = "modal " + this.defaults.className;
+				this.modal.style.top = window.pageYOffset + window.innerHeight / 2 + "px";
+				this.modal.style.left = (window.innerWidth - this.modal.offsetWidth) / 2 + "px";
+
+				this.overlay = document.createElement('div');
+				this.overlay.className = 'modal-overlay ' + this.defaults.className;
+
+				contentHolder = document.createElement('div');
+				contentHolder.className = "modal-content";
+				contentHolder.innerHTML = content;
+				this.modal.appendChild(contentHolder);
+
+				this.container.appendChild(this.modal);
+				this.container.appendChild(this.overlay);
+
+				document.body.appendChild(this.container);
+			}
+		}, {
+			key: '_closeKeyHandler',
+			value: function _closeKeyHandler(e) {
+				if (this.defaults.closeKeys.indexOf(e.which) > -1) {
+					e.preventDefault();
+					this.close();
+				}
+			}
+		}, {
+			key: '_attachEvents',
+			value: function _attachEvents() {
+				var _closeKeyHandler = this._closeKeyHandler.bind(this);
+
+				this.overlay.addEventListener('click', this.close, false);
+				document.body.addEventListener('keydown', _closeKeyHandler, false);
+			}
+		}]);
+
+		return dialog;
+	}();
+
+	exports.default = dialog;
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -692,78 +615,6 @@
 
 
 	exports.default = sideNav;
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _contact = __webpack_require__(7);
-
-	var _contact2 = _interopRequireDefault(_contact);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function init() {
-		var sendMessage = document.getElementById('contact-send');
-
-		sendMessage.addEventListener('click', _contact2.default.message);
-	}
-
-	exports.default = {
-		init: init
-	};
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function message() {
-		var data = {};
-		data.name = document.getElementById('contact-name');
-		data.email = document.getElementById('contact-email');
-		data.subject = document.getElementById('contact-subject');
-		data.message = document.getElementById('contact-message');
-
-		var promise = new Promise(function (resolve, reject) {
-			var req = new XMLHttpRequest();
-
-			req.open('POST', '/contact', true);
-			req.onload = function () {
-				if (req.status == 200) {
-					resolve(req.response);
-				} else {
-					reject(Error(req.statusText));
-				}
-			};
-
-			req.onError = function () {
-				reject(Error("Error"));
-			};
-
-			req.send();
-		});
-
-		promise.then(function (response) {
-			console.log("Success", response);
-		}, function (error) {
-			console.log('Failed');
-		});
-	}
-
-	exports.default = {
-		message: message
-	};
 
 /***/ }
 /******/ ]);
