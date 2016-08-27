@@ -30,7 +30,7 @@
 	width: 200px
 	height: 100%
 	box-shadow: 0 2px 6px rgba(0,0,0,0.35)
-	background: #fff
+	background: #f5f2ed
 	transform: translateX(-103%)
 	z-index: 160
 
@@ -62,10 +62,16 @@
 		background: none
 
 		span
+			display: inline-block
 			@include lato
 			font-weight: 300
 			font-size: 20px
 			color: #fff
+			transition: all .6s ease
+
+		&:hover
+			span
+				transform: scale(1.2,1.2)
 
 	div
 		height: 50px
@@ -80,7 +86,7 @@
 
 		li
 			width: 100%
-			height: 50px
+			height: 55px
 			border-bottom: 1px solid rgba(0,0,0,0.12)
 
 			a
@@ -89,16 +95,26 @@
 
 				button
 					width: 100%
-					height: 50px
+					height: 55px
 					border: none
 					background: none
+					transition: all .6s ease
 
 					span
 						@include lato
 						font-weight: 300
 						font-size: 14px
 						letter-spacing: 2px
-						color: rgb(119, 119, 119)
+						color: #777
+						transition: color .6s ease
 
 			&:last-child
 				border-bottom: none
+
+			&:hover
+				a
+					button
+						background: lighten(#2c3e50, 20%)
+
+						span
+							color: #e9e9e9		
