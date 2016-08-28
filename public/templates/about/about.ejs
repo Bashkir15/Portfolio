@@ -1,3 +1,80 @@
-<div class='about-container'>
-	Stuff
-</div>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>About Forrest Collins</title>
+
+		<link rel='stylesheet' href='./vendor/font-awesome/css/font-awesome.css'>
+		<link rel='stylesheet' href='./vendor/etlinefont-bower/style.css'>
+		<link href='https://fonts.googleapis.com/css?family=Muli:400,400italic|Playfair+Display:400,700|Lato:300italic,300|Montserrat:400,700' rel='stylesheet'>
+		<link rel='stylesheet' href='./main.min.css'>
+	</head>
+
+	<body>
+		<nav class='nav' id='nav'>
+			<div class='nav-left'>
+				<div class='nav-item'>
+					<h3>Forrest Collins</h3>
+				</div>
+			</div>
+
+			<div class='nav-right'>
+				<div class='nav-item'>
+					<button id='open-sidenav'>
+						<i class='icon icon-layers'></i>
+					</button>
+				</div>
+			</div>
+		</nav>
+
+		<div id='sidenav-container' class='sidenav-container'>
+			<div class='sidenav column' id='sidenav'>
+				<% include ../shared/sidenav %>
+			</div>
+		</div>
+
+		<section class='about-page-header column column-center'>
+			<img src='../static/images/me.jpg'>
+
+			<div class='row'>
+				<button>
+					<span>Early Life</span>
+				</button>
+
+				<button>
+					<span>College</span>
+				</button>
+
+				<button>
+					<span>Now</span>
+				</button>
+
+				<button>
+					<span>Future</span>
+				</button>
+			</div>
+		</section>
+
+		<section id='about-early'>
+			<% include ./early %>
+		</section>
+
+		<section id='about-college'>
+			<% include ./college %>
+		</section>
+
+		<section id='about-now'>
+			<% include ./now %>
+		</section>
+
+		<section id='about-future'>
+			<% include ./future %>
+		</section>
+
+		<section id='footer'>
+			<% include ../shared/footer %>
+		</section>
+
+		<script src='./bundle.js'></script>
+	</body>
+</html>

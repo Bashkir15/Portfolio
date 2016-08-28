@@ -7,6 +7,10 @@ router.get('/', (req, res, next) => {
 	res.render('index');
 });
 
+router.get('/about', (req, res) => {
+	res.render('templates/about/about');
+});
+
 router.post('/contact', contact.message);
 
 module.exports = router;
