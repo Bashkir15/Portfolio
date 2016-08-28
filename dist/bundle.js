@@ -58,20 +58,32 @@
 
 	var _home2 = _interopRequireDefault(_home);
 
+	var _skills = __webpack_require__(8);
+
+	var _skills2 = _interopRequireDefault(_skills);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var sidenavTrigger = document.getElementById('open-sidenav');
-	var sidenavMenu = document.getElementById('sidenav-container');
+	function init() {
+		var sidenavTrigger = document.getElementById('open-sidenav');
+		var sidenavMenu = document.getElementById('sidenav-container');
 
-	if (sidenavTrigger) {
-		var leftNav = new _sidenav2.default();
+		if (sidenavTrigger) {
+			var leftNav = new _sidenav2.default();
 
-		sidenavTrigger.addEventListener('click', leftNav.open, false);
-		//sidenavMenu.addEventListener('transitionend', sidenav.onTransitionEnd, false);
+			sidenavTrigger.addEventListener('click', leftNav.open, false);
+		}
+
+		if (window.location.href.indexOf('skills') != -1) {
+			_skills2.default.init();
+		} else {
+			_home2.default.init();
+		}
+
+		_scrollNav2.default.init();
 	}
 
-	window.onload = _scrollNav2.default.init();
-	window.onload = _home2.default.init();
+	init();
 
 /***/ },
 /* 1 */
@@ -763,6 +775,99 @@
 
 	exports.default = {
 		init: init
+	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _scrollTo = __webpack_require__(9);
+
+	var _scrollTo2 = _interopRequireDefault(_scrollTo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init() {
+		var frontTrigger = document.getElementById('frontend-trigger');
+		var backTrigger = document.getElementById('backend-trigger');
+		var efficientTrigger = document.getElementById('efficiency-trigger');
+
+		if (frontTrigger) {
+			frontTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('skills-front-end').offsetTop);
+			}, false);
+		}
+
+		if (backTrigger) {
+			backTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('skills-back-end').offsetTop);
+			}, false);
+		}
+
+		if (efficientTrigger) {
+			efficientTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('skills-efficiency').offsetTop);
+			}, false);
+		}
+
+		//backEndTrigger.addEventListener('click', scrollTo.smoothScroll(document.getElementById('skills-back-end').offsetTop));
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var smoothScroll = function () {
+		var timer;
+		var start;
+		var factor;
+
+		return function (target, duration) {
+			var offset = window.pageYOffset;
+			var delta = target - window.pageYOffset;
+			var duration = duration || 1000;
+			start = Date.now();
+			factor = 0;
+
+			if (timer) {
+				clearInterval(timer);
+			}
+
+			function step() {
+				var y;
+				factor = (Date.now() - start) / duration;
+
+				if (factor >= 1) {
+					clearInterval(timer);
+					factor = 1;
+				}
+
+				y = factor * delta + offset;
+				window.scrollBy(0, y - window.pageYOffset);
+			}
+
+			timer = setInterval(step, 10);
+			return timer;
+		};
+	}();
+
+	exports.default = {
+		smoothScroll: smoothScroll
 	};
 
 /***/ }

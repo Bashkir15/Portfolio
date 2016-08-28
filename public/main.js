@@ -1,17 +1,25 @@
 import sidenav from './scripts/components/sidenav.js';
 import scrollNav from './scripts/scroll.nav.js';
 import home from './scripts/home/home.js';
+import skills from './scripts/skills/skills.js';
 
-var sidenavTrigger = document.getElementById('open-sidenav');
-var sidenavMenu = document.getElementById('sidenav-container');
+function init() {
+	var sidenavTrigger = document.getElementById('open-sidenav');
+	var sidenavMenu = document.getElementById('sidenav-container');
 
-if (sidenavTrigger) {
-	var leftNav = new sidenav();
+	if (sidenavTrigger) {
+		var leftNav = new sidenav();
 
-	sidenavTrigger.addEventListener('click', leftNav.open, false);
-	//sidenavMenu.addEventListener('transitionend', sidenav.onTransitionEnd, false);
+		sidenavTrigger.addEventListener('click', leftNav.open, false);
+	}
+
+	if (window.location.href.indexOf('skills') != -1) {
+		skills.init();
+	} else {
+		home.init();
+	}
+
+	scrollNav.init();
 }
 
-
-window.onload = scrollNav.init();
-window.onload = home.init();
+init();

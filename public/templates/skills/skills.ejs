@@ -34,6 +34,44 @@
 			</div>
 		</div>
 
-		<script src='./bundles.js'></script>
+		<section id='skills-page-header' class='column column-center'>
+			<div class='row'>
+				<button id='frontend-trigger'>
+					<span>Front-End</span>
+				</button>
+
+				<button id='backend-trigger'>
+					<span>Backend</span>
+				</button>
+
+				<button id='efficiency-trigger'>
+					<span>Efficiency</span>
+				</button>
+
+				<button>
+					<span>UI/UX</span>
+				</button>
+			</div>
+		</section>
+
+		<section id='skills-front-end'>
+			<% include ./frontend %>
+		</section>
+
+		<section id='skills-back-end'>
+			<% include ./backend %>
+		</section>
+
+		<section id='skills-efficiency'>
+			<% include ./efficiency %>
+		</section>
+
+		<section id='footer'>
+			<% include ../shared/footer %>
+		</section>
+
+
+
+		<script src='./bundle.js'></script>
 	</body>
 </html>
