@@ -54,6 +54,10 @@
 
 	var _scrollNav2 = _interopRequireDefault(_scrollNav);
 
+	var _routes = __webpack_require__(11);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
 	var _home = __webpack_require__(5);
 
 	var _home2 = _interopRequireDefault(_home);
@@ -87,14 +91,16 @@
 		}
 
 		_scrollNav2.default.init();
+		_routes2.default.init();
 	}
 
-	init();
 	window.onload = function () {
 		setTimeout(function () {
 			document.body.classList.add('loaded');
 		}, 1000);
 	};
+
+	init();
 
 /***/ },
 /* 1 */
@@ -615,7 +621,7 @@
 
 	function init() {
 
-		// Home Header
+		// Home Routes
 
 		// Home Dialogs
 
@@ -952,6 +958,41 @@
 		}
 
 		window.addEventListener('scroll', scrollWatch);
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function init() {
+		function goToSkills() {
+			document.body.classList.add('route-changing');
+
+			setTimeout(function () {
+				window.location.href = '/skills';
+				document.body.classList.replace('route-changing', 'route-changed');
+				setTimeout(function () {
+					document.body.classList.remove('route-changed');
+				}, 500);
+			}, 500);
+		}
+
+		var skillLinks = document.getElementsByClassName('go-to-skills');
+
+		if (skillLinks) {
+			for (var i = 0; i < skillLinks.length; i++) {
+				skillLinks[i].addEventListener('click', goToSkills);
+			}
+		}
 	}
 
 	exports.default = {

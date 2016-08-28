@@ -5,7 +5,7 @@ import scrollIn from '../scroll.in.js';
 
 function init() {
 
-	// Home Header
+	// Home Routes
 
 	// Home Dialogs
 
