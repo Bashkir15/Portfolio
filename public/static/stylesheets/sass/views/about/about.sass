@@ -33,16 +33,15 @@
 
 
 .about-section-container
-	width: 80%
-	padding-top: 75px
+	width: 100%
+	padding-top: 140px
 	padding-bottom: 40px
-	margin: 0 auto
-	border-bottom: 1px solid rgba(0,0,0,0.23)
-
 
 .about-section-left
 	display: inline-block
 	width: 45%
+	margin-left: 10%
+	padding-top: 25px
 
 	h3
 		@include muli
@@ -54,12 +53,36 @@
 .about-section-right
 	display: inline-block
 	width: 45%
+	margin-right: 10%
 
 	p
 		@include lato
 		font-weight: 300
 		font-size: 16px
-		letter-spacing: 2px
-		line-height: 18px
+		letter-spacing: 2.4px
+		line-height: 26px
 		color: rgb(119,119,119)
-		padding-bottom: 20px
+		padding-bottom: 45px
+
+@media screen and (max-width: 550px)
+	.about-section-container
+		flex-direction: column
+
+	.about-section-left
+		display: flex
+		align-items: center
+		justify-content: center
+		width: 60%
+		margin: 0 auto 55px auto
+
+	.about-section-right
+		display: block
+		width: 60%
+		margin: 0 auto
+
+		p
+			padding-bottom: 70px
+
+@media screen and (max-width: 350px)
+	.about-section-right
+		width: 80%
