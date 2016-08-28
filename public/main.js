@@ -26,3 +26,8 @@ function init() {
 }
 
 init();
+window.onload = function() {
+	setTimeout(function() {
+		document.body.classList.add('loaded');
+	}, 1000);
+};
