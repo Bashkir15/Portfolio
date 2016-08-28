@@ -1,6 +1,7 @@
 import sidenav from './scripts/components/sidenav.js';
 import scrollNav from './scripts/scroll.nav.js';
 import home from './scripts/home/home.js';
+import about from './scripts/about/about.js';
 import skills from './scripts/skills/skills.js';
 
 function init() {
@@ -15,6 +16,8 @@ function init() {
 
 	if (window.location.href.indexOf('skills') != -1) {
 		skills.init();
+	} else if (window.location.href.indexOf('about') != -1) {
+		about.init();
 	} else {
 		home.init();
 	}

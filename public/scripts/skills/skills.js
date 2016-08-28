@@ -24,6 +24,19 @@ function init() {
 		}, false);
 	}
 
+	function scrollWatch() {
+		var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+		var navigation = document.getElementById('skills-page-nav');
+
+		if (distanceY > 110) {
+			navigation.classList.add('navigation-scrolled');
+		} else {
+			navigation.classList.remove('navigation-scrolled');
+		}
+	}
+
+	window.addEventListener('scroll', scrollWatch);
+
 	//backEndTrigger.addEventListener('click', scrollTo.smoothScroll(document.getElementById('skills-back-end').offsetTop));
 }
 

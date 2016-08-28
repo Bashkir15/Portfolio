@@ -58,6 +58,10 @@
 
 	var _home2 = _interopRequireDefault(_home);
 
+	var _about = __webpack_require__(10);
+
+	var _about2 = _interopRequireDefault(_about);
+
 	var _skills = __webpack_require__(8);
 
 	var _skills2 = _interopRequireDefault(_skills);
@@ -76,6 +80,8 @@
 
 		if (window.location.href.indexOf('skills') != -1) {
 			_skills2.default.init();
+		} else if (window.location.href.indexOf('about') != -1) {
+			_about2.default.init();
 		} else {
 			_home2.default.init();
 		}
@@ -816,6 +822,19 @@
 			}, false);
 		}
 
+		function scrollWatch() {
+			var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+			var navigation = document.getElementById('skills-page-nav');
+
+			if (distanceY > 110) {
+				navigation.classList.add('navigation-scrolled');
+			} else {
+				navigation.classList.remove('navigation-scrolled');
+			}
+		}
+
+		window.addEventListener('scroll', scrollWatch);
+
 		//backEndTrigger.addEventListener('click', scrollTo.smoothScroll(document.getElementById('skills-back-end').offsetTop));
 	}
 
@@ -868,6 +887,57 @@
 
 	exports.default = {
 		smoothScroll: smoothScroll
+	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _scrollTo = __webpack_require__(9);
+
+	var _scrollTo2 = _interopRequireDefault(_scrollTo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init() {
+		var earlyTrigger = document.getElementById('early-trigger');
+		var collegeTrigger = document.getElementById('college-trigger');
+		var nowTrigger = document.getElementById('now-trigger');
+		var futureTrigger = document.getElementById('future-trigger');
+
+		if (earlyTrigger) {
+			earlyTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-early').offsetTop);
+			}, false);
+		}
+
+		if (collegeTrigger) {
+			collegeTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-college').offsetTop);
+			}, false);
+		}
+
+		if (nowTrigger) {
+			nowTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-now').offsetTop);
+			}, false);
+		}
+
+		if (futureTrigger) {
+			futureTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-future').offsetTop);
+			}, false);
+		}
+	}
+
+	exports.default = {
+		init: init
 	};
 
 /***/ }

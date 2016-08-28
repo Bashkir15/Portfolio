@@ -3,27 +3,48 @@
 	width: 100%
 
 	> div
-		padding-top: 45px
+		position: relative
+		width: 100%
 
-		button
+		> div
+			width: 70%
+			margin: 0 auto
+			padding: 25px 0
 			background: none
-			border: none
-			border-right: 1px solid #52b588
+			box-shadow: none
+			transition: all .6s ease-in
 
-			span
-				@include lato
-				font-weight: 300
-				font-size: 16px
-				letter-spacing: 2px
-				color: rgb(3,3,3)
-				transition: color .6s ease
+			button
+				background: none
+				border: none
+				border-right: 1px solid #52b588
 
-			&:last-child
-				border-right: none
-
-			&:hover
 				span
-					color: #52b588
+					@include lato
+					font-weight: 300
+					font-size: 16px
+					letter-spacing: 2px
+					color: rgb(3,3,3)
+					transition: color .6s ease
+
+				&:last-child
+					border-right: none
+
+				&:hover
+					span
+						color: #52b588
+
+		&.navigation-scrolled
+			position: fixed
+			top: 70px
+			left: 0
+			right: 0
+
+			> div
+				background: #fff
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+				transition: all .6s ease-out
+
 
 .skills-section-container
 	width: 100%
