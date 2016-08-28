@@ -29,6 +29,19 @@ function init() {
 			scrollTo.smoothScroll(document.getElementById('about-future').offsetTop);
 		}, false);
 	}
+
+	function scrollWatch() {
+		var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+		var navigation = document.getElementById('about-page-navigation');
+
+		if (distanceY > 110) {
+			navigation.classList.add('navigation-scrolled');
+		} else {
+			navigation.classList.remove('navigation-scrolled');
+		}
+	}
+
+	window.addEventListener('scroll', scrollWatch);
 }
 
 export default {
