@@ -94,8 +94,7 @@
 						animation: slideIn .9s ease-in
 
 					button
-						opacity: 1
-						transition: all .6s ease
+						@include fade-in($delay: .7s)
 
 						&:hover
 							background: #434242
@@ -174,3 +173,6 @@
 @media screen and (max-width: 760px)
 	.home-featured-projects
 		flex-direction: column
+
+	.home-featured-project
+		margin-bottom: 20px

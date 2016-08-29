@@ -46,27 +46,27 @@
 
 	'use strict';
 
-	var _sidenav = __webpack_require__(3);
+	var _sidenav = __webpack_require__(5);
 
 	var _sidenav2 = _interopRequireDefault(_sidenav);
 
-	var _scrollNav = __webpack_require__(7);
+	var _scrollNav = __webpack_require__(10);
 
 	var _scrollNav2 = _interopRequireDefault(_scrollNav);
 
-	var _routes = __webpack_require__(11);
+	var _routes = __webpack_require__(8);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _home = __webpack_require__(5);
+	var _home = __webpack_require__(7);
 
 	var _home2 = _interopRequireDefault(_home);
 
-	var _about = __webpack_require__(10);
+	var _about = __webpack_require__(3);
 
 	var _about2 = _interopRequireDefault(_about);
 
-	var _skills = __webpack_require__(8);
+	var _skills = __webpack_require__(11);
 
 	var _skills2 = _interopRequireDefault(_skills);
 
@@ -104,6 +104,53 @@
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var smoothScroll = function () {
+		var timer;
+		var start;
+		var factor;
+
+		return function (target, duration) {
+			var offset = window.pageYOffset;
+			var delta = target - window.pageYOffset;
+			var duration = duration || 1000;
+			start = Date.now();
+			factor = 0;
+
+			if (timer) {
+				clearInterval(timer);
+			}
+
+			function step() {
+				var y;
+				factor = (Date.now() - start) / duration;
+
+				if (factor >= 1) {
+					clearInterval(timer);
+					factor = 1;
+				}
+
+				y = factor * delta + offset;
+				window.scrollBy(0, y - window.pageYOffset);
+			}
+
+			timer = setInterval(step, 10);
+			return timer;
+		};
+	}();
+
+	exports.default = {
+		smoothScroll: smoothScroll
+	};
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -243,7 +290,71 @@
 	exports.default = notify;
 
 /***/ },
-/* 2 */
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _scrollTo = __webpack_require__(1);
+
+	var _scrollTo2 = _interopRequireDefault(_scrollTo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function init() {
+		var earlyTrigger = document.getElementById('early-trigger');
+		var collegeTrigger = document.getElementById('college-trigger');
+		var nowTrigger = document.getElementById('now-trigger');
+		var futureTrigger = document.getElementById('future-trigger');
+
+		if (earlyTrigger) {
+			earlyTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-early').offsetTop);
+			}, false);
+		}
+
+		if (collegeTrigger) {
+			collegeTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-college').offsetTop);
+			}, false);
+		}
+
+		if (nowTrigger) {
+			nowTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-now').offsetTop);
+			}, false);
+		}
+
+		if (futureTrigger) {
+			futureTrigger.addEventListener('click', function () {
+				_scrollTo2.default.smoothScroll(document.getElementById('about-future').offsetTop);
+			}, false);
+		}
+
+		function scrollWatch() {
+			var distanceY = window.pageYOffset || document.documentElement.scrollTop;
+			var navigation = document.getElementById('about-page-navigation');
+
+			if (distanceY > 110) {
+				navigation.classList.add('navigation-scrolled');
+			} else {
+				navigation.classList.remove('navigation-scrolled');
+			}
+		}
+
+		window.addEventListener('scroll', scrollWatch);
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -381,7 +492,7 @@
 	exports.default = dialog;
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -479,7 +590,7 @@
 	exports.default = sideNav;
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -488,7 +599,7 @@
 		value: true
 	});
 
-	var _notify = __webpack_require__(1);
+	var _notify = __webpack_require__(2);
 
 	var _notify2 = _interopRequireDefault(_notify);
 
@@ -533,7 +644,7 @@
 	};
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -542,23 +653,23 @@
 		value: true
 	});
 
-	var _contact = __webpack_require__(4);
+	var _contact = __webpack_require__(6);
 
 	var _contact2 = _interopRequireDefault(_contact);
 
-	var _dialog = __webpack_require__(2);
+	var _dialog = __webpack_require__(4);
 
 	var _dialog2 = _interopRequireDefault(_dialog);
 
-	var _notify = __webpack_require__(1);
+	var _notify = __webpack_require__(2);
 
 	var _notify2 = _interopRequireDefault(_notify);
 
-	var _scrollIn = __webpack_require__(6);
+	var _scrollIn = __webpack_require__(9);
 
 	var _scrollIn2 = _interopRequireDefault(_scrollIn);
 
-	var _scrollTo = __webpack_require__(9);
+	var _scrollTo = __webpack_require__(1);
 
 	var _scrollTo2 = _interopRequireDefault(_scrollTo);
 
@@ -577,14 +688,21 @@
 		// Home Dialogs
 
 
-		var opinionDialogTrigger = document.getElementById('open-opinionated');
+		var opinionDialogTrigger = document.getElementById('open-opinionated-button');
 		var opinionDialogContent = document.getElementById('opinionated-dialog');
+		var applicationBoilerDialogTrigger = document.getElementById('open-application-boiler-button');
+		var applicationBoilerDialogContent = document.getElementById('application-boiler-dialog');
 
 		var opinionDialog = new _dialog2.default({
 			content: opinionDialogContent
 		});
 
+		var applicationBoilerDialog = new _dialog2.default({
+			content: applicationBoilerDialogContent
+		});
+
 		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
+		applicationBoilerDialogTrigger.addEventListener('click', applicationBoilerDialog.open, false);
 
 		// Home Skills Scroll In
 		var scrollEntrance = new _scrollIn2.default();
@@ -612,7 +730,71 @@
 	};
 
 /***/ },
-/* 6 */
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function init() {
+		function goToSkills() {
+			document.body.classList.add('route-changing');
+
+			setTimeout(function () {
+				window.location.href = '/skills';
+				document.body.classList.remove('route-changing');
+			}, 500);
+		}
+
+		function goToAbout() {
+			document.body.classList.add('route-changing');
+
+			setTimeout(function () {
+				window.location.href = '/about';
+				document.body.classList.remove('route-changing');
+			}, 500);
+		}
+
+		function goToWork() {
+			document.body.classList.add('route-changing');
+
+			setTimeout(function () {
+				window.location.href = '/works';
+				document.body.classList.remove('route-changing');
+			}, 500);
+		}
+
+		var skillLinks = document.getElementsByClassName('go-to-skills');
+		var aboutLinks = document.getElementsByClassName('go-to-about');
+		var workLinks = document.getElementsByClassName('go-to-works');
+
+		if (skillLinks) {
+			for (var i = 0; i < skillLinks.length; i++) {
+				skillLinks[i].addEventListener('click', goToSkills);
+			}
+		}
+
+		if (aboutLinks) {
+			for (var i = 0; i < aboutLinks.length; i++) {
+				aboutLinks[i].addEventListener('click', goToAbout);
+			}
+		}
+
+		if (workLinks) {
+			for (var i = 0; i < workLinks.length; i++) {
+				workLinks[i].addEventListener('click', goToWork);
+			}
+		}
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -716,7 +898,7 @@
 	exports.default = scrollIn;
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -745,7 +927,7 @@
 	};
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -754,7 +936,7 @@
 		value: true
 	});
 
-	var _scrollTo = __webpack_require__(9);
+	var _scrollTo = __webpack_require__(1);
 
 	var _scrollTo2 = _interopRequireDefault(_scrollTo);
 
@@ -797,181 +979,6 @@
 		window.addEventListener('scroll', scrollWatch);
 
 		//backEndTrigger.addEventListener('click', scrollTo.smoothScroll(document.getElementById('skills-back-end').offsetTop));
-	}
-
-	exports.default = {
-		init: init
-	};
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var smoothScroll = function () {
-		var timer;
-		var start;
-		var factor;
-
-		return function (target, duration) {
-			var offset = window.pageYOffset;
-			var delta = target - window.pageYOffset;
-			var duration = duration || 1000;
-			start = Date.now();
-			factor = 0;
-
-			if (timer) {
-				clearInterval(timer);
-			}
-
-			function step() {
-				var y;
-				factor = (Date.now() - start) / duration;
-
-				if (factor >= 1) {
-					clearInterval(timer);
-					factor = 1;
-				}
-
-				y = factor * delta + offset;
-				window.scrollBy(0, y - window.pageYOffset);
-			}
-
-			timer = setInterval(step, 10);
-			return timer;
-		};
-	}();
-
-	exports.default = {
-		smoothScroll: smoothScroll
-	};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _scrollTo = __webpack_require__(9);
-
-	var _scrollTo2 = _interopRequireDefault(_scrollTo);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function init() {
-		var earlyTrigger = document.getElementById('early-trigger');
-		var collegeTrigger = document.getElementById('college-trigger');
-		var nowTrigger = document.getElementById('now-trigger');
-		var futureTrigger = document.getElementById('future-trigger');
-
-		if (earlyTrigger) {
-			earlyTrigger.addEventListener('click', function () {
-				_scrollTo2.default.smoothScroll(document.getElementById('about-early').offsetTop);
-			}, false);
-		}
-
-		if (collegeTrigger) {
-			collegeTrigger.addEventListener('click', function () {
-				_scrollTo2.default.smoothScroll(document.getElementById('about-college').offsetTop);
-			}, false);
-		}
-
-		if (nowTrigger) {
-			nowTrigger.addEventListener('click', function () {
-				_scrollTo2.default.smoothScroll(document.getElementById('about-now').offsetTop);
-			}, false);
-		}
-
-		if (futureTrigger) {
-			futureTrigger.addEventListener('click', function () {
-				_scrollTo2.default.smoothScroll(document.getElementById('about-future').offsetTop);
-			}, false);
-		}
-
-		function scrollWatch() {
-			var distanceY = window.pageYOffset || document.documentElement.scrollTop;
-			var navigation = document.getElementById('about-page-navigation');
-
-			if (distanceY > 110) {
-				navigation.classList.add('navigation-scrolled');
-			} else {
-				navigation.classList.remove('navigation-scrolled');
-			}
-		}
-
-		window.addEventListener('scroll', scrollWatch);
-	}
-
-	exports.default = {
-		init: init
-	};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function init() {
-		function goToSkills() {
-			document.body.classList.add('route-changing');
-
-			setTimeout(function () {
-				window.location.href = '/skills';
-				document.body.classList.remove('route-changing');
-			}, 500);
-		}
-
-		function goToAbout() {
-			document.body.classList.add('route-changing');
-
-			setTimeout(function () {
-				window.location.href = '/about';
-				document.body.classList.remove('route-changing');
-			}, 500);
-		}
-
-		function goToWork() {
-			document.body.classList.add('route-changing');
-
-			setTimeout(function () {
-				window.location.href = '/works';
-				document.body.classList.remove('route-changing');
-			}, 500);
-		}
-
-		var skillLinks = document.getElementsByClassName('go-to-skills');
-		var aboutLinks = document.getElementsByClassName('go-to-about');
-		var workLinks = document.getElementsByClassName('go-to-works');
-
-		if (skillLinks) {
-			for (var i = 0; i < skillLinks.length; i++) {
-				skillLinks[i].addEventListener('click', goToSkills);
-			}
-		}
-
-		if (aboutLinks) {
-			for (var i = 0; i < aboutLinks.length; i++) {
-				aboutLinks[i].addEventListener('click', goToAbout);
-			}
-		}
-
-		if (workLinks) {
-			for (var i = 0; i < workLinks.length; i++) {
-				workLinks[i].addEventListener('click', goToWork);
-			}
-		}
 	}
 
 	exports.default = {

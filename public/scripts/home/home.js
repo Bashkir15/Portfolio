@@ -17,17 +17,22 @@ function init() {
 	// Home Dialogs
 
 
-	var opinionDialogTrigger = document.getElementById('open-opinionated');
+	var opinionDialogTrigger = document.getElementById('open-opinionated-button');
 	var opinionDialogContent = document.getElementById('opinionated-dialog');
-
+	var applicationBoilerDialogTrigger = document.getElementById('open-application-boiler-button');
+	var applicationBoilerDialogContent = document.getElementById('application-boiler-dialog');
 
 	var opinionDialog = new dialog({
 		content: opinionDialogContent
 	});
 
+	var applicationBoilerDialog = new dialog({
+		content: applicationBoilerDialogContent
+	});
+
 
 	opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
-
+	applicationBoilerDialogTrigger.addEventListener('click', applicationBoilerDialog.open, false);
 
 	// Home Skills Scroll In
 	var scrollEntrance = new scrollIn();
