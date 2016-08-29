@@ -617,11 +617,21 @@
 
 	var _scrollIn2 = _interopRequireDefault(_scrollIn);
 
+	var _scrollTo = __webpack_require__(9);
+
+	var _scrollTo2 = _interopRequireDefault(_scrollTo);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init() {
 
-		// Home Routes
+		// Home Header
+
+		var contactScroll = document.getElementById('scrollToContact');
+
+		contactScroll.addEventListener('click', function () {
+			_scrollTo2.default.smoothScroll(document.getElementById('home-contact').offsetTop);
+		});
 
 		// Home Dialogs
 

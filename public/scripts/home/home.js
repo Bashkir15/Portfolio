@@ -2,10 +2,17 @@ import contact from './contact.js';
 import dialog from '../components/dialog.js';
 import notify from '../components/notify.js';
 import scrollIn from '../scroll.in.js';
+import scrollTo from '../utils/scrollTo.js';
 
 function init() {
 
-	// Home Routes
+	// Home Header
+
+	var contactScroll = document.getElementById('scrollToContact');
+
+	contactScroll.addEventListener('click', function() {
+		scrollTo.smoothScroll(document.getElementById('home-contact').offsetTop);
+	});
 
 	// Home Dialogs
 
