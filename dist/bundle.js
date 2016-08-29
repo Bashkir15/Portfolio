@@ -265,12 +265,14 @@
 			this.modal = null;
 			this.overlay = null;
 			this.container = null;
+			this.closeButton = null;
 
 			this.defaults = {
 				className: 'fade-and-fall',
 				content: "",
 				overlay: true,
-				closeKeys: [27]
+				closeKeys: [27],
+				closeButton: true
 			};
 
 			this._applySettings(options);
@@ -337,6 +339,13 @@
 				this.overlay = document.createElement('div');
 				this.overlay.className = 'modal-overlay ' + this.defaults.className;
 
+				if (this.defaults.closeButton == true) {
+					this.closeButton = document.createElement('button');
+					this.closeButton.innerHTML = "X";
+					this.closeButton.classList.add('dialog-close-button');
+					this.modal.appendChild(this.closeButton);
+				}
+
 				contentHolder = document.createElement('div');
 				contentHolder.className = "modal-content";
 				contentHolder.innerHTML = content;
@@ -361,6 +370,7 @@
 				var _closeKeyHandler = this._closeKeyHandler.bind(this);
 
 				this.overlay.addEventListener('click', this.close, false);
+				this.closeButton.addEventListener('click', this.close, false);
 				document.body.addEventListener('keydown', _closeKeyHandler, false);
 			}
 		}]);
@@ -405,6 +415,7 @@
 					this.container.classList.add('sidenav-container--visible');
 					this._buildOverlay.call(this);
 					this.overlay.classList.add('overlay--visible');
+					document.body.style.overflowY = "hidden";
 
 					this._addEvents();
 				}
@@ -422,6 +433,7 @@
 				if (this.container.classList.contains("sidenav-container--visible")) {
 					this.container.classList.remove("sidenav-container--visible");
 					document.body.removeChild(this.overlay);
+					document.body.style.overflowY = "auto";
 				}
 
 				this.nav.style.willChange = "auto";

@@ -3,12 +3,14 @@ export default class dialog {
 		this.modal = null;
 		this.overlay = null;
 		this.container = null;
+		this.closeButton = null;
 		
 		this.defaults = {
 			className: 'fade-and-fall',
 			content: "",
 			overlay: true,
-			closeKeys: [27]
+			closeKeys: [27],
+			closeButton: true
 		};
 
 		this._applySettings(options);
@@ -72,8 +74,15 @@ export default class dialog {
 		this.modal.style.top = window.pageYOffset + (window.innerHeight / 2) + "px";
 		this.modal.style.left = (window.innerWidth - this.modal.offsetWidth) / 2 + "px";
 
-			this.overlay = document.createElement('div');
-			this.overlay.className = 'modal-overlay ' + this.defaults.className;
+		this.overlay = document.createElement('div');
+		this.overlay.className = 'modal-overlay ' + this.defaults.className;
+
+		if (this.defaults.closeButton == true) {
+			this.closeButton = document.createElement('button');
+			this.closeButton.innerHTML = "X";
+			this.closeButton.classList.add('dialog-close-button');
+			this.modal.appendChild(this.closeButton);
+		}
 
 		contentHolder = document.createElement('div');
 		contentHolder.className = "modal-content";
@@ -97,6 +106,7 @@ export default class dialog {
 		let _closeKeyHandler = this._closeKeyHandler.bind(this);
 
 		this.overlay.addEventListener('click', this.close, false);
+		this.closeButton.addEventListener('click', this.close, false);
 		document.body.addEventListener('keydown', _closeKeyHandler, false);
 	}
 

@@ -19,6 +19,7 @@ export default class sideNav {
 			this.container.classList.add('sidenav-container--visible');
 			this._buildOverlay.call(this);
 			this.overlay.classList.add('overlay--visible');
+			document.body.style.overflowY = "hidden";
 
 			this._addEvents();
 		}
@@ -35,6 +36,7 @@ export default class sideNav {
 		if (this.container.classList.contains("sidenav-container--visible")) {
 			this.container.classList.remove("sidenav-container--visible");
 			document.body.removeChild(this.overlay);
+			document.body.style.overflowY = "auto";
 		}
 
 		this.nav.style.willChange = "auto";
