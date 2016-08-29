@@ -579,14 +579,12 @@
 
 		var opinionDialogTrigger = document.getElementById('open-opinionated');
 		var opinionDialogContent = document.getElementById('opinionated-dialog');
-		var opinionClose = document.getElementById('close-opinionated');
 
 		var opinionDialog = new _dialog2.default({
 			content: opinionDialogContent
 		});
 
 		opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
-		opinionClose.addEventListener('click', opinionDialog.close, false);
 
 		// Home Skills Scroll In
 		var scrollEntrance = new _scrollIn2.default();

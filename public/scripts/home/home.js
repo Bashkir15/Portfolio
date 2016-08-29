@@ -19,7 +19,6 @@ function init() {
 
 	var opinionDialogTrigger = document.getElementById('open-opinionated');
 	var opinionDialogContent = document.getElementById('opinionated-dialog');
-	var opinionClose = document.getElementById('close-opinionated');
 
 
 	var opinionDialog = new dialog({
@@ -28,7 +27,6 @@ function init() {
 
 
 	opinionDialogTrigger.addEventListener('click', opinionDialog.open, false);
-	opinionClose.addEventListener('click', opinionDialog.close, false);
 
 
 	// Home Skills Scroll In
