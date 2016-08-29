@@ -70,6 +70,10 @@
 
 	var _skills2 = _interopRequireDefault(_skills);
 
+	var _works = __webpack_require__(12);
+
+	var _works2 = _interopRequireDefault(_works);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function init() {
@@ -86,6 +90,8 @@
 			_skills2.default.init();
 		} else if (window.location.href.indexOf('about') != -1) {
 			_about2.default.init();
+		} else if (window.location.href.indexOf('works') != -1) {
+			_works2.default.init();
 		} else {
 			_home2.default.init();
 		}
@@ -979,6 +985,23 @@
 		window.addEventListener('scroll', scrollWatch);
 
 		//backEndTrigger.addEventListener('click', scrollTo.smoothScroll(document.getElementById('skills-back-end').offsetTop));
+	}
+
+	exports.default = {
+		init: init
+	};
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function init() {
+		console.log('Placeholder');
 	}
 
 	exports.default = {
