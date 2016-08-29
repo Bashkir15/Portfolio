@@ -45,7 +45,8 @@ function init() {
 		var successContent = document.getElementById('contact-success');
 		var successNotify = new notify({
 			content: successContent,
-			timeout: 1000
+			timeout: 1000,
+			type: 'success'
 		});
 
 	window.addEventListener('message-delivered', successNotify.open);

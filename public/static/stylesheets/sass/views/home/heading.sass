@@ -1,17 +1,14 @@
 #home-heading
-	height: 100vh
-	width: 100%
+	padding: 80px 0
 
 .home-heading-container
 	position: relative
 	height: 100%
-	background: #52b588
+	padding-bottom: 70px
+	background-image: linear-gradient(to top, #367d5a 0%, #52b588 100%)
 
 
 .home-heading-overlay
-	position: absolute
-	top: 90px
-	left: 0
 	width: 100%
 	padding-top: 155px
 
@@ -23,9 +20,9 @@
 		color: #434242
 
 	p
-		padding: 50px 0
-		@include lato
-		font-weight: 300
+		padding: 75px 20px 100px 20px
+		@include muli
+		font-weight: 400
 		font-size: 18px
 		letter-spacing: 3px
 		line-height: 30px
@@ -33,7 +30,7 @@
 
 	button
 		height: 55px
-		width: 130px
+		width: 155px
 		border: none
 		border-radius: 4px
 		background: #2c3e50
@@ -48,3 +45,12 @@
 
 		&:hover
 			background: lighten(#2c3e50, 10%)
+
+@media screen and (max-width: 610px)
+	.home-heading-overlay
+		p
+			text-align: center
+
+		h2
+			text-align: center
+			line-height: 60px

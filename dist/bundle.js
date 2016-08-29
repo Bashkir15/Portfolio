@@ -166,6 +166,14 @@
 					_content = this.settings.content.innerHTML;
 				}
 
+				if (this.settings.type === 'alert') {
+					_contentHolder.classList.add('alert');
+				}
+
+				if (this.settings.type === 'success') {
+					_contentHolder.classList.add('success');
+				}
+
 				_contentHolder.innerHTML = _content;
 
 				if (this.settings.posX === 'right') {
@@ -582,7 +590,8 @@
 		var successContent = document.getElementById('contact-success');
 		var successNotify = new _notify2.default({
 			content: successContent,
-			timeout: 1000
+			timeout: 1000,
+			type: 'success'
 		});
 
 		window.addEventListener('message-delivered', successNotify.open);
