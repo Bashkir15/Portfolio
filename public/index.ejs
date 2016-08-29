@@ -2,43 +2,76 @@
 <html>
 	<head>
 		<meta charset='utf-8'>
-		<title>Forrest - Home</title>
-		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic|Pacifico|Lato:300,100' rel='stylesheet' type='text/css'>
-		<link href='/vendor/mdi/css/materialdesignicons.min.css' rel='stylesheet'>
-		<link rel='stylesheet' href='/stylesheets/main.min.css'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+		<meta name='description' content="UI/UX Full Stack Developer. My Job is to provide modern, performant, beautiful interfaces to offser the best performing and usable product possible">
+		<meta name='keywords' content="portfolio, front-end, back-end, developer, ux, ui, web development, javascript, denton">
+		<meta name='author' content="Forrest Collins">
+		<title>Forrest Collins - Full-Stack Developer</title>
+
+		
+		<link rel='stylesheet' href='./vendor/font-awesome/css/font-awesome.css'>
+		<link rel='stylesheet' href='./vendor/etlinefont-bower/style.css'>
+		<link href='https://fonts.googleapis.com/css?family=Muli:400,400italic|Playfair+Display:400,700|Lato:300italic,300|Montserrat:400,700' rel='stylesheet'>
+		<link rel='stylesheet' href='./main.min.css'>
 	</head>
 
 	<body>
-		<div id='backdrop'></div>
+		<div class='preloader'>
+			<div class='loader'></div>
+			<div class='loader-section section-left'></div>
+			<div class='loader-section section-right'></div>
+		</div>
 
-		<section id='intro'>
-			<div class='intro-content' class='mask'>
-				<div class='intro-content-container'>
-					<div class='intro-content-left'>
-						<div>
-							<h3>Forrest Collins</h3>
-							<p>The Design is in the Details</p>
-						</div>
 
-						<div class='intro-content-left-button'>
-							<button id='home-button'>
-								<span>
-									<i class='mdi mdi-arrow-right'></i>
-								</span>
-							</button>
-							<span>View Profile</span>
-						</div>
-					</div>
-
-					<div class='intro-content-right'>
-						<div class='intro-content-image'>
-							<img src='/images/landscape.jpg'>
-						</div>
-					</div>
+		<nav class='nav' id='nav'>
+			<div class='nav-left'>
+				<div class='nav-item'>
+					<h3>Forrest Collins</h3>
 				</div>
 			</div>
+
+			<div class='nav-right'>
+				<div class='nav-item'>
+					<button id="open-sidenav">
+						<i class='icon icon-layers'></i>
+					</button>
+				</div>
+			</div>
+		</nav>
+
+
+
+
+		<div id='sidenav-container' class='sidenav-container'>
+			<div class='sidenav column' id='sidenav'>
+				<% include ./templates/shared/sidenav %>
+			</div>
+		</div>
+
+		<section id='home-heading'>
+			<% include ./templates/home/heading %>
 		</section>
 
-		<script src='/scripts/main.js'></script>
+		<section id="home-skills">
+			<% include ./templates/home/skills %>
+		</section>
+
+		<section id='home-featured'>
+			<% include ./templates/home/featured %>
+		</section>
+		
+		<section id='home-about'>
+			<% include ./templates/home/about %>
+		</section>
+
+		<section id='home-contact'>
+			<% include ./templates/home/contact %>
+		</section>
+
+		<section id='footer'>
+			<% include ./templates/shared/footer %>
+		</section>
+
+		<script src='./bundle.js'></script>
 	</body>
 </html>

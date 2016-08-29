@@ -1,0 +1,108 @@
+.about-page-header
+	padding-top: 140px
+	width: 100%
+
+	img
+		height: 65px
+		width: 65px
+		border-radius: 50%
+
+	> div
+		position: relative
+		width: 100%
+		
+		> div
+			width: 70%
+			margin: 0 auto
+			padding: 25px 0
+			background: none
+			box-shadow: none
+			transition: all .6s ease-in
+
+			button
+				background: none
+				border: none
+				border-right: 1px solid #52b588
+				
+
+				span
+					@include lato
+					font-weight: 300
+					font-size: 16px
+					letter-spacing: 2px
+					color: rgb(3,3,3)
+					transition: all .6s ease
+
+				&:last-child
+					border-right: none
+
+				&:hover
+					span
+						color: #52b588
+
+		&.navigation-scrolled
+			position: fixed
+			top: 70px
+			left: 0
+			right: 0
+
+			> div
+				background: #fff
+				box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
+				transition: all .6s ease-out
+
+
+.about-section-container
+	width: 100%
+	padding-top: 140px
+	padding-bottom: 40px
+
+.about-section-left
+	display: inline-block
+	width: 45%
+	margin-left: 10%
+	padding-top: 25px
+
+	h3
+		@include muli
+		font-weight: 400
+		font-size: 20px
+		letter-spacing: 3px
+		color: rgb(3,3,3)
+
+.about-section-right
+	display: inline-block
+	width: 45%
+	margin-right: 10%
+
+	p
+		@include lato
+		font-weight: 300
+		font-size: 16px
+		letter-spacing: 2.4px
+		line-height: 26px
+		color: rgb(119,119,119)
+		padding-bottom: 45px
+
+@media screen and (max-width: 550px)
+	.about-section-container
+		flex-direction: column
+
+	.about-section-left
+		display: flex
+		align-items: center
+		justify-content: center
+		width: 60%
+		margin: 0 auto 55px auto
+
+	.about-section-right
+		display: block
+		width: 60%
+		margin: 0 auto
+
+		p
+			padding-bottom: 70px
+
+@media screen and (max-width: 350px)
+	.about-section-right
+		width: 80%

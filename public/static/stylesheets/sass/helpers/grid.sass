@@ -1,28 +1,21 @@
-
-.grid-child
-	flex: 1 1 auto
-	padding: 10px
-
-	@for $i from 1 through 12
-		&.col-#{$i}
-			flex: none
-			width: ($i / 12) * 100%
-
-.grid
+.column
 	display: flex
-	flex-direction: row
-	margin-left: -10px
-	margin-right: -10px
-	margin-top: -10px
+	flex-direction: column
 
-	&:last-child
-		margin-bottom: -10px
+	&.column-center
+		align-items: center
 
-	&:not(:last-child)
-		margin-bottom: 10px
-
-	&.is-centered
+	&.column-vh-center
+		align-items: center
 		justify-content: center
 
-	&.is-vcentered
+.row
+	display: flex
+	flex-direction: row
+
+	&.row-center
+		justify-content: center
+
+	&.row-v-center
 		align-items: center
+	

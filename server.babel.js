@@ -1,10 +1,10 @@
-var modules = {
-	webserver: require('./server/express')
-};
+var configFile = require('./server/config/env/' + (process.env.NODE_ENV || 'development'));
+var app = require('./server/config/express')();
 
-global.configuration = {};
-global.modules = modules;
+global.config = configFile;
 
-(function (config) {
-	console.log('The application has connected');
-}(global.configuration));
+app.listen(global.config.server.port, () => {
+	console.log('Application is up and running on ' + global.config.server.host + global.config.server.port);
+});
+
+

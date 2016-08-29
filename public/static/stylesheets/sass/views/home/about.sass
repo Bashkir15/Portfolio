@@ -1,48 +1,56 @@
 #home-about
-	padding-top: 80px
-	padding-bottom: 120px
-	background: #f5f2ed
+	padding: 80px 0
 
-	> div
-		display: flex
-		flex-direction: column
-		align-items: center
-		padding: 0 75px
-		text-align: center
+.home-about-header
+	padding-top: 75px
+
+	h2
+		@include lato
+		font-weight: 300
+		letter-spacing: 2px
+		color: rgb(3,3,3)
+
 
 .home-about-image
-	display: flex
-	flex-direction: column
-	align-items: center
-	justify-content: center
-	height: 100px
-	width: 100px
-	margin-bottom: 15px
-	border: 1px solid #5c5c5c
-	border-radius: 50%
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
-	background: #fff
+	padding-top: 65px
 
-	> img
-		height: 92px
-		width: 92px
-		border: 1px solid #5c5c5c
+	img
+		height: 80px
+		width: 80px
+		border: 1px solid rgba(0,0,0,0.35)
 		border-radius: 50%
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.35)
 
-.title
-	@include sanchez
-	font-size: 30px
-	line-height: 30px
-	letter-spacing: 2px
-	padding-top: 8px
-	margin-bottom: 20px
-	color: rgb(102, 102, 102)
+.home-about-content
+	padding-top: 55px
+	width: 60%
+	margin: 0 auto
 
-.short-description
-	@include lato
-	font-weight: 100
-	letter-spacing: 2px
-	word-spacing: 3px
-	color: rgb(104, 107, 110)
+	p
+		display: inline-block
+		color: rgba(0,0,0,0.8)
+		line-height: 30px
+		@include lato
+		font-weight: 300
+
+		span
+			@include muli
+			font-weight: 400
+			color: darken(#bdc5c8, 15%)
+			//text-shadow: 1px 1px rgba(0,0,0,0.35)
 
 
+.home-about-learn-more
+	padding-top: 75px
+
+	p
+		@include lato
+		font-weight: 300
+		color: rgb(119, 119, 119)
+		letter-spacing: 2px
+		font-size: 14px
+
+		span
+			@include lato
+			font-weight: 300
+			color: #52bd88

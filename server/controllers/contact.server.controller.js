@@ -1,33 +1,34 @@
 import nodemailer from 'nodemailer';
-var config = require('../config/env/' + (process.env.NODE_ENV || 'development'));
 
 module.exports = function() {
 	var obj = {};
 
-	obj.send = function (req, res) {
+	obj.message = function (req, res) {
 		var transporter = nodemailer.createTransport({
-			service: 'Gmail',
+			service: global.config.mailer.service,
 			auth: {
-				user: config.mailer.auth.user,
-				pass: config.mailer.auth.password
+				user: global.config.mailer.auth.user,
+				pass: global.config.mailer.auth.pass
 			}
 		});
 
 		var mailOptions = {
 			from: req.body.email,
-			to: config.mailer.auth.user,
-			subject: 'Message from ' + req.body.email,
+			to: global.config.mailer.auth.user,
+			subject: req.body.subject,
 			text: req.body.message
 		};
 
-		transporter.sendMail(mailOptions, function (error, info) {
+		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
+				console.log(error);
 				res.json({message: 'error'});
 			} else {
-				res.json({message: 'woot'});
+				res.json({message: 'yay!'});
+				console.log('Message sent: ' + info.response);
 			}
 		});
 	};
 
 	return obj;
-};
+}
