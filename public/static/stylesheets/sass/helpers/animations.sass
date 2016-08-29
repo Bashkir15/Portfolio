@@ -96,6 +96,15 @@ $visibilityDefault: hidden
 	100%
 		transform: rotate(360deg)
 
+@include keyframes (slideInRight)
+	0%
+		transform: translateX(100%)
+		opacity: 0
+
+	100%
+		transform: translateX(0)
+		opacity: 1
+
 
 @mixin fade-in($count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) 
 	@include animation-name(fade-in)
@@ -124,5 +133,13 @@ $visibilityDefault: hidden
 	@include fill-mode($fill)
 	@include visibility($visibility)
 
+@mixin slideInRight($count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) 
+	@include animation-name(slideInRight)
+	@include count($count)
+	@include duration($duration)
+	@include delay($delay)
+	@include function($function)
+	@include fill-mode($fill)
+	@include visibility($visibility)
 
 
