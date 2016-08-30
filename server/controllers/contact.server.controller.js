@@ -23,7 +23,7 @@ module.exports = function() {
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
 				console.log(error);
-				json.bad(err, res);
+				json.bad(error, res);
 			} else {
 				json.good(info.response, res);
 				console.log('Message sent: ' + info.response);

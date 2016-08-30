@@ -219,8 +219,8 @@
 					_content = this.settings.content.innerHTML;
 				}
 
-				if (this.settings.type === 'alert') {
-					_contentHolder.classList.add('alert');
+				if (this.settings.type === 'danger') {
+					_contentHolder.classList.add('danger');
 				}
 
 				if (this.settings.type === 'success') {
@@ -638,8 +638,13 @@
 		});
 
 		promise.then(function (response) {
-			var success = new Event('message-delivered');
-			window.dispatchEvent(success);
+			if (response.success) {
+				var success = new Event('message-delivered');
+				window.dispatchEvent(success);
+			} else {
+				var failure = new Event('message-failed');
+				window.dispatchEvent(failure);
+			}
 		}, function (error) {
 			console.log('Failed');
 		});
@@ -728,7 +733,15 @@
 			type: 'success'
 		});
 
+		var failureContent = document.getElementById('contact-failure');
+		var failureNotify = new _notify2.default({
+			content: failureContent,
+			timeout: 1000,
+			type: 'danger'
+		});
+
 		window.addEventListener('message-delivered', successNotify.open);
+		window.addEventListener('message-failed', failureNotify.open);
 	}
 
 	exports.default = {

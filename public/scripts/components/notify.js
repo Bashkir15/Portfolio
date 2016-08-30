@@ -41,8 +41,8 @@ export default class notify {
 			_content = this.settings.content.innerHTML;
 		}
 
-		if (this.settings.type === 'alert') {
-			_contentHolder.classList.add('alert');
+		if (this.settings.type === 'danger') {
+			_contentHolder.classList.add('danger');
 		}
 
 		if (this.settings.type === 'success') {

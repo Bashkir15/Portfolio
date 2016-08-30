@@ -27,8 +27,13 @@ function message() {
 	});
 
 	promise.then((response) => {
-		var success = new Event('message-delivered');
-		window.dispatchEvent(success);
+		if (response.success) {
+			var success = new Event('message-delivered');
+			window.dispatchEvent(success);
+		} else {
+			var failure = new Event('message-failed');
+			window.dispatchEvent(failure);
+		}
 	}, function (error) {
 		console.log('Failed');
 	});

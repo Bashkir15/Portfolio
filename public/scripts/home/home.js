@@ -52,7 +52,15 @@ function init() {
 			type: 'success'
 		});
 
+		var failureContent = document.getElementById('contact-failure');
+		var failureNotify = new notify({
+			content: failureContent,
+			timeout: 1000,
+			type: 'danger'
+		});
+
 	window.addEventListener('message-delivered', successNotify.open);
+	window.addEventListener('message-failed', failureNotify.open);
 }
 
 export default {
