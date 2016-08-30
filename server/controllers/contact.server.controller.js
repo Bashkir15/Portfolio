@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import json from '../helpers/json';
 
 module.exports = function() {
 	var obj = {};
@@ -22,9 +23,9 @@ module.exports = function() {
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
 				console.log(error);
-				res.json({message: 'error'});
+				json.bad(err, res);
 			} else {
-				res.json({message: 'yay!'});
+				json.good(info.response, res);
 				console.log('Message sent: ' + info.response);
 			}
 		});
