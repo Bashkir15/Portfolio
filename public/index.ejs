@@ -3,75 +3,87 @@
 	<head>
 		<meta charset='utf-8'>
 		<meta name='viewport' content="width=device-width, initial-scale=1">
-		<meta name='description' content="UI/UX Full Stack Developer. My Job is to provide modern, performant, beautiful interfaces to offser the best performing and usable product possible">
-		<meta name='keywords' content="portfolio, front-end, back-end, developer, ux, ui, web development, javascript, denton">
-		<meta name='author' content="Forrest Collins">
-		<title>Forrest Collins - Full-Stack Developer</title>
 
-		
-		<link rel='stylesheet' href='./vendor/font-awesome/css/font-awesome.css'>
-		<link rel='stylesheet' href='./vendor/etlinefont-bower/style.css'>
-		<link href='https://fonts.googleapis.com/css?family=Muli:400,400italic|Playfair+Display:400,700|Lato:300italic,300|Montserrat:400,700' rel='stylesheet'>
-		<link rel='stylesheet' href='./main.min.css'>
+		<title>Portfolio -- Forrest Collins</title>
+
+		<link rel='stylesheet' href='./styles/main.min.css'>
 	</head>
 
 	<body>
-		<div class='preloader'>
-			<div class='loader'></div>
-			<div class='loader-section section-left'></div>
-			<div class='loader-section section-right'></div>
-		</div>
+		<% include ./views/shared/nav %>
 
+		<section class='landing-header'>
+			<h1>Hi, I'm Forrest</h1>
+			<p>I am an obsessively thorough developer</p>
 
-		<nav class='nav' id='nav'>
-			<div class='nav-left'>
-				<div class='nav-item'>
-					<h3>Forrest Collins</h3>
+			<button>
+				<span>Contact Me</span>
+			</button>
+		</section>
+
+		<section class='landing-skills'>
+			<header>
+				<h2>Some of my Skills</h2>
+			</header>
+
+			<div class='landing-skills-body'>
+				<div>
+					<div class='landing-skill' data-entrance='fade'>
+						<span>Icon</span>
+						<div>
+							<h3>Fontend</h3>
+							<p>HTML5, CSS3(Sass), Javascipt(ES6),
+							AngularJS, Vue, React, and animations are just some of the tools in my kit</p>
+						</div>
+					</div>
+
+					<div class='landing-skill' data-entrance='fade'>
+						<span>Icon</span>
+						<div>
+							<h3>Backend</h3>
+							<p>NodeJs, Express, Koa, Ngnix, and Websockets come together to create modern, secure, and performant backends</p>
+						</div>
+					</div>
+
+					<div class='landing-skill' data-entrance="fade">
+						<span>Icon</span>
+						<div>
+							<h3>Database</h3>
+							<p>MongoDB, Redis, and RethinkDB are my NoSQL weapons for creating well-designed data structures</p>
+						</div>
+					</div>
+
+					<div class='landing-skill' data-entrance="fade">
+						<span>Icon</span>
+						<div>
+							<h3>UI/UX</h3>
+							<p>I am passionate about creating enjoyable and interactive experiences that bring user back</p>
+						</div>
+					</div>
+
+					<div class='landing-skill' data-entrance="fade">
+						<span>Icon</span>
+						<div>
+							<h3>Responsive Design</h3>
+							<p>Applications are not one size fits all, but by building with other devices in mind from the ground up we can push that under the rug</p>
+						</div>
+					</div>
+
+					<div class='landing-skill' data-entrance='fade'>
+						<span>Icon</span>
+						<div>
+							<h3>Efficiency</h3>
+							<p>I like to waste as little time as possible, so I use tools like gulp, webpack, and rollup to the make development smoother</p>
+						</div>
+					</div>
 				</div>
-			</div>
 
-			<div class='nav-right'>
-				<div class='nav-item'>
-					<button id="open-sidenav">
-						<i class='icon icon-layers'></i>
+				<div class='landing-skills-more'>
+					<button>
+						<span>See the rest</span>
 					</button>
 				</div>
 			</div>
-		</nav>
-
-
-
-
-		<div id='sidenav-container' class='sidenav-container'>
-			<div class='sidenav column' id='sidenav'>
-				<% include ./templates/shared/sidenav %>
-			</div>
-		</div>
-
-		<section id='home-heading'>
-			<% include ./templates/home/heading %>
 		</section>
-
-		<section id="home-skills">
-			<% include ./templates/home/skills %>
-		</section>
-
-		<section id='home-featured'>
-			<% include ./templates/home/featured %>
-		</section>
-		
-		<section id='home-about'>
-			<% include ./templates/home/about %>
-		</section>
-
-		<section id='home-contact'>
-			<% include ./templates/home/contact %>
-		</section>
-
-		<section id='footer'>
-			<% include ./templates/shared/footer %>
-		</section>
-
-		<script src='./bundle.min.js'></script>
 	</body>
 </html>

@@ -1,22 +1,25 @@
 import express from 'express';
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import compression from 'compression';
 import path from 'path';
-import webpack from 'webpack';
+import compression from 'compression';
+import morgan from 'morgan';
 import ejs from 'ejs';
+
 import indexRoutes from '../routes/index.server.routes';
 
-module.exports = function () {
-	let app = express();
+module.exports = () => {
+	const app = express();
 
-	app.set('views', path.join(__dirname, '../../public'));
 	app.set('view engine', 'ejs');
+	app.set('views', path.join(__dirname, '../../public'));
 
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(morgan('dev'));
 	app.use(compression());
+	app.use((req, res, next) => {
+		res.setHeader('Access-Control-Allow-Origin', '*');
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+		res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
+		next();
+	});
 
 	app.use(express.static(path.join(__dirname, '../../public')));
 	app.use(express.static(path.join(__dirname, '../../node_modules')));
@@ -25,4 +28,4 @@ module.exports = function () {
 	app.use('/', indexRoutes);
 
 	return app;
-}
+};

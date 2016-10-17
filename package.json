@@ -1,47 +1,48 @@
 {
   "name": "portfolio",
-  "version": "0.0.1",
-  "description": "\"My personal portfolio\"",
+  "version": "1.2.0",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "webpack --config ./webpack/webpack.config.js",
     "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bashkir15/Portfolio.git"
   },
   "author": "Forrest Collins",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bashkir15/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Bashkir15/Portfolio#readme",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "cluster": "^0.7.7",
     "compression": "^1.6.2",
-    "ejs": "^2.5.1",
+    "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "http": "0.0.0",
     "morgan": "^1.7.0",
-    "nodemailer": "^2.5.0",
-    "path": "^0.12.7",
-    "vue": "^1.0.26",
-    "vue-router": "^0.7.13"
+    "path": "^0.12.7"
   },
   "devDependencies": {
-    "babel-core": "^6.13.2",
-    "babel-loader": "^6.2.4",
-    "babel-plugin-transform-runtime": "^6.12.0",
-    "babel-preset-es2015": "^6.13.2",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-runtime": "^6.11.6",
-    "connect-history-api-fallback": "^1.3.0",
-    "css-loader": "^0.23.1",
+    "babel": "^6.5.2",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "browser-sync": "^2.17.3",
     "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-combine-media-queries": "^0.2.0",
     "gulp-concat": "^2.6.0",
+    "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.1.1",
     "gulp-uglify": "^2.0.0",
-    "gulp-uglifycss": "^1.0.6",
-    "vue-hot-reload-api": "^1.3.3",
-    "vue-html-loader": "^1.2.3",
-    "vue-loader": "^8.5.3",
-    "vue-style-loader": "^1.0.0",
-    "webpack": "^1.13.1",
-    "webpack-hot-middleware": "^2.12.2"
+    "gulp-uglifycss": "^1.0.6"
   }
 }
