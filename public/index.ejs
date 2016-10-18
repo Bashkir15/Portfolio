@@ -22,7 +22,7 @@
 		</section>
 
 		<section class='landing-skills'>
-			<header>
+			<header class='landing-section-header'>
 				<h2>Some of my Skills</h2>
 			</header>
 
@@ -85,5 +85,142 @@
 				</div>
 			</div>
 		</section>
+
+		<section class='landing-projects'>
+			<header class='landing-section-header'>
+				<h2>Recent Projects</h2>
+			</header>
+
+			<div class='landing-projects-body'>
+				<div>
+					<div class='landing-project'>
+						<div>
+							<div class='landing-project-overlay'></div>
+						</div>
+
+						<h3>Opinionated</h3>
+						<p>A forum and social-media application to share articles, pictures, and more</p>
+					</div>
+
+					<div class='landing-project'>
+						<div>
+							<div class='landing-project-overlay'>
+							</div>
+						</div>
+
+						<h3>Application Boilerplate</h3>
+						<p>A boilerplate to quickly role out applications that allows you to mix and match frequently needed features</p>
+					</div>
+
+					<div class='landing-project'>
+						<div>
+							<div class='landing-project-overlay'>
+							</div>
+						</div>
+
+						<h3>Golondrina Studios</h3>
+						<p>A Portfolio website for a community driven local-artist looking to expand her business</p>
+					</div>
+				</div>
+
+				<div class='landing-projects-more'>
+					<button>
+						<span>See the rest</span>
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<section class='landing-about'>
+			<header class='landing-section-header'>
+				<h2>About Me</h2>
+			</header>
+
+			<div class='landing-about-body'>
+				<div class='landing-about-image'></div>
+
+				<div class='landing-about-text'>
+					<p>The transition from writing simulations in ForTran to delegating events in Javascript has been an interesting one. It is an exciting time where developers from all around the world are coming together and pushing the boundaries of what we thought the web was capable of. Becuase of these changes I must always be learning and improving my skills. It is for this reason that I am constantly adding new tools to my kit, using ES6, and preparing for future ECMAScript releases</p>
+				</div>
+
+				<div class='landing-about-more'>
+					<button>
+						<span>Learn more</span>
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<section class='landing-contact'>
+			<header class='landing-section-header'>
+				<h2>Contact Me</h2>
+			</header>
+
+			<div class='landing-contact-body'>
+				<div class='contact-form'>
+					<form name='contact'>
+						<div class='form-wrapper'>
+							<label for='contact-name'>Name</label>
+							<span>Icon</span>
+							<input type='text' id='contact-name'>
+						</div>
+
+						<div class='form-wrapper'>
+							<label for='contact-email'>Email</label>
+							<span>Icon</span>
+							<input type='email' id='contact-email'>
+						</div>
+
+						<div class='form-wrapper'>
+							<label for='contact-subject'>Subject</label>
+							<span>Icon</span>
+							<input type='email' id='contact-email'>
+						</div>
+
+						<div class='form-wrapper'>
+							<label for='contact-message'>Message</label>
+							<textarea id='contact-message' cols='40' rows='7'></textarea>
+						</div>
+
+						<div class='contact-submit'>
+							<button id='contact-send' type='button'>
+								<span>Message Me</span>
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<div class='contact-details'>
+					<h3>Details</h3>
+					<p>If you don't want to send me a message, feel free to use any of these methods</p>
+
+					<div class='contact-detail'>
+						<span>Icon</span>
+						<div>
+							<h4>Email</h4>
+							<p>Forest.D.Collins@gmail.com</p>
+						</div>
+					</div>
+
+					<div class='contact-detail'>
+						<span>Icon</span>
+						<div>
+							<h4>Phone</h4>
+							<p>918-351-8097</p>
+						</div>
+					</div>
+					
+					<div class='contact-detail'>
+						<span>Icon</span>
+						<div>	
+							<h4>Inhabits</h4>
+							<p>Denton, TX. 76209</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<% include ./views/shared/footer %>
 	</body>
 </html>
