@@ -48,3 +48,64 @@
 			span
 				font-size: 22px
 
+@media screen and (min-width: 1325px)
+	.footer
+		flex-direction: row
+		padding: 40px 25px
+
+	.footer-text
+		display: flex
+		flex: 1
+		flex-basis: 0
+		align-items: center
+		justify-content: flex-start
+
+	.footer-social-buttons
+		flex: 1
+		flex-basis: 0
+		justify-content: flex-end
+		padding-top: 0
+
+	.footer-button
+		flex: 0
+
+		button
+			position: relative
+			height: 40px
+			padding: 0 10px
+			transition: all .4s ease
+
+			span
+				@include open()
+				font-weight: 300
+				font-size: 18px
+				letter-spacing: 2px
+				transition: all .28s ease-in-out
+
+			&:before,
+			&:after
+				display: block
+				content: ""
+				position: relative
+				width: 0px
+				margin: 0 auto
+				backface-visibility: hidden
+				border: 1px solid rgba(0,0,0,0.35)
+				transition: all .28s ease-in-out
+
+			&:after
+				bottom: -10px
+
+			&:before
+				top: -10px
+
+			&:hover
+				&:after,
+				&:before
+					width: 70%
+					transition: width .35s ease-in-out
+
+				span
+					letter-spacing: 6px
+
+
