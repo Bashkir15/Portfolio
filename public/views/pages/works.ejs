@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Portfolio -- Works of Forrest Collins</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Raleway:400,600" rel="stylesheet">
+		<link rel='stylesheet' href='./static/fonts/style.css'>
+		<link rel='stylesheet' href='./styles/main.min.css'>
+	</head>
+
+	<body>
+		<% include ../shared/nav %>
+
+		<div class='works-page-container'>
+			<header>
+				<h1>My Works</h1>
+			</header>
+
+			<section class='works-container'>
+				<div class='works'>
+					<div class='work'>
+						<a href='/'>
+							<img src='../../static/images/opinionated.jpeg'>
+							<div class='work-overlay'></div>
+						</a>
+
+						<h2>Opinionated</h2>
+						<p>A forum and social-media application to talk with friends, share articles, score them, and more</p>
+					</div>
+
+					<div class='work'>
+						<a href='/'>
+							<img src='../../static/images/blue-city.jpg'>
+							<div class='work-overlay'></div>
+						</a>
+
+						<h2>Application Boilerplate</h2>
+						<p>A boilerplate to quickly role out applications that allows you to mix and match frequently needed features</p>
+					</div>
+
+					<div class='work'>
+						<a href='/'>
+							<div></div>
+							<div class='work-overlay'></div>
+						</a>
+
+						<h2>Golondrina Studios</h2>
+						<p>A Portfolio website for a community driven local-artist looking to expand her business</p>
+					</div>
+
+					<div class='work'>
+						<a href='/'>
+							<div></div>
+							<div class='work-overlay'></div>
+						</a>
+
+						<h2>Melody</h2>
+						<p>This is my personal music site to display some of my compositions as well as recordings</p>
+					</div>
+
+					<div class='work'>
+						<a href='/'>
+							<div></div>
+							<div class='work-overlay'></div>
+						</a>
+
+						<h2>Machine.js</h2>
+						<p>This is a small collection of machine-learning algorithms implemented in javascript</p>
+					</div>
+				</div>
+
+				<div class='github-button'>
+					<p>Feel free to check out my github here</p>
+					<a href='/'>
+						<button>
+							<span>Github</span>
+						</button>
+					</a>
+				</div>
+			</section>
+		</div>
+
+		<% include ../shared/footer %>
+	</body>
+</html>
