@@ -1,4 +1,7 @@
 import navshrink from './scripts/utils/nav.shrink';
+import scrollIn from './scripts/utils/scroll.in'
+
+var scrollEntrance = new scrollIn();
 
 function activeUrl() {
 	var navLinks = document.querySelectorAll('.nav-link');
@@ -20,3 +23,7 @@ window.onload = () => {
 		document.body.classList.add('loaded');
 	}, 1000);
 }
+
+window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+window.addEventListener('scroll', scrollEntrance.viewPortChange);
+window.addEventListener('resize', scrollEntrance.viewPortChange);
