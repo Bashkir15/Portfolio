@@ -1,3 +1,5 @@
+import navshrink from './scripts/utils/nav.shrink';
+
 function activeUrl() {
 	var navLinks = document.querySelectorAll('.nav-link');
 
@@ -10,6 +12,8 @@ function activeUrl() {
 
 
 activeUrl();
+
+navshrink();
 
 window.onload = () => {
 	setTimeout(() => {

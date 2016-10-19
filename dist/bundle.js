@@ -42,9 +42,15 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _nav = __webpack_require__(1);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function activeUrl() {
 		var navLinks = document.querySelectorAll('.nav-link');
@@ -58,11 +64,80 @@
 
 	activeUrl();
 
+	(0, _nav2.default)();
+
 	window.onload = function () {
 		setTimeout(function () {
 			document.body.classList.add('loaded');
 		}, 1000);
 	};
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function navshrink() {
+		var lastKnownScrollY = 0;
+		var nav = document.querySelector('.nav');
+
+		init();
+
+		function getScrollY() {
+			return window.pageYOffset || window.scrollTop;
+		}
+
+		function init() {
+			window.addEventListener('scroll', checkPin);
+		}
+
+		function checkPin() {
+			var currentScrollY = getScrollY();
+
+			if (currentScrollY < lastKnownScrollY) {
+				pin();
+			}
+
+			if (currentScrollY > lastKnownScrollY) {
+				unpin();
+			}
+
+			lastKnownScrollY = getScrollY();
+		}
+
+		function pin() {
+			nav.style.willChange = 'transform';
+
+			if (nav.classList.contains('nav-unpinned')) {
+				nav.classList.remove('nav-unpinned');
+				nav.classList.add('nav-pinned');
+			} else {
+				nav.classList.add('nav-pinned');
+			}
+
+			nav.style.willChange = 'auto';
+		}
+
+		function unpin() {
+
+			nav.style.willChange = 'transform';
+
+			if (nav.classList.contains('nav-pinned')) {
+				nav.classList.remove('nav-pinned');
+				nav.classList.add('nav-unpinned');
+			} else {
+				nav.classList.add('nav-unpinned');
+			}
+
+			nav.style.willChange = 'auto';
+		}
+	}
+
+	exports.default = navshrink;
 
 /***/ }
 /******/ ]);
