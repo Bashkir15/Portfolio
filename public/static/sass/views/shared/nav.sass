@@ -5,7 +5,7 @@
 	height: 60px
 	width: 100%
 	z-index: 100
-	padding-bottom: 10px
+	padding: 10px 0
 	transition: all .5s ease-out
 
 .nav-left
@@ -16,6 +16,14 @@
 	justify-content: flex-start
 	white-space: nowrap
 	padding-left: 15px
+
+	button
+		span
+			@include rale()
+			font-weight: 300
+			font-size: 20px
+			letter-spacing: 4px
+			color: #6d6e70
 
 
 .nav-right
@@ -58,12 +66,63 @@
 		&:nth-child(1)
 			top: 12px
 			transform-origin: left center
+			background: #fd4f00
 
 		&:nth-child(2)
 			top: 24px
 			transform-origin: left center
+			background: darken(#fd4f00, 1%)
 
 		&:nth-child(3)
 			top: 36px
 			transform-origin: left center
+			background: darken(#fd4f00, 2%)
+
+
+@media screen and (min-width: 1325px)
+	.nav-left
+		padding-left: 25px
+
+	.nav-right
+		padding-right: 25px
+
+		.nav-item
+			padding: 0px 10px
+
+	.nav-item
+		height: 60px
+
+		&.desktop
+			display: flex
+
+			button
+				position: relative
+				width: 90px
+
+				span
+					@include rale()
+					font-weight: 400
+					font-size: 18px
+					letter-spacing: 3px
+					color: #6d6e70 
+
+				&:before
+					content: ""
+					position: absolute
+					bottom: -8px
+					left: 0
+					height: 1px
+					width: 100%
+					opacity: 0
+					transform: translateY(30px)
+					background: #fd4f00
+					transition: all .3s ease-out
+
+				&:hover
+					&:before
+						opacity: 1
+						transform: translateY(0)
+
+
+
 

@@ -6,221 +6,235 @@
 
 		<title>Portfolio -- Forrest Collins</title>
 
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Raleway:400,600" rel="stylesheet">
+		<link rel='stylesheet' href='./static/fonts/style.css'>
 		<link rel='stylesheet' href='./styles/main.min.css'>
 	</head>
 
-	<body>
+	<body class='home-body'>
+		<div class='preloader'>
+			<div class='loader'></div>
+			<div class='loader-section section-left'></div>
+			<div class='loader-section section-right'></div>
+		</div>
+
+
 		<% include ./views/shared/nav %>
 
-		<section class='landing-header'>
-			<h1>Hi, I'm Forrest</h1>
-			<p>I am an obsessively thorough developer</p>
+		<div class='landing-page-container'>
+			<section class='landing-header'>
+				<h1>Hi, I'm Forrest</h1>
+				<p>I am an obsessively thorough developer</p>
 
-			<button>
-				<span>Contact Me</span>
-			</button>
-		</section>
+				<button>
+					<span>Contact Me</span>
+				</button>
+			</section>
 
-		<section class='landing-skills'>
-			<header class='landing-section-header'>
-				<h2>Some of my Skills</h2>
-			</header>
+			<section class='landing-skills'>
+				<header class='landing-section-header'>
+					<h2>Some of my Skills</h2>
+				</header>
 
-			<div class='landing-skills-body'>
-				<div>
-					<div class='landing-skill' data-entrance='fade'>
-						<span>Icon</span>
-						<div>
-							<h3>Fontend</h3>
-							<p>HTML5, CSS3(Sass), Javascipt(ES6),
-							AngularJS, Vue, React, and  CSS/JS animations are just a few of my tools</p>
-						</div>
-					</div>
-
-					<div class='landing-skill' data-entrance='fade'>
-						<span>Icon</span>
-						<div>
-							<h3>Backend</h3>
-							<p>NodeJs, Express, Koa, Ngnix, and Websockets come together to create modern, and secure backends</p>
-						</div>
-					</div>
-
-					<div class='landing-skill' data-entrance="fade">
-						<span>Icon</span>
-						<div>
-							<h3>Database</h3>
-							<p>MongoDB, Redis, and RethinkDB are my NoSQL weapons for creating well-designed data structures</p>
-						</div>
-					</div>
-
-					<div class='landing-skill' data-entrance="fade">
-						<span>Icon</span>
-						<div>
-							<h3>UI/UX</h3>
-							<p>I am passionate about creating enjoyable and interactive experiences that users cherish and want to come back to</p>
-						</div>
-					</div>
-
-					<div class='landing-skill' data-entrance="fade">
-						<span>Icon</span>
-						<div>
-							<h3>Responsive Design</h3>
-							<p>Applications are not one size fits all, but building for small screens first we can make our website look amazing anywhere</p>
-						</div>
-					</div>
-
-					<div class='landing-skill' data-entrance='fade'>
-						<span>Icon</span>
-						<div>
-							<h3>Efficiency</h3>
-							<p>I like to waste as little time as possible, so I use tools like gulp, webpack, and rollup to the make development smoother</p>
-						</div>
-					</div>
-				</div>
-
-				<div class='landing-skills-more'>
-					<button>
-						<span>See the rest</span>
-					</button>
-				</div>
-			</div>
-		</section>
-
-		<section class='landing-projects'>
-			<header class='landing-section-header'>
-				<h2>Recent Projects</h2>
-			</header>
-
-			<div class='landing-projects-body'>
-				<div>
-					<div class='landing-project'>
-						<div>
-							<div class='landing-project-overlay'></div>
-						</div>
-
-						<h3>Opinionated</h3>
-						<p>A forum and social-media application to talk with friends, share articles, score them, and more</p>
-					</div>
-
-					<div class='landing-project'>
-						<div>
-							<div class='landing-project-overlay'>
+				<div class='landing-skills-body'>
+					<div>
+						<div class='landing-skill' data-entrance='fade'>
+							<span class='icon-desktop'></span>
+							<div>
+								<h3>Fontend</h3>
+								<p>HTML5, CSS3(Sass), Javascipt(ES6),
+								AngularJS, Vue, React, and  CSS/JS animations are just a few of my tools</p>
 							</div>
 						</div>
 
-						<h3>Application Boilerplate</h3>
-						<p>A boilerplate to quickly role out applications that allows you to mix and match frequently needed features</p>
-					</div>
-
-					<div class='landing-project'>
-						<div>
-							<div class='landing-project-overlay'>
+						<div class='landing-skill' data-entrance='fade'>
+							<span class='icon-upload'></span>
+							<div>
+								<h3>Backend</h3>
+								<p>NodeJs, Express, Koa, Ngnix, and Websockets come together to create modern, and secure backends</p>
 							</div>
 						</div>
 
-						<h3>Golondrina Studios</h3>
-						<p>A Portfolio website for a community driven local-artist looking to expand her business</p>
-					</div>
-				</div>
-
-				<div class='landing-projects-more'>
-					<button>
-						<span>See the rest</span>
-					</button>
-				</div>
-			</div>
-		</section>
-
-		<section class='landing-about'>
-			<header class='landing-section-header'>
-				<h2>About Me</h2>
-			</header>
-
-			<div class='landing-about-body'>
-				<div class='landing-about-image'></div>
-
-				<div class='landing-about-text'>
-					<p>The transition from writing simulations in ForTran to delegating events in Javascript has been an interesting one. It is an exciting time where developers from all around the world are coming together and pushing the boundaries of what we thought the web was capable of. Becuase of these changes I must always be learning and improving my skills. It is for this reason that I am constantly adding new tools to my kit, using ES6, and preparing for future ECMAScript releases</p>
-				</div>
-
-				<div class='landing-about-more'>
-					<button>
-						<span>Learn more</span>
-					</button>
-				</div>
-			</div>
-		</section>
-
-		<section class='landing-contact'>
-			<header class='landing-section-header'>
-				<h2>Contact Me</h2>
-			</header>
-
-			<div class='landing-contact-body'>
-				<div class='contact-form'>
-					<form name='contact'>
-						<div class='form-wrapper'>
-							<label for='contact-name'>Name</label>
-							<span>Icon</span>
-							<input type='text' id='contact-name'>
+						<div class='landing-skill' data-entrance="fade">
+							<span class='icon-book-open'></span>
+							<div>
+								<h3>Database</h3>
+								<p>MongoDB, Redis, and RethinkDB are my NoSQL weapons for creating well-designed data structures</p>
+							</div>
 						</div>
 
-						<div class='form-wrapper'>
-							<label for='contact-email'>Email</label>
-							<span>Icon</span>
-							<input type='email' id='contact-email'>
+						<div class='landing-skill' data-entrance="fade">
+							<span class='icon-browser'></span>
+							<div>
+								<h3>UI/UX</h3>
+								<p>I am passionate about creating enjoyable and interactive experiences that users cherish and want to come back to</p>
+							</div>
 						</div>
 
-						<div class='form-wrapper'>
-							<label for='contact-subject'>Subject</label>
-							<span>Icon</span>
-							<input type='email' id='contact-email'>
+						<div class='landing-skill' data-entrance="fade">
+							<span class='icon-mobile'></span>
+							<div>
+								<h3>Responsive Design</h3>
+								<p>Applications are not one size fits all, but building for small screens first we can make our website look amazing anywhere</p>
+							</div>
 						</div>
 
-						<div class='form-wrapper'>
-							<label for='contact-message'>Message</label>
-							<textarea id='contact-message' cols='40' rows='7'></textarea>
-						</div>
-
-						<div class='contact-submit'>
-							<button id='contact-send' type='button'>
-								<span>Message Me</span>
-							</button>
-						</div>
-					</form>
-				</div>
-
-				<div class='contact-details'>
-					<h3>Details</h3>
-					<p>If you don't want to send me a message, feel free to use any of these methods</p>
-
-					<div class='contact-detail'>
-						<span>Icon</span>
-						<div>
-							<h4>Email</h4>
-							<p>Forest.D.Collins@gmail.com</p>
+						<div class='landing-skill' data-entrance='fade'>
+							<span class='icon-genius'></span>
+							<div>
+								<h3>Efficiency</h3>
+								<p>I like to waste as little time as possible, so I use tools like gulp, webpack, and rollup to the make development smoother</p>
+							</div>
 						</div>
 					</div>
 
-					<div class='contact-detail'>
-						<span>Icon</span>
-						<div>
-							<h4>Phone</h4>
-							<p>918-351-8097</p>
+					<div class='landing-skills-more'>
+						<button>
+							<span>See the rest</span>
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section class='landing-projects'>
+				<header class='landing-section-header'>
+					<h2>Recent Projects</h2>
+				</header>
+
+				<div class='landing-projects-body'>
+					<div>
+						<div class='landing-project'>
+							<div>
+								<img src='./static/images/opinionated.jpeg'>
+								<div class='landing-project-overlay'></div>
+							</div>
+
+							<h3>Opinionated</h3>
+							<p>A forum and social-media application to talk with friends, share articles, score them, and more</p>
+						</div>
+
+						<div class='landing-project'>
+							<div>
+								<img src='./static/images/blue-city.jpg'>
+								<div class='landing-project-overlay'>
+								</div>
+							</div>
+
+							<h3>Application Boilerplate</h3>
+							<p>A boilerplate to quickly role out applications that allows you to mix and match frequently needed features</p>
+						</div>
+
+						<div class='landing-project'>
+							<div>
+								<div class='landing-project-overlay'>
+								</div>
+							</div>
+
+							<h3>Golondrina Studios</h3>
+							<p>A Portfolio website for a community driven local-artist looking to expand her business</p>
 						</div>
 					</div>
-					
-					<div class='contact-detail'>
-						<span>Icon</span>
-						<div>	
-							<h4>Inhabits</h4>
-							<p>Denton, TX. 76209</p>
+
+					<div class='landing-projects-more'>
+						<button>
+							<span>See the rest</span>
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section class='landing-about'>
+				<header class='landing-section-header'>
+					<h2>About Me</h2>
+				</header>
+
+				<div class='landing-about-body'>
+					<img class='landing-about-image' src='./static/images/me.jpg'>
+
+					<div class='landing-about-text'>
+						<p>The transition from writing simulations in ForTran to delegating events in Javascript has been an interesting one. It is an exciting time where developers from all around the world are coming together and pushing the boundaries of what we thought the web was capable of. Becuase of these changes I must always be learning and improving my skills. It is for this reason that I am constantly adding new tools to my kit, using ES6, and preparing for future ECMAScript releases</p>
+					</div>
+
+					<div class='landing-about-more'>
+						<button>
+							<span>Learn more</span>
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section class='landing-contact'>
+				<header class='landing-section-header'>
+					<h2>Contact Me</h2>
+				</header>
+
+				<div class='landing-contact-body'>
+					<div class='contact-form'>
+						<form name='contact'>
+							<div class='form-wrapper'>
+								<label for='contact-name'>Name</label>
+								<span class='icon-person_outline'></span>
+								<input type='text' id='contact-name'>
+							</div>
+
+							<div class='form-wrapper'>
+								<label for='contact-email'>Email</label>
+								<span class='icon-mail_outline'></span>
+								<input type='email' id='contact-email'>
+							</div>
+
+							<div class='form-wrapper'>
+								<label for='contact-subject'>Subject</label>
+								<span class='icon-mode_edit'></span>
+								<input type='email' id='contact-email'>
+							</div>
+
+							<div class='form-wrapper'>
+								<label for='contact-message'>Message</label>
+								<textarea id='contact-message' cols='40' rows='7'></textarea>
+							</div>
+
+							<div class='contact-submit'>
+								<button id='contact-send' type='button'>
+									<span>Message Me</span>
+								</button>
+							</div>
+						</form>
+					</div>
+
+					<div class='contact-details'>
+						<h3>Details</h3>
+						<p>If you don't want to send me a message, feel free to use any of these methods</p>
+
+						<div class='contact-detail'>
+							<span class='icon-envelope'></span>
+							<div>
+								<h4>Email</h4>
+								<p>Forest.D.Collins@gmail.com</p>
+							</div>
+						</div>
+
+						<div class='contact-detail'>
+							<span class='icon-phone'></span>
+							<div>
+								<h4>Phone</h4>
+								<p>918-351-8097</p>
+							</div>
+						</div>
+						
+						<div class='contact-detail'>
+							<span class='icon-map-pin'></span>
+							<div>	
+								<h4>Inhabits</h4>
+								<p>Denton, TX. 76209</p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 
 		<% include ./views/shared/footer %>
+		<script src='./bundle.js'></script>
 	</body>
 </html>
