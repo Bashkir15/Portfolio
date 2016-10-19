@@ -46,6 +46,18 @@
 
 	'use strict';
 
+	function activeUrl() {
+		var navLinks = document.querySelectorAll('.nav-link');
+
+		Array.prototype.forEach.call(navLinks, function (link) {
+			if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
+				link.classList.add('active');
+			}
+		});
+	}
+
+	activeUrl();
+
 	window.onload = function () {
 		setTimeout(function () {
 			document.body.classList.add('loaded');
