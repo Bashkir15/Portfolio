@@ -9,13 +9,17 @@ import rename from 'gulp-rename';
 import notify from 'gulp-notify';
 import browserSync from 'browser-sync';
 import sourceMaps from 'gulp-sourcemaps';
+import imagemin from 'gulp-imagemin';
+import pngquant from 'imagemin-pngquant';
 
 const paths = {
 	dev: {
 		html: './public/*.html',
 		sass: './public/static/sass/main.sass',
 		sass2: '/public/static/sass/**',
-		js: './dist/bundle.js'
+		js: './dist/main.build.js',
+		js2: './dist/other.build.js',
+		images: './public/static/images/*'
 	},
 
 	prod: {
@@ -32,6 +36,15 @@ gulp.task('browserSync', () => {
 		files: ["public/**/*.*"],
 		port: 7000
 	});
+});
+
+gulp.task('images', () => {
+	gulp.src(paths.dev.images)
+		.pipe(imagemin({
+			progressive: true,
+			use: [pngquant()]
+		}))
+		.pipe(gulp.dest(paths.prod.images));
 });
 
 gulp.task('styles', () => {
@@ -64,7 +77,7 @@ gulp.task('styles', () => {
 });
 
 gulp.task('scripts', () => {
-	gulp.src(paths.dev.js)
+	gulp.src([paths.dev.js, paths.dev.js2])
 		.pipe(plumber())
 		.pipe(uglify())
 		.pipe(rename((path) => {
