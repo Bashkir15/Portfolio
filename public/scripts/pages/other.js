@@ -1,3 +1,9 @@
+import mobileMenu from '../components/mobile.menu';
+
+var navTrigger = document.getElementById('nav-trigger');
+
+var mobileNav = new mobileMenu();
+
 function activeUrl() {
 	var navLinks = document.querySelectorAll('.nav-link');
 
@@ -9,3 +15,5 @@ function activeUrl() {
 }
 
 activeUrl();
+
+navTrigger.addEventListener('click', mobileNav.toggle);
