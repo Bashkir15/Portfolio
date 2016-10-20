@@ -29,13 +29,16 @@ module.exports = () => {
 			if (error) {
 				json.bad(error, res);
 			} else {
-				//sendContactConfirm(messageSender);
+				sendContactConfirm(messageSender);
 				json.good(info.response, res);
 			}
 		});
 	};
 
-	function sendContactConfirm(sender) {
+
+	function sendContactConfirm(sender, res) {
+		var emailTemplate = fs.readFileSync('./server/templates/contact.html', {encoding: 'utf-8'});
+
 		var transporter = nodemailer.createTransport({
 			service: global.config.mailer.service,
 			auth: {
@@ -47,14 +50,15 @@ module.exports = () => {
 		var mailOptions = {
 			from: 'Forrest Collins',
 			to: sender,
-			subject: 'I have received your message'
+			subject: 'I have received your message',
+			html: emailTemplate
 		};
 
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
 				res.json(error, res);
 			} else {
-				json.good(info.response, res);
+				json.good(info.response, );
 			}
 		});
 	}
