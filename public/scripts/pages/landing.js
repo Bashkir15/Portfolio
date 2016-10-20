@@ -112,21 +112,34 @@ function landing() {
 		}
 	}
 
+	function clearInputs() {
+		Array.prototype.forEach.call(formInputs, (input) => {
+			input.value = '';
+		});
+	}
+
 	function sendMessage() {
 		if (submitButton.classList.contains('form-valid')) {
 			submitButton.classList.add('contact-loading');
 		
+			
+			var nameData = document.getElementById('contact-name').value
+			var emailData  = document.getElementById('contact-email').value
+			var subjectData = document.getElementById('contact-subject').value
+			var messageData = document.getElementById('contact-message').value
 
-			var data = {};
-			data.name = document.getElementById('contact-name');
-			data.email = document.getElementById('contact-email');
-			data.subject = document.getElementById('contact-subject');
-			data.message = document.getElementById('contact-message');
+			 var data = JSON.stringify({
+				"name": nameData,
+				"email": emailData,
+				"subject": subjectData,
+				"message": messageData
+			}); 
 
 			var promise = new Promise((resolve, reject) => {
 				var req = new XMLHttpRequest();
 
 				req.open('POST', '/contact', true);
+				req.setRequestHeader('content-type', 'application/json');
 
 				req.onload = () => {
 					if (req.status == 200) {
@@ -140,32 +153,25 @@ function landing() {
 					reject(Error('error'));
 				};
 
-				req.send();
+				req.send(data);
 			});
 
 			promise.then((response) => {
-				if (response.success) {
-					setTimeout(() => {
-						submitButton.classList.remove('contact-loading');
+				setTimeout(() => {
+					submitButton.classList.remove('contact-loading');
+					var success = new Event('message-sent');
+					window.dispatchEvent(success);
 
-						Array.prototype.forEach.call(formInputs, (input) => {
-							input.value = "";
-						});
-
-						var success = new Event('message-sent');
-						window.dispatchEvent(success);
-					}, 500);
-				} else {
-					setTimeout(() => {
-						submitButton.classList.remove('contact-loading');
-						var failure = new Event('message-failed');
-						window.dispatchEvent(failure);
-					}, 500);
-				}
+				//	clearInputs();
+				}, 500);
 			}, (error) => {
-				var failure = new Event('message-failed');
-				window.dispatchEvent(failure);
+				setTimeout(() => {
+					submitButton.classList.remove('contact-loading');
+					var failure = new Event('message-failed');
+					window.dispatchEvent(failure);
+				});
 			});
+
 		} else {
 			var error = new Event('message-error');
 			window.dispatchEvent(error);

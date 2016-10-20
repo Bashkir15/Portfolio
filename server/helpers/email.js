@@ -7,6 +7,7 @@ module.exports = () => {
 	var obj = {};
 
 	obj.contact = function (req, res) {
+		console.log(req.body);
 		var messageSender = req.body.email;
 
 		var transporter = nodemailer.createTransport({
@@ -18,15 +19,15 @@ module.exports = () => {
 		});
 
 		var mailOptions = {
-			from: messageSender
+			from: messageSender,
 			to: global.config.mailer.auth.user,
-			subject: 'New contact from ' + req.body.name
+			subject: 'New contact from ' + req.body.name,
 			text: req.body.message
 		};
 
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
-				json.bad(err, res);
+				json.bad(error, res);
 			} else {
 				//sendContactConfirm(messageSender);
 				json.good(info.response, res);
