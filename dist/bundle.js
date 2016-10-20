@@ -321,6 +321,10 @@
 					input.parentNode.classList.remove('blank');
 				}
 
+				if (formValue == '') {
+					input.parentNode.classList.add('blank');
+				}
+
 				input.parentNode.classList.add('invalid');
 			} else {
 				if (input.parentNode.classList.contains('blank')) {
@@ -408,6 +412,8 @@
 		}
 
 		addEvents();
+
+		submitButton.addEventListener('click', sendMessage);
 	}
 
 	exports.default = landing;

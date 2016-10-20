@@ -272,10 +272,31 @@
 		width: 220px
 		border-radius: 22px
 		border: 1px solid rgba(0,0,0,0.12)
+		transition: all .4s ease-out
 
 		span
 			font-size: 16px
 			letter-spacing: 2px
+			transition: all .4s ease-out
+
+		.icon-loader
+			display: none
+
+
+		&.contact-loading
+			span
+				display: none
+
+			.icon-loader
+				display: inline-block
+		
+		&.form-valid
+			border: none
+			background: #37bf5b
+
+			span
+				color: #f1f3f3
+
 
 .contact-form
 	width: 95%
@@ -335,6 +356,71 @@
 		label
 			top: 13px
 			left: 12px
+
+	&.focused
+		label
+			opacity: 0
+			left: -30px
+
+		input
+			border-color: #14869d
+
+		textarea
+			border-color: #14869d
+
+	&.blank
+		label
+			color: #bf3757
+
+		input,
+		textarea
+			border-color: #bf3757
+
+		&.focused
+			label
+				opacity: 0
+				left: -3px
+
+		&.invalid
+			label
+				color: #bf3757
+
+		+ .contact-error-container
+			p
+				opacity: 1
+
+	&.invalid
+		label
+			left: -30px
+			opacity: 0
+
+		input
+			border-color: #bf3757
+
+		+ .contact-error-container
+			opacity: 1
+
+	&.valid
+		label
+			left: -30px
+			opacity: 0
+
+		input,
+		textarea
+			border-color: #37bf5b
+
+
+.contact-error-container
+	display: block
+
+	p
+		@include open()
+		font-weight: 300
+		font-size: 14px
+		letter-spacing: 2px
+		color: #bf3757
+		opacity: 0
+		transition: all .38s ease-out
 
 .contact-submit
 	display: flex

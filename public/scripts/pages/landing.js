@@ -50,9 +50,14 @@ function landing() {
 		var atpos = formValue.indexOf('@');
 		var dotpos = formValue.lastIndexOf('.');
 
+
 		if (atpos < 1 || (dotpos - atpos < 2)) {
 			if (input.parentNode.classList.contains('blank')) {
 				input.parentNode.classList.remove('blank');
+			}
+
+			if (formValue == '') {
+				input.parentNode.classList.add('blank');
 			}
 
 			input.parentNode.classList.add('invalid');
@@ -143,6 +148,8 @@ function landing() {
 	}
 
 	addEvents();
+
+	submitButton.addEventListener('click', sendMessage);
 }
 
 export default landing
