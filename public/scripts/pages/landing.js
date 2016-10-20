@@ -1,6 +1,8 @@
 import notifications from '../components/notifications';
+import scrollTo from '../utils/scroll.to';
 
 function landing() {
+	var contactScroller = document.getElementById('contact-scroller');
 	var formWrappers = document.querySelectorAll('.form-wrapper');
 	var formInputs = document.querySelectorAll('.contact-input');
 	var submitButton = document.getElementById('contact-send');
@@ -180,6 +182,9 @@ function landing() {
 
 	addEvents();
 
+	contactScroller.addEventListener('click', () => {
+		scrollTo.smoothScroll(document.getElementById('contact-container').offsetTop);
+	});
 	submitButton.addEventListener('click', sendMessage);
 	window.addEventListener('message-sent', successNotify.open);
 	window.addEventListener('message-failed', failureNotify.open);

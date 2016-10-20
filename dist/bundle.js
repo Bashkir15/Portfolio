@@ -269,9 +269,14 @@
 
 	var _notifications2 = _interopRequireDefault(_notifications);
 
+	var _scroll = __webpack_require__(5);
+
+	var _scroll2 = _interopRequireDefault(_scroll);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function landing() {
+		var contactScroller = document.getElementById('contact-scroller');
 		var formWrappers = document.querySelectorAll('.form-wrapper');
 		var formInputs = document.querySelectorAll('.contact-input');
 		var submitButton = document.getElementById('contact-send');
@@ -447,6 +452,9 @@
 
 		addEvents();
 
+		contactScroller.addEventListener('click', function () {
+			_scroll2.default.smoothScroll(document.getElementById('contact-container').offsetTop);
+		});
 		submitButton.addEventListener('click', sendMessage);
 		window.addEventListener('message-sent', successNotify.open);
 		window.addEventListener('message-failed', failureNotify.open);
@@ -612,6 +620,53 @@
 	}();
 
 	exports.default = notifications;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var smoothScroll = function () {
+		var timer;
+		var start;
+		var factor;
+
+		return function (target, duration) {
+			var offset = window.pageYOffset;
+			var delta = target - window.pageYOffset;
+			var duration = duration || 1800;
+			start = Date.now();
+			factor = 0;
+
+			if (timer) {
+				clearInterval(timer);
+			}
+
+			function step() {
+				var y;
+				factor = (Date.now() - start) / duration;
+
+				if (factor >= 1) {
+					clearInterval(timer);
+					factor = 1;
+				}
+
+				y = factor * delta + offset;
+				window.scrollBy(0, y - window.pageYOffset);
+			}
+
+			timer = setInterval(step, 10);
+			return timer;
+		};
+	}();
+
+	exports.default = {
+		smoothScroll: smoothScroll
+	};
 
 /***/ }
 /******/ ]);
