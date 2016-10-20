@@ -1,4 +1,6 @@
 .footer
+	//background: darken(#2f384c, 10%)
+	background: rgba(47,47,47,0.98)
 	display: flex
 	flex-direction: column
 	align-items: center
@@ -9,6 +11,7 @@
 		font-weight: 300
 		font-size: 16px
 		letter-spacing: 2px
+		color: #f1f3f3
 
 .footer-social-buttons
 	display: flex
@@ -29,11 +32,18 @@
 		height: 45px
 		width: 45px
 		border-radius: 50%
-		border: 1px solid rgba(0,0,0,0.12)
+		box-shadow: 0 0 0 3px #9a9a9a
+		transition: all .4s ease-out
 
 		span
-			color: rgba(0,0,0,0.5)
+			color: rgba(0,0,0,0.35)
 			font-size: 18px
+			transiton: all .4s ease-out
+
+		&:hover
+			box-shadow: 0 0 0 6px #f1f3f3
+
+
 
 @media screen and (min-width: 630px)
 	.footer
@@ -80,6 +90,7 @@
 				font-weight: 300
 				font-size: 18px
 				letter-spacing: 2px
+				color: #9a9a9a
 				transition: all .28s ease-in-out
 
 			&:before,
@@ -90,7 +101,7 @@
 				width: 0px
 				margin: 0 auto
 				backface-visibility: hidden
-				border: 1px solid rgba(0,0,0,0.35)
+				border: 1px solid rgba(47,47,47,0.98)
 				transition: all .28s ease-in-out
 
 			&:after
@@ -104,6 +115,7 @@
 				&:before
 					width: 70%
 					transition: width .35s ease-in-out
+					border-color: #9a9a9a
 
 				span
 					letter-spacing: 6px
