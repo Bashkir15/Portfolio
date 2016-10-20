@@ -1,5 +1,7 @@
 import navshrink from './scripts/utils/nav.shrink';
-import scrollIn from './scripts/utils/scroll.in'
+import scrollIn from './scripts/utils/scroll.in';
+
+import landing from './scripts/pages/landing';
 
 var scrollEntrance = new scrollIn();
 
@@ -15,15 +17,15 @@ function activeUrl() {
 
 
 activeUrl();
-
 navshrink();
+landing();
+
 
 window.onload = () => {
 	setTimeout(() => {
 		document.body.classList.add('loaded');
 	}, 1000);
 }
-
 window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 window.addEventListener('scroll', scrollEntrance.viewPortChange);
 window.addEventListener('resize', scrollEntrance.viewPortChange);

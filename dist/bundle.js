@@ -54,6 +54,10 @@
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
+	var _landing = __webpack_require__(3);
+
+	var _landing2 = _interopRequireDefault(_landing);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var scrollEntrance = new _scroll2.default();
@@ -69,15 +73,14 @@
 	}
 
 	activeUrl();
-
 	(0, _nav2.default)();
+	(0, _landing2.default)();
 
 	window.onload = function () {
 		setTimeout(function () {
 			document.body.classList.add('loaded');
 		}, 1000);
 	};
-
 	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 	window.addEventListener('scroll', scrollEntrance.viewPortChange);
 	window.addEventListener('resize', scrollEntrance.viewPortChange);
@@ -251,6 +254,163 @@
 	}();
 
 	exports.default = ScrollIn;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function landing() {
+		var formWrappers = document.querySelectorAll('.form-wrapper');
+		var formInputs = document.querySelectorAll('.contact-input');
+		var submitButton = document.getElementById('contact-send');
+
+		function addEvents() {
+			Array.prototype.forEach.call(formInputs, function (input) {
+				input.addEventListener('focus', inputFocus);
+				input.addEventListener('blur', inputBlur);
+			});
+		}
+
+		function inputFocus() {
+			if (!this.parentNode.classList.contains('focused')) {
+				this.parentNode.classList.add('focused');
+			} else {
+				return;
+			}
+		}
+
+		function inputBlur() {
+			var formContent = this.value;
+
+			if (this.parentNode.classList.contains('focused')) {
+				this.parentNode.classList.remove('focused');
+			}
+
+			if (formContent == '') {
+				this.parentNode.classList.add('blank');
+			}
+
+			if (this.parentNode.classList.contains('contact-email')) {
+				validateEmail();
+			}
+
+			if (formContent != '' && !this.parentNode.classList.contains('contact-email')) {
+				if (this.parentNode.classList.contains('blank')) {
+					this.parentNode.classList.remove('blank');
+				}
+
+				this.parentNode.classList.add('valid');
+			}
+
+			checkValidForm();
+		}
+
+		function validateEmail() {
+			var input = document.getElementById('contact-email');
+			var formValue = input.value;
+			var atpos = formValue.indexOf('@');
+			var dotpos = formValue.lastIndexOf('.');
+
+			if (atpos < 1 || dotpos - atpos < 2) {
+				if (input.parentNode.classList.contains('blank')) {
+					input.parentNode.classList.remove('blank');
+				}
+
+				input.parentNode.classList.add('invalid');
+			} else {
+				if (input.parentNode.classList.contains('blank')) {
+					input.parentNode.classList.remove('blank');
+				}
+
+				if (input.parentNode.classList.contains('invalid')) {
+					input.parentNode.classList.remove('invalid');
+				}
+
+				input.parentNode.classList.add('valid');
+			}
+		}
+
+		function checkValidForm() {
+			var validForm = 0;
+
+			Array.prototype.forEach.call(formWrappers, function (wrapper) {
+				if (wrapper.classList.contains('valid')) {
+					validForm++;
+				}
+			});
+
+			if (validForm == 4) {
+				submitButton.classList.add('form-valid');
+			}
+		}
+
+		function sendMessage() {
+			if (submitButton.classList.contains('form-valid')) {
+				submitButton.classList.add('contact-loading');
+
+				var data = {};
+				data.name = document.getElementById('contact-name');
+				data.email = document.getElementById('contact-email');
+				data.subject = document.getElementById('contact-subject');
+				data.message = document.getElementById('contact-message');
+
+				var promise = new Promise(function (resolve, reject) {
+					var req = new XMLHttpRequest();
+
+					req.open('POST', '/contact', true);
+
+					req.onload = function () {
+						if (req.status == 200) {
+							resolve(req.response);
+						} else {
+							reject(Error(req.statusText));
+						}
+					};
+
+					req.onError = function () {
+						reject(Error('error'));
+					};
+
+					req.send();
+				});
+
+				promise.then(function (response) {
+					if (response.success) {
+						setTimeout(function () {
+							submitButton.classList.remove('contact-loading');
+
+							Array.prototype.forEach.call(formInputs, function (input) {
+								input.value = "";
+							});
+
+							var success = new Event('message-sent');
+							window.dispatchEvent(success);
+						}, 500);
+					} else {
+						setTimeout(function () {
+							submitButton.classList.remove('contact-loading');
+							var failure = new Event('message-failed');
+							window.dispatchEvent(failure);
+						}, 500);
+					}
+				}, function (error) {
+					console.log('contact error');
+				});
+			} else {
+				var error = new Event('contact-error');
+				window.dispatchEvent(error);
+			}
+		}
+
+		addEvents();
+	}
+
+	exports.default = landing;
 
 /***/ }
 /******/ ]);
