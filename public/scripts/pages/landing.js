@@ -1,7 +1,31 @@
+import notifications from '../components/notifications';
+
 function landing() {
 	var formWrappers = document.querySelectorAll('.form-wrapper');
 	var formInputs = document.querySelectorAll('.contact-input');
 	var submitButton = document.getElementById('contact-send');
+	var successContent = document.getElementById('contact-success');
+	var failureContent = document.getElementById('contact-failure');
+	var errorContent = document.getElementById('contact-error');
+
+	var successNotify = new notifications({
+		content: successContent,
+		timeout: 2000,
+		type: 'success'
+	});
+
+	var failureNotify = new notifications({
+		content: failureContent,
+		timeout: 2000,
+		type: 'danger'
+	});
+
+	var errorNotify = new notifications({
+		content: errorContent,
+		timeout: 2000,
+		type: 'warning'
+	});
+
 
 	function addEvents() {
 		Array.prototype.forEach.call(formInputs, (input) => {
@@ -139,10 +163,11 @@ function landing() {
 					}, 500);
 				}
 			}, (error) => {
-				console.log('contact error');
+				var failure = new Event('message-failed');
+				window.dispatchEvent(failure);
 			});
 		} else {
-			var error = new Event('contact-error');
+			var error = new Event('message-error');
 			window.dispatchEvent(error);
 		}
 	}
@@ -150,6 +175,10 @@ function landing() {
 	addEvents();
 
 	submitButton.addEventListener('click', sendMessage);
+	window.addEventListener('message-sent', successNotify.open);
+	window.addEventListener('message-failed', failureNotify.open);
+	window.addEventListener('message-error', errorNotify.open);
+
 }
 
 export default landing
