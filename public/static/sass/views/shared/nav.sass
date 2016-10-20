@@ -23,6 +23,22 @@
 		.nav-left
 			visibility: hidden
 
+		.nav-icon
+			span
+				&:nth-child(1)
+					transform: rotate(45deg)
+					top: 10px
+					left: 8px
+
+				&:nth-child(2)
+					opacity: 0
+					width: 0
+
+				&:nth-child(3)
+					transform: rotate(-45deg)
+					top: 38px
+					left: 8px
+
 .nav-left
 	display: flex
 	flex-basis: 0
@@ -78,6 +94,7 @@
 		background: #666
 		border-radius: 5px
 		opacity: 1
+		transition: all .35s ease-in-out
 
 		&:nth-child(1)
 			top: 12px

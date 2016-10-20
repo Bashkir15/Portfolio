@@ -28,8 +28,89 @@
 	position: relative
 	width: 100%
 	height: 100%
-	background: #666
+	background: #61aab0
 	z-index: 100
 	opacity: 0
 	transform: translateY(-100%)
 	transition: opacity .8s ease-out
+
+.menu-items-container
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	align-items: center
+	width: 70%
+	margin: 0 auto
+	padding-top: 140px
+
+
+.menu-item
+	display: flex
+	flex: 1 0 20%
+	flex-direction: column
+	align-items: center
+	height: 70px
+	width: 90px
+	margin-bottom: 45px
+	background: rgba(0,0,0,0.35)
+	transition: all .35s ease-out
+
+	&:nth-of-type(odd)
+		margin-right: 14%
+
+	&:nth-of-type(even)
+		margin-left: 14%
+
+	a
+		width: 100%
+		height: 70px
+		color: #dfe1df
+
+		div
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			span
+				font-size: 18px
+				margin: 10px 0
+				color: #f1f3f3
+
+			p
+				@include open()
+				font-weight: 300
+				font-size: 16px
+				letter-spacing: 1px
+
+	&:hover
+		background: rgba(0,0,0,0.12)
+
+@media screen and (min-width: 730px)
+	.menu-items-container
+		padding-top: 220px
+
+	.menu-item
+		height: 120px
+		width: 100px
+		margin-bottom: 50px
+
+		a
+			height: 120px
+
+			div
+				span
+					font-size: 22px
+					margin: 35px 0 20px 0
+
+@media screen and (min-width: 1000px)
+	.menu-items-container
+		width: 40%
+
+	.menu-item
+		flex: 1 0 15%
+
+		&:nth-of-type(odd)
+			margin-right: 20%
+
+		&:nth-of-type(even)
+			margin-left: 20%

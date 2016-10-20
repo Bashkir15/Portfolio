@@ -18,7 +18,7 @@ class mobileMenu {
 			this.container.classList.add(this.openClass);
 			this._updateNav();
 		} else {
-			document.body.overflowY = 'auto';
+			document.body.style.overflowY = 'auto';
 			this._addEvents();
 			this.container.classList.remove(this.openClass);
 			this._updateNav();
