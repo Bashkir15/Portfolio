@@ -16,7 +16,6 @@
   "bugs": {
     "url": "https://github.com/Bashkir15/Portfolio/issues"
   },
-
   "homepage": "https://github.com/Bashkir15/Portfolio#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -28,7 +27,8 @@
     "http": "0.0.0",
     "morgan": "^1.7.0",
     "nodemailer": "^2.6.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "webpack": "^1.13.3"
   },
   "devDependencies": {
     "babel": "^6.5.2",
