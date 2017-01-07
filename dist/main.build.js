@@ -54,11 +54,11 @@
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
-	var _mobile = __webpack_require__(6);
+	var _mobile = __webpack_require__(3);
 
 	var _mobile2 = _interopRequireDefault(_mobile);
 
-	var _landing = __webpack_require__(3);
+	var _landing = __webpack_require__(4);
 
 	var _landing2 = _interopRequireDefault(_landing);
 
@@ -265,6 +265,90 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var mobileMenu = function () {
+		function mobileMenu() {
+			_classCallCheck(this, mobileMenu);
+
+			this.container = document.getElementById('mobile-menu-container');
+			this.menu = document.getElementById("mobile-menu");
+			this.toggle = this._toggle.bind(this);
+			this.animatedClass = 'mobile-menu-container--animatable';
+			this.openClass = 'mobile-menu-container--open';
+			this.closeKeys = [27];
+		}
+
+		_createClass(mobileMenu, [{
+			key: '_toggle',
+			value: function _toggle() {
+				this.menu.style.willChange = 'transform';
+				this.container.classList.add(this.animatedClass);
+
+				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
+					document.body.style.overflowY = 'hidden';
+					this._addEvents();
+					this.container.classList.add(this.openClass);
+					this._updateNav();
+				} else {
+					document.body.style.overflowY = 'auto';
+					this._addEvents();
+					this.container.classList.remove(this.openClass);
+					this._updateNav();
+				}
+
+				this.menu.style.willChange = 'auto';
+			}
+		}, {
+			key: '_onTransitionEnd',
+			value: function _onTransitionEnd() {
+				this.container.classList.remove('mobile-menu-container--animatable');
+			}
+		}, {
+			key: '_closeKeyHandler',
+			value: function _closeKeyHandler(e) {
+				if (this.closeKeys.indexOf(e.which) > -1) {
+					e.preventDefault();
+					this.toggle();
+				}
+			}
+		}, {
+			key: '_updateNav',
+			value: function _updateNav() {
+				var nav = document.getElementById('nav');
+
+				if (this.container.classList.contains(this.openClass)) {
+					nav.classList.add('nav-mobile--open');
+				} else {
+					nav.classList.remove('nav-mobile--open');
+				}
+			}
+		}, {
+			key: '_addEvents',
+			value: function _addEvents() {
+				var _onTransitionEnd = this._onTransitionEnd.bind(this);
+
+				this.container.addEventListener('transitionend', _onTransitionEnd);
+			}
+		}]);
+
+		return mobileMenu;
+	}();
+
+	exports.default = mobileMenu;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -273,11 +357,11 @@
 		value: true
 	});
 
-	var _notifications = __webpack_require__(4);
+	var _notifications = __webpack_require__(5);
 
 	var _notifications2 = _interopRequireDefault(_notifications);
 
-	var _scroll = __webpack_require__(5);
+	var _scroll = __webpack_require__(6);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
@@ -472,7 +556,7 @@
 	exports.default = landing;
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -630,7 +714,7 @@
 	exports.default = notifications;
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -675,90 +759,6 @@
 	exports.default = {
 		smoothScroll: smoothScroll
 	};
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var mobileMenu = function () {
-		function mobileMenu() {
-			_classCallCheck(this, mobileMenu);
-
-			this.container = document.getElementById('mobile-menu-container');
-			this.menu = document.getElementById("mobile-menu");
-			this.toggle = this._toggle.bind(this);
-			this.animatedClass = 'mobile-menu-container--animatable';
-			this.openClass = 'mobile-menu-container--open';
-			this.closeKeys = [27];
-		}
-
-		_createClass(mobileMenu, [{
-			key: '_toggle',
-			value: function _toggle() {
-				this.menu.style.willChange = 'transform';
-				this.container.classList.add(this.animatedClass);
-
-				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
-					document.body.style.overflowY = 'hidden';
-					this._addEvents();
-					this.container.classList.add(this.openClass);
-					this._updateNav();
-				} else {
-					document.body.style.overflowY = 'auto';
-					this._addEvents();
-					this.container.classList.remove(this.openClass);
-					this._updateNav();
-				}
-
-				this.menu.style.willChange = 'auto';
-			}
-		}, {
-			key: '_onTransitionEnd',
-			value: function _onTransitionEnd() {
-				this.container.classList.remove('mobile-menu-container--animatable');
-			}
-		}, {
-			key: '_closeKeyHandler',
-			value: function _closeKeyHandler(e) {
-				if (this.closeKeys.indexOf(e.which) > -1) {
-					e.preventDefault();
-					this.toggle();
-				}
-			}
-		}, {
-			key: '_updateNav',
-			value: function _updateNav() {
-				var nav = document.getElementById('nav');
-
-				if (this.container.classList.contains(this.openClass)) {
-					nav.classList.add('nav-mobile--open');
-				} else {
-					nav.classList.remove('nav-mobile--open');
-				}
-			}
-		}, {
-			key: '_addEvents',
-			value: function _addEvents() {
-				var _onTransitionEnd = this._onTransitionEnd.bind(this);
-
-				this.container.addEventListener('transitionend', _onTransitionEnd);
-			}
-		}]);
-
-		return mobileMenu;
-	}();
-
-	exports.default = mobileMenu;
 
 /***/ }
 /******/ ]);

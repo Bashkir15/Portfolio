@@ -40,14 +40,13 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _mobile = __webpack_require__(6);
+	var _mobile = __webpack_require__(3);
 
 	var _mobile2 = _interopRequireDefault(_mobile);
 
@@ -72,8 +71,9 @@
 	navTrigger.addEventListener('click', mobileNav.toggle);
 
 /***/ },
-
-/***/ 6:
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -157,5 +157,4 @@
 	exports.default = mobileMenu;
 
 /***/ }
-
-/******/ });
+/******/ ]);

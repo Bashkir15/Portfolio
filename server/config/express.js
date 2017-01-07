@@ -5,9 +5,10 @@ import morgan from 'morgan';
 import ejs from 'ejs';
 import bodyParser from 'body-parser';
 
-import indexRoutes from '../routes/index.server.routes';
+import indexRoutes from '../routes/index.server.routes'
+import blogRoutes from '../routes/blog.server.routes'
 
-module.exports = () => {
+module.exports = (db) => {
 	const app = express();
 
 	app.set('view engine', 'ejs');
@@ -29,6 +30,7 @@ module.exports = () => {
 	app.use(express.static(path.join(__dirname, '../../dist')));
 
 	app.use('/', indexRoutes);
+	app.use('/blog', blogRoutes);
 
 	return app;
 };

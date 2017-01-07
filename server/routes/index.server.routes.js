@@ -16,9 +16,6 @@ router.get('/about', (req, res) => {
 	res.render('./views/pages/about');
 });
 
-router.get('/blog', (req, res) => {
-	res.render('./views/pages/blog');
-});
 
 router.post('/contact', email.contact);
 
