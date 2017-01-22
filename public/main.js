@@ -9,6 +9,8 @@ var mobileTrigger = document.getElementById('nav-trigger');
 var mobileNav = new mobileMenu();
 var scrollEntrance = new scrollIn();
 
+let scrollTimeout = false;
+
 function activeUrl() {
 	var navLinks = document.querySelectorAll('.nav-link');
 
@@ -19,6 +21,16 @@ function activeUrl() {
 	});
 }
 
+function scrollThrottle() {
+	if (!scrollTimeout) {
+		window.requestAnimationFrame(() => {
+			scrollEntrance.viewPortChange();
+			scrollTimeout = false;
+		});
+	}
+
+	scrollTimeout = true;
+}
 
 activeUrl();
 navshrink();
@@ -30,6 +42,8 @@ window.onload = () => {
 		document.body.classList.add('loaded');
 	}, 1000);
 }
+
+
 window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
-window.addEventListener('scroll', scrollEntrance.viewPortChange);
+window.addEventListener('scroll', scrollThrottle);
 window.addEventListener('resize', scrollEntrance.viewPortChange);

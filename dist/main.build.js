@@ -69,6 +69,8 @@
 	var mobileNav = new _mobile2.default();
 	var scrollEntrance = new _scroll2.default();
 
+	var scrollTimeout = false;
+
 	function activeUrl() {
 		var navLinks = document.querySelectorAll('.nav-link');
 
@@ -77,6 +79,17 @@
 				link.classList.add('active');
 			}
 		});
+	}
+
+	function scrollThrottle() {
+		if (!scrollTimeout) {
+			window.requestAnimationFrame(function () {
+				scrollEntrance.viewPortChange();
+				scrollTimeout = false;
+			});
+		}
+
+		scrollTimeout = true;
 	}
 
 	activeUrl();
@@ -89,8 +102,9 @@
 			document.body.classList.add('loaded');
 		}, 1000);
 	};
+
 	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
-	window.addEventListener('scroll', scrollEntrance.viewPortChange);
+	window.addEventListener('scroll', scrollThrottle);
 	window.addEventListener('resize', scrollEntrance.viewPortChange);
 
 /***/ },
@@ -105,7 +119,7 @@
 	function navshrink() {
 		var lastKnownScrollY = 0;
 		var nav = document.querySelector('.nav');
-		var scrollTimeout = void 0;
+		var scrollTimeout = false;
 
 		init();
 
@@ -120,10 +134,12 @@
 		function scrollThrottle() {
 			if (!scrollTimeout) {
 				scrollTimeout = setTimeout(function () {
-					scrollTimeout = null;
+					scrollTimeout = false;
 					checkPin();
 				}, 250);
 			}
+
+			scrollTimeout = true;
 		}
 
 		function checkPin() {

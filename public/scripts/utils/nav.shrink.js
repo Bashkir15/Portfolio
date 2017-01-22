@@ -1,7 +1,7 @@
 function navshrink() {
 	let lastKnownScrollY = 0;
 	let nav = document.querySelector('.nav');
-	let scrollTimeout;
+	let scrollTimeout = false;
 
 	init();
 
@@ -16,10 +16,12 @@ function navshrink() {
 	function scrollThrottle() {
 		if (!scrollTimeout) {
 			scrollTimeout = setTimeout(() => {
-				scrollTimeout = null;
+				scrollTimeout = false;
 				checkPin();
 			}, 250);
 		}
+
+		scrollTimeout = true;
 	}
 
 	function checkPin() {
