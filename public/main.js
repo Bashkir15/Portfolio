@@ -46,4 +46,4 @@ window.onload = () => {
 
 window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 window.addEventListener('scroll', scrollThrottle);
-window.addEventListener('resize', scrollEntrance.viewPortChange);
+window.addEventListener('resize', scrollThrottle);
