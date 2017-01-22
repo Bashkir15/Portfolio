@@ -105,6 +105,7 @@
 	function navshrink() {
 		var lastKnownScrollY = 0;
 		var nav = document.querySelector('.nav');
+		var scrollTimeout = void 0;
 
 		init();
 
@@ -113,7 +114,16 @@
 		}
 
 		function init() {
-			window.addEventListener('scroll', checkPin);
+			window.addEventListener('scroll', scrollThrottle);
+		}
+
+		function scrollThrottle() {
+			if (!scrollTimeout) {
+				scrollTimeout = setTimeout(function () {
+					scrollTimeout = null;
+					checkPin();
+				}, 250);
+			}
 		}
 
 		function checkPin() {
