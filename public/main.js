@@ -36,12 +36,33 @@ activeUrl();
 navshrink();
 landing();
 
-mobileTrigger.addEventListener('click', mobileNav.toggle);
-window.onload = () => {
-	setTimeout(() => {
-		document.body.classList.add('loaded');
-	}, 1000);
+HTMLDocument.prototype.ready = () => {
+	return new Promise((resolve, reject) => {
+		var startTime = console.time('start');
+		var endTime;
+		if (document.readyState === 'complete') {
+			endTime = console.timeEnd('start');
+			resolve(document, startTime, endTime);
+		} else {
+			document.addEventListener('DOMContentLoaded', () => {
+				endTime = console.timeEnd('start');
+				resolve(document, startTime, endTime);
+			});
+		}
+	});
 }
+
+mobileTrigger.addEventListener('click', mobileNav.toggle);
+
+document.ready().then((startTime, endTime) => {
+	if (endTime - startTime > 300) {
+		document.body.classList.add('loaded');
+	} else {
+		setTimeout(() => {
+			document.body.classList.add('loaded');
+		}, 1000);
+	}
+});
 
 
 window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);

@@ -96,12 +96,33 @@
 	(0, _nav2.default)();
 	(0, _landing2.default)();
 
-	mobileTrigger.addEventListener('click', mobileNav.toggle);
-	window.onload = function () {
-		setTimeout(function () {
-			document.body.classList.add('loaded');
-		}, 1000);
+	HTMLDocument.prototype.ready = function () {
+		return new Promise(function (resolve, reject) {
+			var startTime = console.time('start');
+			var endTime;
+			if (document.readyState === 'complete') {
+				endTime = console.timeEnd('start');
+				resolve(document, startTime, endTime);
+			} else {
+				document.addEventListener('DOMContentLoaded', function () {
+					endTime = console.timeEnd('start');
+					resolve(document, startTime, endTime);
+				});
+			}
+		});
 	};
+
+	mobileTrigger.addEventListener('click', mobileNav.toggle);
+
+	document.ready().then(function (startTime, endTime) {
+		if (endTime - startTime > 300) {
+			document.body.classList.add('loaded');
+		} else {
+			setTimeout(function () {
+				document.body.classList.add('loaded');
+			}, 1000);
+		}
+	});
 
 	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 	window.addEventListener('scroll', scrollThrottle);
