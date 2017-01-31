@@ -418,8 +418,13 @@
 
 	function landing() {
 		var contactScroller = document.getElementById('contact-scroller');
+		var contactContainer = doucument.getElementById('contact-container');
 		var formWrappers = document.querySelectorAll('.form-wrapper');
 		var formInputs = document.querySelectorAll('.contact-input');
+		var emailInput = document.getElementById('contact-email');
+		var nameInput = document.getElementById('contact-name');
+		var subjectInput = document.getElementById('contact-subject');
+		var messageInput = document.getElementById('contact-message');
 		var submitButton = document.getElementById('contact-send');
 		var successContent = document.getElementById('contact-success');
 		var failureContent = document.getElementById('contact-failure');
@@ -487,7 +492,7 @@
 		}
 
 		function validateEmail() {
-			var input = document.getElementById('contact-email');
+			var input = emailInput;
 			var formValue = input.value;
 			var atpos = formValue.indexOf('@');
 			var dotpos = formValue.lastIndexOf('.');
@@ -537,56 +542,58 @@
 
 		function sendMessage() {
 			if (submitButton.classList.contains('form-valid')) {
-				submitButton.classList.add('contact-loading');
+				(function () {
+					submitButton.classList.add('contact-loading');
 
-				var nameData = document.getElementById('contact-name').value;
-				var emailData = document.getElementById('contact-email').value;
-				var subjectData = document.getElementById('contact-subject').value;
-				var messageData = document.getElementById('contact-message').value;
+					var nameData = nameInput.value;
+					var emailData = emailInput.value;
+					var subjectData = subjectInput.value;
+					var messageData = messageInput.value;
 
-				var data = JSON.stringify({
-					"name": nameData,
-					"email": emailData,
-					"subject": subjectData,
-					"message": messageData
-				});
-
-				var promise = new Promise(function (resolve, reject) {
-					var req = new XMLHttpRequest();
-
-					req.open('POST', '/contact', true);
-					req.setRequestHeader('content-type', 'application/json');
-
-					req.onload = function () {
-						if (req.status == 200) {
-							resolve(req.response);
-						} else {
-							reject(Error(req.statusText));
-						}
-					};
-
-					req.onError = function () {
-						reject(Error('error'));
-					};
-
-					req.send(data);
-				});
-
-				promise.then(function (response) {
-					setTimeout(function () {
-						submitButton.classList.remove('contact-loading');
-						var success = new Event('message-sent');
-						window.dispatchEvent(success);
-
-						//	clearInputs();
-					}, 500);
-				}, function (error) {
-					setTimeout(function () {
-						submitButton.classList.remove('contact-loading');
-						var failure = new Event('message-failed');
-						window.dispatchEvent(failure);
+					var data = JSON.stringify({
+						"name": nameData,
+						"email": emailData,
+						"subject": subjectData,
+						"message": messageData
 					});
-				});
+
+					var promise = new Promise(function (resolve, reject) {
+						var req = new XMLHttpRequest();
+
+						req.open('POST', '/contact', true);
+						req.setRequestHeader('content-type', 'application/json');
+
+						req.onload = function () {
+							if (req.status == 200) {
+								resolve(req.response);
+							} else {
+								reject(Error(req.statusText));
+							}
+						};
+
+						req.onError = function () {
+							reject(Error('error'));
+						};
+
+						req.send(data);
+					});
+
+					promise.then(function (response) {
+						setTimeout(function () {
+							submitButton.classList.remove('contact-loading');
+							var success = new Event('message-sent');
+							window.dispatchEvent(success);
+
+							//	clearInputs();
+						}, 500);
+					}, function (error) {
+						setTimeout(function () {
+							submitButton.classList.remove('contact-loading');
+							var failure = new Event('message-failed');
+							window.dispatchEvent(failure);
+						});
+					});
+				})();
 			} else {
 				var error = new Event('message-error');
 				window.dispatchEvent(error);
@@ -596,12 +603,12 @@
 		addEvents();
 
 		contactScroller.addEventListener('click', function () {
-			_scroll2.default.smoothScroll(document.getElementById('contact-container').offsetTop);
+			_scroll2.default.smoothScroll(contactContainer.offsetTop);
 		});
-		submitButton.addEventListener('click', sendMessage);
-		window.addEventListener('message-sent', successNotify.open);
-		window.addEventListener('message-failed', failureNotify.open);
-		window.addEventListener('message-error', errorNotify.open);
+		submitButton.addEventListener('click', sendMessage, false);
+		window.addEventListener('message-sent', successNotify.open, false);
+		window.addEventListener('message-failed', failureNotify.open, false);
+		window.addEventListener('message-error', errorNotify.open, false);
 	}
 
 	exports.default = landing;

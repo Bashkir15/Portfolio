@@ -3,27 +3,32 @@ import scrollTo from '../utils/scroll.to';
 import { header } from '../components/header'
 
 function landing() {
-	var contactScroller = document.getElementById('contact-scroller');
-	var formWrappers = document.querySelectorAll('.form-wrapper');
-	var formInputs = document.querySelectorAll('.contact-input');
-	var submitButton = document.getElementById('contact-send');
-	var successContent = document.getElementById('contact-success');
-	var failureContent = document.getElementById('contact-failure');
-	var errorContent = document.getElementById('contact-error');
+	const contactScroller = document.getElementById('contact-scroller');
+	const contactContainer = doucument.getElementById('contact-container');
+	const formWrappers = document.querySelectorAll('.form-wrapper');
+	const formInputs = document.querySelectorAll('.contact-input');
+	const emailInput = document.getElementById('contact-email');
+	const nameInput = document.getElementById('contact-name');
+	const subjectInput = document.getElementById('contact-subject');
+	const messageInput = document.getElementById('contact-message')
+	const submitButton = document.getElementById('contact-send');
+	const successContent = document.getElementById('contact-success');
+	const failureContent = document.getElementById('contact-failure');
+	const errorContent = document.getElementById('contact-error');
 
-	var successNotify = new notifications({
+	const successNotify = new notifications({
 		content: successContent,
 		timeout: 2000,
 		type: 'success'
 	});
 
-	var failureNotify = new notifications({
+	const failureNotify = new notifications({
 		content: failureContent,
 		timeout: 2000,
 		type: 'danger'
 	});
 
-	var errorNotify = new notifications({
+	const errorNotify = new notifications({
 		content: errorContent,
 		timeout: 2000,
 		type: 'warning'
@@ -48,7 +53,7 @@ function landing() {
 	}
 
 	function inputBlur() {
-		var formContent = this.value;
+		let formContent = this.value;
 
 		if (this.parentNode.classList.contains('focused')) {
 			this.parentNode.classList.remove('focused');
@@ -74,10 +79,10 @@ function landing() {
 	}
 
 	function validateEmail() {
-		var input = document.getElementById('contact-email');
-		var formValue = input.value;
-		var atpos = formValue.indexOf('@');
-		var dotpos = formValue.lastIndexOf('.');
+		let input = emailInput;
+		let formValue = input.value;
+		let atpos = formValue.indexOf('@');
+		let dotpos = formValue.lastIndexOf('.');
 
 
 		if (atpos < 1 || (dotpos - atpos < 2)) {
@@ -104,7 +109,7 @@ function landing() {
 	}
 
 	function checkValidForm() {
-		var validForm = 0;
+		let validForm = 0;
 
 		Array.prototype.forEach.call(formWrappers, (wrapper) => {
 			if (wrapper.classList.contains('valid')) {
@@ -128,20 +133,20 @@ function landing() {
 			submitButton.classList.add('contact-loading');
 		
 			
-			var nameData = document.getElementById('contact-name').value
-			var emailData  = document.getElementById('contact-email').value
-			var subjectData = document.getElementById('contact-subject').value
-			var messageData = document.getElementById('contact-message').value
+			let nameData = nameInput.value;
+			let emailData  = emailInput.value;
+			let subjectData = subjectInput.value;
+			let messageData = messageInput.value;
 
-			 var data = JSON.stringify({
+			let data = JSON.stringify({
 				"name": nameData,
 				"email": emailData,
 				"subject": subjectData,
 				"message": messageData
 			}); 
 
-			var promise = new Promise((resolve, reject) => {
-				var req = new XMLHttpRequest();
+			let promise = new Promise((resolve, reject) => {
+				let req = new XMLHttpRequest();
 
 				req.open('POST', '/contact', true);
 				req.setRequestHeader('content-type', 'application/json');
@@ -186,12 +191,12 @@ function landing() {
 	addEvents();
 
 	contactScroller.addEventListener('click', () => {
-		scrollTo.smoothScroll(document.getElementById('contact-container').offsetTop);
+		scrollTo.smoothScroll(contactContainer.offsetTop);
 	});
-	submitButton.addEventListener('click', sendMessage);
-	window.addEventListener('message-sent', successNotify.open);
-	window.addEventListener('message-failed', failureNotify.open);
-	window.addEventListener('message-error', errorNotify.open);
+	submitButton.addEventListener('click', sendMessage, false);
+	window.addEventListener('message-sent', successNotify.open, false);
+	window.addEventListener('message-failed', failureNotify.open, false);
+	window.addEventListener('message-error', errorNotify.open, false);
 
 }
 
