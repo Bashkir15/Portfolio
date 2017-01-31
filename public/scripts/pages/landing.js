@@ -4,7 +4,7 @@ import { header } from '../components/header'
 
 function landing() {
 	const contactScroller = document.getElementById('contact-scroller');
-	const contactContainer = doucument.getElementById('contact-container');
+	const contactContainer = document.getElementById('contact-container');
 	const formWrappers = document.querySelectorAll('.form-wrapper');
 	const formInputs = document.querySelectorAll('.contact-input');
 	const emailInput = document.getElementById('contact-email');

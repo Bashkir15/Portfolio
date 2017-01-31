@@ -418,7 +418,7 @@
 
 	function landing() {
 		var contactScroller = document.getElementById('contact-scroller');
-		var contactContainer = doucument.getElementById('contact-container');
+		var contactContainer = document.getElementById('contact-container');
 		var formWrappers = document.querySelectorAll('.form-wrapper');
 		var formInputs = document.querySelectorAll('.contact-input');
 		var emailInput = document.getElementById('contact-email');
