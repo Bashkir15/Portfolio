@@ -1,5 +1,6 @@
 import notifications from '../components/notifications';
 import scrollTo from '../utils/scroll.to';
+import { header } from '../components/header'
 
 function landing() {
 	var contactScroller = document.getElementById('contact-scroller');
@@ -27,6 +28,8 @@ function landing() {
 		timeout: 2000,
 		type: 'warning'
 	});
+
+	header();
 
 
 	function addEvents() {

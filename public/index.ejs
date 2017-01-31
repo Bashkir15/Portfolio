@@ -24,14 +24,17 @@
 
 		<div class='landing-page-container'>
 			<section class='landing-header'>
-				<div class='landing-header-overlay'></div>
-				
-				<h1>I'm Forrest</h1>
-				<p>I engineer modern applications for the web</p>
+				<canvas id='landing-header'></canvas>
+				<div class='landing-header-overlay'>
+					<div>
+						<h1>I'm Forrest</h1>
+						<p>I engineer modern applications for the web</p>
 
-				<button type='button' id='contact-scroller'>
-					<span>Contact Me</span>
-				</button>
+						<button type='button' id='contact-scroller' aria-label='click to scroll to contact form'>
+							<span>Contact Me</span>
+						</button>
+					</div>					
+				</div>
 			</section>
 
 			<section class='landing-skills'>
@@ -161,6 +164,7 @@
 			</section>
 
 			<section class='landing-about'>
+				<div class='landing-about-overlay'></div>
 				<header class='landing-section-header'>
 					<h2>About Me</h2>
 				</header>
@@ -177,7 +181,7 @@
 
 					<div class='landing-about-more'>
 						<a href='/about'>
-							<button>
+							<button type='button' aria-label='learn more about me'>
 								<span>Learn more</span>
 							</button>
 						</a>

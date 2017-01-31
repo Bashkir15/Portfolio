@@ -5,17 +5,23 @@
 	left: 0
 	height: 100%
 	width: 100%
-	background: rgba(0,0,0,0.7)
+	background: rgba(0,0,0,0.2)
+
+	> div
+		display: flex
+		flex-direction: column
+		align-items: center
+		height: 100%
+		width: 100%
+		padding-top: 145px
 
 .landing-header
 	position: relative
 	display: flex
 	flex-direction: column
 	align-items: center
-	padding: 180px 0
-	background: url('../static/images/header.jpg') 100% 100%
-	background-repeat: no-repeat 
-	background-size: cover 
+	height: calc(100vh + 45vh)
+	overflow: hidden
 
 	h1
 		position: relative
@@ -52,7 +58,7 @@
 		position: relative
 		height: 50px
 		width: 220px
-		border-radius: 22px
+		padding: 0
 		overflow: hidden
 		border: 1px solid #47aecc
 		transition: all .4s ease
@@ -70,9 +76,9 @@
 
 		span
 			position: relative
-			@include muli()
-			font-weight: 400
-			font-size: 18px
+			@include lato()
+			font-weight: 300
+			font-size: 20px
 			letter-spacing: 3px
 			color: #f1f3f3
 			z-index: 20
@@ -89,12 +95,12 @@
 	padding: 60px 0 120px 0
 
 	h2
-		@include muli()
+		@include lato()
 		font-weight: 300
 		font-size: 35px
 		letter-spacing: 7px
 		text-align: center
-		color: rgba(0,0,0,0.7)
+		color: #21282f
 
 
 .landing-skills
@@ -136,8 +142,8 @@
 
 	span
 		display: inline-block
-		font-size: 25px
-		margin-right: 18px
+		font-size: 32px
+		margin-right: 22px
 		color: #14869d
 
 	> div
@@ -146,20 +152,21 @@
 		flex-direction: column
 
 		h3
-			@include muli()
+			@include lato()
 			font-weight: 300
 			font-size: 26px
 			letter-spacing: 4px
 			margin-bottom: 28px
-			color: #3f4c5b
+			color: #21282f
 
 		p
-			@include sin()
-			font-weight: 400
+			@include muli()
+			font-weight: 300
 			font-size: 14px
 			letter-spacing: 2px
 			line-height: 30px
 			color: darken(#98b3bb, 20%)
+			color: #7b7c7e
 
 .landing-projects
 	padding: 70px 0
@@ -185,7 +192,7 @@
 	overflow: hidden
 
 	img
-		height: 340px
+		height: calc(100% + 20px)
 		width: 100%
 		margin-top: -18px
 		z-index: 10
@@ -249,18 +256,36 @@
 
 .landing-projects-more
 	button
+		position: relative
 		height: 55px
 		width: 180px
-		border: 1px solid #09afb7
+		border: 1px solid #ed4e6e
+		transition: all .4s ease
 
 		span
 			@include muli()
-			font-weight: 600
+			font-weight: 300
 			letter-spacing: 3px
 			text-transform: uppercase
 			font-size: 14px
+			color: #21282f
+			transition: all .4s ease
+
+		&:hover
+			background: #ed4e6e
+
+			span
+				color: #fff
 
 	
+.landing-about
+	position: relative
+	background: linear-gradient(#041927 0%, #253044 55%, #33485b 100%)
+	background: #192833
+
+	.landing-section-header
+		h2
+			color: #a9c2d3
 
 
 .landing-about-body
@@ -271,22 +296,7 @@
 	margin: 0 auto
 	padding-bottom: 50px
 
-	button
-		height: 50px
-		width: 200px
-		border-radius: 18px
-		background: #14869d
-		transition: all .4s ease-out
 
-		span
-			@include sin()
-			font-weight: 400
-			font-size: 16px
-			letter-spacing: 2px
-			color: #f1f3f3
-
-		&:hover
-			background: lighten(#14869d, 10%)
 
 .landing-about-mobile-image
 	height: 165px
@@ -294,8 +304,27 @@
 	border-radius: 50%
 	box-shadow: 0 0 8px rgba(0,0,0,0.7)
 
-.landing-about-background-image
-	display: none
+.landing-about-more
+	button
+		height: 50px
+		width: 180px
+		border-radius: 4px
+		background: #00adb7
+		transition: all .4s ease-out
+
+		span
+			@include muli()
+			font-weight: 300
+			font-size: 16px
+			letter-spacing: 2px
+			color: #e0e2e5
+			transition: all .4s ease-out
+
+		&:hover
+			background: lighten(#00adb7, 10%)
+
+			span
+				color: #fff
 
 .landing-about-text
 	padding: 100px 0
@@ -304,13 +333,14 @@
 
 	blockquote
 		position: relative
-		@include sin()
-		font-weight: 400
+		@include muli()
+		font-weight: 300
 		letter-spacing: 2px
 		font-size: 15px
 		line-height: 28px
 		text-align: center
 		width: 100%
+		color: #e0e2e5
 
 		&:before
 			display: block
@@ -318,7 +348,7 @@
 			position: absolute
 			left: -20px
 			top: -15px
-			color: #7a7a7a
+			color: #475660
 			font-size: 80px
 
 
@@ -332,35 +362,6 @@
 	flex-direction: column
 	align-items: center
 
-	button
-		height: 40px
-		width: 220px
-		border-radius: 22px
-		border: 1px solid rgba(0,0,0,0.12)
-		transition: all .4s ease-out
-
-		span
-			font-size: 16px
-			letter-spacing: 2px
-			transition: all .4s ease-out
-
-		.icon-loader
-			display: none
-
-
-		&.contact-loading
-			span
-				display: none
-
-			.icon-loader
-				display: inline-block
-		
-		&.form-valid
-			border: none
-			background: #37bf5b
-
-			span
-				color: #f1f3f3
 
 
 .contact-form
@@ -494,25 +495,60 @@
 	justify-content: center
 	padding: 30px 0 75px 0
 
+	button
+		height: 50px
+		width: 160px
+		border: 1px solid rgba(0,0,0,0.12)
+		background: rgba(0,0,0,0.12)
+		transition: all .4s ease-out
+		pointer-events: none
+
+		span
+			@include muli()
+			font-weight: 300
+			font-size: 16px
+			letter-spacing: 2px
+			color: rgba(0,0,0,0.3)
+			transition: all .4s ease-out
+
+		.icon-loader
+			display: none
+
+
+		&.contact-loading
+			span
+				display: none
+
+			.icon-loader
+				display: inline-block
+		
+		&.form-valid
+			border: none
+			background: #37bf5b
+
+			span
+				color: #f1f3f3
+
 .contact-details
 	width: 90%
 	margin: 0 auto
 
 	h3
-		@include muli()
-		font-weight: 400
+		@include lato()
+		font-weight: 300
 		font-size: 23px
 		letter-spacing: 2px
 		margin-bottom: 30px
+		color: #21282f
 
 	> p
-		@include sin()
-		font-weight: 400
+		@include muli()
+		font-weight: 300
 		font-size: 16px
 		letter-spacing: 2px
 		line-height: 30px
 		margin-bottom: 70px
-		color: #6d6e70
+		color: #7b7c7e
 
 .contact-detail
 	display: flex
@@ -537,18 +573,19 @@
 		flex: 1
 
 		h4
-			@include sin()
-			font-weight: 400
+			@include lato()
+			font-weight: 300
 			font-size: 18px
 			letter-spacing: 1px
 			margin-bottom: 14px
+			color: #21282f
 
 		p
 			@include muli()
 			font-weight: 300
 			font-size: 14px
 			letter-spacing: 1px
-			color: #6d6e70
+			color: #7b7c7e
 
 
 @media screen and (min-width: 480px)
@@ -566,7 +603,7 @@
 
 @media screen and (min-width: 630px)
 	.landing-header
-		padding: 200px 0
+		height: calc(100vh + 10vh)
 
 		h1
 			font-size: 36px
