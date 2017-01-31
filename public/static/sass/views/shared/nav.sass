@@ -9,6 +9,7 @@
 	z-index: 100
 	padding: 10px 0
 	background: #f1f3f3
+	background: transparent
 	transition: all .38s ease-out
 
 	&.nav-unpinned
@@ -51,8 +52,8 @@
 
 	button
 		span
-			@include rale()
-			font-weight: 300
+			@include sin()
+			font-weight: 400
 			font-size: 20px
 			letter-spacing: 4px
 			color: #6d6e70
@@ -99,17 +100,17 @@
 		&:nth-child(1)
 			top: 12px
 			transform-origin: left center
-			background: #fd4f00
+			background: darken(rgb(85, 239, 203), 10%)
 
 		&:nth-child(2)
 			top: 24px
 			transform-origin: left center
-			background: darken(#fd4f00, 1%)
+			background: darken(rgb(85, 239, 203), 11%)
 
 		&:nth-child(3)
 			top: 36px
 			transform-origin: left center
-			background: darken(#fd4f00, 2%)
+			background: darken(rgb(85, 239, 203), 12%)
 
 
 @media screen and (min-width: 1325px)
@@ -133,7 +134,7 @@
 				width: 90px
 
 				span
-					@include rale()
+					@include sin()
 					font-weight: 400
 					font-size: 18px
 					letter-spacing: 3px
