@@ -843,6 +843,57 @@
 		var groundHeight = canvas.height * 0.15;
 		var resizeTimeout = void 0;
 
+		function Star() {
+			var _this = this;
+
+			this.radius = Math.random() * 10 + 5;
+			this.x = this.radius + (canvas.width - this.radius * 2) * Math.random();
+			this.y = -10;
+			this.dx = (Math.random() - 0.5) * 20;
+			this.dy = 30;
+			this.gravity = .5;
+			this.friction = .54;
+
+			this.update = function () {
+				if (_this.y + _this.radius + _this.dy >= canvas.height - groundHeight) {
+					_this.dy = -_this.dy * _this.friction;
+					_this.dx *= _this.friction;
+					_this.radius -= 3;
+
+					// handle explosions
+				}
+
+				if (_this.x + _this.radius + _this.dx >= canvas.width || _this.x - _this.radius + _this.dx < 0) {
+					_this.dx = -_this.dx;
+					_this.dx *= _this.friction;
+					// handle explosions
+				}
+
+				_this.x += _this.dx;
+				_this.y += _this.dy;
+
+				_this.draw();
+
+				// draw particles
+			};
+
+			this.draw = function () {
+				context.save();
+				context.beginPath();
+				context.arc(_this.x, _this.y, Math.abs(_this.radius), 0, Math.PI * 2, false);
+
+				context.shadowColor = '#e3eaef';
+				context.shadowBlur = 20;
+				context.shadowOffsetX = 0;
+				context.shadowOffsetY = 0;
+
+				context.fillStyle = '#e3eaef';
+				context.fill();
+				context.closePath();
+				context.restore();
+			};
+		}
+
 		function createMoutainRange(height, yPos, amount, color) {
 			for (var i = 0; i < amount; i++) {
 				var width = canvas.width / amount;
