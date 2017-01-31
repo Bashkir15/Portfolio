@@ -19,6 +19,10 @@ export function header() {
 	backgroundGradient.addColorStop(0, `rgba(23, 30, 38, 0.7)`);
 	backgroundGradient.addColorStop(1, `rgba(63, 88, 107, 0.7)`);
 
+	for (let i = 0; i < 150; i++) {
+		miniStars.push(new miniStar());
+	}
+
 
 	function Star() {
 		this.radius = (Math.random() * 10) + 5;
@@ -29,7 +33,7 @@ export function header() {
 		this.gravity = .5;
 		this.friction = .54;
 
-		this.update = function() {
+		this.update = () => {
 			let len;
 
 			if (this.y + this.radius + this.dy >= canvas.height - groundHeight) {
@@ -147,7 +151,7 @@ export function header() {
 
 		this.init(star);
 
-		this.update = function() {
+		this.update = () => {
 			for (let i = 0; i < this.particles.length; i++) {
 				this.particles[i].update();
 
@@ -155,6 +159,28 @@ export function header() {
 					this.particles.splice(i, 1);
 				}
 			}
+		}
+	}
+
+	function miniStar() {
+		this.x = Math.random() * canvas.width;
+		this.y = Math.random() * canvas.height;
+		this.radius = Math.random() * 3;
+
+		this.draw = () => {
+			context.save();
+			context.beginPath();
+			context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+			context.shadowColor = '#e3eaef';
+			context.shadowBlur = (Math.random() * 10) + 10;
+			context.shadowOffsetX = 0;
+			context.shadowOffsetY = 0;
+
+			context.fillStyle = "white";
+			context.fill();
+
+			context.closePath();
+			context.restore();
 		}
 	}
 
@@ -196,6 +222,10 @@ export function header() {
 		window.requestAnimationFrame(animate);
 		context.fillStyle = backgroundGradient;
 		context.fillRect(0, 0, canvas.width, canvas.height);
+
+		for (let i = 0; i < miniStars.length; i++) {
+			miniStars[i].draw();
+		}
 
 		createMoutainRange(canvas.height / .55, canvas.height, 1, `#384551`);
 		createMoutainRange(canvas.height / .7, canvas.height, 2, `#2b3843`);

@@ -848,6 +848,10 @@
 		backgroundGradient.addColorStop(0, 'rgba(23, 30, 38, 0.7)');
 		backgroundGradient.addColorStop(1, 'rgba(63, 88, 107, 0.7)');
 
+		for (var i = 0; i < 150; i++) {
+			miniStars.push(new miniStar());
+		}
+
 		function Star() {
 			var _this = this;
 
@@ -862,31 +866,31 @@
 			this.update = function () {
 				var len = void 0;
 
-				if (this.y + this.radius + this.dy >= canvas.height - groundHeight) {
-					this.dy = -this.dy * this.friction;
-					this.dx *= this.friction;
-					this.radius -= 3;
+				if (_this.y + _this.radius + _this.dy >= canvas.height - groundHeight) {
+					_this.dy = -_this.dy * _this.friction;
+					_this.dx *= _this.friction;
+					_this.radius -= 3;
 
-					explosions.push(new Explosion(this));
+					explosions.push(new Explosion(_this));
 				} else {
-					this.dy += this.gravity;
+					_this.dy += _this.gravity;
 				}
 
-				if (this.x + this.radius + this.dx >= canvas.width || this.x - this.radius + this.dx < 0) {
-					this.dx = -this.dx;
-					this.dx *= this.friction;
-					explosions.push(new Explosion(this));
+				if (_this.x + _this.radius + _this.dx >= canvas.width || _this.x - _this.radius + _this.dx < 0) {
+					_this.dx = -_this.dx;
+					_this.dx *= _this.friction;
+					explosions.push(new Explosion(_this));
 				}
 
-				this.x += this.dx;
-				this.y += this.dy;
+				_this.x += _this.dx;
+				_this.y += _this.dy;
 
-				this.draw();
+				_this.draw();
 
 				len = explosions.length;
 
-				for (var i = 0; i < len; i++) {
-					explosions[i].update();
+				for (var _i = 0; _i < len; _i++) {
+					explosions[_i].update();
 				}
 			};
 
@@ -967,7 +971,7 @@
 			this.particles = [];
 
 			this.init = function (parentStar) {
-				for (var i = 0; i < 8; i++) {
+				for (var _i2 = 0; _i2 < 8; _i2++) {
 					var velocity = {
 						x: (Math.random() - 0.5) * 5,
 						y: (Math.random() - 0.5) * 15
@@ -980,28 +984,52 @@
 			this.init(star);
 
 			this.update = function () {
-				for (var i = 0; i < this.particles.length; i++) {
-					this.particles[i].update();
+				for (var _i3 = 0; _i3 < _this3.particles.length; _i3++) {
+					_this3.particles[_i3].update();
 
-					if (this.particles[i].isAlive() == false) {
-						this.particles.splice(i, 1);
+					if (_this3.particles[_i3].isAlive() == false) {
+						_this3.particles.splice(_i3, 1);
 					}
 				}
 			};
 		}
 
+		function miniStar() {
+			var _this4 = this;
+
+			this.x = Math.random() * canvas.width;
+			this.y = Math.random() * canvas.height;
+			this.radius = Math.random() * 3;
+
+			this.draw = function () {
+				context.save();
+				context.beginPath();
+				context.arc(_this4.x, _this4.y, _this4.radius, 0, Math.PI * 2, false);
+				context.shadowColor = '#e3eaef';
+				context.shadowBlur = Math.random() * 10 + 10;
+				context.shadowOffsetX = 0;
+				context.shadowOffsetY = 0;
+
+				context.fillStyle = "white";
+				context.fill();
+
+				context.closePath();
+				context.restore();
+			};
+		}
+
 		function createMoutainRange(height, yPos, amount, color) {
-			for (var i = 0; i < amount; i++) {
+			for (var _i4 = 0; _i4 < amount; _i4++) {
 				var width = canvas.width / amount;
 
 				// draw the moutainer
 				context.beginPath();
-				context.moveTo(i * width, yPos);
-				context.lineTo(i * width + width + 325, yPos);
+				context.moveTo(_i4 * width, yPos);
+				context.lineTo(_i4 * width + width + 325, yPos);
 
 				// draw the peak
-				context.lineTo(i * width + width / 2, yPos - height / 2);
-				context.lineTo(i * width - 325, yPos);
+				context.lineTo(_i4 * width + width / 2, yPos - height / 2);
+				context.lineTo(_i4 * width - 325, yPos);
 				context.fillStyle = color;
 				context.fill();
 				context.closePath();
@@ -1028,6 +1056,10 @@
 			context.fillStyle = backgroundGradient;
 			context.fillRect(0, 0, canvas.width, canvas.height);
 
+			for (var _i5 = 0; _i5 < miniStars.length; _i5++) {
+				miniStars[_i5].draw();
+			}
+
 			createMoutainRange(canvas.height / .55, canvas.height, 1, '#384551');
 			createMoutainRange(canvas.height / .7, canvas.height, 2, '#2b3843');
 			createMoutainRange(canvas.height / 1.2, canvas.height, 3, '#26333e');
@@ -1035,17 +1067,17 @@
 			context.fillStyle = "#182028";
 			context.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
 
-			for (var i = 0; i < stars.length; i++) {
-				stars[i].update();
+			for (var _i6 = 0; _i6 < stars.length; _i6++) {
+				stars[_i6].update();
 
-				if (stars[i].radius <= 0) {
-					stars.splice(i, 1);
+				if (stars[_i6].radius <= 0) {
+					stars.splice(_i6, 1);
 				}
 			}
 
-			for (var _i = 0; _i < eLen; _i++) {
-				if (explosions[_i].length <= 0) {
-					explosions.splice(_i, 1);
+			for (var _i7 = 0; _i7 < eLen; _i7++) {
+				if (explosions[_i7].length <= 0) {
+					explosions.splice(_i7, 1);
 				}
 			}
 
