@@ -832,16 +832,21 @@
 		var canvas = document.getElementById('landing-header');
 		var headerSection = document.querySelector('.landing-header');
 		var context = canvas.getContext('2d');
+		var stars = [];
+		var explosions = [];
+		var miniStars = [];
+		var backgroundGradient = context.createLinearGradient(0, 0, 0, canvas.height);
+
+		var groundHeight = canvas.height * 0.15;
+		var randomSpawnRate = Math.floor(Math.random() * 25 + 60);
+		var timer = 0;
+		var resizeTimeout = void 0;
 
 		canvas.width = window.innerWidth;
 		canvas.height = headerSection.scrollHeight;
-		var backgroundGradient = context.createLinearGradient(0, 0, 0, canvas.height);
 
 		backgroundGradient.addColorStop(0, 'rgba(23, 30, 38, 0.7)');
 		backgroundGradient.addColorStop(1, 'rgba(63, 88, 107, 0.7)');
-
-		var groundHeight = canvas.height * 0.15;
-		var resizeTimeout = void 0;
 
 		function Star() {
 			var _this = this;
@@ -855,26 +860,34 @@
 			this.friction = .54;
 
 			this.update = function () {
-				if (_this.y + _this.radius + _this.dy >= canvas.height - groundHeight) {
-					_this.dy = -_this.dy * _this.friction;
-					_this.dx *= _this.friction;
-					_this.radius -= 3;
+				var len = void 0;
 
-					// handle explosions
+				if (this.y + this.radius + this.dy >= canvas.height - groundHeight) {
+					this.dy = -this.dy * this.friction;
+					this.dx *= this.friction;
+					this.radius -= 3;
+
+					explosions.push(new Explosion(this));
+				} else {
+					this.dy += this.gravity;
 				}
 
-				if (_this.x + _this.radius + _this.dx >= canvas.width || _this.x - _this.radius + _this.dx < 0) {
-					_this.dx = -_this.dx;
-					_this.dx *= _this.friction;
-					// handle explosions
+				if (this.x + this.radius + this.dx >= canvas.width || this.x - this.radius + this.dx < 0) {
+					this.dx = -this.dx;
+					this.dx *= this.friction;
+					explosions.push(new Explosion(this));
 				}
 
-				_this.x += _this.dx;
-				_this.y += _this.dy;
+				this.x += this.dx;
+				this.y += this.dy;
 
-				_this.draw();
+				this.draw();
 
-				// draw particles
+				len = explosions.length;
+
+				for (var i = 0; i < len; i++) {
+					explosions[i].update();
+				}
 			};
 
 			this.draw = function () {
@@ -891,6 +904,89 @@
 				context.fill();
 				context.closePath();
 				context.restore();
+			};
+		}
+
+		function Particle(x, y, dx, dy) {
+			var _this2 = this;
+
+			this.x = x;
+			this.y = y;
+			this.dx = dx;
+			this.dy = dy;
+			this.gravity = .09;
+			this.friction = 0.88;
+			this.timeToLive = 3;
+			this.opacity = 1;
+			this.size = {
+				width: 2,
+				height: 2
+			};
+
+			this.update = function () {
+				if (_this2.y + _this2.size.height + _this2.dy >= canvas.height - groundHeight) {
+					_this2.dy = -_this2.dy * _this2.friction;
+					_this2.dx *= _this2.friction;
+				} else {
+					_this2.dy += _this2.gravity;
+				}
+
+				if (_this2.x + _this2.size.width + _this2.dx >= canvas.width || _this2.x + _this2.dx < 0) {
+					_this2.dx = -_this2.dx;
+					_this2.dx *= _this2.friction;
+				}
+
+				_this2.x += _this2.dx;
+				_this2.y += _this2.dy;
+
+				_this2.draw();
+
+				_this2.timeToLive -= 0.01;
+				_this2.opacity -= 1 / (_this2.timeToLive / 0.01);
+			};
+
+			this.draw = function () {
+				context.save();
+				context.fillStyle = 'rgba(227, 234, 239, ' + _this2.opacity + ')';
+				context.shadowColor = '#e3eaef';
+				context.shadowBlur = 20;
+				context.shadowOffsetX = 0;
+				context.shadowOffsetY = 0;
+				context.fillRect(_this2.x, _this2.y, _this2.size.width, _this2.size.height);
+				context.restore();
+			};
+
+			this.isAlive = function () {
+				return 0 <= _this2.timeToLive;
+			};
+		}
+
+		function Explosion(star) {
+			var _this3 = this;
+
+			this.particles = [];
+
+			this.init = function (parentStar) {
+				for (var i = 0; i < 8; i++) {
+					var velocity = {
+						x: (Math.random() - 0.5) * 5,
+						y: (Math.random() - 0.5) * 15
+					};
+
+					_this3.particles.push(new Particle(parentStar.x, parentStar.y, velocity.x, velocity.y));
+				}
+			};
+
+			this.init(star);
+
+			this.update = function () {
+				for (var i = 0; i < this.particles.length; i++) {
+					this.particles[i].update();
+
+					if (this.particles[i].isAlive() == false) {
+						this.particles.splice(i, 1);
+					}
+				}
 			};
 		}
 
@@ -925,6 +1021,9 @@
 		}
 
 		function animate() {
+			var sLen = stars.length;
+			var eLen = explosions.length;
+
 			window.requestAnimationFrame(animate);
 			context.fillStyle = backgroundGradient;
 			context.fillRect(0, 0, canvas.width, canvas.height);
@@ -935,6 +1034,27 @@
 
 			context.fillStyle = "#182028";
 			context.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
+
+			for (var i = 0; i < stars.length; i++) {
+				stars[i].update();
+
+				if (stars[i].radius <= 0) {
+					stars.splice(i, 1);
+				}
+			}
+
+			for (var _i = 0; _i < eLen; _i++) {
+				if (explosions[_i].length <= 0) {
+					explosions.splice(_i, 1);
+				}
+			}
+
+			timer++;
+
+			if (timer % randomSpawnRate == 0) {
+				stars.push(new Star());
+				randomSpawnRate = Math.floor(Math.random() * 10 + 75);
+			}
 		}
 
 		animate();
