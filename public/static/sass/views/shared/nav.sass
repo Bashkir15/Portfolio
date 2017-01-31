@@ -52,11 +52,11 @@
 
 	button
 		span
-			@include sin()
-			font-weight: 400
+			@include lato()
+			font-weight: 300
 			font-size: 20px
 			letter-spacing: 4px
-			color: #6d6e70
+			color: #fefefe
 
 
 .nav-right
@@ -100,17 +100,17 @@
 		&:nth-child(1)
 			top: 12px
 			transform-origin: left center
-			background: darken(rgb(85, 239, 203), 10%)
+			background: #47aecc
 
 		&:nth-child(2)
 			top: 24px
 			transform-origin: left center
-			background: darken(rgb(85, 239, 203), 11%)
+			background: darken(#47aecc, 1%)
 
 		&:nth-child(3)
 			top: 36px
 			transform-origin: left center
-			background: darken(rgb(85, 239, 203), 12%)
+			background: darken(#47aecc, 2%)
 
 
 @media screen and (min-width: 1325px)
@@ -134,11 +134,11 @@
 				width: 90px
 
 				span
-					@include sin()
-					font-weight: 400
+					@include muli()
+					font-weight: 300
 					font-size: 18px
 					letter-spacing: 3px
-					color: #6d6e70
+					color: #fefefe
 					transition: all .4s ease-out
 
 				&:before
@@ -150,7 +150,7 @@
 					width: 100%
 					opacity: 0
 					transform: translateY(30px)
-					background: #fd4f00
+					background: #47aecc
 					transition: all .3s ease-out
 
 				&:hover
@@ -159,13 +159,13 @@
 						transform: translateY(0)
 
 					span
-						color: #fd4f00
+						color: #47aecc
 
 		.nav-link
 			&.active
 				button
 					span
-						color: #fd4f00
+						color: #47aecc
 
 
 
