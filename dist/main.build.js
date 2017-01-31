@@ -138,8 +138,8 @@
 		value: true
 	});
 	function navshrink() {
-		var lastKnownScrollY = 0;
 		var nav = document.querySelector('.nav');
+		var lastKnownScrollY = 0;
 		var scrollTimeout = false;
 
 		init();

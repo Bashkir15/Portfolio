@@ -1,6 +1,6 @@
 function navshrink() {
+	const nav = document.querySelector('.nav');
 	let lastKnownScrollY = 0;
-	let nav = document.querySelector('.nav');
 	let scrollTimeout = false;
 
 	init();
