@@ -1,5 +1,6 @@
 function navshrink() {
 	const nav = document.querySelector('.nav');
+	const landingHeader = document.querySelector('.landing-header');
 	let lastKnownScrollY = 0;
 	let scrollTimeout = false;
 
@@ -25,15 +26,31 @@ function navshrink() {
 	}
 
 	function checkPin() {
-		var currentScrollY = getScrollY();
+		let currentScrollY = getScrollY();
 
-		if (currentScrollY < lastKnownScrollY) {
-			pin();
+		if (window.location.pathname == '/') {
+			if (currentScrollY >= landingHeader.scrollHeight) {
+
+				if (currentScrollY < lastKnownScrollY) {
+					pin();
+				}
+
+				if (currentScrollY > lastKnownScrollY) {
+					unpin();
+				}
+			}
+
+		} else {
+
+			if (currentScrollY < lastKnownScrollY) {
+				pin();
+			}
+
+			if (currentScrollY > lastKnownScrollY) {
+				unpin();
+			}
 		}
 
-		if (currentScrollY > lastKnownScrollY) {
-			unpin();
-		}
 
 		lastKnownScrollY = getScrollY();
 	}

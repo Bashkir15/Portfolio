@@ -65,7 +65,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mobileTrigger = document.getElementById('nav-trigger');
-
+	var preLoader = document.querySelector('.preloader');
 	var mobileNav = new _mobile2.default();
 	var scrollEntrance = new _scroll2.default();
 
@@ -85,16 +85,12 @@
 		if (!scrollTimeout) {
 			window.requestAnimationFrame(function () {
 				scrollEntrance.viewPortChange();
-				scrollTimeout = false;
+				scrollTimeout = true;
 			});
 		}
 
-		scrollTimeout = true;
+		scrollTimeout = false;
 	}
-
-	activeUrl();
-	(0, _nav2.default)();
-	(0, _landing2.default)();
 
 	HTMLDocument.prototype.ready = function () {
 		return new Promise(function (resolve, reject) {
@@ -112,18 +108,23 @@
 		});
 	};
 
-	mobileTrigger.addEventListener('click', mobileNav.toggle);
-
 	document.ready().then(function (startTime, endTime) {
 		if (endTime - startTime > 300) {
 			document.body.classList.add('loaded');
+			preLoader.classList.add('finished');
 		} else {
 			setTimeout(function () {
 				document.body.classList.add('loaded');
+				preLoader.classList.add('finished');
 			}, 1000);
 		}
 	});
 
+	activeUrl();
+	(0, _nav2.default)();
+	(0, _landing2.default)();
+
+	mobileTrigger.addEventListener('click', mobileNav.toggle);
 	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 	window.addEventListener('scroll', scrollThrottle);
 	window.addEventListener('resize', scrollThrottle);
@@ -139,6 +140,7 @@
 	});
 	function navshrink() {
 		var nav = document.querySelector('.nav');
+		var landingHeader = document.querySelector('.landing-header');
 		var lastKnownScrollY = 0;
 		var scrollTimeout = false;
 
@@ -166,12 +168,26 @@
 		function checkPin() {
 			var currentScrollY = getScrollY();
 
-			if (currentScrollY < lastKnownScrollY) {
-				pin();
-			}
+			if (window.location.pathname == '/') {
+				if (currentScrollY >= landingHeader.scrollHeight) {
 
-			if (currentScrollY > lastKnownScrollY) {
-				unpin();
+					if (currentScrollY < lastKnownScrollY) {
+						pin();
+					}
+
+					if (currentScrollY > lastKnownScrollY) {
+						unpin();
+					}
+				}
+			} else {
+
+				if (currentScrollY < lastKnownScrollY) {
+					pin();
+				}
+
+				if (currentScrollY > lastKnownScrollY) {
+					unpin();
+				}
 			}
 
 			lastKnownScrollY = getScrollY();
@@ -448,8 +464,6 @@
 			type: 'warning'
 		});
 
-		(0, _header.header)();
-
 		function addEvents() {
 			Array.prototype.forEach.call(formInputs, function (input) {
 				input.addEventListener('focus', inputFocus);
@@ -601,6 +615,7 @@
 		}
 
 		addEvents();
+		(0, _header.header)();
 
 		contactScroller.addEventListener('click', function () {
 			_scroll2.default.smoothScroll(contactContainer.offsetTop);

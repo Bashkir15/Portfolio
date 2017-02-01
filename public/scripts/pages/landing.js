@@ -34,8 +34,6 @@ function landing() {
 		type: 'warning'
 	});
 
-	header();
-
 
 	function addEvents() {
 		Array.prototype.forEach.call(formInputs, (input) => {
@@ -189,6 +187,7 @@ function landing() {
 	}
 
 	addEvents();
+	header();
 
 	contactScroller.addEventListener('click', () => {
 		scrollTo.smoothScroll(contactContainer.offsetTop);

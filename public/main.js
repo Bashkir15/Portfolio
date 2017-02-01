@@ -4,10 +4,10 @@ import mobileMenu from './scripts/components/mobile.menu';
 
 import landing from './scripts/pages/landing';
 
-var mobileTrigger = document.getElementById('nav-trigger');
-
-var mobileNav = new mobileMenu();
-var scrollEntrance = new scrollIn();
+const mobileTrigger = document.getElementById('nav-trigger');
+const preLoader = document.querySelector('.preloader');
+const mobileNav = new mobileMenu();
+const scrollEntrance = new scrollIn();
 
 let scrollTimeout = false;
 
@@ -25,16 +25,13 @@ function scrollThrottle() {
 	if (!scrollTimeout) {
 		window.requestAnimationFrame(() => {
 			scrollEntrance.viewPortChange();
-			scrollTimeout = false;
+			scrollTimeout = true;
 		});
 	}
 
-	scrollTimeout = true;
+	scrollTimeout = false;
 }
 
-activeUrl();
-navshrink();
-landing();
 
 HTMLDocument.prototype.ready = () => {
 	return new Promise((resolve, reject) => {
@@ -52,19 +49,24 @@ HTMLDocument.prototype.ready = () => {
 	});
 }
 
-mobileTrigger.addEventListener('click', mobileNav.toggle);
-
 document.ready().then((startTime, endTime) => {
 	if (endTime - startTime > 300) {
 		document.body.classList.add('loaded');
+		preLoader.classList.add('finished')
 	} else {
 		setTimeout(() => {
 			document.body.classList.add('loaded');
+			preLoader.classList.add('finished');
 		}, 1000);
 	}
-});
+}); 
+
+activeUrl();
+navshrink();
+landing();
 
 
+mobileTrigger.addEventListener('click', mobileNav.toggle);
 window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 window.addEventListener('scroll', scrollThrottle);
 window.addEventListener('resize', scrollThrottle);

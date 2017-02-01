@@ -5,11 +5,14 @@ html
 body
 	margin: 0
 	overflow-x: hidden
+	overflow-y: hidden
 	-moz-osx-font-smoothing: grayscale
 	-webkit-font-smoothing: antialiased
 	text-rendering: optimizeLegibility
 	width: 100%
-	transition: all .6s ease
+
+	&.loaded
+		overflow-y: auto
 
 h1, h2, h3, h4, p, blockquote, figure, ol, ul
 	margin: 0
