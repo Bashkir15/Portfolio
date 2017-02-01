@@ -6,7 +6,7 @@ function good (obj, res) {
 }
 
 function bad (err, res) {
-	var obj = {
+	let obj = {
 		success: 0,
 		res: err
 	};
@@ -14,7 +14,7 @@ function bad (err, res) {
 	if (obj.res.errors) {
 		obj.res.messages = [];
 
-		for (var i in obj.res.errors) {
+		for (let i in obj.res.errors) {
 			obj.res.messages.push(obj.res.errors[i].message);
 		}
 

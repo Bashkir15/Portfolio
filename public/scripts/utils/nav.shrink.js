@@ -38,6 +38,8 @@ function navshrink() {
 				if (currentScrollY > lastKnownScrollY) {
 					unpin();
 				}
+			} else {
+				pin();
 			}
 
 		} else {

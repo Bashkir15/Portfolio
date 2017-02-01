@@ -4,13 +4,12 @@ import path from 'path';
 import json from './json';
 
 module.exports = () => {
-	var obj = {};
+	let obj = {};
 
 	obj.contact = function (req, res) {
-		console.log(req.body);
-		var messageSender = req.body.email;
+		const messageSender = req.body.email;
 
-		var transporter = nodemailer.createTransport({
+		const transporter = nodemailer.createTransport({
 			service: global.config.mailer.service,
 			auth: {
 				user: global.config.mailer.auth.user,
@@ -18,10 +17,10 @@ module.exports = () => {
 			}
 		});
 
-		var mailOptions = {
+		const mailOptions = {
 			from: messageSender,
 			to: global.config.mailer.auth.user,
-			subject: 'New contact from ' + req.body.name,
+			subject: `New Contact From ${req.body.email}`,
 			text: req.body.message
 		};
 
@@ -37,9 +36,9 @@ module.exports = () => {
 
 
 	function sendContactConfirm(sender, res) {
-		var emailTemplate = fs.readFileSync('./server/templates/contact.html', {encoding: 'utf-8'});
+		const emailTemplate = fs.readFileSync('./server/templates/contact.html', {encoding: 'utf-8'});
 
-		var transporter = nodemailer.createTransport({
+		const transporter = nodemailer.createTransport({
 			service: global.config.mailer.service,
 			auth: {
 				user: global.config.mailer.auth.user,
@@ -47,7 +46,7 @@ module.exports = () => {
 			}
 		});
 
-		var mailOptions = {
+		const mailOptions = {
 			from: 'Forrest Collins',
 			to: sender,
 			subject: 'I have received your message',

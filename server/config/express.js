@@ -6,9 +6,8 @@ import ejs from 'ejs';
 import bodyParser from 'body-parser';
 
 import indexRoutes from '../routes/index.server.routes'
-import blogRoutes from '../routes/blog.server.routes'
 
-module.exports = (db) => {
+module.exports = () => {
 	const app = express();
 
 	app.set('view engine', 'ejs');
@@ -30,7 +29,6 @@ module.exports = (db) => {
 	app.use(express.static(path.join(__dirname, '../../dist')));
 
 	app.use('/', indexRoutes);
-	app.use('/blog', blogRoutes);
 
 	return app;
 };
