@@ -46,7 +46,7 @@
 
 	'use strict';
 
-	var _mobile = __webpack_require__(3);
+	var _mobile = __webpack_require__(1);
 
 	var _mobile2 = _interopRequireDefault(_mobile);
 
@@ -71,9 +71,7 @@
 	navTrigger.addEventListener('click', mobileNav.toggle);
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */
+/* 1 */
 /***/ function(module, exports) {
 
 	'use strict';

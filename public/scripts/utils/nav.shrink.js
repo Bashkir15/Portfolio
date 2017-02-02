@@ -1,6 +1,6 @@
 function navshrink() {
 	const nav = document.querySelector('.nav');
-	const landingHeader = document.querySelector('.landing-header');
+	const landingHeader = document.querySelector('.landing-header') || {};
 	let lastKnownScrollY = 0;
 	let scrollTimeout = false;
 
@@ -28,7 +28,7 @@ function navshrink() {
 	function checkPin() {
 		let currentScrollY = getScrollY();
 
-		if (window.location.pathname == '/') {
+		if (window.location.pathname == '') {
 			if (currentScrollY >= landingHeader.scrollHeight) {
 
 				if (currentScrollY < lastKnownScrollY) {

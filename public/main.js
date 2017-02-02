@@ -21,6 +21,15 @@ function activeUrl() {
 	});
 }
 
+console.log(window.location.pathname);
+
+
+if (window.location.pathname == '/works') {
+
+} else {
+	landing();
+}
+
 function scrollThrottle() {
 	if (!scrollTimeout) {
 		window.requestAnimationFrame(() => {
@@ -63,7 +72,6 @@ document.ready().then((startTime, endTime) => {
 
 activeUrl();
 navshrink();
-landing();
 
 
 mobileTrigger.addEventListener('click', mobileNav.toggle);

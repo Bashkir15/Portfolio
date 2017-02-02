@@ -12,111 +12,217 @@
 	</head>
 
 	<body>
+		<% include ../shared/preloader %>
 		<% include ../shared/nav %>
 		<% include ../shared/mobile-menu %>
 
-		<div class='works-page-container'>
+		<main class='works-page-container'>
 			<header>
 				<h1>My Works</h1>
 			</header>
 
 			<section class='works-container'>
-				<div class='works'>
-					<div class='work'>
-						<a href='/'>
-							<img src='./images/opinionable.png'>
-							<div class='work-overlay'></div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/1.png'>
+					<figcaption>
+						<h3>Opinionable</h3>
+						<p>Opinionable is a social-media and news aggregate site build with the technologies of the MEAN stack using Websockets, the power of angular 1.5.x components, and ES6. The project is currently undergoing a makeover</p>
+						
+						<div class='work-options'>
+							<a href='/github'>
+								<button type='button' aria-label='see opinionable`s code on github'>
+									<span class='icon-github'></span>
+								</button>
+							</a>
+
+							<a href='/opinionable'>
+								<button type='button' aria-label='see the opinionable website'>
+									<span>See More</span>
+								</button>
+							</a>
+						</div>
+					</figcaption>
+				</figure>
+
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/2.png'>
+					<figcaption>
+						<h3>Blog</h3>
+						<p>This is my personal blog where I write about code, science, and the web in general. I write for my own pleasure, but hope that someone will be able to use it as a resource</p>
+						
+						<div class='work-options'>
+							<a href='https://github.com/Bashkir15/Blog' target="_blank">
+								<button type='button' aria-label='see the blog code on Github'>
+									<span class='icon-github'></span>
+								</button>
+							</a>
+
+							<a href='/blog' target="_blank">
+								<button type='button' aria-label='see the blog website'>
+									<span>See More</span>
+								</button>
+							</a>
+						</div>
+					</figcaption>
+				</figure>
+
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/3.png'>
+					<figcaption>
+						<h3>Evolution</h3>
+						<p>This page is for a local smokeshop who was seeking a rebranding to allow themsleves a transition into a more modern setup due to a recent businesses growth</p>
+						
+						<div class='work-options'>
+							<a href='https://github.com/Bashkir15/Evolution' target="_blank">
+								<button type='button' aria-label='see the evolution code on Github'>
+									<span class='icon-github'></span>
+								</button>
+							</a>
+
+							<a href='/evolution' target="_blank">
+								<button type='button' aria-label='see the evolution website'>
+									<span>See More</span>
+								</button>
+							</a>
+						</div>
+					</figcaption>
+				</figure>
+
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/4.png'>
+					<figcaption>
+						<h3>Golondrina</h3>
+						<p>This work is a portfolio project for a local artist who needed to showcase their work and offer their services. This is still an ongoing project with the client</p>
+						<a href='/golondrina'>
+							See More
 						</a>
+					</figcaption>
+				</figure>
 
-						<h2>Opinionated</h2>
-						<p>A forum and social-media application to talk with friends, share articles, score them, and more</p>
-					</div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/1.png'>
+					<figcaption>
+						<h3>Application Boilerplate</h3>
+						<p>The Application Boiler is a mostly server side boilerplate that comes with many of the functionalities needed for applications build right into its core. It allows developers to pick and chose what they need.</p>
+						
+						<div class='work-options'>
+							<a href='https://github.com/Bashkir15/Application-Boilerplate' target="_blank">
+								<button type='button' aria-label='see the Application Boilerplate code on Github'>
+									<span class='icon-github'></span>
+								</button>
+							</a>
 
-					<div class='work'>
-						<a href='/'>
-							<img src='./images/blue-city.jpg'>
-							<div class='work-overlay'></div>
+							<a href='/application-boiler'>
+								<button type='button' aria-label='see the demo site'>
+									<span>See More</span>
+								</button>
+							</a>
+						</div>
+					</figcaption>
+ 				</figure>
+
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/2.png'>
+					<figcaption>
+						<h3>Softserve</h3>
+						<p>Softserve is a Vanilla Javascript Utility and UI library. It is incredily customizable and plans for the developer to have control rather than bloat your application down with extra code and css included</p>
+						
+						<div class='work-options'>
+							<a href='https://github.com/Bashkir15/Softserve' target="_blank">
+								<button type='button' aria-label='see the code for the library on Guthub'>
+									<span class='icon-github'></span>
+								</button>
+							</a>
+
+							<a href='/softserve' target="_blank">
+								<button type='button' aria-label='see the documentation website'>
+									<span>See More</span>
+								</button>
+							</a>
+						</div>
+
+					</figcaption>
+				</figure>
+
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/3.png'>
+					<figcaption>
+						<h3>Math</h3>
+						<p>A very small, work-in-progress Javascript mathematics library. My goal was to create a more performant Javascript math library in the similar vein as PyMath for Python</p>
+						<a href='/math'>
+							See More
 						</a>
+					</figcaption>
+				</figure>
 
-						<h2>Application Boilerplate</h2>
-						<p>A boilerplate to quickly role out applications that allows you to mix and match frequently needed features</p>
-					</div>
-
-					<div class='work'>
-						<a href='/'>
-							<img src='./images/golondrina.png'>
-							<div class='work-overlay'></div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/4.png'>
+					<figcaption>
+						<h3>Music</h3>
+						<p>This is another personal site of mine built with React and Redux that displays my compositions, recordings, and allows clients to message me to contract musical work</p>
+						<a href='/music'>
+							See More
 						</a>
+					</figcaption>
+				</figure>
 
-						<h2>Golondrina Studios</h2>
-						<p>A Portfolio website for a community driven local-artist looking to expand her business</p>
-					</div>
-
-
-					<div class='work'>
-						<a href='/'>
-							<img src='./images/blog.png'>
-							<div class='work-overlay'></div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/1.png'>
+					<figcaption>
+						<h3>Notes</h3>
+						<p>Notes is a Kanban style application build with React and Flux. It provides a simple means to organize and delegate work between a group project.</p>
+						<a href='/notes'>
+							See More
 						</a>
+					</figcaption>
+				</figure>
 
-						<h2>Blog</h2>
-						<p>This is my own personal blog for everything code and science related</p>
-					</div>
-
-					<div class='work'>
-						<a href='/'>
-							<img src='./images/softserve.png'>
-							<div class='work-overlay'></div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/2.png'>
+					<figcaption>
+						<h3>Boards</h3>
+						<p>Some Text</p>
+						<a href='/boards'>
+							See More
 						</a>
+					</figcaption>
+				</figure>
 
-						<h2>Soft Serve</h2>
-						<p>Soft server is a vanilla javascript plugin library</p>
-					</div>
-
-					<div class='work'>
-						<a href='/'>
-							<img src='./images/evolution.png'>
-							<div class='work-overlay'></div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/3.png'>
+					<figcaption>
+						<h3>Application Start</h3>
+						<p>Some Text</p>
+						<a href='/application-start'>
+							See More
 						</a>
+					</figcaption>
+				</figure>
 
-						<h2>Evolution</h2>
-						<p>Evolution is a prototype project for a local smoke shop</p>
-					</div>
-
-					<div class='work'>
-						<a href='/'>
-							<div></div>
-							<div class='work-overlay'></div>
+				<figure class='work' data-entrance='fade'>
+					<img src='./static/images/4.png'>
+					<figcaption>
+						<h3>I Will Die</h3>
+						<p>Some Text</p>
+						<a href='/i-will-die'>
+							See More
 						</a>
-
-						<h2>Melody</h2>
-						<p>This is my personal music site to display some of my compositions as well as recordings</p>
-					</div>
-
-					<div class='work'>
-						<a href='/'>
-							<div></div>
-							<div class='work-overlay'></div>
-						</a>
-
-						<h2>Numbers</h2>
-						<p>This is a small collection of common math exquations for things like matricies, shannon entropy, etc.</p>
-					</div>
-				</div>
-
-				<div class='github-button'>
-					<p>Feel free to check out my github here</p>
-					<a href='/'>
-						<button>
-							<span>Github</span>
-						</button>
-					</a>
-				</div>
+					</figcaption>
+				</figure>
 			</section>
-		</div>
+
+			<div class='github-button'>
+				<p>Feel free to check out my github here</p>
+				<a href='https://github.com/Bashkir15' target="_blank">
+					<button type='button' aria-label='Go check out my github'>
+						<span class='icon-github'></span>
+					</button>
+				</a>
+			</div>
+		</main>
 
 		<% include ../shared/footer %>
 
-		<script src='./scripts/other.build.min.js'></script>
+		<script src='./main.build.js'></script>
 	</body>
 </html>
