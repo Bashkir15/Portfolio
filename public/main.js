@@ -3,6 +3,7 @@ import scrollIn from './scripts/utils/scroll.in';
 import mobileMenu from './scripts/components/mobile.menu';
 
 import landing from './scripts/pages/landing';
+import about from './scripts/pages/about'
 
 const mobileTrigger = document.getElementById('nav-trigger');
 const preLoader = document.querySelector('.preloader');
@@ -21,11 +22,9 @@ function activeUrl() {
 	});
 }
 
-console.log(window.location.pathname);
 
-
-if (window.location.pathname == '/works') {
-
+if (window.location.pathname == '/about') {
+	about();
 } else {
 	landing();
 }
@@ -44,8 +43,8 @@ function scrollThrottle() {
 
 HTMLDocument.prototype.ready = () => {
 	return new Promise((resolve, reject) => {
-		var startTime = console.time('start');
-		var endTime;
+		let startTime = console.time('start');
+		let endTime;
 		if (document.readyState === 'complete') {
 			endTime = console.timeEnd('start');
 			resolve(document, startTime, endTime);

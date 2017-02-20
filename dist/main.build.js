@@ -46,21 +46,25 @@
 
 	'use strict';
 
-	var _nav = __webpack_require__(2);
+	var _nav = __webpack_require__(1);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
-	var _scroll = __webpack_require__(3);
+	var _scroll = __webpack_require__(2);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
-	var _mobile = __webpack_require__(1);
+	var _mobile = __webpack_require__(3);
 
 	var _mobile2 = _interopRequireDefault(_mobile);
 
 	var _landing = __webpack_require__(4);
 
 	var _landing2 = _interopRequireDefault(_landing);
+
+	var _about = __webpack_require__(8);
+
+	var _about2 = _interopRequireDefault(_about);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -81,9 +85,9 @@
 		});
 	}
 
-	console.log(window.location.pathname);
-
-	if (window.location.pathname == '/works') {} else {
+	if (window.location.pathname == '/about') {
+		(0, _about2.default)();
+	} else {
 		(0, _landing2.default)();
 	}
 
@@ -101,7 +105,7 @@
 	HTMLDocument.prototype.ready = function () {
 		return new Promise(function (resolve, reject) {
 			var startTime = console.time('start');
-			var endTime;
+			var endTime = void 0;
 			if (document.readyState === 'complete') {
 				endTime = console.timeEnd('start');
 				resolve(document, startTime, endTime);
@@ -136,90 +140,6 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var mobileMenu = function () {
-		function mobileMenu() {
-			_classCallCheck(this, mobileMenu);
-
-			this.container = document.getElementById('mobile-menu-container');
-			this.menu = document.getElementById("mobile-menu");
-			this.toggle = this._toggle.bind(this);
-			this.animatedClass = 'mobile-menu-container--animatable';
-			this.openClass = 'mobile-menu-container--open';
-			this.closeKeys = [27];
-		}
-
-		_createClass(mobileMenu, [{
-			key: '_toggle',
-			value: function _toggle() {
-				this.menu.style.willChange = 'transform';
-				this.container.classList.add(this.animatedClass);
-
-				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
-					document.body.style.overflowY = 'hidden';
-					this._addEvents();
-					this.container.classList.add(this.openClass);
-					this._updateNav();
-				} else {
-					document.body.style.overflowY = 'auto';
-					this._addEvents();
-					this.container.classList.remove(this.openClass);
-					this._updateNav();
-				}
-
-				this.menu.style.willChange = 'auto';
-			}
-		}, {
-			key: '_onTransitionEnd',
-			value: function _onTransitionEnd() {
-				this.container.classList.remove('mobile-menu-container--animatable');
-			}
-		}, {
-			key: '_closeKeyHandler',
-			value: function _closeKeyHandler(e) {
-				if (this.closeKeys.indexOf(e.which) > -1) {
-					e.preventDefault();
-					this.toggle();
-				}
-			}
-		}, {
-			key: '_updateNav',
-			value: function _updateNav() {
-				var nav = document.getElementById('nav');
-
-				if (this.container.classList.contains(this.openClass)) {
-					nav.classList.add('nav-mobile--open');
-				} else {
-					nav.classList.remove('nav-mobile--open');
-				}
-			}
-		}, {
-			key: '_addEvents',
-			value: function _addEvents() {
-				var _onTransitionEnd = this._onTransitionEnd.bind(this);
-
-				this.container.addEventListener('transitionend', _onTransitionEnd);
-			}
-		}]);
-
-		return mobileMenu;
-	}();
-
-	exports.default = mobileMenu;
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -315,7 +235,7 @@
 	exports.default = navshrink;
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -416,6 +336,90 @@
 	}();
 
 	exports.default = ScrollIn;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var mobileMenu = function () {
+		function mobileMenu() {
+			_classCallCheck(this, mobileMenu);
+
+			this.container = document.getElementById('mobile-menu-container');
+			this.menu = document.getElementById("mobile-menu");
+			this.toggle = this._toggle.bind(this);
+			this.animatedClass = 'mobile-menu-container--animatable';
+			this.openClass = 'mobile-menu-container--open';
+			this.closeKeys = [27];
+		}
+
+		_createClass(mobileMenu, [{
+			key: '_toggle',
+			value: function _toggle() {
+				this.menu.style.willChange = 'transform';
+				this.container.classList.add(this.animatedClass);
+
+				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
+					document.body.style.overflowY = 'hidden';
+					this._addEvents();
+					this.container.classList.add(this.openClass);
+					this._updateNav();
+				} else {
+					document.body.style.overflowY = 'auto';
+					this._addEvents();
+					this.container.classList.remove(this.openClass);
+					this._updateNav();
+				}
+
+				this.menu.style.willChange = 'auto';
+			}
+		}, {
+			key: '_onTransitionEnd',
+			value: function _onTransitionEnd() {
+				this.container.classList.remove('mobile-menu-container--animatable');
+			}
+		}, {
+			key: '_closeKeyHandler',
+			value: function _closeKeyHandler(e) {
+				if (this.closeKeys.indexOf(e.which) > -1) {
+					e.preventDefault();
+					this.toggle();
+				}
+			}
+		}, {
+			key: '_updateNav',
+			value: function _updateNav() {
+				var nav = document.getElementById('nav');
+
+				if (this.container.classList.contains(this.openClass)) {
+					nav.classList.add('nav-mobile--open');
+				} else {
+					nav.classList.remove('nav-mobile--open');
+				}
+			}
+		}, {
+			key: '_addEvents',
+			value: function _addEvents() {
+				var _onTransitionEnd = this._onTransitionEnd.bind(this);
+
+				this.container.addEventListener('transitionend', _onTransitionEnd);
+			}
+		}]);
+
+		return mobileMenu;
+	}();
+
+	exports.default = mobileMenu;
 
 /***/ },
 /* 4 */
@@ -1114,6 +1118,55 @@
 		animate();
 
 		window.addEventListener('resize', handleResize, false);
+	}
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = about;
+	function about() {
+		var widgets = document.querySelectorAll('.about-content li');
+
+		var scrolling = void 0;
+
+		function timelineEffect() {
+			var i = void 0;
+			var len = widgets.length;
+
+			for (i = 0; i < len; i++) {
+				var widget = widgets[i];
+
+				if (isInView(widget)) {
+					widget.classList.add('in-view');
+				}
+			}
+		}
+
+		function isInView(el) {
+			var rect = el.getBoundingClientRect();
+
+			return rect.bottom > 0 && rect.right > 0 && rect.left < (window.innerWidth || document.documentElement.clientWidth) && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+		}
+
+		function scrollThrottle() {
+			if (!scrolling) {
+				window.requestAnimationFrame(function () {
+					timelineEffect();
+					scrolling = true;
+				});
+			}
+
+			scrolling = false;
+		}
+
+		window.addEventListener('load', timelineEffect, false);
+		window.addEventListener('scroll', scrollThrottle, false);
 	}
 
 /***/ }

@@ -5,169 +5,79 @@
 		padding: 60px 0 90px 0
 
 		h1
-			@include rale()
+			@include muli()
 			font-weight: 400
 			font-size: 30px
 			letter-spacing: 6px
 			text-align: center
 
 
-.about-page-images
-	display: flex
-	flex-direction: column
-	align-items: center
-
-
-.about-image
-	height: 85px
-	width: 85px
-	border-radius: 50%
-	background: rgba(0,0,0,0.4)
-
 .about-content
-	width: 80%
-	padding-top: 80px
-	margin: 0 auto
-
-	> div
-		margin-bottom: 80px
-
-		p
-			@include open()
-			font-weight: 300
-			font-size: 16px
-			letter-spacing: 2px
-			line-height: 28px
-			color: #6d6e70
-			text-align: center
-
-@media screen and (min-width: 630px)
-	.about-page-container
-		> header
-			padding: 60px 0 120px 0
-
-			h1
-				font-size: 35px
-				letter-spacing: 8px
-
-	.about-image
-		height: 100px
-		width: 100px
-
-
-	.about-content
-		width: 70%
-		padding-top: 120px
-
-		> div
-			p
-				line-height: 32px
-
-@media screen and (min-width: 730px)
-	.about-image
-		height: 130px
-		width: 130px
-
-	.about-content
-		width: 70%
-
-		> div
-			margin-bottom: 120px
-
-			p
-				line-height: 36px
-
-@media screen and (min-width: 1000px)
-	.about-page-container
-		padding: 240px 0 100px 0
-
-		> header
-			padding: 80px 0 120px 0
-
-			h1
-				font-size: 40px
-				letter-spacing: 10px
-
-	.about-image
-		height: 150px
-		width: 150px
-
-	.about-content
-
-		> div
-			width: 80%
-			margin: 0 auto 140px auto
-
-			p
-				font-size: 20px
-				letter-spacing: 3px
-				line-height: 40px
-
-@media screen and (min-width: 1325px)
-
-	.about-page-container
-		> header
-			padding: 80px 0 170px 0
-
-			h1
-				font-size: 45px
-				letter-spacing: 12px
-
-	.about-page-images
-		flex-direction: row
+	ul
+		display: flex
+		flex-direction: column
 		align-items: center
-		justify-content: center
-		padding-bottom: 60px
-
-	.about-image
-		display: inline-block
-		height: 175px
-		width: 175px
 
 
-		&:nth-of-type(1)
-			margin-right: 140px
+	li
+		display: flex
+		flex-direction: column
+		align-items: center
+		position: relative
+		width: 6px
+		margin: 0 auto
+		background: #666
+		list-style-type: none
 
-		&:nth-of-type(2)
-			margin-left: 140px
+		&:nth-of-type(5)
+			.timeline-widget
+				margin-bottom: 0
 
-	.about-content
-		> div
+		&:nth-child(odd)
+			.timeline-widget
+				transform: translate3d(100%, 0, 0)
 
-			p
-				line-height: 45px
-				letter-spacing: 4px
+		&:nth-child(even)
+			.timeline-widget
+				transform: translate3d(-100%, 0, 0)
 
-@media screen and (min-width: 1450px)
-	.about-image
-		height: 190px
-		width: 190px
+		&.in-view
+			.timeline-widget
+				transform: none
+				visibility: visible
+				opacity: 1
 
-		&:nth-of-type(1)
-			margin-right: 80px
 
-		&:nth-of-type(2)
-			margin: 0 40px
+.timeline-marker
+	display: flex
+	align-items: center
+	justify-content: center
+	height: 50px
+	width: 50px
+	border-radius: 50%
+	background: #888
 
-		&:nth-of-type(3)
-			margin-left: 80px
 
-@media screen and (min-width: 1600px)
-	.about-page-container
-		> header
-			padding-top: 130px
+.timeline-widget
+	position: relative
+	width: 80vw
+	left: 0
+	right: 0
+	padding: 15px
+	margin: 45px 0
+	background: #757575
+	visibility: hidden
+	opacity: 0
+	transition: all .4s ease
+	z-index: 50
 
-			h1
-				font-size: 50px
-				letter-spacing: 14px
-				
-	.about-image
+	p
+		@include lato()
+		font-weight: 300
+		letter-spacing: 1px
+		line-height: 28px
+		font-size: 14px
+		text-align: center
 
-		&:nth-of-type(1)
-			margin-right: 100px
 
-		&:nth-of-type(2)
-			margin: 0 50px
 
-		&:nth-of-type(3)
-			margin-left: 100px
