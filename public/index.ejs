@@ -6,9 +6,9 @@
 
 		<title>Portfolio -- Forrest Collins</title>
 
-		<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300" rel="stylesheet">
-		<link rel='stylesheet' href='./static/fonts/style.css'>
-		<link rel='stylesheet' href='./styles/main.min.css'>
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='./static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
 
 		<style>
 			.landing-header-overlay {
@@ -128,10 +128,54 @@
 				}
 
 				.landing-header button span {
-					font-size: 18px
+					font-size: 18px;
+				}
+			}
+
+			@media screen and (min-width: 731px) {
+				.landing-header {
+					height: 100vh;		
 				}
 
+				.landing-header h1 {
+					font-size: 52px	
+				}
 
+				.landing-header p {
+					font-size: 23px
+				}
+			}
+
+			@media screen and (min-width: 1325px) {
+				.landing-header h1 {
+					font-size: 45px;
+					letter-spacing: 10px;
+					margin-bottom: 120px;		
+				}
+
+				.landing-header p {
+					font-size: 25px;
+					letter-spacing: 6px;
+					margin-bottom: 120px;
+				}
+
+				.landing-header button span {
+					font-size: 20px;
+					letter-spacing: 6px;				
+				}
+			}
+
+			@media screen and (min-width: 1600px) {
+				.landing-header h1 {
+					font-size: 80px
+					letter-spacing: 16px
+					font-weight: 300
+					margin-bottom: 55px
+				}
+
+				.landing-header p {
+					margin-bottom: 140px
+				}
 			}
 		</style>
 	</head>
@@ -385,6 +429,8 @@
 		<% include ./views/utils/landing-notifications %>
 
 		<% include ./views/shared/footer %>
+		<script src='./fg-loadcss/src/loadCSS.js'></script>
+		<script src='./fg-loadcss/src/cssrelpreload.js'></script>
 		<script src='./main.build.js'></script>
 	</body>
 </html>
