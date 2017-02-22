@@ -69,6 +69,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mobileTrigger = document.getElementById('nav-trigger');
+	var navLinks = document.querySelectorAll('.nav-link');
 	var preLoader = document.querySelector('.preloader');
 	var mobileNav = new _mobile2.default();
 	var scrollEntrance = new _scroll2.default();
@@ -76,18 +77,21 @@
 	var scrollTimeout = false;
 
 	function activeUrl() {
-		var navLinks = document.querySelectorAll('.nav-link');
+		var i = void 0;
+		var len = navLinks.length;
 
-		Array.prototype.forEach.call(navLinks, function (link) {
+		for (i = 0; i < len; i++) {
+			var link = navLinks[i];
+
 			if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
 				link.classList.add('active');
 			}
-		});
+		}
 	}
 
 	if (window.location.pathname == '/about') {
 		(0, _about2.default)();
-	} else {
+	} else if (window.location.pathname == '/works') {} else {
 		(0, _landing2.default)();
 	}
 

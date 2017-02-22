@@ -6,6 +6,7 @@ import landing from './scripts/pages/landing';
 import about from './scripts/pages/about'
 
 const mobileTrigger = document.getElementById('nav-trigger');
+const navLinks = document.querySelectorAll('.nav-link');
 const preLoader = document.querySelector('.preloader');
 const mobileNav = new mobileMenu();
 const scrollEntrance = new scrollIn();
@@ -13,18 +14,23 @@ const scrollEntrance = new scrollIn();
 let scrollTimeout = false;
 
 function activeUrl() {
-	var navLinks = document.querySelectorAll('.nav-link');
+	let i;
+	let len = navLinks.length;
 
-	Array.prototype.forEach.call(navLinks, (link) => {
+	for (i = 0; i < len; i++) {
+		let link = navLinks[i];
+
 		if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
 			link.classList.add('active');
 		}
-	});
+	}
 }
 
 
 if (window.location.pathname == '/about') {
 	about();
+} else if (window.location.pathname == '/works') {
+
 } else {
 	landing();
 }
