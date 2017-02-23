@@ -10,6 +10,13 @@
 		<link rel='preload' href='./static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
 		<link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
 
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300" rel='stylesheet'>
+			<link rel='stylesheet' href='./static/fonts/style.css'>
+			<link rel='stylesheet' href='./styles/main.min.css'>
+		</noscript>
+
+
 		<style>
 			.landing-header-overlay {
 				position: absolute;
@@ -431,6 +438,6 @@
 		<% include ./views/shared/footer %>
 		<script src='./fg-loadcss/src/loadCSS.js'></script>
 		<script src='./fg-loadcss/src/cssrelpreload.js'></script>
-		<script src='./main.build.js'></script>
+		<script src='./main.build.min.js'></script>
 	</body>
 </html>
