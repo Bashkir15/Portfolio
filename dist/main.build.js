@@ -443,13 +443,15 @@
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
-	var _header = __webpack_require__(7);
+	var _heading = __webpack_require__(9);
+
+	var _heading2 = _interopRequireDefault(_heading);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function landing() {
-		var contactScroller = document.getElementById('contact-scroller');
-		var contactContainer = document.getElementById('contact-container');
+		//const contactScroller = document.getElementById('contact-scroller');
+		//const contactContainer = document.getElementById('contact-container');
 		var formWrappers = document.querySelectorAll('.form-wrapper');
 		var formInputs = document.querySelectorAll('.contact-input');
 		var emailInput = document.getElementById('contact-email');
@@ -478,6 +480,8 @@
 			timeout: 2000,
 			type: 'warning'
 		});
+
+		(0, _heading2.default)();
 
 		function addEvents() {
 			Array.prototype.forEach.call(formInputs, function (input) {
@@ -630,11 +634,10 @@
 		}
 
 		addEvents();
-		(0, _header.header)();
 
-		contactScroller.addEventListener('click', function () {
-			_scroll2.default.smoothScroll(contactContainer.offsetTop);
-		});
+		//contactScroller.addEventListener('click', () => {
+		//	scrollTo.smoothScroll(contactContainer.offsetTop);
+		//});
 		submitButton.addEventListener('click', sendMessage, false);
 		window.addEventListener('message-sent', successNotify.open, false);
 		window.addEventListener('message-failed', failureNotify.open, false);
@@ -849,282 +852,7 @@
 	};
 
 /***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.header = header;
-	function header() {
-		var canvas = document.getElementById('landing-header');
-		var headerSection = document.querySelector('.landing-header');
-		var context = canvas.getContext('2d');
-		var stars = [];
-		var explosions = [];
-		var miniStars = [];
-		var backgroundGradient = context.createLinearGradient(0, 0, 0, canvas.height);
-
-		var groundHeight = canvas.height * 0.15;
-		var randomSpawnRate = Math.floor(Math.random() * 25 + 60);
-		var timer = 0;
-		var resizeTimeout = void 0;
-
-		canvas.width = window.innerWidth;
-		canvas.height = headerSection.scrollHeight;
-
-		backgroundGradient.addColorStop(0, 'rgba(23, 30, 38, 0.7)');
-		backgroundGradient.addColorStop(1, 'rgba(63, 88, 107, 0.7)');
-
-		for (var i = 0; i < 150; i++) {
-			miniStars.push(new miniStar());
-		}
-
-		function Star() {
-			var _this = this;
-
-			this.radius = Math.random() * 10 + 5;
-			this.x = this.radius + (canvas.width - this.radius * 2) * Math.random();
-			this.y = -10;
-			this.dx = (Math.random() - 0.5) * 20;
-			this.dy = 30;
-			this.gravity = .5;
-			this.friction = .54;
-
-			this.update = function () {
-				var len = void 0;
-
-				if (_this.y + _this.radius + _this.dy >= canvas.height - groundHeight) {
-					_this.dy = -_this.dy * _this.friction;
-					_this.dx *= _this.friction;
-					_this.radius -= 3;
-
-					explosions.push(new Explosion(_this));
-				} else {
-					_this.dy += _this.gravity;
-				}
-
-				if (_this.x + _this.radius + _this.dx >= canvas.width || _this.x - _this.radius + _this.dx < 0) {
-					_this.dx = -_this.dx;
-					_this.dx *= _this.friction;
-					explosions.push(new Explosion(_this));
-				}
-
-				_this.x += _this.dx;
-				_this.y += _this.dy;
-
-				_this.draw();
-
-				len = explosions.length;
-
-				for (var _i = 0; _i < len; _i++) {
-					explosions[_i].update();
-				}
-			};
-
-			this.draw = function () {
-				context.save();
-				context.beginPath();
-				context.arc(_this.x, _this.y, Math.abs(_this.radius), 0, Math.PI * 2, false);
-
-				context.shadowColor = '#e3eaef';
-				context.shadowBlur = 20;
-				context.shadowOffsetX = 0;
-				context.shadowOffsetY = 0;
-
-				context.fillStyle = '#e3eaef';
-				context.fill();
-				context.closePath();
-				context.restore();
-			};
-		}
-
-		function Particle(x, y, dx, dy) {
-			var _this2 = this;
-
-			this.x = x;
-			this.y = y;
-			this.dx = dx;
-			this.dy = dy;
-			this.gravity = .09;
-			this.friction = 0.88;
-			this.timeToLive = 3;
-			this.opacity = 1;
-			this.size = {
-				width: 2,
-				height: 2
-			};
-
-			this.update = function () {
-				if (_this2.y + _this2.size.height + _this2.dy >= canvas.height - groundHeight) {
-					_this2.dy = -_this2.dy * _this2.friction;
-					_this2.dx *= _this2.friction;
-				} else {
-					_this2.dy += _this2.gravity;
-				}
-
-				if (_this2.x + _this2.size.width + _this2.dx >= canvas.width || _this2.x + _this2.dx < 0) {
-					_this2.dx = -_this2.dx;
-					_this2.dx *= _this2.friction;
-				}
-
-				_this2.x += _this2.dx;
-				_this2.y += _this2.dy;
-
-				_this2.draw();
-
-				_this2.timeToLive -= 0.01;
-				_this2.opacity -= 1 / (_this2.timeToLive / 0.01);
-			};
-
-			this.draw = function () {
-				context.save();
-				context.fillStyle = 'rgba(227, 234, 239, ' + _this2.opacity + ')';
-				context.shadowColor = '#e3eaef';
-				context.shadowBlur = 20;
-				context.shadowOffsetX = 0;
-				context.shadowOffsetY = 0;
-				context.fillRect(_this2.x, _this2.y, _this2.size.width, _this2.size.height);
-				context.restore();
-			};
-
-			this.isAlive = function () {
-				return 0 <= _this2.timeToLive;
-			};
-		}
-
-		function Explosion(star) {
-			var _this3 = this;
-
-			this.particles = [];
-
-			this.init = function (parentStar) {
-				for (var _i2 = 0; _i2 < 8; _i2++) {
-					var velocity = {
-						x: (Math.random() - 0.5) * 5,
-						y: (Math.random() - 0.5) * 15
-					};
-
-					_this3.particles.push(new Particle(parentStar.x, parentStar.y, velocity.x, velocity.y));
-				}
-			};
-
-			this.init(star);
-
-			this.update = function () {
-				for (var _i3 = 0; _i3 < _this3.particles.length; _i3++) {
-					_this3.particles[_i3].update();
-
-					if (_this3.particles[_i3].isAlive() == false) {
-						_this3.particles.splice(_i3, 1);
-					}
-				}
-			};
-		}
-
-		function miniStar() {
-			var _this4 = this;
-
-			this.x = Math.random() * canvas.width;
-			this.y = Math.random() * canvas.height;
-			this.radius = Math.random() * 3;
-
-			this.draw = function () {
-				context.save();
-				context.beginPath();
-				context.arc(_this4.x, _this4.y, _this4.radius, 0, Math.PI * 2, false);
-				context.shadowColor = '#e3eaef';
-				context.shadowBlur = Math.random() * 10 + 10;
-				context.shadowOffsetX = 0;
-				context.shadowOffsetY = 0;
-
-				context.fillStyle = "white";
-				context.fill();
-
-				context.closePath();
-				context.restore();
-			};
-		}
-
-		function createMoutainRange(height, yPos, amount, color) {
-			for (var _i4 = 0; _i4 < amount; _i4++) {
-				var width = canvas.width / amount;
-
-				// draw the moutainer
-				context.beginPath();
-				context.moveTo(_i4 * width, yPos);
-				context.lineTo(_i4 * width + width + 325, yPos);
-
-				// draw the peak
-				context.lineTo(_i4 * width + width / 2, yPos - height / 2);
-				context.lineTo(_i4 * width - 325, yPos);
-				context.fillStyle = color;
-				context.fill();
-				context.closePath();
-			}
-		}
-
-		function handleResize() {
-			if (!resizeTimeout) {
-				setTimeout(function () {
-					canvas.width = window.innerWidth;
-					canvas.height = headerSection.scrollHeight;
-					resizeTimeout = true;
-				}, 150);
-			}
-
-			resizeTimeout = false;
-		}
-
-		function animate() {
-			var sLen = stars.length;
-			var eLen = explosions.length;
-
-			window.requestAnimationFrame(animate);
-			context.fillStyle = backgroundGradient;
-			context.fillRect(0, 0, canvas.width, canvas.height);
-
-			for (var _i5 = 0; _i5 < miniStars.length; _i5++) {
-				miniStars[_i5].draw();
-			}
-
-			createMoutainRange(canvas.height / .55, canvas.height, 1, '#384551');
-			createMoutainRange(canvas.height / .7, canvas.height, 2, '#2b3843');
-			createMoutainRange(canvas.height / 1.2, canvas.height, 3, '#26333e');
-
-			context.fillStyle = "#182028";
-			context.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
-
-			for (var _i6 = 0; _i6 < stars.length; _i6++) {
-				stars[_i6].update();
-
-				if (stars[_i6].radius <= 0) {
-					stars.splice(_i6, 1);
-				}
-			}
-
-			for (var _i7 = 0; _i7 < eLen; _i7++) {
-				if (explosions[_i7].length <= 0) {
-					explosions.splice(_i7, 1);
-				}
-			}
-
-			timer++;
-
-			if (timer % randomSpawnRate == 0) {
-				stars.push(new Star());
-				randomSpawnRate = Math.floor(Math.random() * 10 + 75);
-			}
-		}
-
-		animate();
-
-		window.addEventListener('resize', handleResize, false);
-	}
-
-/***/ },
+/* 7 */,
 /* 8 */
 /***/ function(module, exports) {
 
@@ -1171,6 +899,136 @@
 
 		window.addEventListener('load', timelineEffect, false);
 		window.addEventListener('scroll', scrollThrottle, false);
+	}
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = heading;
+	function heading() {
+		var header = document.querySelector('.landing-header');
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / header.scrollHeight, 1, 1000);
+		var renderer = new THREE.WebGLRenderer({
+			antialias: true,
+			alpha: true
+		});
+
+		var particle = new THREE.Object3D();
+		var circle = new THREE.Object3D();
+		var skelet = new THREE.Object3D();
+		var scene = new THREE.Scene();
+
+		var composer = void 0;
+
+		init();
+		animate();
+
+		function init() {
+
+			renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
+			renderer.setSize(window.innerWidth, header.scrollHeight);
+			renderer.autoClear = false;
+			renderer.setClearColor(0x000000, 0.0);
+
+			camera.position.z = 400;
+
+			header.appendChild(renderer.domElement);
+
+			scene.add(camera);
+
+			scene.add(circle);
+			scene.add(skelet);
+			scene.add(particle);
+
+			var geometry = new THREE.TetrahedronGeometry(2, 0);
+			var geom = new THREE.IcosahedronGeometry(7, 1);
+			var geom2 = new THREE.IcosahedronGeometry(15, 1);
+
+			var material = new THREE.MeshPhongMaterial({
+				color: "rgb(233, 248, 183)",
+				shading: THREE.FlatShading
+			});
+
+			for (var i = 0; i < 1000; i++) {
+				var mesh = new THREE.Mesh(geometry, material);
+
+				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+				mesh.position.multiplyScalar(90 + Math.random() * 700);
+				mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+
+				particle.add(mesh);
+			}
+
+			var mat = new THREE.MeshPhongMaterial({
+				//color: 0x429e97,
+				color: 0x2a6d62,
+				shading: THREE.FlatShading
+			});
+
+			var mat2 = new THREE.MeshPhongMaterial({
+				color: 0x8cd1c4,
+				wireframe: true,
+				side: THREE.DoubleSide
+			});
+
+			var planet = new THREE.Mesh(geom, mat);
+			planet.scale.x = planet.scale.y = planet.scale.z = 16;
+
+			circle.add(planet);
+
+			var planet2 = new THREE.Mesh(geom2, mat2);
+			planet2.scale.x = planet2.scale.y = planet2.scale.z = 10;
+
+			skelet.add(planet2);
+
+			var ambientLight = new THREE.AmbientLight(0x999999);
+
+			scene.add(ambientLight);
+
+			var lights = [];
+			lights[0] = new THREE.DirectionalLight(0xaaa, 1);
+			lights[0].position.set(1, 0, 0);
+			lights[1] = new THREE.DirectionalLight(0xe9f8b7, 1);
+			lights[1].position.set(0.75, 1, 0.5);
+
+			lights[2] = new THREE.DirectionalLight(0x429e97, 1);
+			lights[2].position.set(-0.75, -1, 0.5);
+
+			scene.add(lights[0]);
+			scene.add(lights[1]);
+			scene.add(lights[2]);
+
+			window.addEventListener('resize', handleResize, false);
+		}
+
+		function handleResize() {
+			camera.aspect = window.innerWidth / header.scrollHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize(window.innerWidth, header.scrollHeight);
+		}
+
+		function animate() {
+			requestAnimationFrame(animate);
+
+			particle.rotation.x += 0.0000;
+			particle.rotation.y -= 0.0040;
+
+			circle.rotation.x -= 0.0020;
+			circle.rotation.y -= 0.0030;
+
+			skelet.rotation.x -= 0.0010;
+			skelet.rotation.y += 0.0020;
+
+			renderer.clear();
+
+			renderer.render(scene, camera);
+		}
 	}
 
 /***/ }

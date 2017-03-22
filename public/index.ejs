@@ -6,12 +6,12 @@
 
 		<title>Portfolio -- Forrest Collins</title>
 
-		<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Mont:400" rel="preload" as="style" onload="this.rel='stylesheet'"">
 		<link rel='preload' href='./static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
 		<link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
 
 		<noscript>
-			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300" rel='stylesheet'>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
 			<link rel='stylesheet' href='./static/fonts/style.css'>
 			<link rel='stylesheet' href='./styles/main.min.css'>
 		</noscript>
@@ -24,16 +24,16 @@
 				left: 0;
 				width: 100%;
 				height: 100%;
-				background: rgba(0,0,0,0.2);
 			}
 
 			.landing-header-overlay div {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				justify-content: center
 				width: 100%;
 				height: 100%;
-				padding-top: 145px;
+				padding-top: 135px;
 			}
 
 			.landing-header {
@@ -41,81 +41,84 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				height: calc(100vh + 45vh);
 				overflow: hidden;
+				height: calc(100vh + 10vh);
+				padding-bottom: 70px;
+				background: rgba(233, 248, 183, 0.5);
 			}
 
 			.landing-header h1 {
 				position: relative;
-				font-family: 'Lato';
+				font-family: 'Sintony';
+				text-shadow: 0 1px 1px rgba(0,0,0,0.3);
 				font-weight: 300;
-				font-size: 55px;
+				text-transform: uppercase;
+				font-size: 38px;
 				line-height: 85px;
 				letter-spacing: 8px;
-				text-shadow: -1px 2px rgba(0,0,0,0.3);
 				width: 90%;
 				text-align: center;
-				margin-bottom: 80px;
-				background: linear-gradient(125deg, #fff 0%, #38495a 100%);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
+				margin-bottom: 25px;
+				color: rgba(56, 73, 90, 0.7);
 				z-index: 10;
 			}
 
 			.landing-header p {
 				position: relative;
 				font-family: 'Muli';
-				font-weight: 400;
+				font-weight: 600;
 				font-size: 20px;
 				letter-spacing: 2px;
 				line-height: 30px;
-				margin-bottom: 100px;
-				padding: 0 20px;
+				padding: 0 33px;
+				margin-bottom: 85px;
 				text-align: center;
-				color: #e9e9e9;
+				color: rgba(56, 73, 80, 0.6);
 				z-index: 10;
 			}
 
 			.landing-header button {
 				position: relative;
-				height: 50px;
-				width: 220px;
+				height: 55px;
+				width: 160px;
 				padding: 0;
 				overflow: hidden;
-				border: 1px solid #47aecc;
+				background: rgba(255, 255, 255, 0.5);
 				transition: all .4s ease;
 			}
 
 			.landing-header button:after {
 				position: absolute;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				content: '';
 				width: 0;
 				left: -10%;
 				bottom: 0;
 				height: 120%;
-				background: darken(#60E3E9, 10%);
+				background: #8cd1c4;
 				transition: all .4s ease;
 				transform: skewX(15deg);
 			}
 
 			.landing-header button span {
 				position: relative;
-				font-family: 'Lato';
+				font-family: 'Muli';
 				font-weight: 300;
+				letter-spacing: 2px ;
 				font-size: 20px;
-				letter-spacing: 3px;
 				color: #f1f3f3;
 				z-index: 20;
 			}
 
-			.lanidng-header button:hover:after {
-				border-color: #47aecc;
+			.landing-header button:hover:after {
 				width: 120%;
 			}
 
 			@media screen and (min-width: 630px) {
 				.landing-header {
-					height: calc(100vh + 10vh);
+					height: 100vh;
 				}
 
 				.landing-header h1 {
@@ -196,18 +199,83 @@
 
 		<div class='landing-page-container'>
 			<section class='landing-header'>
-				<canvas id='landing-header'></canvas>
 				<div class='landing-header-overlay'>
 					<div>
 						<h1>I'm Forrest</h1>
-						<p>I engineer modern applications for the web</p>
+						<p>I engineer modern applications for the web</p> 
 
-						<button type='button' id='contact-scroller' aria-label='click to scroll to contact form'>
-							<span>Contact Me</span>
+					<button type='button' id='contact-scroller' aria-label='click to scroll to contact form'>
+							<span>Get In Touch</span>
 						</button>
-					</div>					
+					</div>		
 				</div>
 			</section>
+
+			<section class='landing-projects'>
+				<header class='landing-section-header'>
+					<h2>Recent Projects</h2>
+				</header>
+
+				<div class='landing-projects-body'>
+					<div>
+						<figure class='landing-project' data-entrance='fade'>
+							<img src='./images/opinion.svg' alt='Opinionable'>
+							<figcaption>
+								<h3>Opinionable</h3>
+								<p>A news aggregate and social-sharing application</p>
+
+								<a href='/opinionable'>
+									See More
+								</a>
+							</figcaption>
+						</figure>
+
+						<figure class='landing-project' data-entrance='fade'>
+							<img src='./images/blue-city.jpg'>
+							<figcaption>
+								<h3>Application Boilerplate</h3>
+								<p>A boilerplate to provide essential features for many applications</p>
+
+								<a href='/application-boilerplate'>
+									See More
+								</a>
+							</figcaption>
+						</figure>
+
+						<figure class='landing-project' data-entrance='fade'>
+							<img src='./images/portfolio.png'>
+							<figcaption>
+								<h3>Blog</h3>
+								<p>My personal Blog devote to code and science</p>
+
+								<a href='/blog'>
+									See More
+								</a>
+							</figcaption>
+						</figure>
+
+						<figure class='landing-project' data-entrance='fade'>
+							<img src='./static/images/4.png'>
+							<figcaption>
+								<h3>Evoltuion</h3>
+								<p>A demo project for a local smoke shop. Currently a WIP</p>
+
+								<a href='ec2-54-83-144-40.compute-1.amazonaws.com:8000' target='_blank'>
+									See More
+								</a>
+							</figcaption>
+						</figure>
+					</div>
+
+					<div class='landing-projects-more'>
+						<a href='/works' aria-label="See the rest of my projects">
+							<button type='button'>
+								<span>See the rest</span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</section>s
 
 			<section class='landing-skills'>
 				<header class='landing-section-header'>
@@ -265,72 +333,6 @@
 								<p>I like to waste as little time as possible, so I use tools like gulp, webpack, and rollup to the make development smoother</p>
 							</div>
 						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class='landing-projects'>
-				<header class='landing-section-header'>
-					<h2>Recent Projects</h2>
-				</header>
-
-				<div class='landing-projects-body'>
-					<div>
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./static/images/1.png'>
-							<figcaption>
-								<h3>Opinionable</h3>
-								<p>A news aggregate and social-sharing application</p>
-
-								<a href='/opinionable'>
-									See More
-								</a>
-							</figcaption>
-						</figure>
-
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./static/images/2.png'>
-							<figcaption>
-								<h3>Application Boilerplate</h3>
-								<p>A boilerplate to provide essential features for many applications</p>
-
-								<a href='/application-boilerplate'>
-									See More
-								</a>
-							</figcaption>
-						</figure>
-
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./static/images/3.png'>
-							<figcaption>
-								<h3>Blog</h3>
-								<p>My personal Blog devote to code and science</p>
-
-								<a href='/blog'>
-									See More
-								</a>
-							</figcaption>
-						</figure>
-
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./static/images/4.png'>
-							<figcaption>
-								<h3>Evoltuion</h3>
-								<p>A demo project for a local smoke shop. Currently a WIP</p>
-
-								<a href='ec2-54-83-144-40.compute-1.amazonaws.com:8000' target='_blank'>
-									See More
-								</a>
-							</figcaption>
-						</figure>
-					</div>
-
-					<div class='landing-projects-more'>
-						<a href='/works' aria-label="See the rest of my projects">
-							<button type='button'>
-								<span>See the rest</span>
-							</button>
-						</a>
 					</div>
 				</div>
 			</section>
@@ -438,6 +440,7 @@
 		<% include ./views/shared/footer %>
 		<script src='./fg-loadcss/src/loadCSS.js'></script>
 		<script src='./fg-loadcss/src/cssrelpreload.js'></script>
-		<script src='./main.build.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js'></script>
+		<script src='./scripts/main.build.min.js'></script>
 	</body>
 </html>

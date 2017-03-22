@@ -1,10 +1,10 @@
 import notifications from '../components/notifications';
 import scrollTo from '../utils/scroll.to';
-import { header } from '../components/header'
+import heading from '../components/heading'
 
 function landing() {
-	const contactScroller = document.getElementById('contact-scroller');
-	const contactContainer = document.getElementById('contact-container');
+	//const contactScroller = document.getElementById('contact-scroller');
+	//const contactContainer = document.getElementById('contact-container');
 	const formWrappers = document.querySelectorAll('.form-wrapper');
 	const formInputs = document.querySelectorAll('.contact-input');
 	const emailInput = document.getElementById('contact-email');
@@ -33,6 +33,8 @@ function landing() {
 		timeout: 2000,
 		type: 'warning'
 	});
+
+	heading();
 
 
 	function addEvents() {
@@ -187,11 +189,10 @@ function landing() {
 	}
 
 	addEvents();
-	header();
 
-	contactScroller.addEventListener('click', () => {
-		scrollTo.smoothScroll(contactContainer.offsetTop);
-	});
+	//contactScroller.addEventListener('click', () => {
+	//	scrollTo.smoothScroll(contactContainer.offsetTop);
+	//});
 	submitButton.addEventListener('click', sendMessage, false);
 	window.addEventListener('message-sent', successNotify.open, false);
 	window.addEventListener('message-failed', failureNotify.open, false);
