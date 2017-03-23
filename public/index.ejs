@@ -6,7 +6,7 @@
 
 		<title>Portfolio -- Forrest Collins</title>
 
-		<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Mont:400" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
 		<link rel='preload' href='./static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
 		<link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
 
@@ -30,10 +30,9 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				justify-content: center
+				justify-content: center;
 				width: 100%;
 				height: 100%;
-				padding-top: 135px;
 			}
 
 			.landing-header {
@@ -71,7 +70,7 @@
 				letter-spacing: 2px;
 				line-height: 30px;
 				padding: 0 33px;
-				margin-bottom: 85px;
+				margin-bottom: 145px;
 				text-align: center;
 				color: rgba(56, 73, 80, 0.6);
 				z-index: 10;
@@ -80,10 +79,10 @@
 			.landing-header button {
 				position: relative;
 				height: 55px;
-				width: 160px;
+				width: 220px;
 				padding: 0;
 				overflow: hidden;
-				background: rgba(255, 255, 255, 0.5);
+				background: rgba(255, 255, 255, 0.6);
 				transition: all .4s ease;
 			}
 
@@ -105,9 +104,9 @@
 			.landing-header button span {
 				position: relative;
 				font-family: 'Muli';
-				font-weight: 300;
-				letter-spacing: 2px ;
-				font-size: 20px;
+				font-weight: 400;
+				letter-spacing: 2px;
+				font-size: 18px;
 				color: #f1f3f3;
 				z-index: 20;
 			}
@@ -129,7 +128,7 @@
 				.landing-header p {
 					font-size: 21px;
 					letter-spacing: 3px;
-					margin-bottom: 80px;
+					margin-bottom: 120px;
 				}
 
 				.landing-header button {
@@ -148,43 +147,56 @@
 				}
 
 				.landing-header h1 {
-					font-size: 52px	
+					font-size: 52px;	
 				}
 
 				.landing-header p {
 					font-size: 23px
+					margin-bottom: 150px;
 				}
 			}
 
 			@media screen and (min-width: 1325px) {
 				.landing-header h1 {
-					font-size: 45px;
+					font-size: 52px;
 					letter-spacing: 10px;
-					margin-bottom: 120px;		
+					margin-bottom: 45px;		
 				}
 
 				.landing-header p {
+					font-family: 'Muli';
 					font-size: 25px;
 					letter-spacing: 6px;
-					margin-bottom: 120px;
+					margin-bottom: 135px;
+					font-weight: 300;
 				}
 
 				.landing-header button span {
-					font-size: 20px;
-					letter-spacing: 6px;				
+					font-size: 20px;				
 				}
 			}
 
 			@media screen and (min-width: 1600px) {
+				.landing-header {
+					height: 75vh;
+				}
+
 				.landing-header h1 {
-					font-size: 80px
-					letter-spacing: 16px
-					font-weight: 300
-					margin-bottom: 55px
+					font-size: 70px;
+					letter-spacing: 16px;
+					font-weight: 300;
+					margin-top: -120px;
+					margin-bottom: 38px;
 				}
 
 				.landing-header p {
-					margin-bottom: 140px
+					margin-bottom: 450px
+					font-size: 30px;
+				}
+
+				.landing-header button {
+					height: 75px;
+					width: 300px;
 				}
 			}
 		</style>
@@ -205,7 +217,7 @@
 						<p>I engineer modern applications for the web</p> 
 
 					<button type='button' id='contact-scroller' aria-label='click to scroll to contact form'>
-							<span>Get In Touch</span>
+							<span>Let's Work Together</span></span>
 						</button>
 					</div>		
 				</div>
@@ -219,14 +231,16 @@
 				<div class='landing-projects-body'>
 					<div>
 						<figure class='landing-project' data-entrance='fade'>
-							<img src='./images/opinion.svg' alt='Opinionable'>
+							<img src='./images/opinion-res.png' alt='Opinionable'>
 							<figcaption>
 								<h3>Opinionable</h3>
-								<p>A news aggregate and social-sharing application</p>
+								<div class='figure-info'>
+									<p>A news aggregate and social-sharing application</p>
 
-								<a href='/opinionable'>
-									See More
-								</a>
+									<a href='/opinionable'>
+										See More
+									</a>
+								</div>
 							</figcaption>
 						</figure>
 
@@ -234,35 +248,44 @@
 							<img src='./images/blue-city.jpg'>
 							<figcaption>
 								<h3>Application Boilerplate</h3>
-								<p>A boilerplate to provide essential features for many applications</p>
+								<div class='figure-info'>
+									
+									<p>A boilerplate to provide essential features for many applications</p>
 
-								<a href='/application-boilerplate'>
-									See More
-								</a>
+									<a href='/application-boilerplate'>
+										See More
+									</a>
+								</div>
 							</figcaption>
 						</figure>
 
 						<figure class='landing-project' data-entrance='fade'>
-							<img src='./images/portfolio.png'>
+							<img src='./images/rsz_1blog.png'>
 							<figcaption>
 								<h3>Blog</h3>
-								<p>My personal Blog devote to code and science</p>
+								<div class='figure-info'>
+									
+									<p>My personal Blog devote to code and science</p>
 
-								<a href='/blog'>
-									See More
-								</a>
+									<a href='/blog'>
+										See More
+									</a>
+								</div>
 							</figcaption>
 						</figure>
 
 						<figure class='landing-project' data-entrance='fade'>
-							<img src='./static/images/4.png'>
+							<img src='images/evo-res.png'>
 							<figcaption>
 								<h3>Evoltuion</h3>
-								<p>A demo project for a local smoke shop. Currently a WIP</p>
+								<div class='figure-info'>
+									
+									<p>A demo project for a local smoke shop. Currently a WIP</p>
 
-								<a href='ec2-54-83-144-40.compute-1.amazonaws.com:8000' target='_blank'>
-									See More
-								</a>
+									<a href='ec2-54-83-144-40.compute-1.amazonaws.com:8000' target='_blank'>
+										See More
+									</a>
+								</div>
 							</figcaption>
 						</figure>
 					</div>
@@ -344,20 +367,17 @@
 				</header>
 
 				<div class='landing-about-body'>
-					<img class='landing-about-mobile-image' src='./images/me.jpg'>
 
 					<div class='landing-about-text'>
-						<blockquote>
+						<!-- <blockquote>
 							The transitions from quatum simulations in ForTran to delegating events in Javascript has been a fascinating one. I
 							have become obsessed with the fast-paced culture that surrounds web technologies and development. The race to aquire knowledge and to push the boundaries of what we thought we could do inspires me to learn and absorb as much I can
-						</blockquote>
+						</blockquote> -->
 					</div>
 
 					<div class='landing-about-more'>
 						<a href='/about'>
-							<button type='button' aria-label='learn more about me'>
-								<span>Learn more</span>
-							</button>
+							
 						</a>
 					</div>
 				</div>
