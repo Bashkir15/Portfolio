@@ -28,8 +28,10 @@ function navshrink() {
 	function checkPin() {
 		let currentScrollY = getScrollY();
 
-		if (window.location.pathname == '') {
-			if (currentScrollY >= landingHeader.scrollHeight) {
+		if (window.location.pathname == '/') {
+			nav.classList.add("landing-nav");
+
+			if (currentScrollY >= landingHeader.offsetHeight) {
 
 				if (currentScrollY < lastKnownScrollY) {
 					pin();

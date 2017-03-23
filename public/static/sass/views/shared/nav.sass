@@ -9,8 +9,16 @@
 	z-index: 100
 	padding: 10px 0
 	background: #f1f3f3
-	background: transparent
+	box-shadow: 0 1px 12 0 rgba(0,0,0,0.12)
 	transition: all .38s ease-out
+
+	&.landing-nav
+		background: transparent
+		box-shadow: none
+
+		&.nav-pinned
+			background: #f1f3f3
+			box-shadow: 0 1px 12px 0 rgba(0,0,0,0.12)
 
 	&.nav-unpinned
 		transform: translateY(-80px)
@@ -63,7 +71,7 @@
 	display: flex
 	flex-basis: 0
 	flex-grow: 1
-	align-items: stretch
+	align-items: center
 	justify-content: flex-end
 	padding-right: 25px
 

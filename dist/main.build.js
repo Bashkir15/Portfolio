@@ -181,8 +181,10 @@
 		function checkPin() {
 			var currentScrollY = getScrollY();
 
-			if (window.location.pathname == '') {
-				if (currentScrollY >= landingHeader.scrollHeight) {
+			if (window.location.pathname == '/') {
+				nav.classList.add("landing-nav");
+
+				if (currentScrollY >= landingHeader.offsetHeight) {
 
 					if (currentScrollY < lastKnownScrollY) {
 						pin();
@@ -443,7 +445,7 @@
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
-	var _heading = __webpack_require__(9);
+	var _heading = __webpack_require__(7);
 
 	var _heading2 = _interopRequireDefault(_heading);
 
@@ -852,57 +854,7 @@
 	};
 
 /***/ },
-/* 7 */,
-/* 8 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = about;
-	function about() {
-		var widgets = document.querySelectorAll('.about-content li');
-
-		var scrolling = void 0;
-
-		function timelineEffect() {
-			var i = void 0;
-			var len = widgets.length;
-
-			for (i = 0; i < len; i++) {
-				var widget = widgets[i];
-
-				if (isInView(widget)) {
-					widget.classList.add('in-view');
-				}
-			}
-		}
-
-		function isInView(el) {
-			var rect = el.getBoundingClientRect();
-
-			return rect.bottom > 0 && rect.right > 0 && rect.left < (window.innerWidth || document.documentElement.clientWidth) && rect.top < (window.innerHeight || document.documentElement.clientHeight);
-		}
-
-		function scrollThrottle() {
-			if (!scrolling) {
-				window.requestAnimationFrame(function () {
-					timelineEffect();
-					scrolling = true;
-				});
-			}
-
-			scrolling = false;
-		}
-
-		window.addEventListener('load', timelineEffect, false);
-		window.addEventListener('scroll', scrollThrottle, false);
-	}
-
-/***/ },
-/* 9 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1029,6 +981,55 @@
 
 			renderer.render(scene, camera);
 		}
+	}
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = about;
+	function about() {
+		var widgets = document.querySelectorAll('.about-content li');
+
+		var scrolling = void 0;
+
+		function timelineEffect() {
+			var i = void 0;
+			var len = widgets.length;
+
+			for (i = 0; i < len; i++) {
+				var widget = widgets[i];
+
+				if (isInView(widget)) {
+					widget.classList.add('in-view');
+				}
+			}
+		}
+
+		function isInView(el) {
+			var rect = el.getBoundingClientRect();
+
+			return rect.bottom > 0 && rect.right > 0 && rect.left < (window.innerWidth || document.documentElement.clientWidth) && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+		}
+
+		function scrollThrottle() {
+			if (!scrolling) {
+				window.requestAnimationFrame(function () {
+					timelineEffect();
+					scrolling = true;
+				});
+			}
+
+			scrolling = false;
+		}
+
+		window.addEventListener('load', timelineEffect, false);
+		window.addEventListener('scroll', scrollThrottle, false);
 	}
 
 /***/ }
