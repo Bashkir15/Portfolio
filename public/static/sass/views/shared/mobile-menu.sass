@@ -1,9 +1,9 @@
 .mobile-menu-container
 	position: fixed
-	top: 0
+	top: 70px
 	left: 0
 	width: 100%
-	height: 100vh
+	height: calc(100vh - 70px)
 	overflow: hidden
 	pointer-events: none
 	z-index: 90
@@ -28,7 +28,7 @@
 	position: relative
 	width: 100%
 	height: 100%
-	background: #61aab0
+	background: #429e97
 	z-index: 100
 	opacity: 0
 	transform: translateY(-100%)
@@ -39,37 +39,36 @@
 	flex-direction: row
 	flex-wrap: wrap
 	align-items: center
-	width: 70%
-	margin: 0 auto
-	padding-top: 140px
+	width: 100%
+	height: 100%
 
 
 .menu-item
 	display: flex
-	flex: 1 0 20%
-	flex-direction: column
-	align-items: center
-	height: 70px
-	width: 90px
-	margin-bottom: 45px
-	background: rgba(0,0,0,0.35)
+	width: 50%
+	height: 50%
 	transition: all .35s ease-out
 
 	&:nth-of-type(odd)
-		margin-right: 14%
+		border-right: 1px solid #fff
+		width: calc(50% - 1px)
 
-	&:nth-of-type(even)
-		margin-left: 14%
+	&:nth-of-type(1),
+	&:nth-of-type(2)
+		border-bottom: 1px solid #fff
+		height: calc(50% - 1px)
 
 	a
 		width: 100%
-		height: 70px
+		height: 100%
 		color: #dfe1df
 
 		div
+			height: 100%
 			display: flex
 			flex-direction: column
 			align-items: center
+			justify-content: center
 
 			span
 				font-size: 18px
@@ -83,34 +82,6 @@
 				letter-spacing: 1px
 
 	&:hover
-		background: rgba(0,0,0,0.12)
+		background: rgba(0,0,0,0.23)
 
-@media screen and (min-width: 730px)
-	.menu-items-container
-		padding-top: 220px
 
-	.menu-item
-		height: 120px
-		width: 100px
-		margin-bottom: 50px
-
-		a
-			height: 120px
-
-			div
-				span
-					font-size: 22px
-					margin: 35px 0 20px 0
-
-@media screen and (min-width: 1000px)
-	.menu-items-container
-		width: 40%
-
-	.menu-item
-		flex: 1 0 15%
-
-		&:nth-of-type(odd)
-			margin-right: 20%
-
-		&:nth-of-type(even)
-			margin-left: 20%

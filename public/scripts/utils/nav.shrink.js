@@ -11,6 +11,10 @@ function navshrink() {
 	}
 
 	function init() {
+		if (window.location.pathname == '/') {
+			nav.classList.add('landing-nav');
+		}
+		
 		window.addEventListener('scroll', scrollThrottle);
 	}
 
@@ -29,7 +33,6 @@ function navshrink() {
 		let currentScrollY = getScrollY();
 
 		if (window.location.pathname == '/') {
-			nav.classList.add("landing-nav");
 
 			if (currentScrollY >= landingHeader.offsetHeight) {
 
