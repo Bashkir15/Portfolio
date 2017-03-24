@@ -1,0 +1,158 @@
+.single-work-study-container
+	header
+		display: flex
+		align-items: center
+		justify-content: center
+		padding: 60px 0
+
+		h1
+			@include sin()
+			font-weight: 300
+			font-size: 28px
+			line-height: 42px
+			letter-spacing: 3px
+
+.single-work-study
+	width: 80%
+	margin: 0 auto
+	padding: 40px 0
+
+	p
+		@include muli()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 18px
+		line-height: 42px
+		margin-bottom: 38px
+
+.single-work-list
+	list-style: disc
+	margin-bottom: 10px
+
+	li
+		@include muli()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 20px
+		line-height: 40px
+		padding: 10px 0
+
+.single-work-list-problem
+	padding: 20px 0
+
+	p
+		@include muli()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+		line-height: 33px
+		margin-bottom: 20px
+
+.single-work-list-image
+	width: 90%
+	margin: 0 auto 30px auto
+	height: 400px
+
+	img
+		height: 100%
+		width: 100%
+
+.single-work-list-full-image
+	width: 90%
+	margin: 0 auto 60px auto
+	height: 1800px
+
+	img
+		height: 100%
+		width: 100%
+
+.single-work-study-conclusion
+	padding: 30px 0
+	width: 80%
+	margin: 0 auto
+
+	h3
+		@include sin()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 22px
+		line-height: 30px
+		margin-bottom: 15px
+		text-align: center
+
+	p
+		@include muli()
+		font-weight: 300
+		letter-spacing: 2px
+		line-height: 30px
+		font-size: 18px
+
+.single-work-study-links
+	display: flex
+	align-items: center
+	justify-content: center
+
+	a
+		padding: 0 10px
+
+@media screen and (min-width: 720px)
+	.single-work-study-container
+		header
+			padding: 80px 0
+
+	.single-work-study
+		p
+			margin-bottom: 48px
+
+	.single-work-list
+		margin: 20px 0
+
+	.single-work-list-image
+		margin: 55px 0
+
+	.single-work-list-problem
+		p
+			margin-bottom: 35px
+
+@media screen and (min-width: 1000px)
+	.single-work-study
+		width: 70%
+
+		p
+			margin-bottom: 50px
+
+	.single-work-list
+		margin: 40px 0
+
+	.single-work-list-image
+		width: 80%
+		margin: 75px auto
+
+	.single-work-list-problem
+		p
+			margin-bottom: 55px
+
+	.single-work-study-conclusion
+		width: 70%
+
+		p
+			margin-bottom: 50px
+
+@media screen and (min-width: 1300px)
+	.single-work-study
+		width: 65%
+
+
+	.single-work-list-image
+		margin: 115px auto
+
+	.single-work-study-conclusion
+		width: 60%
+
+
+@media screen and (min-width: 1600px)
+	.single-work-study
+		width: 55%
+
+	.single-work-list-image
+		width: 60%

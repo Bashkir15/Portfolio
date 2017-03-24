@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Fordevv -- Golondrina</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='../static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
+			<link rel='stylesheet' href='../static/fonts/style.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
+		</noscript>
+	</head>
+
+	<body>
+		<% include ../../shared/preloader %>
+		<% include ../../shared/nav %>
+		<% include ../../shared/mobile-menu %>
+
+		<main class='single-work-study-container'>
+			<header>
+				<h1>Golondrina</h1>
+			</header>
+
+			<section class='single-work-study'>
+				<p>This project put me out of my comfort zone a little bit because I am definitely nothing of an artist. The local artist that contracted me for this work wanted a place to display her art, expand her business, and give back to her customers</p>
+
+				<ul class='single-work-list'>
+					<li>How am I going to handle the large amount of large images they provided?</li>
+					<li>What is going to be the best way to display their work to immediately draw people in?</li>
+					<li>Will I be able to accomplish my goal with what the client has provided?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>I decided to make the landing page simple. I was original going to include a testimonials section, but that might be a future addition depending on the wishes of the client. So the landing page is fairly simple, just displaying a slider of some of their works, some a small info section and then a contact section</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/gol-full.png' alt='golondrina landing page'>
+					</div>
+
+					<p>Handling the images took a bit more thought, but eventually I decided I would host them and use Cloudfront as a CDN to serve the images. I then created JSON files for each of the categories of images containing some meta information and the links to the images</p>
+
+					<p>The client wanted all of the images on the same page. I originally had rendering concerns, but I was able to write some scripts to only start loading the beginning images when a tab was active, and when it was active to only load the first 10 images in the set. After that a user could click the load more button to load another ten images until there were no more and the load more button would go away</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/gol-gallery.png' alt='golondrina gallery'>
+					</div>
+
+					<p>The most difficult issue came with integrating the lightbox plugin. I was not able to initialize all of the images into it because they did not exist in the DOM at the time of its instantiation. To circumvent this I use a promise that would resolve only when all the images were loaded and then I passed them into the lightbox plugin</p>
+
+					<p>Doing this for each itteration made me take a small performance hit, but the rest of the code and caching made up for it fairly well and made it quite performant</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/gol-lightbox.png' alt='golondrina lightbox example'>
+					</div>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<h3>Conclusion</h3>
+
+				<p>While this is a delayed work in progress, this is considered finished for now. The client would like to accrue some more work and then we will continue</p>
+
+				<p>Some things I would like to fix would be to optimize the images more, ask the client for better resolution images though I could resize them myself, and to provide some loading indicators for images and figure out how to make that work well with the lightbox</p>
+
+				<p>To see the working application or code on github checkout the links below</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://www.github.com/Bashkir15/Golondrina' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+
+					<a href='http://www.golondrinastudio.com'>
+						Golondrina
+					</a>
+				</div>
+			</section>
+		</main>
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
+	</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Fordevv -- Evolution</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='../static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
+			<link rel='stylesheet' href='../static/fonts/style.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
+		</noscript>
+	</head>
+
+	<body>
+		<% include ../../shared/preloader %>
+		<% include ../../shared/nav %>
+		<% include ../../shared/mobile-menu %>
+
+		<main class='single-work-study-container'>
+			<header>
+				<h1>Evolution</h1>
+			</header>
+
+			<section class='single-work-study'>
+				<p>I was contracted to take an existing website for a local smokeshop and help them improve their branding a produce a much more modern take on their dated site. They wanted to be able to appeal to a much younger audience while at the same time maintaining a professional appearance</p>
+
+				<ul class='single-work-list'>
+					<li>What can I implement to grab Users attention and ensure their return?</li>
+					<li>What features make a site seem modern in comparison?</li>
+					<li>How can I tie their brand and function to their new site?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>When I think of attention grabbing and modern, I think of a very clean UI design that is very interactive but not distracting. The animations and state changes of components are very subtle, but nuanced without being overpowering</p>
+
+					<p>I decided to go with a darker, almost smoky color scheme for the landing page where I would be able to display the most pertinent information, their product sections, their services displayed in tabs, their media info with latest tweets and posts, and ways to contact them</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/evo-full.png' alt='full evolution landing page'>
+					</div>
+
+					<p>With this in place I wanted to provide more indepth information for each of these pieces, so I created an about page to describe more what the business was about</p>
+
+					<p>After doing research on what made a great business about page and how to increase user retention and desire to use your business I was able to come up with a suitable design that told their story, where they came from, and where they are today without being too terse and business like. The ThreeJS animation at the top of the page, a realistic smoke animation, helps tie into their overall brand</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/evo-about.png'>
+					</div>
+
+					<p>Next I moved onto the contact page. This was one of the sections I had to think about the most. Users will decide very quickly if they want to contact the business or not, or even if the page is worth staying on and viewing. With the page being modern I opted to include the contact form lower down on the page moving the content about their locations and phone numbers up because I figured that would be the most likely forms of communication</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/evo-contact.png'>
+					</div>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<h3>Conclusion</h3>
+
+				<p>This website is currently still under development as their are more sections to add. A page featuring their newsletter and current deals need to be added, as well as a scheduled Node application to send out texts to those who have subscribed for their text deals. At a later date a Shopify plugin will be included to allow orders to order things from their site directly</p>
+
+				<p>This was a fun project that I build with Vanilla ES6 Javascript. In the future the shop page will be seperate from the main site itself and will be build with React to decouple to application code and provide a easier way to handle application state and the quick manipulation of data for end users</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://www.github.com/Bashkir15/Evolution' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+
+					<a href='evolution-link'>
+						Evolution
+					</a>
+				</div>
+			</section>
+		</main>
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
+	</body>
+</html>
+

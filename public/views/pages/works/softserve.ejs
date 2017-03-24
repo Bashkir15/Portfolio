@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Fordevv -- Softserve</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='../static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
+			<link rel='stylesheet' href='../static/fonts/style.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
+		</noscript>
+	</head>
+
+	<body>
+		<% include ../../shared/preloader %>
+		<% include ../../shared/nav %>
+		<% include ../../shared/mobile-menu %>
+
+		<main class='single-work-study-container'>
+			<header>
+				<h1>Softserve</h1>
+			</header>
+
+			<section class='single-work-study'>
+				<p>With how many VanillaJS projects I was undertaking I found myself rewriting a lot of code and plugins that I was reusing on applications. It was for this reason that I decided to build a small Vanilla UI/Utility library for Javacript</p>
+
+				<p>While there are a plethora of other libraries out there that do the exact same thing, I wanted this to customized to the developers liking, be writting in es6, and incredibly modular</p>
+
+				<ul class='single-work-list'>
+					<li>What features should I include?</li>
+					<li>What is the best way to modularize things?</li>
+					<li>How should I handle bundling my styles for modularity?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>While the site is a work in progress, I decided to build in the most common UI components after analyzing serveral frameworks and then some utility features such as input validation, scroll plugins and the like</p>
+
+					<p>With this in mind I wanted each of the components to be seperable and not rely on each other what so ever, even a core module</p>
+
+					<div class='single-work-list-image'>
+						<img src='../images/soft-res.png' alt='softserve landing'>
+					</div>
+
+					<p>This meant that I might be rewriting some code, such as throttles, debouncers, and utility functions, but I figured it wouldn't be too much and to go on with it</p>
+
+					<p>To handle this code copying when someone downloads the entire module I will use webpack to cut out code that is shared among files</p>
+
+					<p>As a developer bad documentation is one of the things that causes me to suffer the most. With this in mind I made sure that the documentation for my library would be readable and thorough. Each section of the component docs gives examples on how to use each feature, customizable options, arguments, class options and the full gamit of possibilities for each feature</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/soft-component.png' alt='softserver component example'>
+					</div>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<h3>Conclusion</h3>
+
+				<p>While this a severe work in progress due to lack of time to devote to it properly, it has been probably the most fun project to date. Trying to figure out the best ways to condense and seperate concerns without rewriting too much code and making each component performant. As well as following these principles in the styling, meaning that developers can only import the parts of the Sass that they need and then compile it</p>
+
+				<p>I'm hoping that soon I will be able to flesh out the demo site with some guides and more plugins</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://www.github.com/Bashkir15/Softserve' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+
+					<a href='link'>
+						Softserve
+					</a>
+				</div>
+			</section>
+		</main>
+
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
+	</body>
+</html>
+

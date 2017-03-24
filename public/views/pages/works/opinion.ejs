@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Fordevv -- Opinionable</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='../static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
+			<link rel='stylesheet' href='../static/fonts/style.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
+		</noscript>
+	</head>
+
+	<body>
+		<% include ../../shared/preloader %>
+		<% include ../../shared/nav %>
+		<% include ../../shared/mobile-menu %>
+
+		<main class='single-work-study-container'>
+			<header>
+				<h1>Opinionable</h1>
+			</header>
+
+			<section class='single-work-study'>
+				<p>When I first started learning the MEAN stack I decided I wanted to build something that was slightly interesting. I am an avid Reddit user, so I started thinking of ways that I could improve upon that concept</p>
+
+				<p>The basic features that I needed to implement were obvious, but there were a few concerns that I had when I first began building the application</p>
+
+				<ul class='single-work-list'>
+					<li>What is going to be the best way to manage state?</li>
+					<li>How can I create a more friendly and interactive User Experience?</li>
+					<li>What parts of Reddit are a little lacking and could be improved upon?</li>
+					<li>How can I build that to allow me to work on it into the future?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>Using the latest ES6 feature such as modules and building a hierarchical component structure managing state became much less of an issue and I could focus much more on designing the application.</p>
+
+					<p>One dissapointed feature on Reddit is the limited User interaction. The only real communication takes place on the forums themselves and not such much in the messages between individual users</p>
+
+					<p>For this reason I incorporated some more social aspects into the application.</p>
+
+					<div class='single-work-list-image'>
+						<img src='../images/opinion-profile.png'>
+					</div>
+
+					<p>Allowing Users to create their own customizable profile where they could add friends, display their stats, and generally talk about themselves provides a possible solution to my concern</p>
+
+					<p>Users have complete control over what is displayed on their Profile, including their display image, what friends they have, and have the ability to send other Users messages</p>
+
+					<div class='single-work-list-image'>
+						<img src='../images/opinion-update.png'>
+					</div>
+
+					<p>While Reddit has a message system, it feels sluggish having to wait to see what the person I'm message says back. Refreshing my inbox and only checking when I get notifications. I improved upon this by allowing a chat stream where Users can message and receive the newest chats in real-time</p>
+
+					<div class='single-work-list-image'>
+						<img src='../images/opinion-message.png'>
+					</div>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<h3>Conclusion</h3>
+
+				<p>In all, this application was incredibly fun to build. In the future I hope that I will be able to find some time to go back and refactor my old code, add some new features, and generally just have some more fun working on this application</p>
+
+				<p>To see the working application or the code on github check out the links below</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://www.github.com/Bashkir15/Opinion' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+
+					<a href='http://www.opinionable.com'>
+						Opinionable
+					</a>
+				</div>
+			</section>
+		</main>
+		<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js'></script> -->
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
+	</body>
+</html>

@@ -91,7 +91,7 @@
 
 	if (window.location.pathname == '/about') {
 		(0, _about2.default)();
-	} else if (window.location.pathname == '/works') {} else {
+	} else if (window.location.pathname == '/works') {} else if (window.location.href.indexOf('/work') !== -1) {} else {
 		(0, _landing2.default)();
 	}
 

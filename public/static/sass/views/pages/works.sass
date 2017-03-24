@@ -6,10 +6,11 @@
 		text-align: center
 
 		h1
-			@include lato()
+			@include muli()
 			font-weight: 300
 			font-size: 46px
 			letter-spacing: 4px
+			color: rgba(56, 73, 90, 0.7)
 
 .works-container
 	display: flex
@@ -22,83 +23,106 @@
 	height: 250px
 	width: 90%
 	margin: 0 auto 55px auto
+	overflow: hidden
+	cursor: pointer
+	background: #2a6d62
 
 	img
 		position: relative
 		height: 100%
 		width: 100%
+		opacity: 0.95
+		transition: opacity 0.45s, transform 0.45s
+		transform: scale3d(1.05, 1.05, 1)
 
 	figcaption
-		display: flex
-		flex-direction: column
-		align-items: center
 		position: absolute
 		top: 0
 		left: 0
-		height: 100%
 		width: 100%
-		padding-top: 25px
-		opacity: 0
-		background: #2c3f52
+		height: 100%
 		backface-visibility: hidden
-		transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out
 
-		h3
-			@include lato()
-			font-weight: 300
-			font-size: 26px
-			letter-spacing: 3px
-			color: #f9f9f9
-			margin-bottom: 20px
+		&:before
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			content: ''
+			background: rgba(255, 255, 255, 0.7)
+			transition: transform 0.6s
+			transform: scale3d(1.9, 1.4, 1) rotate3d(0,0,1,45deg) translate3d(0, -100%, 0)
 
-		p
-			@include lato()
-			font-weight: 300
-			font-size: 16px
-			letter-spacing: 2px
-			line-height: 20px
-			color: #f9f9f9
-			text-align: center
+	.figure-info
+		display: flex
+		align-items: center
+		justify-content: flex-end
+		position: absolute
+		bottom: 35px
+		width: 100%
+		height: 100px
 
-	&:hover
-		figcaption
-			opacity: 1
-			transform: translate(15px, 15px)
 
-.work-options
-	display: flex
-	align-items: center
-	padding-top: 30px
+	h3
+		text-align: left
+		@include sin()
+		font-weight: 300
+		text-transform: uppercase
+		letter-spacing: 2px
+		line-height: 30px
+		font-size: 20px
+		margin-top: 30px
+		margin-left: 34px
+		opacity: 0
+		transition: opacity 0.35s
+		color: #fff
+
+	p
+		@include muli()
+		font-weight: 300
+		letter-spacing: 1px
+		font-size: 16px
+		line-height: 24px
+		padding: 0 10px
+		border-right: 4px solid #fff
+		text-align: right
+		opacity: 0
+		color: #fff
+		transition: opacity 0.35s
 
 	a
-		padding: 0 10px
+		@include muli()
+		font-weight: 300
+		letter-spacing: 2px
+		font-size: 16px
+		padding-left: 15px
+		padding-right: 35px
+		opacity: 0
+		color: #fff
+		transition: opacity 0.35s
 
-		button
-			height: 40px
+	&:hover
+		img
+			opacity: 0.35
+			transform: scale3d(0.9, 0.9, 1)
 
-			span
-				color: #fff
+		figcaption
+			&:before
+				transform: scale3d(1.9, 1.4, 1) rotate3d(0,0,1,45deg) translate3d(0, 100%, 0)
 
-		&:nth-of-type(1)
-			button
-				span
-					font-size: 26px
+		h3
+			opacity: 1
+			transition-delay: 0.1s
 
-		&:nth-of-type(2)
-			button
-				width: 120px
-				border: 1px solid #ed4e6e
-				transition: all .4s ease
+		p
+			opacity: 1
+			transition-delay: 0.1s
 
-				span
-					@include lato()
-					font-weight: 300
-					font-size: 17px
-					letter-spacing: 2px
+		a
+			opacity: 1
+			transition-delay: 0.1s
 
-			&:hover
-				button
-					background: #ed4e6e
 
 .github-button
 	display: flex

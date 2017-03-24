@@ -31,6 +31,8 @@ if (window.location.pathname == '/about') {
 	about();
 } else if (window.location.pathname == '/works') {
 
+} else if (window.location.href.indexOf('/work') !== -1) {
+	
 } else {
 	landing();
 }

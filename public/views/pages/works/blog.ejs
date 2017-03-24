@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Fordevv -- Blog</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='../static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
+			<link rel='stylesheet' href='../static/fonts/style.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
+		</noscript>
+	</head>
+
+	<body>
+		<% include ../../shared/preloader %>
+		<% include ../../shared/nav %>
+		<% include ../../shared/mobile-menu %>
+
+		<main class='single-work-study-container'>
+			<header>
+				<h1>Blog</h1>
+			</header>
+
+			<section class='single-work-study'>
+				<p>I had wanted to build a blog for a long time, but was never really sure what I would write about. After finally sitting down and decided I wanted to write a blog about development, coding, and science I struggled with a few different ideas on how to create the application</p>
+
+				<ul class='single-work-list'>
+					<li>What technologies should I use?</li>
+					<li>Should I use a CMS or handle everything from scratch?</li>
+					<li>Should I allow Users to sign up and provide feed back on my posts?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>I decided to give myself a little bit of a challenge and build the application with Vanilla JS. I knew that the application was going to have a bit of state management to contend with, but I wanted to see how difficult it was to write a modular architecture that manages state with ES6 without having giant, garbled files of incomprehensible code</p>
+
+					<p>Wanting to take a modern design for the blog, I did research on modern typographys and what fonts were the easiest and most pleasant for Users to read. I ended up going deciding on Montserrat for my headers and Open Sans as the standard for my paragraph text</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/blog-full.png'>
+					</div>
+
+					<p>I then started creating my editor. The editor was rather simple, a two-panel page, the left being where I would write content and then the preview would appear on the right. I build in a parse function to handle certain inputs, pressing tab would indent properly in the text area and pressing enter would insert a new line character</p>
+
+					<p>I did it in this way because the entire document gets saved as an html string when it is sent to the database and without the tabs or new line characters they would not show up when I retrieved the post from the database</p>
+
+					<!-- Insert editor image here -->
+
+					<p>I attempted using prism to parse my scripts, but there was an issue getting its wrapping to work with my HTML strings, so I took on the task of building a syntax parser and highlighter myself</p>
+
+					<p>The parser is incomplete as it stands, but it wasn't too hard to get to work. Some simple RegExps to seach for certain characters and then it will create a span and apply a class to it so I can highlight the words in CSS. There are still a few more difficult edge cases to work out, such as highlighting names after functions, the color of arguments in functions, framework syntax and the like. For now, it is functional</p>
+
+					<!-- Insert parser example here -->
+
+					<p>I eventually did decide to allow users to be able to create accounts. This meant that I now had to go in and provide authentication checks to make sure that no one had access to my admin routes. This was simple enough to do by checking the roles in User object on the client and if the proper role was found it would send the token to the server to have the role validated there for security. If this didn't happen then they would be sent back to the home page with an unauthorized notification</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/blog-register.png' alt='blog register page'>
+					</div>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<h3>Conclusion</h3>
+
+				<p>While I am still working on this and haven't had the time to write any posts yet, I have learned a lot from this endeavour. Handling state and doing complex operations in Vanilla JS can be a bit unwieldy, but with ES6 features such as modules it becomes vastly easier to manage. I hope in the future I will be able to turn this into more of a customizable blogging platform</p>
+
+				<p>To see the working application or the code on github check out the links below</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://github.com/Bashkir15/Blog' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+
+					<a href='blog link'>
+						Scripted
+					</a>
+				</div>
+			</section>
+		</main>
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
+	</body>
+</html>

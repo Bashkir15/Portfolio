@@ -16,6 +16,33 @@ router.get('/about', (req, res) => {
 	res.render('./views/pages/about');
 });
 
+router.get('/work/opinion', (req, res) => {
+	res.render('./views/pages/works/opinion')
+});
+
+router.get('/work/evolution', (req, res) => {
+	res.render('./views/pages/works/evolution');
+});
+
+router.get('/work/softserve', (req, res) => {
+	res.render('./views/pages/works/softserve');
+});
+
+router.get('/work/golondrina', (req, res) => {
+	res.render('./views/pages/works/golondrina');
+});
+
+router.get('/work/blog', (req, res) => {
+	res.render('./views/pages/works/blog');
+});
+
+router.get('/work/application-boilerplate', (req, res) => {
+	res.render('./views/pages/works/applicationBoilerplate');
+});
+
+router.get('/work/math', (req, res) => {
+	res.render('./views/pages/works/math');
+});
 
 router.post('/contact', email.contact);
 

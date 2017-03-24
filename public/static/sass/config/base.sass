@@ -11,10 +11,17 @@ body
 	text-rendering: optimizeLegibility
 	width: 100%
 	background: #222
+	transition: all .4s ease
+
+	.landing-page-container
+		opacity: 0
 
 	&.loaded
 		overflow-y: auto
 		background: none
+
+		.landing-page-container
+			opacity: 1
 
 h1, h2, h3, h4, p, blockquote, figure, ol, ul
 	margin: 0

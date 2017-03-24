@@ -232,33 +232,18 @@
 
 
 
-.landing-about-mobile-image
-	height: 165px
-	width: 165px
-	border-radius: 50%
-	box-shadow: 0 0 8px rgba(0,0,0,0.7)
 
 .landing-about-more
-	button
-		height: 50px
-		width: 180px
-		border-radius: 4px
-		background: #00adb7
+	a
+		@include muli()
+		font-weight: 300
+		font-size: 18px
+		letter-spacing: 2px
+		color: #fff
 		transition: all .4s ease-out
 
-		span
-			@include muli()
-			font-weight: 300
-			font-size: 16px
-			letter-spacing: 2px
-			color: #e0e2e5
-			transition: all .4s ease-out
-
 		&:hover
-			background: lighten(#00adb7, 10%)
-
-			span
-				color: #fff
+			color: rgb(56, 73, 90)
 
 .landing-about-text
 	padding: 100px 0
@@ -355,7 +340,6 @@
 	span
 		padding: 11px 12px
 		font-size: 22px
-		background: #2c3f52
 		background: #429e97
 		color: #f1f3f3
 
