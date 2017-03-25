@@ -24,8 +24,8 @@ export default function preloader() {
 				let f = 0.05 + ((Math.sin(t * 0.00002) / Math.PI) * 0.2);
 				let r = (Math.min(w, h)) * (Math.cos((t + i) * f) / Math.PI * 1.5);
 
-				let x = Math.sin(i) * r + (canvas.width / 2);
-				let y = Math.cos(i) * r + (canvas.height / 2);
+				let x = 0.5 + (Math.sin(i) * r + (canvas.width / 2)) | 0;
+				let y = 0.5 + (Math.cos(i) * r + (canvas.height / 2)) | 0;
 
 				context.fillStyle = 'rgba(0, 255, 255, 0.5)';
 				context.fillRect(x, y, 1.5, 1.5);
