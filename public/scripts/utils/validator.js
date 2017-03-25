@@ -53,7 +53,7 @@ function inputBlur() {
 		validateEmail(this);
 	}
 
-	if (formContent != '' ** !this.parentNode.classList.contains('form-email')) {
+	if (formContent != '' && !this.parentNode.classList.contains('form-email')) {
 		if (this.parentNode.classList.contains('blank')) {
 			this.parentNode.classList.remove('blank');
 		}
@@ -67,7 +67,7 @@ function inputBlur() {
 function checkValidForm() {
 	let valid = 0;
 
-	for (i = 0; i < wrapperLength; i++) {
+	for (let i = 0; i < wrapperLength; i++) {
 		let wrapper = formWrapper[i];
 
 		if (wrapper.classList.contains('valid') || wrapper.classList.contains('email-valid')) {
@@ -75,7 +75,7 @@ function checkValidForm() {
 		}
 	}
 
-	if (valid = wrapperLength) {
+	if (valid == wrapperLength) {
 		submitButton.classList.add('form-valid');
 	}
 }
