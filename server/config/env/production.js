@@ -1,6 +1,6 @@
 module.exports = {
 	server: {
-		host: 'forest-collins.herokuapp.com',
+		host: 'localhost',
 		port: process.env.PORT
 	},
 

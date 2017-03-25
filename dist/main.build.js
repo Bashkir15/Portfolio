@@ -50,29 +50,34 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _scroll = __webpack_require__(33);
-
-	var _scroll2 = _interopRequireDefault(_scroll);
-
 	var _preloader = __webpack_require__(32);
 
 	var _preloader2 = _interopRequireDefault(_preloader);
+
+	var _nav = __webpack_require__(37);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	var _scroll = __webpack_require__(36);
+
+	var _scroll2 = _interopRequireDefault(_scroll);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	init();
 
 	function init() {
-		var scrollEntrance = new _scroll2.default();
-		var scrollTimeout = false;
+		var scroller = new _scroll2.default();
+		var scrollTimeout = void 0;
 
 		(0, _routes2.default)();
 		(0, _preloader2.default)();
+		(0, _nav2.default)();
 
 		function scrollThrottle() {
 			if (!scrollTimeout) {
 				window.requestAnimationFrame(function () {
-					scrollEntrance.viewPortChange();
+					scroller.viewPortChange();
 					scrollTimeout = true;
 				});
 			}
@@ -80,7 +85,7 @@
 			scrollTimeout = false;
 		}
 
-		window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+		window.addEventListener('DOMContentLoaded', scroller.init);
 		window.addEventListener('scroll', scrollThrottle);
 		window.addEventListener('resize', scrollThrottle);
 	}
@@ -488,7 +493,7 @@
 
 	module.exports = defaults;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
 
 /***/ },
 /* 3 */
@@ -1584,7 +1589,7 @@
 	});
 	exports.default = contact;
 
-	var _validator = __webpack_require__(35);
+	var _validator = __webpack_require__(34);
 
 	var _notifications = __webpack_require__(28);
 
@@ -1653,6 +1658,7 @@
 						window.dispatchEvent(success);
 					} else {
 						submitButton.classList.remove('contact-loading');
+						console.log(response);
 
 						var failure = new Event('message-failed');
 
@@ -2030,7 +2036,7 @@
 
 	var _contact2 = _interopRequireDefault(_contact);
 
-	var _scroll = __webpack_require__(34);
+	var _scroll = __webpack_require__(33);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
@@ -2096,6 +2102,8 @@
 	function preloader() {
 		var preLoader = document.querySelector('.preloader');
 
+		init();
+
 		function init() {
 			var canvas = document.querySelector('.preloader-canvas');
 			var t = 0;
@@ -2108,7 +2116,7 @@
 			animate();
 
 			function animate() {
-				context.clearRect(0, 0, w, h);
+				//context.clearRect(0, 0, w, h);
 
 				t += 1;
 
@@ -2159,115 +2167,10 @@
 				}, 2000);
 			}
 		});
-
-		init();
-	}
+		}
 
 /***/ },
 /* 33 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var ScrollIn = function () {
-		function ScrollIn() {
-			_classCallCheck(this, ScrollIn);
-
-			this.elements = null;
-
-			this.defaults = {
-				duration: '1000',
-				distance: '200',
-				heightOffset: 200
-			};
-
-			this.enter = this._enter.bind(this);
-			this.init = this._init.bind(this);
-			this.viewPortChange = this._viewPortChange.bind(this);
-		}
-
-		_createClass(ScrollIn, [{
-			key: '_isInView',
-			value: function _isInView(elem) {
-				var rect = elem.getBoundingClientRect();
-
-				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
-			}
-		}, {
-			key: '_setInitialStyles',
-			value: function _setInitialStyles(elem) {
-				var anim = elem.getAttribute('data-entrance');
-				var delay = elem.getAttribute('data-entrance-delay');
-
-				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease-out";
-
-				if (delay) {
-					elem.style.transitionDelay = delay / 1000 + 's';
-				}
-
-				if (anim == 'fade') {
-					elem.style.opacity = '0';
-				}
-			}
-		}, {
-			key: '_enter',
-			value: function _enter(elem) {
-				elem.style.visibility = "visible";
-				elem.style.opacity = "1";
-				elem.style.transform = "translate(0,0)";
-				elem.classList.add('has-entered');
-			}
-		}, {
-			key: '_viewPortChange',
-			value: function _viewPortChange() {
-				var _this = this;
-
-				Array.prototype.map.call(this.elements, function (item) {
-					var isInView = _this._isInView(item);
-
-					if (isInView) {
-						var hasEntered = item.classList.contains('has-entered');
-
-						if (!hasEntered) {
-							_this._enter(item);
-						}
-					}
-				});
-			}
-		}, {
-			key: '_init',
-			value: function _init() {
-				var _this2 = this;
-
-				this.elements = document.querySelectorAll('[data-entrance]');
-
-				Array.prototype.map.call(this.elements, function (item) {
-					_this2._setInitialStyles(item);
-
-					if (_this2._isInView(item)) {
-						window.addEventListener('load', function () {
-							_this2.enter(item);
-						}, false);
-					}
-				});
-			}
-		}]);
-
-		return ScrollIn;
-	}();
-
-		exports.default = ScrollIn;
-
-/***/ },
-/* 34 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2314,7 +2217,7 @@
 		};
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2407,7 +2310,7 @@
 	}
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -2591,6 +2494,338 @@
 	};
 	process.umask = function() { return 0; };
 
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ScrollIn = function () {
+		function ScrollIn() {
+			_classCallCheck(this, ScrollIn);
+
+			this.elements = document.querySelectorAll('[data-entrance]');
+
+			this.defaults = {
+				duration: '1000',
+				distance: '200',
+				heightOffset: 200
+			};
+
+			this.enter = this._enter.bind(this);
+			this.init = this._init.bind(this);
+			this.viewPortChange = this._viewPortChange.bind(this);
+		}
+
+		_createClass(ScrollIn, [{
+			key: '_isInView',
+			value: function _isInView(elem) {
+				var rect = elem.getBoundingClientRect();
+
+				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
+			}
+		}, {
+			key: '_setInitialStyles',
+			value: function _setInitialStyles(elem) {
+				var anim = elem.getAttribute('data-entrance');
+				var delay = elem.getAttribute('data-entrance-delay');
+
+				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease-out";
+
+				if (delay) {
+					elem.style.transitionDelay = delay / 1000 + 's';
+				}
+
+				if (anim == 'fade') {
+					elem.style.opacity = '0';
+				}
+			}
+		}, {
+			key: '_enter',
+			value: function _enter(elem) {
+				elem.style.visibility = "visible";
+				elem.style.opacity = "1";
+				elem.style.transform = "translate(0,0)";
+				elem.classList.add('has-entered');
+			}
+		}, {
+			key: '_viewPortChange',
+			value: function _viewPortChange() {
+				var _this = this;
+
+				Array.prototype.map.call(this.elements, function (item) {
+					var isInView = _this._isInView(item);
+
+					if (isInView) {
+						var hasEntered = item.classList.contains('has-entered');
+
+						if (!hasEntered) {
+							_this._enter(item);
+						}
+					}
+				});
+			}
+		}, {
+			key: '_init',
+			value: function _init() {
+				var _this2 = this;
+
+				Array.prototype.map.call(this.elements, function (item) {
+					_this2._setInitialStyles(item);
+
+					if (_this2._isInView(item)) {
+						window.addEventListener('load', function () {
+							_this2.enter(item);
+						}, false);
+					}
+				});
+			}
+		}]);
+
+		return ScrollIn;
+	}();
+
+		exports.default = ScrollIn;
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = navUtil;
+
+	var _nav = __webpack_require__(39);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	var _mobile = __webpack_require__(38);
+
+	var _mobile2 = _interopRequireDefault(_mobile);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function navUtil() {
+		var mobileTrigger = document.getElementById('nav-trigger');
+		var navLinks = document.querySelectorAll('.nav-link');
+
+		var mobileNav = new _mobile2.default();
+
+		activeUrl();
+		(0, _nav2.default)();
+
+		function activeUrl() {
+			var i = void 0;
+			var len = navLinks.length;
+
+			for (i = 0; i < len; i++) {
+				var link = navLinks[i];
+
+				if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
+					link.classList.add('active');
+				}
+			}
+		}
+
+		mobileTrigger.addEventListener('click', mobileNav.toggle);
+	}
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var mobileMenu = function () {
+		function mobileMenu() {
+			_classCallCheck(this, mobileMenu);
+
+			this.container = document.getElementById('mobile-menu-container');
+			this.menu = document.getElementById("mobile-menu");
+			this.toggle = this._toggle.bind(this);
+			this.animatedClass = 'mobile-menu-container--animatable';
+			this.openClass = 'mobile-menu-container--open';
+			this.closeKeys = [27];
+		}
+
+		_createClass(mobileMenu, [{
+			key: '_toggle',
+			value: function _toggle() {
+				this.menu.style.willChange = 'transform';
+				this.container.classList.add(this.animatedClass);
+
+				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
+					document.body.style.overflowY = 'hidden';
+					this._addEvents();
+					this.container.classList.add(this.openClass);
+					this._updateNav();
+				} else {
+					document.body.style.overflowY = 'auto';
+					this._addEvents();
+					this.container.classList.remove(this.openClass);
+					this._updateNav();
+				}
+
+				this.menu.style.willChange = 'auto';
+			}
+		}, {
+			key: '_onTransitionEnd',
+			value: function _onTransitionEnd() {
+				this.container.classList.remove('mobile-menu-container--animatable');
+			}
+		}, {
+			key: '_closeKeyHandler',
+			value: function _closeKeyHandler(e) {
+				if (this.closeKeys.indexOf(e.which) > -1) {
+					e.preventDefault();
+					this.toggle();
+				}
+			}
+		}, {
+			key: '_updateNav',
+			value: function _updateNav() {
+				var nav = document.getElementById('nav');
+
+				if (this.container.classList.contains(this.openClass)) {
+					nav.classList.add('nav-mobile--open');
+				} else {
+					nav.classList.remove('nav-mobile--open');
+				}
+			}
+		}, {
+			key: '_addEvents',
+			value: function _addEvents() {
+				var _onTransitionEnd = this._onTransitionEnd.bind(this);
+
+				this.container.addEventListener('transitionend', _onTransitionEnd);
+			}
+		}]);
+
+		return mobileMenu;
+	}();
+
+		exports.default = mobileMenu;
+
+/***/ },
+/* 39 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	function navshrink() {
+		var nav = document.querySelector('.nav');
+		var landingHeader = document.querySelector('.landing-header') || {};
+		var lastKnownScrollY = 0;
+		var scrollTimeout = false;
+
+		init();
+
+		function getScrollY() {
+			return window.pageYOffset || window.scrollTop;
+		}
+
+		function init() {
+			if (window.location.pathname == '/') {
+				nav.classList.add('landing-nav');
+			}
+
+			window.addEventListener('scroll', scrollThrottle);
+		}
+
+		function scrollThrottle() {
+			if (!scrollTimeout) {
+				scrollTimeout = setTimeout(function () {
+					scrollTimeout = false;
+					checkPin();
+				}, 250);
+			}
+
+			scrollTimeout = true;
+		}
+
+		function checkPin() {
+			var currentScrollY = getScrollY();
+
+			if (window.location.pathname == '/') {
+
+				if (currentScrollY >= landingHeader.offsetHeight) {
+
+					if (currentScrollY < lastKnownScrollY) {
+						pin();
+					}
+
+					if (currentScrollY > lastKnownScrollY) {
+						unpin();
+					}
+				} else {
+					pin();
+				}
+			} else {
+
+				if (currentScrollY < lastKnownScrollY) {
+					pin();
+				}
+
+				if (currentScrollY > lastKnownScrollY) {
+					unpin();
+				}
+			}
+
+			lastKnownScrollY = getScrollY();
+		}
+
+		function pin() {
+			nav.style.willChange = 'transform';
+
+			if (nav.classList.contains('nav-unpinned')) {
+				nav.classList.remove('nav-unpinned');
+				nav.classList.add('nav-pinned');
+			} else {
+				nav.classList.add('nav-pinned');
+			}
+
+			nav.style.willChange = 'auto';
+		}
+
+		function unpin() {
+
+			nav.style.willChange = 'transform';
+
+			if (nav.classList.contains('nav-pinned')) {
+				nav.classList.remove('nav-pinned');
+				nav.classList.add('nav-unpinned');
+			} else {
+				nav.classList.add('nav-unpinned');
+			}
+
+			nav.style.willChange = 'auto';
+		}
+	}
+
+	exports.default = navshrink;
 
 /***/ }
 /******/ ]);

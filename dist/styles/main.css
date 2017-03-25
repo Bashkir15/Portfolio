@@ -40,6 +40,8 @@ img { max-width: 100%; height: auto; border: 0; }
 
 .nav.landing-nav.nav-pinned { background: #f1f3f3; -webkit-box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.12); box-shadow: 0 1px 12px 0 rgba(0, 0, 0, 0.12); }
 
+.nav.landing-nav.nav-pinned.nav-mobile--open { background: #429e97; border-bottom: 1px solid #fff; }
+
 .nav.nav-unpinned { -webkit-transform: translateY(-80px); -ms-transform: translateY(-80px); transform: translateY(-80px); }
 
 .nav.nav-pinned { -webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); }

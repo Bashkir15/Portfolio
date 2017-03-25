@@ -1,6 +1,6 @@
 class ScrollIn {
 	constructor() {
-		this.elements = null;
+		this.elements = document.querySelectorAll('[data-entrance]');
 
 		this.defaults = {
 			duration: '1000',
@@ -60,8 +60,7 @@ class ScrollIn {
 	}
 
 	_init() {
-		this.elements = document.querySelectorAll('[data-entrance]');
-
+		
 		Array.prototype.map.call(this.elements, (item) => {
 			this._setInitialStyles(item);
 

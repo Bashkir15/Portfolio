@@ -1,20 +1,22 @@
 import routes from './scripts/pages/routes'
-import scrollIn from './scripts/utils/scroll.in'
 import preloader from './scripts/utils/preloader'
+import navUtil from './scripts/components/nav'
+import scrollIn from './scripts/utils/scroll.in'
 
 init();
 
 function init() {
-	const scrollEntrance = new scrollIn();
-	let scrollTimeout = false;
+	const scroller = new scrollIn();
+	let scrollTimeout;
 
 	routes();
 	preloader();
+	navUtil();
 
 	function scrollThrottle() {
 		if (!scrollTimeout) {
 			window.requestAnimationFrame(() => {
-				scrollEntrance.viewPortChange();
+				scroller.viewPortChange();
 				scrollTimeout = true;
 			});
 		}
@@ -22,7 +24,7 @@ function init() {
 		scrollTimeout = false;
 	}
 
-	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+	window.addEventListener('DOMContentLoaded', scroller.init);
 	window.addEventListener('scroll', scrollThrottle);
 	window.addEventListener('resize', scrollThrottle);	
 }

@@ -61,6 +61,7 @@ export default function contact() {
 					window.dispatchEvent(success);
 				} else {
 					submitButton.classList.remove('contact-loading');
+					console.log(response);
 
 					let failure = new Event('message-failed');
 

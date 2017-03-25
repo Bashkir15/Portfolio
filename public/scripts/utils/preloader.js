@@ -1,5 +1,8 @@
+
 export default function preloader() {
 	const preLoader = document.querySelector('.preloader');
+
+	init();
 
 	function init() {
 		let canvas = document.querySelector('.preloader-canvas');
@@ -13,7 +16,7 @@ export default function preloader() {
 		animate();
 
 		function animate() {
-			context.clearRect(0, 0, w, h);
+			//context.clearRect(0, 0, w, h);
 
 			t += 1;
 
@@ -53,6 +56,7 @@ export default function preloader() {
 	document.ready().then((startTime, endTime) => {
 		let canvas = document.querySelector('.preloader-canvas');
 
+
 		if (endTime - startTime > 300) {
 			document.body.classList.add('loaded');
 			canvas.parentElement.classList.add('finished');
@@ -66,5 +70,4 @@ export default function preloader() {
 		}
 	});
 
-	init();
 }

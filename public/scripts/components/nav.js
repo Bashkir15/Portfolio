@@ -1,4 +1,4 @@
-import navSrhink from '../utils/nav.shrink'
+import navShrink from '../utils/nav.shrink'
 import mobileMenu from './mobile.menu'
 
 export default function navUtil() {
@@ -18,7 +18,7 @@ export default function navUtil() {
 		for (i = 0; i < len; i++) {
 			let link = navLinks[i];
 
-			if (link.getAttribute("href") == window.location.pathname || window.location.pathname = '') {
+			if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
 				link.classList.add('active');
 			}
 		}

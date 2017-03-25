@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
+import concat from 'gulp-concat'
 
 import sass from 'gulp-sass';
 import autoprefix from 'gulp-autoprefixer';
@@ -112,6 +113,22 @@ gulp.task('scripts', () => {
 		.pipe(sourceMaps.write('.'))
 		.pipe(gulp.dest(paths.prod.js))
 		.pipe(browserSync.reload({stream: true}))
+});
+
+gulp.task('vendors', () => {
+	gulp.src(['./node_modules/fg-loadcss/src/loadCSS.js', './node_modules/fg-loadcss/src/cssrelpreload.js'])
+		.pipe(plumber({
+			errorHandler: function(err) {
+				console.log(err);
+				this.emit('end');
+			}
+		}))
+		.pipe(concat({path: 'vendors.js'}))
+		.pipe(uglify())
+		.pipe(rename((path) => {
+			path.extname = '.min.js'
+		}))
+		.pipe(gulp.dest(paths.prod.js))
 });
 
 gulp.task('html', () => {
