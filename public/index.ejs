@@ -18,6 +18,15 @@
 
 
 		<style>
+			body .main-container {
+				opacity: 0;
+				transition: all .4s ease;
+			}
+
+			body.loaded .main-container {
+				opacity: 1;
+			}
+
 			.landing-header-overlay {
 				position: absolute;
 				top: 0;
@@ -201,10 +210,10 @@
 	<body class='home-body'>
 		
 		<% include ./views/shared/preloader %>
-		<% include ./views/shared/nav %>
-		<% include ./views/shared/mobile-menu %>
 
-		<div class='landing-page-container'>
+		<main class='landing-page-container main-container'>
+			<% include ./views/shared/nav %>
+			<% include ./views/shared/mobile-menu %>			
 			<section class='landing-header'>
 				<div class='landing-header-overlay'>
 					<div>
@@ -448,7 +457,7 @@
 					</div>
 				</div>
 			</section>
-		</div>
+		</main>
 
 		<% include ./views/utils/landing-notifications %>
 

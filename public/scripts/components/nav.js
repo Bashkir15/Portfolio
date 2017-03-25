@@ -8,8 +8,6 @@ export default function navUtil() {
 
 	const mobileNav = new mobileMenu();
 
-	let scrollTimeout = false;
-
 	activeUrl();
 	navShrink();
 

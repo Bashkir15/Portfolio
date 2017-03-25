@@ -46,6 +46,10 @@
 
 	'use strict';
 
+	var _routes = __webpack_require__(36);
+
+	var _routes2 = _interopRequireDefault(_routes);
+
 	var _scroll = __webpack_require__(1);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
@@ -54,42 +58,32 @@
 
 	var _preloader2 = _interopRequireDefault(_preloader);
 
-	var _landing = __webpack_require__(3);
-
-	var _landing2 = _interopRequireDefault(_landing);
-
-	var _about = __webpack_require__(35);
-
-	var _about2 = _interopRequireDefault(_about);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var scrollEntrance = new _scroll2.default();
+	init();
 
-	(0, _preloader2.default)();
+	function init() {
+		var scrollEntrance = new _scroll2.default();
+		var scrollTimeout = false;
 
-	var scrollTimeout = false;
+		(0, _routes2.default)();
+		(0, _preloader2.default)();
 
-	if (window.location.pathname == '/about') {
-		(0, _about2.default)();
-	} else if (window.location.pathname == '/works') {} else if (window.location.href.indexOf('/work') !== -1) {} else {
-		(0, _landing2.default)();
-	}
+		function scrollThrottle() {
+			if (!scrollTimeout) {
+				window.requestAnimationFrame(function () {
+					scrollEntrance.viewPortChange();
+					scrollTimeout = true;
+				});
+			}
 
-	function scrollThrottle() {
-		if (!scrollTimeout) {
-			window.requestAnimationFrame(function () {
-				scrollEntrance.viewPortChange();
-				scrollTimeout = true;
-			});
+			scrollTimeout = false;
 		}
 
-		scrollTimeout = false;
+		window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
+		window.addEventListener('scroll', scrollThrottle);
+		window.addEventListener('resize', scrollThrottle);
 	}
-
-	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
-	window.addEventListener('scroll', scrollThrottle);
-	window.addEventListener('resize', scrollThrottle);
 
 /***/ },
 /* 1 */
@@ -2568,6 +2562,35 @@
 
 		window.addEventListener('load', timelineEffect, false);
 		window.addEventListener('scroll', scrollThrottle, false);
+	}
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = routes;
+
+	var _landing = __webpack_require__(3);
+
+	var _landing2 = _interopRequireDefault(_landing);
+
+	var _about = __webpack_require__(35);
+
+	var _about2 = _interopRequireDefault(_about);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function routes() {
+		if (window.location.pathname == '/about') {
+			(0, _about2.default)();
+		} else if (window.location.pathname == '/works') {} else if (window.location.href.includes('/work')) {} else {
+			(0, _landing2.default)();
+		}
 	}
 
 /***/ }
