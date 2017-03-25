@@ -1,9 +1,9 @@
 export default function about() {
-	const widgets = document.querySelectorAll('.about-content li');
 
 	let scrolling;
 
 	function timelineEffect() {
+		const widgets = document.querySelectorAll('.about-content li');
 		let i;
 		let len = widgets.length;
 

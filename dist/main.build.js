@@ -2100,7 +2100,7 @@
 	});
 	exports.default = preloader;
 	function preloader() {
-		var preLoader = document.querySelector('.preloader');
+		var animation = void 0;
 
 		init();
 
@@ -2116,7 +2116,8 @@
 			animate();
 
 			function animate() {
-				//context.clearRect(0, 0, w, h);
+				console.time('start');
+				context.clearRect(0, 0, w, h);
 
 				t += 1;
 
@@ -2131,42 +2132,60 @@
 					context.fillRect(x, y, 1.5, 1.5);
 				}
 
-				setTimeout(animate, 16);
+				animation = setTimeout(animate, 16);
+
+				console.timeEnd('start');
 			}
 		}
 
-		HTMLDocument.prototype.ready = function () {
-			return new Promise(function (resolve, reject) {
-				var startTime = console.time('start');
-				var endTime = void 0;
+		function handleDoc() {
+			setTimeout(finishLoad, 1500);
+		}
 
-				if (document.readyState === 'complete') {
-					endTime = console.timeEnd('start');
-					resolve(document, startTime, endTime);
-				} else {
-					document.addEventListener('DOMContentLoaded', function () {
-						endTime = console.timeEnd('start');
-						resolve(document, startTime, endTime);
-					});
-				}
-			});
-		};
-
-		document.ready().then(function (startTime, endTime) {
+		function finishLoad() {
 			var canvas = document.querySelector('.preloader-canvas');
 
-			if (endTime - startTime > 300) {
-				document.body.classList.add('loaded');
-				canvas.parentElement.classList.add('finished');
-				canvas.parentElement.removeChild(canvas);
-			} else {
-				setTimeout(function () {
-					document.body.classList.add('loaded');
-					canvas.parentElement.classList.add('finished');
-					canvas.parentElement.removeChild(canvas);
-				}, 2000);
-			}
-		});
+			document.body.classList.add('loaded');
+			canvas.parentElement.classList.add('finished');
+			canvas.parentElement.removeChild(canvas);
+			clearTimeout(animation);
+
+			document.removeEventListener('DOMContentLoaded', handleDoc);
+		}
+
+		document.addEventListener('DOMContentLoaded', handleDoc);
+
+		/*HTMLDocument.prototype.ready = () => {
+	 	return new Promise((resolve, reject) => {
+	 		let startTime = console.time('start');
+	 		let endTime;
+	 			function renderDoc() {
+	 			endTime = console.timeEnd('start');
+	 			resolve(document, startTime, endTime);
+	 		}
+	 			if (document.readyState === 'complete') {
+	 			endTime = console.timeEnd('start');
+	 			resolve(document, startTime, endTime);
+	 		} else {
+	 			document.addEventListener('DOMContentLoaded', renderDoc);
+	 		}
+	 	});
+	 }
+	 	document.ready().then((startTime, endTime) => {
+	 	let canvas = document.querySelector('.preloader-canvas');
+	 
+	 	if (endTime - startTime > 300) {
+	 		document.body.classList.add('loaded');
+	 		canvas.parentElement.classList.add('finished');
+	 		canvas.parentElement.removeChild(canvas);
+	 	} else {
+	 		setTimeout(() => {
+	 			document.body.classList.add('loaded');
+	 			canvas.parentElement.classList.add('finished');
+	 			canvas.parentElement.removeChild(canvas);
+	 		}, 2000);
+	 	}
+	 }); */
 		}
 
 /***/ },
