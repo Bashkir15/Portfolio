@@ -3,7 +3,7 @@
 		display: flex
 		align-items: center
 		justify-content: center
-		padding: 60px 0
+		padding: 95px 0
 
 		h1
 			@include sin()
@@ -11,6 +11,8 @@
 			font-size: 28px
 			line-height: 42px
 			letter-spacing: 3px
+			color: rgba(56, 73, 90, 0.8)
+			margin-top: 15px
 
 .single-work-study
 	width: 80%
@@ -24,10 +26,12 @@
 		font-size: 18px
 		line-height: 42px
 		margin-bottom: 38px
+		color: #757575
 
 .single-work-list
 	list-style: disc
-	margin-bottom: 10px
+	width: 90%
+	margin: 30px auto
 
 	li
 		@include muli()
@@ -35,7 +39,8 @@
 		letter-spacing: 2px
 		font-size: 20px
 		line-height: 40px
-		padding: 10px 0
+		padding: 15px 0
+		color: rgb(56, 73, 90)
 
 .single-work-list-problem
 	padding: 20px 0
@@ -46,11 +51,11 @@
 		letter-spacing: 2px
 		font-size: 16px
 		line-height: 33px
-		margin-bottom: 20px
+		margin-bottom: 45px
 
 .single-work-list-image
 	width: 90%
-	margin: 0 auto 30px auto
+	margin: 0 auto 70px auto
 	height: 400px
 
 	img
@@ -59,8 +64,8 @@
 
 .single-work-list-full-image
 	width: 90%
-	margin: 0 auto 60px auto
-	height: 1800px
+	margin: 0 auto 70px auto
+	height: auto
 
 	img
 		height: 100%
@@ -77,8 +82,9 @@
 		letter-spacing: 2px
 		font-size: 22px
 		line-height: 30px
-		margin-bottom: 15px
+		margin-bottom: 30px
 		text-align: center
+		color: rgba(56, 73, 90, 0.8)
 
 	p
 		@include muli()
@@ -86,6 +92,9 @@
 		letter-spacing: 2px
 		line-height: 30px
 		font-size: 18px
+		text-align: center
+		margin-bottom: 40px
+		color: #757575
 
 .single-work-study-links
 	display: flex
@@ -93,26 +102,68 @@
 	justify-content: center
 
 	a
-		padding: 0 10px
+		display: flex
+		align-items: center
+		justify-content: center
+		padding: 0 20px
+		@include muli()
+		font-weight: 300
+		letter-spacing: 2px
+		line-height: 35px
+		font-size: 20px
+		transition: all .4s ease
+		color: rgb(56, 73, 90)
+
+		&:nth-of-type(1)
+			height: 45px
+			width: 45px
+
+		&:hover
+			color: #8cd1c4
+
 
 @media screen and (min-width: 720px)
 	.single-work-study-container
 		header
 			padding: 80px 0
 
+			h1
+				margin-top: 28px
+
 	.single-work-study
 		p
-			margin-bottom: 48px
+			margin-bottom: 55px
+			line-height: 40px
 
 	.single-work-list
-		margin: 20px 0
+		width: 80%
+		margin: 45px auto
 
 	.single-work-list-image
-		margin: 55px 0
+		width: 85%
+		margin: 85px auto
+
+	.single-work-list-full-image
+		margin: 85px auto
 
 	.single-work-list-problem
 		p
+			margin-bottom: 55px
+
+	.single-work-study-conclusion
+		h3
+			font-size: 26px
 			margin-bottom: 35px
+
+		p
+			line-height: 38px
+
+	.single-work-study-links
+		padding: 30px auto
+
+		a
+			&:nth-of-type(1)
+				font-size: 24px
 
 @media screen and (min-width: 1000px)
 	.single-work-study
@@ -122,28 +173,37 @@
 			margin-bottom: 50px
 
 	.single-work-list
-		margin: 40px 0
+		margin: 55pxauto
 
 	.single-work-list-image
 		width: 80%
-		margin: 75px auto
+		margin: 95px auto
+
+	.single-work-list-full-image
+		margin: 95px auto
 
 	.single-work-list-problem
 		p
-			margin-bottom: 55px
+			margin-bottom: 65px
 
 	.single-work-study-conclusion
 		width: 70%
 
 		p
-			margin-bottom: 50px
+			margin-bottom: 65px
 
 @media screen and (min-width: 1300px)
 	.single-work-study
-		width: 65%
+		width: 60%
+
+		p
+			line-height: 45px
 
 
 	.single-work-list-image
+		margin: 115px auto
+
+	.single-work-list-full-image
 		margin: 115px auto
 
 	.single-work-study-conclusion
@@ -152,7 +212,21 @@
 
 @media screen and (min-width: 1600px)
 	.single-work-study
-		width: 55%
+		width: 50%
+
+		p
+			margin-bottom: 85px
 
 	.single-work-list-image
 		width: 60%
+		margin: 130px auto
+
+	.single-work-list-full-image
+		margin: 130px auto
+
+	.single-work-study-links
+		padding: 60px auto
+
+		a
+			&:nth-of-type(1)
+				font-size: 28px

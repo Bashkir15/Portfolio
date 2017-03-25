@@ -44,6 +44,10 @@ router.get('/work/math', (req, res) => {
 	res.render('./views/pages/works/math');
 });
 
+router.get('/work/i-will-die', (req, res) => {
+	res.render('./views/pages/works/die');
+});
+
 router.post('/contact', email.contact);
 
 

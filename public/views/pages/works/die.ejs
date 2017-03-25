@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta name='viewport' content="width=device-width, initial-scale=1">
+
+		<title>Fordevv -- I Will Die</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Muli:300,400,600|Sintony|Lato:300|Mont:400|Open-Sans:300" rel="preload" as="style" onload="this.rel='stylesheet'"">
+		<link rel='preload' href='../static/fonts/style.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+
+		<noscript>
+			<link href="https://fonts.googleapis.com/css?family=Muli:300,600|Sintony|Lato:300|Montserrat:400" rel='stylesheet'>
+			<link rel='stylesheet' href='../static/fonts/style.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
+		</noscript>
+	</head>
+
+	<body>
+		<% include ../../shared/preloader %>
+		<% include ../../shared/nav %>
+		<% include ../../shared/mobile-menu %>
+
+		<main class='single-work-study-container'>
+			<header>
+				<h1>I Will Die</h1>
+			</header>
+
+			<section class='single-work-study'>
+				<p>This was I project I had never planned on working on. It was a spur of the moment project started on Reddit that quickly grew into a large project with several different developers, designs, and content managers</p>
+
+				<p>The application was devised as a means to allow people to share what would happen to them if the Affordable Care Act was repealed. We had hoped to get videos from those all of the country who depended on the ACA for their illnesses</p>
+
+				<ul class='single-work-list'>
+					<li>What is the best way to receive this content?</li>
+					<li>How can we get our message out there?</li>
+					<li>What content will be the best at envoking empathy in people and standing for a change?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>The application was constructed using Angular because that is what most of the developers were comfortable with and due to time constraints it seemed silly for some to learn new tools. The landing page wireframes out by the design team on slack and then was put together on the front end by the development team</p>
+
+					<p>We made the focus on the content right in the front. Displaying submitted videos, a slider with testimonials from text submissions, and very obvious call-to-actions buttons encouraging others to submit content</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/die-full.png' alt='I Will Die landing page'>
+					</div>
+
+					<p>We allowed a few different means for Users to provide content for the site. Due to the short nature of the project, allowing users to directly upload videos and content wasn't a feasable option. Instead, users submit urls to videos that they have uploaded on YouTube and those values are stored in a Database and the url's are retrieved</p>
+
+					<p>Users are also able to submit text submissions which are validated and sanitized before being store, and then can also be retrieved</p>
+
+					<div class='single-work-list-full-image'>
+						<img src='../images/die-video.png' alt='I Will Die video submission'>
+					</div>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<h3>Conclusion</h3>
+
+				<p>This project, which I didn't contribute much with such a large team, was an amazing experience. Being a part of a team who had such a great purpose and was so focus was wonderful. It made me feel like I was working on something that would actually affect people</p>
+
+				<p>In addition to this site there was a full-fledged social media campaign, a plethora of videos and texts submitted, and several days of trending hashtags. Everyones efforts definitely spread awareness to others</p>
+
+				<p>To see the application or code on github, checkout the links below</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://www.github.com/Iwilldiewebsite/iwilldie-lp' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+
+					<a href='http://www.iwilldie.net' target="_blank">
+						<span>I Will Die</span>
+					</a>
+				</div>
+			</section>
+		</main>
+
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
+	</body>
+</html>

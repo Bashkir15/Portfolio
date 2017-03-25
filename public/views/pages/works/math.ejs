@@ -28,7 +28,48 @@
 			</header>
 
 			<section class='single-work-study'>
+				<p>Being a Math and Physics major I spent a lot of time writing mathmetics in Matlab, Fortran, and C++. While there are a few math libraries out there for Javascript, and Javascript isn't the most ideal language for a library like this, I wanted to have some fun and do something like this</p>
+
+				<ul class='single-work-list'>
+					<li>What functions and methods are important enough to include?</li>
+					<li>Should I tailor this to methods used commonly in computing such as Linear Algebra?</li>
+					<li>How can I make this perform the best it can?</li>
+				</ul>
+
+				<div class='single-work-list-problem'>
+					<p>The project is very small given it is not a very pressing project and there isn't much of a way to show it off on a resume, but I would like to spend a lot of time on it in the future to review a lot of math I haven't touched in a while</p>
+
+					<p>The methods that it contains currently are some very common methods such as finding the GCD and the LCM, some mathematics concern matricies, a way to calculate square roots with Newton's method, and a way to calculate the Shannon Entropy of an Array.</p>
+
+					<p>The GCD and LCM methods come with both standard implementations and a "binary" implementation as well. The LCM multiple function imports the methods from GCD and then defines a generic function that takes a GCD function along with two inputs and uses that to compute the LCM. This works for both the standard and bianary version of the GCD</p>
+
+					<p>The Newton's method implementation is fairly simple and standard. The function receives a number, a tolerance, and a number of times to itterate. The function then uses newtons method to determine a lower bound or an upperbound while still in tolerance and the iteration limit hasn't been reached. The bound is then rounded and checked to see if it's square is equal to to the number the function received and returns the value of the square root</p>
+
+					<p>There is a method to transpose a matrix of nested arrays which I will be later refactoring to try and eliminate the nested loop. The function takes in an Array as an argument. It then creates a new Array containing the array in position [0] of the original Array. Then we loop through each of the indicies of the original array, creating arrays to match the indicies of the old array. The nested loop will then insert the values of the nested Arrays, effectively switching the [i] and [j] indicies of the Array to return the transpose, turning the rows into columns</p>
+
+					<p>The last function is the Shannon Entropy which receives an Array and an argument. The function then defines a frequency which reduces the array and counts the instances of values and stores them in an object. The function then defines our probability by mapping the keys of the frequency object and returns the value in the key divided by the length of the array. The function finally then returns a function that reduces the probability, subtracts the second argument from the first and multiples that by the log of the second and returns a single value. That value is then multipled by LOG2E and the value returned is the Shannon Entropy</p>
+				</div>
+			</section>
+
+			<section class='single-work-study-conclusion'>
+				<p>While this isn't a project I have worked on much, this is a problem I am very passionate about. I want to extend this to handle vectors and matricies at a very high level, be able to calculate Lagrangians, Laplace functions and transforms, and be able to create a library that I could use to perform the work I was doing in school</p>
+
+				<p>This library is just for fun, but if it does happen to provide some utility to someone, even just a curious math student, I will be very pleased</p>
+
+				<p>To see the code check out the link below</p>
+
+				<div class='single-work-study-links'>
+					<a href='http://github.com/Bashkir15/Math' target="_blank">
+						<span class='icon-github'></span>
+					</a>
+				</div>
 			</section>
 		</main>
+
+		<% include ../../shared/footer %>
+
+		<script src='../fg-loadcss/src/loadCSS.js'></script>
+		<script src='../fg-loadcss/src/cssrelpreload.js'></script>
+		<script src='../scripts/main.build.min.js' ref='preload'></script>
 	</body>
 </html>
