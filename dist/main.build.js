@@ -46,48 +46,29 @@
 
 	'use strict';
 
-	var _nav = __webpack_require__(1);
-
-	var _nav2 = _interopRequireDefault(_nav);
-
-	var _scroll = __webpack_require__(2);
+	var _scroll = __webpack_require__(1);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
-	var _mobile = __webpack_require__(3);
+	var _preloader = __webpack_require__(2);
 
-	var _mobile2 = _interopRequireDefault(_mobile);
+	var _preloader2 = _interopRequireDefault(_preloader);
 
-	var _landing = __webpack_require__(4);
+	var _landing = __webpack_require__(3);
 
 	var _landing2 = _interopRequireDefault(_landing);
 
-	var _about = __webpack_require__(8);
+	var _about = __webpack_require__(35);
 
 	var _about2 = _interopRequireDefault(_about);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var mobileTrigger = document.getElementById('nav-trigger');
-	var navLinks = document.querySelectorAll('.nav-link');
-	var preLoader = document.querySelector('.preloader');
-	var mobileNav = new _mobile2.default();
 	var scrollEntrance = new _scroll2.default();
 
+	(0, _preloader2.default)();
+
 	var scrollTimeout = false;
-
-	function activeUrl() {
-		var i = void 0;
-		var len = navLinks.length;
-
-		for (i = 0; i < len; i++) {
-			var link = navLinks[i];
-
-			if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
-				link.classList.add('active');
-			}
-		}
-	}
 
 	if (window.location.pathname == '/about') {
 		(0, _about2.default)();
@@ -106,185 +87,12 @@
 		scrollTimeout = false;
 	}
 
-	function init() {
-		var canvas = document.querySelector('.preloader-canvas'),
-		    context = canvas.getContext('2d'),
-		    t = 0,
-		    w = void 0,
-		    h = void 0;
-
-		context.globalCompositeOperate = 'lighter';
-		w = canvas.width = window.innerWidth;
-		h = canvas.height = window.innerHeight;
-		canvas.style.position = 'absolute';
-		canvas.style.top = '0';
-		canvas.style.left = '0';
-
-		animate();
-
-		function animate() {
-			context.clearRect(0, 0, w, h);
-
-			t += 1;
-
-			for (var i = 0; i < 5000; i++) {
-				var f = 0.05 + Math.sin(t * 0.00002) / Math.PI * 0.2;
-				var r = Math.min(w, h) * (Math.cos((t + i) * f) / Math.PI * 1.5);
-
-				var x = Math.sin(i) * r + canvas.width / 2;
-				var y = Math.cos(i) * r + canvas.height / 2;
-
-				context.fillStyle = 'rgba(0, 255, 255, 0.5)';
-				context.fillRect(x, y, 1.5, 1.5);
-			}
-
-			setTimeout(animate, 16);
-		}
-	}
-
-	HTMLDocument.prototype.ready = function () {
-		return new Promise(function (resolve, reject) {
-			var startTime = console.time('start');
-			var endTime = void 0;
-			if (document.readyState === 'complete') {
-				endTime = console.timeEnd('start');
-				resolve(document, startTime, endTime);
-			} else {
-				document.addEventListener('DOMContentLoaded', function () {
-					endTime = console.timeEnd('start');
-					resolve(document, startTime, endTime);
-				});
-			}
-		});
-	};
-
-	document.ready().then(function (startTime, endTime) {
-		var canvas = document.querySelector('.preloader-canvas');
-		if (endTime - startTime > 300) {
-			document.body.classList.add('loaded');
-			canvas.parentElement.classList.add('finished');
-			canvas.parentElement.removeChild(canvas);
-		} else {
-			setTimeout(function () {
-				document.body.classList.add('loaded');
-				canvas.parentElement.classList.add('finished');
-				canvas.parentElement.removeChild(canvas);
-			}, 1500);
-		}
-	});
-
-	activeUrl();
-	(0, _nav2.default)();
-	init();
-
-	mobileTrigger.addEventListener('click', mobileNav.toggle);
 	window.addEventListener('DOMContentLoaded', scrollEntrance.init, false);
 	window.addEventListener('scroll', scrollThrottle);
 	window.addEventListener('resize', scrollThrottle);
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function navshrink() {
-		var nav = document.querySelector('.nav');
-		var landingHeader = document.querySelector('.landing-header') || {};
-		var lastKnownScrollY = 0;
-		var scrollTimeout = false;
-
-		init();
-
-		function getScrollY() {
-			return window.pageYOffset || window.scrollTop;
-		}
-
-		function init() {
-			if (window.location.pathname == '/') {
-				nav.classList.add('landing-nav');
-			}
-
-			window.addEventListener('scroll', scrollThrottle);
-		}
-
-		function scrollThrottle() {
-			if (!scrollTimeout) {
-				scrollTimeout = setTimeout(function () {
-					scrollTimeout = false;
-					checkPin();
-				}, 250);
-			}
-
-			scrollTimeout = true;
-		}
-
-		function checkPin() {
-			var currentScrollY = getScrollY();
-
-			if (window.location.pathname == '/') {
-
-				if (currentScrollY >= landingHeader.offsetHeight) {
-
-					if (currentScrollY < lastKnownScrollY) {
-						pin();
-					}
-
-					if (currentScrollY > lastKnownScrollY) {
-						unpin();
-					}
-				} else {
-					pin();
-				}
-			} else {
-
-				if (currentScrollY < lastKnownScrollY) {
-					pin();
-				}
-
-				if (currentScrollY > lastKnownScrollY) {
-					unpin();
-				}
-			}
-
-			lastKnownScrollY = getScrollY();
-		}
-
-		function pin() {
-			nav.style.willChange = 'transform';
-
-			if (nav.classList.contains('nav-unpinned')) {
-				nav.classList.remove('nav-unpinned');
-				nav.classList.add('nav-pinned');
-			} else {
-				nav.classList.add('nav-pinned');
-			}
-
-			nav.style.willChange = 'auto';
-		}
-
-		function unpin() {
-
-			nav.style.willChange = 'transform';
-
-			if (nav.classList.contains('nav-pinned')) {
-				nav.classList.remove('nav-pinned');
-				nav.classList.add('nav-unpinned');
-			} else {
-				nav.classList.add('nav-unpinned');
-			}
-
-			nav.style.willChange = 'auto';
-		}
-	}
-
-	exports.default = navshrink;
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -387,7 +195,7 @@
 	exports.default = ScrollIn;
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -395,80 +203,114 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.default = preloader;
+	function preloader() {
+		var preLoader = document.querySelector('.preloader');
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+		function init() {
+			var canvas = document.querySelector('.preloader-canvas');
+			var t = 0;
+			var w = canvas.width = window.innerWidth;
+			var h = canvas.height = window.innerHeight;
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+			var context = canvas.getContext('2d');
+			context.globalCompositeOperate = 'lighter';
 
-	var mobileMenu = function () {
-		function mobileMenu() {
-			_classCallCheck(this, mobileMenu);
+			animate();
 
-			this.container = document.getElementById('mobile-menu-container');
-			this.menu = document.getElementById("mobile-menu");
-			this.toggle = this._toggle.bind(this);
-			this.animatedClass = 'mobile-menu-container--animatable';
-			this.openClass = 'mobile-menu-container--open';
-			this.closeKeys = [27];
+			function animate() {
+				context.clearRect(0, 0, w, h);
+
+				t += 1;
+
+				for (var i = 0; i < 5000; i++) {
+					var f = 0.05 + Math.sin(t * 0.00002) / Math.PI * 0.2;
+					var r = Math.min(w, h) * (Math.cos((t + i) * f) / Math.PI * 1.5);
+
+					var x = Math.sin(i) * r + canvas.width / 2;
+					var y = Math.cos(i) * r + canvas.height / 2;
+
+					context.fillStyle = 'rgba(0, 255, 255, 0.5)';
+					context.fillRect(x, y, 1.5, 1.5);
+				}
+
+				setTimeout(animate, 16);
+			}
 		}
 
-		_createClass(mobileMenu, [{
-			key: '_toggle',
-			value: function _toggle() {
-				this.menu.style.willChange = 'transform';
-				this.container.classList.add(this.animatedClass);
+		HTMLDocument.prototype.ready = function () {
+			return new Promise(function (resolve, reject) {
+				var startTime = console.time('start');
+				var endTime = void 0;
 
-				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
-					document.body.style.overflowY = 'hidden';
-					this._addEvents();
-					this.container.classList.add(this.openClass);
-					this._updateNav();
+				if (document.readyState === 'complete') {
+					endTime = console.timeEnd('start');
+					resolve(document, startTime, endTime);
 				} else {
-					document.body.style.overflowY = 'auto';
-					this._addEvents();
-					this.container.classList.remove(this.openClass);
-					this._updateNav();
+					document.addEventListener('DOMContentLoaded', function () {
+						endTime = console.timeEnd('start');
+						resolve(document, startTime, endTime);
+					});
 				}
+			});
+		};
 
-				this.menu.style.willChange = 'auto';
-			}
-		}, {
-			key: '_onTransitionEnd',
-			value: function _onTransitionEnd() {
-				this.container.classList.remove('mobile-menu-container--animatable');
-			}
-		}, {
-			key: '_closeKeyHandler',
-			value: function _closeKeyHandler(e) {
-				if (this.closeKeys.indexOf(e.which) > -1) {
-					e.preventDefault();
-					this.toggle();
-				}
-			}
-		}, {
-			key: '_updateNav',
-			value: function _updateNav() {
-				var nav = document.getElementById('nav');
+		document.ready().then(function (startTime, endTime) {
+			var canvas = document.querySelector('.preloader-canvas');
 
-				if (this.container.classList.contains(this.openClass)) {
-					nav.classList.add('nav-mobile--open');
-				} else {
-					nav.classList.remove('nav-mobile--open');
-				}
+			if (endTime - startTime > 300) {
+				document.body.classList.add('loaded');
+				canvas.parentElement.classList.add('finished');
+				canvas.parentElement.removeChild(canvas);
+			} else {
+				setTimeout(function () {
+					document.body.classList.add('loaded');
+					canvas.parentElement.classList.add('finished');
+					canvas.parentElement.removeChild(canvas);
+				}, 2000);
 			}
-		}, {
-			key: '_addEvents',
-			value: function _addEvents() {
-				var _onTransitionEnd = this._onTransitionEnd.bind(this);
+		});
 
-				this.container.addEventListener('transitionend', _onTransitionEnd);
-			}
-		}]);
+		init();
+	}
 
-		return mobileMenu;
-	}();
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
 
-	exports.default = mobileMenu;
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _contact = __webpack_require__(4);
+
+	var _contact2 = _interopRequireDefault(_contact);
+
+	var _scroll = __webpack_require__(33);
+
+	var _scroll2 = _interopRequireDefault(_scroll);
+
+	var _heading = __webpack_require__(34);
+
+	var _heading2 = _interopRequireDefault(_heading);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function landing() {
+		var contactScroller = document.getElementById('contact-scroller');
+		var contactContainer = document.getElementById('contact-container');
+
+		(0, _heading2.default)();
+		(0, _contact2.default)();
+
+		contactScroller.addEventListener('click', function () {
+			_scroll2.default.smoothScroll(contactContainer.offsetTop);
+		});
+	}
+
+	exports.default = landing;
 
 /***/ },
 /* 4 */
@@ -479,38 +321,198 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.default = contact;
 
-	var _contact = __webpack_require__(9);
+	var _validator = __webpack_require__(5);
 
-	var _contact2 = _interopRequireDefault(_contact);
+	var _notifications = __webpack_require__(6);
 
-	var _scroll = __webpack_require__(6);
+	var _notifications2 = _interopRequireDefault(_notifications);
 
-	var _scroll2 = _interopRequireDefault(_scroll);
+	var _axios = __webpack_require__(7);
 
-	var _heading = __webpack_require__(7);
-
-	var _heading2 = _interopRequireDefault(_heading);
+	var _axios2 = _interopRequireDefault(_axios);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function landing() {
-		//const contactScroller = document.getElementById('contact-scroller');
-		//const contactContainer = document.getElementById('contact-container');
+	function contact() {
+		var formWrapper = document.querySelectorAll('.form-wrapper');
+		var formInputs = document.querySelectorAll('.contact-input');
+		var emailInput = document.getElementById('contact-email');
+		var nameInput = document.getElementById('contact-name');
+		var subjectInput = document.getElementById('contact-subject');
+		var messageInput = document.getElementById('contact-message');
+		var submitButton = document.getElementById('contact-send');
+		var successContent = document.getElementById('contact-success');
+		var failureContent = document.getElementById('contact-failure');
+		var errorContent = document.getElementById('contact-error');
 
+		var successNotify = new _notifications2.default({
+			content: successContent,
+			timeout: 2000,
+			type: 'success'
+		});
 
-		(0, _heading2.default)();
-		(0, _contact2.default)();
+		var failureNotify = new _notifications2.default({
+			content: failureContent,
+			timeout: 2000,
+			type: 'danger'
+		});
 
-		//contactScroller.addEventListener('click', () => {
-		//	scrollTo.smoothScroll(contactContainer.offsetTop);
-		//});
+		var errorNotify = new _notifications2.default({
+			content: errorContent,
+			timeout: 2000,
+			type: 'warning'
+		});
+
+		(0, _validator.onBlur)(formInputs);
+
+		function sendMessage() {
+			if (submitButton.classList.contains('form-valid')) {
+				submitButton.classList.add('contact-loading');
+
+				_axios2.default.post('/contact', {
+					name: nameInput.value,
+					email: emailInput.value,
+					subject: subjectInput.value,
+					message: messageInput.value,
+
+					headers: {
+						'Content-Type': 'Application/Json'
+					}
+				}).then(function (response) {
+					if (response.data.success) {
+						resetForm();
+
+						submitButton.classList.remove('form-loading');
+						submitButton.classList.add('form-success');
+
+						var success = new Event('message-sent');
+
+						window.dispatchEvent(success);
+					} else {
+						submitButton.classList.remove('contact-loading');
+
+						var failure = new Event('message-failed');
+
+						window.dispatchEvent(failure);
+					}
+				});
+			} else {
+				var error = new Event('message-error');
+				window.dispatchEvent(error);
+			}
+		}
+
+		function resetForm() {
+			var length = formInputs.length;
+
+			for (i = 0; i < length; i++) {
+				formInputs[i].value = '';
+			}
+		}
+
+		submitButton.addEventListener('click', sendMessage, false);
+		window.addEventListener('message-sent', successNotify.open, false);
+		window.addEventListener('message-failed', failureNotify.open, false);
+		window.addEventListener('message-error', errorNotify.open, false);
 	}
-
-	exports.default = landing;
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.onBlur = onBlur;
+	exports.removeBlur = removeBlur;
+	var formWrapper = document.querySelectorAll('.form-wrapper');
+	var submitButton = document.getElementById('contact-send');
+	var wrapperLength = formWrapper.length;
+
+	function onBlur(nodes) {
+		var length = nodes.length;
+
+		for (var i = 0; i < length; i++) {
+			nodes[i].addEventListener('blur', inputBlur);
+		}
+	}
+
+	function removeBlur(nodes) {
+		var length = nodes.length;
+
+		for (var i = 0; i < length; i++) {
+			nodes[i].addEventListener('blur', inputBlur);
+		}
+	}
+
+	function validateEmail(node) {
+		var value = node.value;
+		var atpos = value.indexOf('@');
+		var dospos = value.lastIndexOf('.');
+
+		if (atpos < 1 || dotpos - atpos < 2) {
+			if (node.parentNode.classList.contains('blank')) {
+				node.parentNode.classList.remove('blank');
+			}
+
+			node.parentNode.classList.add('email-invalid');
+		} else {
+			if (node.parentNode.classList.contains('blank')) {
+				node.parentNode.classList.remove('blank');
+			}
+
+			if (node.parentNode.classList.contains('email-invalid')) {
+				node.parentNode.classList.remove('email-invalid');
+			}
+
+			node.parentNode.classList.add('email-valid');
+		}
+	}
+
+	function inputBlur() {
+		var formContent = this.value;
+
+		if (formContent == '') {
+			this.parentNode.classList.add('blank');
+		}
+
+		if (this.parentNode.classList.contains('form-email')) {
+			validateEmail(this);
+		}
+
+		if (formContent != '' && !this.parentNode.classList.contains('form-email')) {
+			if (this.parentNode.classList.contains('blank')) {
+				this.parentNode.classList.remove('blank');
+			}
+
+			this.parentNode.classList.add('valid');
+		}
+
+		checkValidForm();
+	}
+
+	function checkValidForm() {
+		var valid = 0;
+
+		for (var i = 0; i < wrapperLength; i++) {
+			var wrapper = formWrapper[i];
+
+			if (wrapper.classList.contains('valid') || wrapper.classList.contains('email-valid')) {
+				valid++;
+			}
+		}
+
+		if (valid == wrapperLength) {
+			submitButton.classList.add('form-valid');
+		}
+	}
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -668,446 +670,21 @@
 	exports.default = notifications;
 
 /***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var smoothScroll = function () {
-		var timer;
-		var start;
-		var factor;
-
-		return function (target, duration) {
-			var offset = window.pageYOffset;
-			var delta = target - window.pageYOffset;
-			var duration = duration || 1800;
-			start = Date.now();
-			factor = 0;
-
-			if (timer) {
-				clearInterval(timer);
-			}
-
-			function step() {
-				var y;
-				factor = (Date.now() - start) / duration;
-
-				if (factor >= 1) {
-					clearInterval(timer);
-					factor = 1;
-				}
-
-				y = factor * delta + offset;
-				window.scrollBy(0, y - window.pageYOffset);
-			}
-
-			timer = setInterval(step, 10);
-			return timer;
-		};
-	}();
-
-	exports.default = {
-		smoothScroll: smoothScroll
-	};
-
-/***/ },
 /* 7 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = heading;
-	function heading() {
-		var header = document.querySelector('.landing-header');
-		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / header.scrollHeight, 1, 1000);
-		var renderer = new THREE.WebGLRenderer({
-			antialias: true,
-			alpha: true
-		});
-
-		var particle = new THREE.Object3D();
-		var circle = new THREE.Object3D();
-		var skelet = new THREE.Object3D();
-		var scene = new THREE.Scene();
-
-		var composer = void 0;
-
-		init();
-		animate();
-
-		function init() {
-
-			renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
-			renderer.setSize(window.innerWidth, header.scrollHeight);
-			renderer.autoClear = false;
-			renderer.setClearColor(0x000000, 0.0);
-
-			camera.position.z = 400;
-
-			header.appendChild(renderer.domElement);
-
-			scene.add(camera);
-
-			scene.add(circle);
-			scene.add(skelet);
-			scene.add(particle);
-
-			var geometry = new THREE.TetrahedronGeometry(2, 0);
-			var geom = new THREE.IcosahedronGeometry(7, 1);
-			var geom2 = new THREE.IcosahedronGeometry(15, 1);
-
-			var material = new THREE.MeshPhongMaterial({
-				color: "rgb(233, 248, 183)",
-				shading: THREE.FlatShading
-			});
-
-			for (var i = 0; i < 1000; i++) {
-				var mesh = new THREE.Mesh(geometry, material);
-
-				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-				mesh.position.multiplyScalar(90 + Math.random() * 700);
-				mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
-
-				particle.add(mesh);
-			}
-
-			var mat = new THREE.MeshPhongMaterial({
-				//color: 0x429e97,
-				color: 0x2a6d62,
-				shading: THREE.FlatShading
-			});
-
-			var mat2 = new THREE.MeshPhongMaterial({
-				color: 0x8cd1c4,
-				wireframe: true,
-				side: THREE.DoubleSide
-			});
-
-			var planet = new THREE.Mesh(geom, mat);
-			planet.scale.x = planet.scale.y = planet.scale.z = 16;
-
-			circle.add(planet);
-
-			var planet2 = new THREE.Mesh(geom2, mat2);
-			planet2.scale.x = planet2.scale.y = planet2.scale.z = 10;
-
-			skelet.add(planet2);
-
-			var ambientLight = new THREE.AmbientLight(0x999999);
-
-			scene.add(ambientLight);
-
-			var lights = [];
-			lights[0] = new THREE.DirectionalLight(0xaaa, 1);
-			lights[0].position.set(1, 0, 0);
-			lights[1] = new THREE.DirectionalLight(0xe9f8b7, 1);
-			lights[1].position.set(0.75, 1, 0.5);
-
-			lights[2] = new THREE.DirectionalLight(0x429e97, 1);
-			lights[2].position.set(-0.75, -1, 0.5);
-
-			scene.add(lights[0]);
-			scene.add(lights[1]);
-			scene.add(lights[2]);
-
-			window.addEventListener('resize', handleResize, false);
-		}
-
-		function handleResize() {
-			camera.aspect = window.innerWidth / header.scrollHeight;
-			camera.updateProjectionMatrix();
-			renderer.setSize(window.innerWidth, header.scrollHeight);
-		}
-
-		function animate() {
-			requestAnimationFrame(animate);
-
-			particle.rotation.x += 0.0000;
-			particle.rotation.y -= 0.0040;
-
-			circle.rotation.x -= 0.0020;
-			circle.rotation.y -= 0.0030;
-
-			skelet.rotation.x -= 0.0010;
-			skelet.rotation.y += 0.0020;
-
-			renderer.clear();
-
-			renderer.render(scene, camera);
-		}
-	}
+	module.exports = __webpack_require__(8);
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = about;
-	function about() {
-		var widgets = document.querySelectorAll('.about-content li');
-
-		var scrolling = void 0;
-
-		function timelineEffect() {
-			var i = void 0;
-			var len = widgets.length;
-
-			for (i = 0; i < len; i++) {
-				var widget = widgets[i];
-
-				if (isInView(widget)) {
-					widget.classList.add('in-view');
-				}
-			}
-		}
-
-		function isInView(el) {
-			var rect = el.getBoundingClientRect();
-
-			return rect.bottom > 0 && rect.right > 0 && rect.left < (window.innerWidth || document.documentElement.clientWidth) && rect.top < (window.innerHeight || document.documentElement.clientHeight);
-		}
-
-		function scrollThrottle() {
-			if (!scrolling) {
-				window.requestAnimationFrame(function () {
-					timelineEffect();
-					scrolling = true;
-				});
-			}
-
-			scrolling = false;
-		}
-
-		window.addEventListener('load', timelineEffect, false);
-		window.addEventListener('scroll', scrollThrottle, false);
-	}
-
-/***/ },
-/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = contact;
-
-	var _validator = __webpack_require__(10);
-
-	var _notifications = __webpack_require__(5);
-
-	var _notifications2 = _interopRequireDefault(_notifications);
-
-	var _axios = __webpack_require__(11);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function contact() {
-		var formWrapper = document.querySelectorAll('.form-wrapper');
-		var formInputs = document.querySelectorAll('.contact-input');
-		var emailInput = document.getElementById('contact-email');
-		var nameInput = document.getElementById('contact-name');
-		var subjectInput = document.getElementById('contact-subject');
-		var messageInput = document.getElementById('contact-message');
-		var submitButton = document.getElementById('contact-send');
-		var successContent = document.getElementById('contact-success');
-		var failureContent = document.getElementById('contact-failure');
-		var errorContent = document.getElementById('contact-error');
-
-		var successNotify = new _notifications2.default({
-			content: successContent,
-			timeout: 2000,
-			type: 'success'
-		});
-
-		var failureNotify = new _notifications2.default({
-			content: failureContent,
-			timeout: 2000,
-			type: 'danger'
-		});
-
-		var errorNotify = new _notifications2.default({
-			content: errorContent,
-			timeout: 2000,
-			type: 'warning'
-		});
-
-		(0, _validator.onBlur)(formInputs);
-
-		function sendMessage() {
-			if (submitButton.classList.contains('form-valid')) {
-				submitButton.classList.add('contact-loading');
-
-				_axios2.default.post('/contact', {
-					name: nameInput.value,
-					email: emailInput.value,
-					subject: subjectInput.value,
-					message: messageInput.value,
-
-					headers: {
-						'Content-Type': 'Application/Json'
-					}
-				}).then(function (response) {
-					if (response.data.success) {
-						resetForm();
-
-						submitButton.classList.remove('form-loading');
-						submitButton.classList.add('form-success');
-
-						var success = new Event('message-sent');
-
-						window.dispatchEvent(success);
-					} else {
-						submitButton.classList.remove('contact-loading');
-
-						var failure = new Event('message-failed');
-
-						window.dispatchEvent(failure);
-					}
-				});
-			} else {
-				var error = new Event('message-error');
-				window.dispatchEvent(error);
-			}
-		}
-
-		function resetForm() {
-			var length = formInputs.length;
-
-			for (i = 0; i < length; i++) {
-				formInputs[i].value = '';
-			}
-		}
-
-		submitButton.addEventListener('click', sendMessage, false);
-		window.addEventListener('message-sent', successNotify.open, false);
-		window.addEventListener('message-failed', failureNotify.open, false);
-		window.addEventListener('message-error', errorNotify.open, false);
-	}
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.onBlur = onBlur;
-	exports.removeBlur = removeBlur;
-	var formWrapper = document.querySelectorAll('.form-wrapper');
-	var submitButton = document.getElementById('contact-send');
-	var wrapperLength = formWrapper.length;
-
-	function onBlur(nodes) {
-		var length = nodes.length;
-
-		for (var i = 0; i < length; i++) {
-			nodes[i].addEventListener('blur', inputBlur);
-		}
-	}
-
-	function removeBlur(nodes) {
-		var length = nodes.length;
-
-		for (var i = 0; i < length; i++) {
-			nodes[i].addEventListener('blur', inputBlur);
-		}
-	}
-
-	function validateEmail(node) {
-		var value = node.value;
-		var atpos = value.indexOf('@');
-		var dospos = value.lastIndexOf('.');
-
-		if (atpos < 1 || dotpos - atpos < 2) {
-			if (node.parentNode.classList.contains('blank')) {
-				node.parentNode.classList.remove('blank');
-			}
-
-			node.parentNode.classList.add('email-invalid');
-		} else {
-			if (node.parentNode.classList.contains('blank')) {
-				node.parentNode.classList.remove('blank');
-			}
-
-			if (node.parentNode.classList.contains('email-invalid')) {
-				node.parentNode.classList.remove('email-invalid');
-			}
-
-			node.parentNode.classList.add('email-valid');
-		}
-	}
-
-	function inputBlur() {
-		var formContent = this.value;
-
-		if (formContent == '') {
-			this.parentNode.classList.add('blank');
-		}
-
-		if (this.parentNode.classList.contains('form-email')) {
-			validateEmail(this);
-		}
-
-		if (formContent != '' && !this.parentNode.classList.contains('form-email')) {
-			if (this.parentNode.classList.contains('blank')) {
-				this.parentNode.classList.remove('blank');
-			}
-
-			this.parentNode.classList.add('valid');
-		}
-
-		checkValidForm();
-	}
-
-	function checkValidForm() {
-		var valid = 0;
-
-		for (var i = 0; i < wrapperLength; i++) {
-			var wrapper = formWrapper[i];
-
-			if (wrapper.classList.contains('valid') || wrapper.classList.contains('email-valid')) {
-				valid++;
-			}
-		}
-
-		if (valid == wrapperLength) {
-			submitButton.classList.add('form-valid');
-		}
-	}
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(12);
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var utils = __webpack_require__(13);
-	var bind = __webpack_require__(14);
-	var Axios = __webpack_require__(15);
-	var defaults = __webpack_require__(16);
+	var utils = __webpack_require__(9);
+	var bind = __webpack_require__(10);
+	var Axios = __webpack_require__(11);
+	var defaults = __webpack_require__(12);
 
 	/**
 	 * Create an instance of Axios
@@ -1140,15 +717,15 @@
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(34);
-	axios.CancelToken = __webpack_require__(35);
-	axios.isCancel = __webpack_require__(31);
+	axios.Cancel = __webpack_require__(30);
+	axios.CancelToken = __webpack_require__(31);
+	axios.isCancel = __webpack_require__(27);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(36);
+	axios.spread = __webpack_require__(32);
 
 	module.exports = axios;
 
@@ -1157,12 +734,12 @@
 
 
 /***/ },
-/* 13 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(14);
+	var bind = __webpack_require__(10);
 
 	/*global toString:true*/
 
@@ -1462,7 +1039,7 @@
 
 
 /***/ },
-/* 14 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1479,17 +1056,17 @@
 
 
 /***/ },
-/* 15 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(16);
-	var utils = __webpack_require__(13);
-	var InterceptorManager = __webpack_require__(28);
-	var dispatchRequest = __webpack_require__(29);
-	var isAbsoluteURL = __webpack_require__(32);
-	var combineURLs = __webpack_require__(33);
+	var defaults = __webpack_require__(12);
+	var utils = __webpack_require__(9);
+	var InterceptorManager = __webpack_require__(24);
+	var dispatchRequest = __webpack_require__(25);
+	var isAbsoluteURL = __webpack_require__(28);
+	var combineURLs = __webpack_require__(29);
 
 	/**
 	 * Create a new instance of Axios
@@ -1570,13 +1147,13 @@
 
 
 /***/ },
-/* 16 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(13);
-	var normalizeHeaderName = __webpack_require__(18);
+	var utils = __webpack_require__(9);
+	var normalizeHeaderName = __webpack_require__(14);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -1593,10 +1170,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(19);
+	    adapter = __webpack_require__(15);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(19);
+	    adapter = __webpack_require__(15);
 	  }
 	  return adapter;
 	}
@@ -1667,10 +1244,10 @@
 
 	module.exports = defaults;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 17 */
+/* 13 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -1856,12 +1433,12 @@
 
 
 /***/ },
-/* 18 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -1874,18 +1451,18 @@
 
 
 /***/ },
-/* 19 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(13);
-	var settle = __webpack_require__(20);
-	var buildURL = __webpack_require__(23);
-	var parseHeaders = __webpack_require__(24);
-	var isURLSameOrigin = __webpack_require__(25);
-	var createError = __webpack_require__(21);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(26);
+	var utils = __webpack_require__(9);
+	var settle = __webpack_require__(16);
+	var buildURL = __webpack_require__(19);
+	var parseHeaders = __webpack_require__(20);
+	var isURLSameOrigin = __webpack_require__(21);
+	var createError = __webpack_require__(17);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(22);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1981,7 +1558,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(27);
+	      var cookies = __webpack_require__(23);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -2055,15 +1632,15 @@
 	  });
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ },
-/* 20 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(21);
+	var createError = __webpack_require__(17);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -2089,12 +1666,12 @@
 
 
 /***/ },
-/* 21 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(22);
+	var enhanceError = __webpack_require__(18);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -2112,7 +1689,7 @@
 
 
 /***/ },
-/* 22 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2137,12 +1714,12 @@
 
 
 /***/ },
-/* 23 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -2211,12 +1788,12 @@
 
 
 /***/ },
-/* 24 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	/**
 	 * Parse headers into an object
@@ -2254,12 +1831,12 @@
 
 
 /***/ },
-/* 25 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -2328,7 +1905,7 @@
 
 
 /***/ },
-/* 26 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2370,12 +1947,12 @@
 
 
 /***/ },
-/* 27 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -2429,12 +2006,12 @@
 
 
 /***/ },
-/* 28 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -2487,15 +2064,15 @@
 
 
 /***/ },
-/* 29 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
-	var transformData = __webpack_require__(30);
-	var isCancel = __webpack_require__(31);
-	var defaults = __webpack_require__(16);
+	var utils = __webpack_require__(9);
+	var transformData = __webpack_require__(26);
+	var isCancel = __webpack_require__(27);
+	var defaults = __webpack_require__(12);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -2572,12 +2149,12 @@
 
 
 /***/ },
-/* 30 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(13);
+	var utils = __webpack_require__(9);
 
 	/**
 	 * Transform the data for a request or a response
@@ -2598,7 +2175,7 @@
 
 
 /***/ },
-/* 31 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2609,7 +2186,7 @@
 
 
 /***/ },
-/* 32 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2629,7 +2206,7 @@
 
 
 /***/ },
-/* 33 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2647,7 +2224,7 @@
 
 
 /***/ },
-/* 34 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2672,12 +2249,12 @@
 
 
 /***/ },
-/* 35 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(34);
+	var Cancel = __webpack_require__(30);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -2735,7 +2312,7 @@
 
 
 /***/ },
-/* 36 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2766,6 +2343,232 @@
 	  };
 	};
 
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var smoothScroll = function () {
+		var timer;
+		var start;
+		var factor;
+
+		return function (target, duration) {
+			var offset = window.pageYOffset;
+			var delta = target - window.pageYOffset;
+			var duration = duration || 1800;
+			start = Date.now();
+			factor = 0;
+
+			if (timer) {
+				clearInterval(timer);
+			}
+
+			function step() {
+				var y;
+				factor = (Date.now() - start) / duration;
+
+				if (factor >= 1) {
+					clearInterval(timer);
+					factor = 1;
+				}
+
+				y = factor * delta + offset;
+				window.scrollBy(0, y - window.pageYOffset);
+			}
+
+			timer = setInterval(step, 10);
+			return timer;
+		};
+	}();
+
+	exports.default = {
+		smoothScroll: smoothScroll
+	};
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = heading;
+	function heading() {
+		var header = document.querySelector('.landing-header');
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / header.scrollHeight, 1, 1000);
+		var renderer = new THREE.WebGLRenderer({
+			antialias: true,
+			alpha: true
+		});
+
+		var particle = new THREE.Object3D();
+		var circle = new THREE.Object3D();
+		var skelet = new THREE.Object3D();
+		var scene = new THREE.Scene();
+
+		var composer = void 0;
+
+		init();
+		animate();
+
+		function init() {
+
+			renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
+			renderer.setSize(window.innerWidth, header.scrollHeight);
+			renderer.autoClear = false;
+			renderer.setClearColor(0x000000, 0.0);
+
+			camera.position.z = 400;
+
+			header.appendChild(renderer.domElement);
+
+			scene.add(camera);
+
+			scene.add(circle);
+			scene.add(skelet);
+			scene.add(particle);
+
+			var geometry = new THREE.TetrahedronGeometry(2, 0);
+			var geom = new THREE.IcosahedronGeometry(7, 1);
+			var geom2 = new THREE.IcosahedronGeometry(15, 1);
+
+			var material = new THREE.MeshPhongMaterial({
+				color: "rgb(233, 248, 183)",
+				shading: THREE.FlatShading
+			});
+
+			for (var i = 0; i < 1000; i++) {
+				var mesh = new THREE.Mesh(geometry, material);
+
+				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+				mesh.position.multiplyScalar(90 + Math.random() * 700);
+				mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+
+				particle.add(mesh);
+			}
+
+			var mat = new THREE.MeshPhongMaterial({
+				//color: 0x429e97,
+				color: 0x2a6d62,
+				shading: THREE.FlatShading
+			});
+
+			var mat2 = new THREE.MeshPhongMaterial({
+				color: 0x8cd1c4,
+				wireframe: true,
+				side: THREE.DoubleSide
+			});
+
+			var planet = new THREE.Mesh(geom, mat);
+			planet.scale.x = planet.scale.y = planet.scale.z = 16;
+
+			circle.add(planet);
+
+			var planet2 = new THREE.Mesh(geom2, mat2);
+			planet2.scale.x = planet2.scale.y = planet2.scale.z = 10;
+
+			skelet.add(planet2);
+
+			var ambientLight = new THREE.AmbientLight(0x999999);
+
+			scene.add(ambientLight);
+
+			var lights = [];
+			lights[0] = new THREE.DirectionalLight(0xaaa, 1);
+			lights[0].position.set(1, 0, 0);
+			lights[1] = new THREE.DirectionalLight(0xe9f8b7, 1);
+			lights[1].position.set(0.75, 1, 0.5);
+
+			lights[2] = new THREE.DirectionalLight(0x429e97, 1);
+			lights[2].position.set(-0.75, -1, 0.5);
+
+			scene.add(lights[0]);
+			scene.add(lights[1]);
+			scene.add(lights[2]);
+
+			window.addEventListener('resize', handleResize, false);
+		}
+
+		function handleResize() {
+			camera.aspect = window.innerWidth / header.scrollHeight;
+			camera.updateProjectionMatrix();
+			renderer.setSize(window.innerWidth, header.scrollHeight);
+		}
+
+		function animate() {
+			requestAnimationFrame(animate);
+
+			particle.rotation.x += 0.0000;
+			particle.rotation.y -= 0.0040;
+
+			circle.rotation.x -= 0.0020;
+			circle.rotation.y -= 0.0030;
+
+			skelet.rotation.x -= 0.0010;
+			skelet.rotation.y += 0.0020;
+
+			renderer.clear();
+
+			renderer.render(scene, camera);
+		}
+	}
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = about;
+	function about() {
+		var widgets = document.querySelectorAll('.about-content li');
+
+		var scrolling = void 0;
+
+		function timelineEffect() {
+			var i = void 0;
+			var len = widgets.length;
+
+			for (i = 0; i < len; i++) {
+				var widget = widgets[i];
+
+				if (isInView(widget)) {
+					widget.classList.add('in-view');
+				}
+			}
+		}
+
+		function isInView(el) {
+			var rect = el.getBoundingClientRect();
+
+			return rect.bottom > 0 && rect.right > 0 && rect.left < (window.innerWidth || document.documentElement.clientWidth) && rect.top < (window.innerHeight || document.documentElement.clientHeight);
+		}
+
+		function scrollThrottle() {
+			if (!scrolling) {
+				window.requestAnimationFrame(function () {
+					timelineEffect();
+					scrolling = true;
+				});
+			}
+
+			scrolling = false;
+		}
+
+		window.addEventListener('load', timelineEffect, false);
+		window.addEventListener('scroll', scrollThrottle, false);
+	}
 
 /***/ }
 /******/ ]);
