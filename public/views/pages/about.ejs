@@ -15,14 +15,25 @@
 			<link rel='stylesheet' href='./static/fonts/style.css'>
 			<link rel='stylesheet' href='./styles/main.min.css'>
 		</noscript>
+
+		<style>
+			body .main-container {
+				opacity: 0;
+				transition: all .4s ease-out;
+			}
+
+			body.loaded .main-container {
+				opacity: 1;
+			}
+		</style>
 	</head>
 
 	<body>
-		<% include ../shared/nav %>
-		<% include ../shared/mobile-menu %>
 		<% include ../shared/preloader %>
 
-		<main class='about-page-container'>
+		<main class='about-page-container main-container'>
+			<% include ../shared/nav %>
+			<% include ../shared/mobile-menu %>
 			<header>
 				<h1>About Me</h1>
 			</header>
