@@ -77,7 +77,7 @@ export default function contact() {
 	function resetForm() {
 		let length = formInputs.length;
 
-		for (i = 0; i < length; i++) {
+		for (let i = 0; i < length; i++) {
 			formInputs[i].value = '';
 		}
 	}

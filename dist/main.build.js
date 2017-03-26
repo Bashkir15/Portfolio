@@ -1669,7 +1669,7 @@
 		function resetForm() {
 			var length = formInputs.length;
 
-			for (i = 0; i < length; i++) {
+			for (var i = 0; i < length; i++) {
 				formInputs[i].value = '';
 			}
 		}
