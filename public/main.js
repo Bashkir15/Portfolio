@@ -1,5 +1,5 @@
 import routes from './scripts/pages/routes'
-import preloader from './scripts/utils/preloader'
+//import preloader from './scripts/utils/preloader'
 import navUtil from './scripts/components/nav'
 import scrollIn from './scripts/utils/scroll.in'
 
@@ -7,7 +7,7 @@ const scroller = new scrollIn();
 let scrollTimeout;
 
 routes();
-preloader();
+//preloader();
 navUtil();
 
 function scrollThrottle() {
@@ -27,7 +27,7 @@ function handleScroll() {
 
 window.addEventListener('DOMContentLoaded', scroller.init);
 window.addEventListener('scroll', scrollThrottle);
-window.addEventListener('resize', scrollThrottle);]]	
+window.addEventListener('resize', scrollThrottle);	
 
 
 

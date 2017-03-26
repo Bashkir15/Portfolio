@@ -46,49 +46,44 @@
 
 	'use strict';
 
-	var _routes = __webpack_require__(31);
+	var _routes = __webpack_require__(33);
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _preloader = __webpack_require__(32);
-
-	var _preloader2 = _interopRequireDefault(_preloader);
-
-	var _nav = __webpack_require__(37);
+	var _nav = __webpack_require__(29);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
-	var _scroll = __webpack_require__(36);
+	var _scroll = __webpack_require__(35);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	init();
+	//import preloader from './scripts/utils/preloader'
+	var scroller = new _scroll2.default();
+	var scrollTimeout = void 0;
 
-	function init() {
-		var scroller = new _scroll2.default();
-		var scrollTimeout = void 0;
+	(0, _routes2.default)();
+	//preloader();
+	(0, _nav2.default)();
 
-		(0, _routes2.default)();
-		(0, _preloader2.default)();
-		(0, _nav2.default)();
-
-		function scrollThrottle() {
-			if (!scrollTimeout) {
-				window.requestAnimationFrame(function () {
-					scroller.viewPortChange();
-					scrollTimeout = true;
-				});
-			}
-
-			scrollTimeout = false;
+	function scrollThrottle() {
+		if (!scrollTimeout) {
+			window.requestAnimationFrame(handleScroll);
 		}
 
-		window.addEventListener('DOMContentLoaded', scroller.init);
-		window.addEventListener('scroll', scrollThrottle);
-		window.addEventListener('resize', scrollThrottle);
+		scrollTimeout = false;
 	}
+
+	function handleScroll() {
+		scroller.viewPortChange();
+		scrollTimeout = true;
+	}
+
+	window.addEventListener('DOMContentLoaded', scroller.init);
+	window.addEventListener('scroll', scrollThrottle);
+	window.addEventListener('resize', scrollThrottle);
 
 /***/ },
 /* 1 */
@@ -493,7 +488,7 @@
 
 	module.exports = defaults;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(38)))
 
 /***/ },
 /* 3 */
@@ -1589,9 +1584,9 @@
 	});
 	exports.default = contact;
 
-	var _validator = __webpack_require__(34);
+	var _validator = __webpack_require__(37);
 
-	var _notifications = __webpack_require__(28);
+	var _notifications = __webpack_require__(30);
 
 	var _notifications2 = _interopRequireDefault(_notifications);
 
@@ -1825,6 +1820,136 @@
 		value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var mobileMenu = function () {
+		function mobileMenu() {
+			_classCallCheck(this, mobileMenu);
+
+			this.container = document.getElementById('mobile-menu-container');
+			this.menu = document.getElementById("mobile-menu");
+			this.toggle = this._toggle.bind(this);
+			this.animatedClass = 'mobile-menu-container--animatable';
+			this.openClass = 'mobile-menu-container--open';
+			this.closeKeys = [27];
+		}
+
+		_createClass(mobileMenu, [{
+			key: '_toggle',
+			value: function _toggle() {
+				this.menu.style.willChange = 'transform';
+				this.container.classList.add(this.animatedClass);
+
+				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
+					document.body.style.overflowY = 'hidden';
+					this._addEvents();
+					this.container.classList.add(this.openClass);
+					this._updateNav();
+				} else {
+					document.body.style.overflowY = 'auto';
+					this._addEvents();
+					this.container.classList.remove(this.openClass);
+					this._updateNav();
+				}
+
+				this.menu.style.willChange = 'auto';
+			}
+		}, {
+			key: '_onTransitionEnd',
+			value: function _onTransitionEnd() {
+				this.container.classList.remove('mobile-menu-container--animatable');
+			}
+		}, {
+			key: '_closeKeyHandler',
+			value: function _closeKeyHandler(e) {
+				if (this.closeKeys.indexOf(e.which) > -1) {
+					e.preventDefault();
+					this.toggle();
+				}
+			}
+		}, {
+			key: '_updateNav',
+			value: function _updateNav() {
+				var nav = document.getElementById('nav');
+
+				if (this.container.classList.contains(this.openClass)) {
+					nav.classList.add('nav-mobile--open');
+				} else {
+					nav.classList.remove('nav-mobile--open');
+				}
+			}
+		}, {
+			key: '_addEvents',
+			value: function _addEvents() {
+				var _onTransitionEnd = this._onTransitionEnd.bind(this);
+
+				this.container.addEventListener('transitionend', _onTransitionEnd);
+			}
+		}]);
+
+		return mobileMenu;
+	}();
+
+		exports.default = mobileMenu;
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = navUtil;
+
+	var _nav = __webpack_require__(34);
+
+	var _nav2 = _interopRequireDefault(_nav);
+
+	var _mobile = __webpack_require__(28);
+
+	var _mobile2 = _interopRequireDefault(_mobile);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function navUtil() {
+		var mobileTrigger = document.getElementById('nav-trigger');
+		var navLinks = document.querySelectorAll('.nav-link');
+
+		var mobileNav = new _mobile2.default();
+
+		activeUrl();
+		(0, _nav2.default)();
+
+		function activeUrl() {
+			var i = void 0;
+			var len = navLinks.length;
+
+			for (i = 0; i < len; i++) {
+				var link = navLinks[i];
+
+				if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
+					link.classList.add('active');
+				}
+			}
+		}
+
+		mobileTrigger.addEventListener('click', mobileNav.toggle);
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1974,7 +2099,7 @@
 		exports.default = notifications;
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1984,11 +2109,11 @@
 	});
 	exports.default = about;
 	function about() {
-		var widgets = document.querySelectorAll('.about-content li');
 
 		var scrolling = void 0;
 
 		function timelineEffect() {
+			var widgets = document.querySelectorAll('.about-content li');
 			var i = void 0;
 			var len = widgets.length;
 
@@ -2023,7 +2148,7 @@
 	}
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2036,7 +2161,7 @@
 
 	var _contact2 = _interopRequireDefault(_contact);
 
-	var _scroll = __webpack_require__(33);
+	var _scroll = __webpack_require__(36);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
@@ -2061,7 +2186,7 @@
 	exports.default = landing;
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2071,11 +2196,11 @@
 	});
 	exports.default = routes;
 
-	var _landing = __webpack_require__(30);
+	var _landing = __webpack_require__(32);
 
 	var _landing2 = _interopRequireDefault(_landing);
 
-	var _about = __webpack_require__(29);
+	var _about = __webpack_require__(31);
 
 	var _about2 = _interopRequireDefault(_about);
 
@@ -2090,7 +2215,7 @@
 	}
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2098,98 +2223,201 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.default = preloader;
-	function preloader() {
-		var animation = void 0;
+	function navshrink() {
+		var nav = document.querySelector('.nav');
+		var landingHeader = document.querySelector('.landing-header') || {};
+		var lastKnownScrollY = 0;
+		var scrollTimeout = false;
 
 		init();
 
+		function getScrollY() {
+			return window.pageYOffset || window.scrollTop;
+		}
+
 		function init() {
-			var canvas = document.querySelector('.preloader-canvas');
-			var t = 0;
-			var w = canvas.width = window.innerWidth;
-			var h = canvas.height = window.innerHeight;
+			if (window.location.pathname == '/') {
+				nav.classList.add('landing-nav');
+			}
 
-			var context = canvas.getContext('2d');
-			context.globalCompositeOperate = 'lighter';
+			window.addEventListener('scroll', scrollThrottle);
+		}
 
-			animate();
+		function scrollThrottle() {
+			if (!scrollTimeout) {
+				scrollTimeout = setTimeout(function () {
+					scrollTimeout = false;
+					checkPin();
+				}, 250);
+			}
 
-			function animate() {
-				console.time('start');
-				context.clearRect(0, 0, w, h);
+			scrollTimeout = true;
+		}
 
-				t += 1;
+		function checkPin() {
+			var currentScrollY = getScrollY();
 
-				for (var i = 0; i < 5000; i++) {
-					var f = 0.05 + Math.sin(t * 0.00002) / Math.PI * 0.2;
-					var r = Math.min(w, h) * (Math.cos((t + i) * f) / Math.PI * 1.5);
+			if (window.location.pathname == '/') {
 
-					var x = 0.5 + (Math.sin(i) * r + canvas.width / 2) | 0;
-					var y = 0.5 + (Math.cos(i) * r + canvas.height / 2) | 0;
+				if (currentScrollY >= landingHeader.offsetHeight) {
 
-					context.fillStyle = 'rgba(0, 255, 255, 0.5)';
-					context.fillRect(x, y, 1.5, 1.5);
+					if (currentScrollY < lastKnownScrollY) {
+						pin();
+					}
+
+					if (currentScrollY > lastKnownScrollY) {
+						unpin();
+					}
+				} else {
+					pin();
+				}
+			} else {
+
+				if (currentScrollY < lastKnownScrollY) {
+					pin();
 				}
 
-				animation = setTimeout(animate, 16);
-
-				console.timeEnd('start');
+				if (currentScrollY > lastKnownScrollY) {
+					unpin();
+				}
 			}
+
+			lastKnownScrollY = getScrollY();
 		}
 
-		function handleDoc() {
-			setTimeout(finishLoad, 1500);
+		function pin() {
+			nav.style.willChange = 'transform';
+
+			if (nav.classList.contains('nav-unpinned')) {
+				nav.classList.remove('nav-unpinned');
+				nav.classList.add('nav-pinned');
+			} else {
+				nav.classList.add('nav-pinned');
+			}
+
+			nav.style.willChange = 'auto';
 		}
 
-		function finishLoad() {
-			var canvas = document.querySelector('.preloader-canvas');
+		function unpin() {
 
-			document.body.classList.add('loaded');
-			canvas.parentElement.classList.add('finished');
-			canvas.parentElement.removeChild(canvas);
-			clearTimeout(animation);
+			nav.style.willChange = 'transform';
 
-			document.removeEventListener('DOMContentLoaded', handleDoc);
+			if (nav.classList.contains('nav-pinned')) {
+				nav.classList.remove('nav-pinned');
+				nav.classList.add('nav-unpinned');
+			} else {
+				nav.classList.add('nav-unpinned');
+			}
+
+			nav.style.willChange = 'auto';
 		}
+	}
 
-		document.addEventListener('DOMContentLoaded', handleDoc);
-
-		/*HTMLDocument.prototype.ready = () => {
-	 	return new Promise((resolve, reject) => {
-	 		let startTime = console.time('start');
-	 		let endTime;
-	 			function renderDoc() {
-	 			endTime = console.timeEnd('start');
-	 			resolve(document, startTime, endTime);
-	 		}
-	 			if (document.readyState === 'complete') {
-	 			endTime = console.timeEnd('start');
-	 			resolve(document, startTime, endTime);
-	 		} else {
-	 			document.addEventListener('DOMContentLoaded', renderDoc);
-	 		}
-	 	});
-	 }
-	 	document.ready().then((startTime, endTime) => {
-	 	let canvas = document.querySelector('.preloader-canvas');
-	 
-	 	if (endTime - startTime > 300) {
-	 		document.body.classList.add('loaded');
-	 		canvas.parentElement.classList.add('finished');
-	 		canvas.parentElement.removeChild(canvas);
-	 	} else {
-	 		setTimeout(() => {
-	 			document.body.classList.add('loaded');
-	 			canvas.parentElement.classList.add('finished');
-	 			canvas.parentElement.removeChild(canvas);
-	 		}, 2000);
-	 	}
-	 }); */
-		}
+	exports.default = navshrink;
 
 /***/ },
-/* 33 */
+/* 35 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ScrollIn = function () {
+		function ScrollIn() {
+			_classCallCheck(this, ScrollIn);
+
+			this.elements = document.querySelectorAll('[data-entrance]');
+
+			this.defaults = {
+				duration: '1000',
+				distance: '200',
+				heightOffset: 200
+			};
+
+			this.enter = this._enter.bind(this);
+			this.init = this._init.bind(this);
+			this.viewPortChange = this._viewPortChange.bind(this);
+		}
+
+		_createClass(ScrollIn, [{
+			key: '_isInView',
+			value: function _isInView(elem) {
+				var rect = elem.getBoundingClientRect();
+
+				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
+			}
+		}, {
+			key: '_setInitialStyles',
+			value: function _setInitialStyles(elem) {
+				var anim = elem.getAttribute('data-entrance');
+				var delay = elem.getAttribute('data-entrance-delay');
+
+				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease-out";
+
+				if (delay) {
+					elem.style.transitionDelay = delay / 1000 + 's';
+				}
+
+				if (anim == 'fade') {
+					elem.style.opacity = '0';
+				}
+			}
+		}, {
+			key: '_enter',
+			value: function _enter(elem) {
+				elem.style.visibility = "visible";
+				elem.style.opacity = "1";
+				elem.style.transform = "translate(0,0)";
+				elem.classList.add('has-entered');
+			}
+		}, {
+			key: '_viewPortChange',
+			value: function _viewPortChange() {
+				var _this = this;
+
+				Array.prototype.map.call(this.elements, function (item) {
+					var isInView = _this._isInView(item);
+
+					if (isInView) {
+						var hasEntered = item.classList.contains('has-entered');
+
+						if (!hasEntered) {
+							_this._enter(item);
+						}
+					}
+				});
+			}
+		}, {
+			key: '_init',
+			value: function _init() {
+				var _this2 = this;
+
+				Array.prototype.map.call(this.elements, function (item) {
+					_this2._setInitialStyles(item);
+
+					if (_this2._isInView(item)) {
+						window.addEventListener('load', function () {
+							_this2.enter(item);
+						}, false);
+					}
+				});
+			}
+		}]);
+
+		return ScrollIn;
+	}();
+
+		exports.default = ScrollIn;
+
+/***/ },
+/* 36 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2236,7 +2464,7 @@
 		};
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2329,7 +2557,7 @@
 	}
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -2513,338 +2741,6 @@
 	};
 	process.umask = function() { return 0; };
 
-
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var ScrollIn = function () {
-		function ScrollIn() {
-			_classCallCheck(this, ScrollIn);
-
-			this.elements = document.querySelectorAll('[data-entrance]');
-
-			this.defaults = {
-				duration: '1000',
-				distance: '200',
-				heightOffset: 200
-			};
-
-			this.enter = this._enter.bind(this);
-			this.init = this._init.bind(this);
-			this.viewPortChange = this._viewPortChange.bind(this);
-		}
-
-		_createClass(ScrollIn, [{
-			key: '_isInView',
-			value: function _isInView(elem) {
-				var rect = elem.getBoundingClientRect();
-
-				return rect.top + this.defaults.heightOffset >= 0 && rect.top + this.defaults.heightOffset <= window.innerHeight || rect.bottom + this.defaults.heightOffset >= 0 && rect.bottom + this.defaults.heightOffset <= window.innerHeight || rect.top + this.defaults.heightOffset < 0 && rect.bottom + this.defaults.heightOffset > window.innerHeight;
-			}
-		}, {
-			key: '_setInitialStyles',
-			value: function _setInitialStyles(elem) {
-				var anim = elem.getAttribute('data-entrance');
-				var delay = elem.getAttribute('data-entrance-delay');
-
-				elem.style.transition = "all " + this.defaults.duration / 1000 + "s ease-out";
-
-				if (delay) {
-					elem.style.transitionDelay = delay / 1000 + 's';
-				}
-
-				if (anim == 'fade') {
-					elem.style.opacity = '0';
-				}
-			}
-		}, {
-			key: '_enter',
-			value: function _enter(elem) {
-				elem.style.visibility = "visible";
-				elem.style.opacity = "1";
-				elem.style.transform = "translate(0,0)";
-				elem.classList.add('has-entered');
-			}
-		}, {
-			key: '_viewPortChange',
-			value: function _viewPortChange() {
-				var _this = this;
-
-				Array.prototype.map.call(this.elements, function (item) {
-					var isInView = _this._isInView(item);
-
-					if (isInView) {
-						var hasEntered = item.classList.contains('has-entered');
-
-						if (!hasEntered) {
-							_this._enter(item);
-						}
-					}
-				});
-			}
-		}, {
-			key: '_init',
-			value: function _init() {
-				var _this2 = this;
-
-				Array.prototype.map.call(this.elements, function (item) {
-					_this2._setInitialStyles(item);
-
-					if (_this2._isInView(item)) {
-						window.addEventListener('load', function () {
-							_this2.enter(item);
-						}, false);
-					}
-				});
-			}
-		}]);
-
-		return ScrollIn;
-	}();
-
-		exports.default = ScrollIn;
-
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.default = navUtil;
-
-	var _nav = __webpack_require__(39);
-
-	var _nav2 = _interopRequireDefault(_nav);
-
-	var _mobile = __webpack_require__(38);
-
-	var _mobile2 = _interopRequireDefault(_mobile);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function navUtil() {
-		var mobileTrigger = document.getElementById('nav-trigger');
-		var navLinks = document.querySelectorAll('.nav-link');
-
-		var mobileNav = new _mobile2.default();
-
-		activeUrl();
-		(0, _nav2.default)();
-
-		function activeUrl() {
-			var i = void 0;
-			var len = navLinks.length;
-
-			for (i = 0; i < len; i++) {
-				var link = navLinks[i];
-
-				if (link.getAttribute("href") == window.location.pathname || window.location.pathname == '') {
-					link.classList.add('active');
-				}
-			}
-		}
-
-		mobileTrigger.addEventListener('click', mobileNav.toggle);
-	}
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var mobileMenu = function () {
-		function mobileMenu() {
-			_classCallCheck(this, mobileMenu);
-
-			this.container = document.getElementById('mobile-menu-container');
-			this.menu = document.getElementById("mobile-menu");
-			this.toggle = this._toggle.bind(this);
-			this.animatedClass = 'mobile-menu-container--animatable';
-			this.openClass = 'mobile-menu-container--open';
-			this.closeKeys = [27];
-		}
-
-		_createClass(mobileMenu, [{
-			key: '_toggle',
-			value: function _toggle() {
-				this.menu.style.willChange = 'transform';
-				this.container.classList.add(this.animatedClass);
-
-				if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
-					document.body.style.overflowY = 'hidden';
-					this._addEvents();
-					this.container.classList.add(this.openClass);
-					this._updateNav();
-				} else {
-					document.body.style.overflowY = 'auto';
-					this._addEvents();
-					this.container.classList.remove(this.openClass);
-					this._updateNav();
-				}
-
-				this.menu.style.willChange = 'auto';
-			}
-		}, {
-			key: '_onTransitionEnd',
-			value: function _onTransitionEnd() {
-				this.container.classList.remove('mobile-menu-container--animatable');
-			}
-		}, {
-			key: '_closeKeyHandler',
-			value: function _closeKeyHandler(e) {
-				if (this.closeKeys.indexOf(e.which) > -1) {
-					e.preventDefault();
-					this.toggle();
-				}
-			}
-		}, {
-			key: '_updateNav',
-			value: function _updateNav() {
-				var nav = document.getElementById('nav');
-
-				if (this.container.classList.contains(this.openClass)) {
-					nav.classList.add('nav-mobile--open');
-				} else {
-					nav.classList.remove('nav-mobile--open');
-				}
-			}
-		}, {
-			key: '_addEvents',
-			value: function _addEvents() {
-				var _onTransitionEnd = this._onTransitionEnd.bind(this);
-
-				this.container.addEventListener('transitionend', _onTransitionEnd);
-			}
-		}]);
-
-		return mobileMenu;
-	}();
-
-		exports.default = mobileMenu;
-
-/***/ },
-/* 39 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function navshrink() {
-		var nav = document.querySelector('.nav');
-		var landingHeader = document.querySelector('.landing-header') || {};
-		var lastKnownScrollY = 0;
-		var scrollTimeout = false;
-
-		init();
-
-		function getScrollY() {
-			return window.pageYOffset || window.scrollTop;
-		}
-
-		function init() {
-			if (window.location.pathname == '/') {
-				nav.classList.add('landing-nav');
-			}
-
-			window.addEventListener('scroll', scrollThrottle);
-		}
-
-		function scrollThrottle() {
-			if (!scrollTimeout) {
-				scrollTimeout = setTimeout(function () {
-					scrollTimeout = false;
-					checkPin();
-				}, 250);
-			}
-
-			scrollTimeout = true;
-		}
-
-		function checkPin() {
-			var currentScrollY = getScrollY();
-
-			if (window.location.pathname == '/') {
-
-				if (currentScrollY >= landingHeader.offsetHeight) {
-
-					if (currentScrollY < lastKnownScrollY) {
-						pin();
-					}
-
-					if (currentScrollY > lastKnownScrollY) {
-						unpin();
-					}
-				} else {
-					pin();
-				}
-			} else {
-
-				if (currentScrollY < lastKnownScrollY) {
-					pin();
-				}
-
-				if (currentScrollY > lastKnownScrollY) {
-					unpin();
-				}
-			}
-
-			lastKnownScrollY = getScrollY();
-		}
-
-		function pin() {
-			nav.style.willChange = 'transform';
-
-			if (nav.classList.contains('nav-unpinned')) {
-				nav.classList.remove('nav-unpinned');
-				nav.classList.add('nav-pinned');
-			} else {
-				nav.classList.add('nav-pinned');
-			}
-
-			nav.style.willChange = 'auto';
-		}
-
-		function unpin() {
-
-			nav.style.willChange = 'transform';
-
-			if (nav.classList.contains('nav-pinned')) {
-				nav.classList.remove('nav-pinned');
-				nav.classList.add('nav-unpinned');
-			} else {
-				nav.classList.add('nav-unpinned');
-			}
-
-			nav.style.willChange = 'auto';
-		}
-	}
-
-	exports.default = navshrink;
 
 /***/ }
 /******/ ]);
