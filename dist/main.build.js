@@ -1645,7 +1645,7 @@
 					if (response.data.success) {
 						resetForm();
 
-						submitButton.classList.remove('form-loading');
+						submitButton.classList.remove('contact-loading');
 						submitButton.classList.add('form-success');
 
 						var success = new Event('message-sent');
@@ -1671,6 +1671,12 @@
 
 			for (var i = 0; i < length; i++) {
 				formInputs[i].value = '';
+
+				if (formInputs[i].parentNode.classList.contains('valid')) {
+					formInputs[i].parentNode.classList.remove('valid');
+				} else {
+					formInputs[i].parentNode.classList.remove('email-valid');
+				}
 			}
 		}
 

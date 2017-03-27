@@ -53,7 +53,7 @@ export default function contact() {
 				if (response.data.success) {
 					resetForm();
 
-					submitButton.classList.remove('form-loading');
+					submitButton.classList.remove('contact-loading');
 					submitButton.classList.add('form-success');
 
 					let success = new Event('message-sent');
@@ -79,6 +79,12 @@ export default function contact() {
 
 		for (let i = 0; i < length; i++) {
 			formInputs[i].value = '';
+
+			if (formInputs[i].parentNode.classList.contains('valid')) {
+				formInputs[i].parentNode.classList.remove('valid');
+			} else {
+				formInputs[i].parentNode.classList.remove('email-valid');
+			}
 		}
 	}
 
