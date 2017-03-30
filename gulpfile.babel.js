@@ -98,7 +98,7 @@ gulp.task('buildStyles', () => {
 });
 
 gulp.task('scripts', () => {
-	gulp.src([paths.dev.js])
+	gulp.src(paths.dev.js)
 		.pipe(plumber({
 			errorHandler: function(err) {
 				console.log(err);
