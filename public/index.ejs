@@ -8,10 +8,10 @@
 
 		<title>Forrdev -- Forrest's Portfolio</title>
 
-		<link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='./styles/main.css' as="style" onload="this.rel='stylesheet'">
 
 		<noscript>
-			<link rel='stylesheet' href='./styles/main.min.css'>
+			<link rel='stylesheet' href='./styles/main.css'>
 		</noscript>
 
 
@@ -266,7 +266,7 @@
 							<figcaption>
 								<h3>Blog</h3>
 								<div class='figure-info'>
-									
+									<p>This is my personal blog devoted to code and science</p>
 
 									<a href='/work/blog'>
 										See More
@@ -371,7 +371,7 @@
 
 					<div class='landing-about-text'>
 						<blockquote>
-							As a Physicist turned Developer the transition from writing quantum simulations in ForTran to delegating events in Javascript has been a fascinating one. I have become obsessed with the fast-paced culture that surrounds web-based technologies. The race to aquire knowledge and push the capabilities of what we thought we could do is an incredible inspiration. From things like reactive programming to Web Assembly to garner almost native like performance the modern web is a playground for developers like myself -- developers who enjoys dealing with difficult questions and solving interesting problems. The ammount of material is never-ending at it seems like there are something new to learn every day, but if anything this just makes me love it more</blockquote>  
+							As a Physicist turned Developer the transition from writing quantum simulations in ForTran to delegating events in Javascript has been a fascinating one. I have become obsessed with the fast-paced culture that surrounds web-based technologies. The constant need for problem solving, innovative solutions, and the desire to keep pushing the limitations of the web are the things that continue to make me strive to be the best developer that I can be</blockquote>  
 					</div>
 
 					<div class='landing-about-more'>
@@ -413,6 +413,7 @@
 								
 								<textarea id='contact-message' cols='40' rows='7' class='contact-input'></textarea>
 								<label for='contact-message'>Message</label>
+
 							</div>
 
 							<div class='contact-submit'>
@@ -460,60 +461,6 @@
 
 		<% include ./views/shared/footer %>
 
-		<script type='text/javascript'>
-			let animation;
-
-			init();
-
-			function init() {
-				let canvas = document.querySelector('.preloader-canvas');
-				let t = 0;
-				let w = canvas.width = window.innerWidth;
-				let h = canvas.height = window.innerHeight;
-
-				let context = canvas.getContext('2d');
-				context.globalCompositeOperate = 'lighter';
-
-				animate();
-
-				function animate() {
-					context.clearRect(0, 0, w, h);
-
-					t += 1;
-
-					for (let i = 0; i < 5000; i++) {
-						let f = 0.05 + ((Math.sin(t * 0.00002) / Math.PI) * 0.2);
-						let r = (Math.min(w, h)) * (Math.cos((t + i) * f) / Math.PI * 1.5);
-
-						let x = 0.5 + (Math.sin(i) * r + (canvas.width / 2)) | 0;
-						let y = 0.5 + (Math.cos(i) * r + (canvas.height / 2)) | 0;
-
-						context.fillStyle = 'rgba(0, 255, 255, 0.5)';
-						context.fillRect(x, y, 1.5, 1.5);
-					}
-
-					animation = setTimeout(animate, 16);
-
-				}
-
-				function handleDoc() {
-					setTimeout(finishLoad, 1500);
-				}
-
-				function finishLoad() {
-					let canvas = document.querySelector('.preloader-canvas');
-
-					document.body.classList.add('loaded');
-					canvas.parentElement.classList.add('finished');
-					canvas.parentElement.removeChild(canvas);
-					clearTimeout(animation);
-
-					document.removeEventListener('DOMContentLoaded', handleDoc);
-				}
-
-				document.addEventListener('DOMContentLoaded', handleDoc);
-			}
-		</script>
 
 		<script type='text/javascript'>
 			function downloadJS() {

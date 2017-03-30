@@ -50,22 +50,25 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
+	var _preloader = __webpack_require__(35);
+
+	var _preloader2 = _interopRequireDefault(_preloader);
+
 	var _nav = __webpack_require__(29);
 
 	var _nav2 = _interopRequireDefault(_nav);
 
-	var _scroll = __webpack_require__(35);
+	var _scroll = __webpack_require__(36);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//import preloader from './scripts/utils/preloader'
 	var scroller = new _scroll2.default();
 	var scrollTimeout = void 0;
 
 	(0, _routes2.default)();
-	//preloader();
+	(0, _preloader2.default)();
 	(0, _nav2.default)();
 
 	function scrollThrottle() {
@@ -488,7 +491,7 @@
 
 	module.exports = defaults;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(38)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39)))
 
 /***/ },
 /* 3 */
@@ -1584,7 +1587,7 @@
 	});
 	exports.default = contact;
 
-	var _validator = __webpack_require__(37);
+	var _validator = __webpack_require__(38);
 
 	var _notifications = __webpack_require__(30);
 
@@ -2167,7 +2170,7 @@
 
 	var _contact2 = _interopRequireDefault(_contact);
 
-	var _scroll = __webpack_require__(36);
+	var _scroll = __webpack_require__(37);
 
 	var _scroll2 = _interopRequireDefault(_scroll);
 
@@ -2330,6 +2333,42 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.default = preloader;
+	function preloader() {
+		var container = document.querySelector('.preloader-container');
+
+		HTMLDocument.prototype.ready = function () {
+			return new Promise(function (resolve, reject) {
+				if (document.readyState === 'complete') {
+					resolve(document);
+				} else {
+					document.addEventListener('DOMContentLoaded', function () {
+						resolve(document);
+					});
+				}
+			});
+		};
+
+		document.ready().then(function () {
+			setTimeout(function () {
+				container.classList.add('loaded');
+
+				setTimeout(function () {
+					document.body.classList.add('loaded');
+				}, 500);
+			}, 1000);
+		});
+	}
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -2423,7 +2462,7 @@
 		exports.default = ScrollIn;
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -2470,7 +2509,7 @@
 		};
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2563,7 +2602,7 @@
 	}
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser

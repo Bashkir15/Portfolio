@@ -75,7 +75,7 @@ gulp.task('styles', () => {
 });
 
 gulp.task('buildStyles', () => {
-	gulp.src(paths.prod.css)
+	gulp.src(`${paths.prod.css}/main.css`)
 		.pipe(plumber({
 			errorHandler: function(err) {
 				console.log(err);

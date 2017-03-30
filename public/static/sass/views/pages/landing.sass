@@ -152,6 +152,7 @@
 		padding-right: 35px
 		opacity: 0
 		color: #fff
+		cursor: pointer
 		transition: opacity 0.35s
 
 	h3
@@ -243,7 +244,7 @@
 		transition: all .4s ease-out
 
 		&:hover
-			color: rgb(56, 73, 90)
+			color: #a9c2d3
 
 .landing-about-text
 	padding: 100px 0
@@ -267,7 +268,7 @@
 			position: absolute
 			left: -20px
 			top: -15px
-			color: #475660
+			color: #a9c2d3
 			font-size: 80px
 
 
@@ -384,9 +385,9 @@
 			label
 				color: #bf3757
 
-		+ .contact-error-container
-			p
-				opacity: 1
+		.requried-message
+			opacity: 1
+			transform: translateY(15px)
 
 	&.invalid
 		label
@@ -396,8 +397,9 @@
 		input
 			border-color: #bf3757
 
-		+ .contact-error-container
+		.required-message
 			opacity: 1
+			transform: translateY(15px)
 
 	&.valid
 		label
@@ -408,18 +410,21 @@
 		textarea
 			border-color: #37bf5b
 
+		.required-message
+			opacity: 0
 
-.contact-error-container
-	display: block
 
-	p
-		@include sin()
-		font-weight: 400
-		font-size: 14px
-		letter-spacing: 2px
-		color: #bf3757
-		opacity: 0
-		transition: all .38s ease-out
+.required-message
+	opacity: 0
+	@include muli()
+	font-weight: 300
+	font-size: 16px
+	color: #bf3757
+	pointer-events: none
+	margin-top: 0
+	margin-left: 0
+	transition: all .4s ease-out
+	transform: translateY(-50px)
 
 .contact-submit
 	display: flex
