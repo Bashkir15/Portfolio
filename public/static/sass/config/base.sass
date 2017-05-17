@@ -5,23 +5,14 @@ html
 body
 	margin: 0
 	overflow-x: hidden
-	overflow-y: hidden
 	-moz-osx-font-smoothing: grayscale
 	-webkit-font-smoothing: antialiased
 	text-rendering: optimizeLegibility
 	width: 100%
-	background: #222
 	transition: all .4s ease
-
-	.landing-page-container
-		opacity: 0
-
-	&.loaded
-		overflow-y: auto
-		background: none
-
-		.landing-page-container
-			opacity: 1
+	font-family: 'proxima-nova', Helvetica
+	font-size: 14px
+	font-weight: normal
 
 h1, h2, h3, h4, p, blockquote, figure, ol, ul
 	margin: 0
@@ -44,3 +35,130 @@ img
 ::-moz-focus-inner
 	padding: 0
 	border: 0
+
+.band
+	position: absolute
+	width: 140%
+	height: 800px
+	z-index: 1
+
+	&.right
+		right: 0
+
+	&.left
+		left: 0
+
+	&.bottom
+		bottom: -800px
+
+	&.top
+		top: -800px
+
+	&.origin_tl
+		transform-origin: top left
+
+	&.origin_tr
+		transform-origin: top right
+
+	&.origin_bl
+		transform-origin: bottom left
+
+	&.origin_br
+		transform-origin: bottom right
+
+	&.rotate_c
+		transform: rotate(12deg)
+
+	&.rotate_cc
+		transform: rotate(-12deg)
+
+	&.rotate_c.offset
+		transform: rotate(5deg)
+
+	&.rotate_cc.offset
+		transform: rotate(-5deg)
+		
+.wrapper
+	position: relative
+	width: auto
+	margin: 0 35px
+	z-index: 3
+
+.btn
+	position: relative
+	width: 235px
+	padding: 15px 0
+	border-radius: 2px
+	background: #4daaf2
+	box-shadow: 0 0 100px 0 rgba(0,0,0,0.1)
+	text-align: center
+	text-transform: uppercase
+	font-size: 15px
+	cursor: pointer
+	overflow: hidden
+	transition: all .4s ease
+
+	> span
+		position: relative
+		display: block
+		transition: all .5s ease
+		z-index: 3
+
+	&:after,
+	&:before
+		content: ""
+		position: absolute
+		top: -250px
+		right: -250px
+		height: 500px
+		width: 500px
+		background: rgba(0, 0, 0, 0.15)
+		border-radius: 100%
+		opacity: 1
+		transform: scale(0)
+		transition: all .5s ease
+		z-index: 1
+
+	&:after
+		background: inherit
+		transition-delay: .15s
+		z-index: 2
+
+	&:hover
+		box-shadow: 0 0 120px 0 rgba(0, 0, 0, 0.23)
+
+		&:after,
+		&:before
+			opacity: 1
+			tranform: scale(1)
+
+.icon
+	&.design
+		background: #4daaf2
+
+	&.development
+		background: #36ceb0
+
+	&.devops
+		background: #7259cd
+
+
+
+// media queries
+
+@media screen and (min-width: 500px)
+	.wrapper
+		width: auto
+		margin: 0 50px
+
+@media screen and (min-width: 1100px)
+	.wrapper
+		&.narrow
+			width: 750px
+
+		&.standard
+			width: 1000px
+
+		&.wide
+			width: 1100px
+

@@ -5,7 +5,7 @@ const email = emailHelper();
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	res.render('index');
+	res.render('newIndex');
 });
 
 router.get('/works', (req, res) => {
