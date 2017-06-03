@@ -1,14 +1,14 @@
 import landing from './landing'
-import about from './about'
+import works from './works';
 
 export default function routes() {
-	if (window.location.pathname == '/about') {
-		about();
-	} else if (window.location.pathname == '/works') {
+    if (window.location.pathname == '/works') {
+        works();
+    } else if (window.location.pathname == '/about') { 
 
-	} else if (window.location.href.includes('/work')) {
+    } else if (window.location.pathname.includes('/work')) {
 
-	} else {
-		landing();
-	}
+    } else {
+        landing();
+    }
 }

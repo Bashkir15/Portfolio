@@ -2,57 +2,68 @@ class mobileMenu {
 	constructor() {
 		this.container = document.getElementById('mobile-menu-container');
 		this.menu = document.getElementById("mobile-menu");
-		this.toggle = this._toggle.bind(this);
-		this.animatedClass = 'mobile-menu-container--animatable';
-		this.openClass = 'mobile-menu-container--open';
+		this.trigger = document.querySelector('.nav-trigger');
+		this.nav = document.querySelector('.nav');
+		this.animatedClass = '--animatable';
+		this.openClass = '--open';
 		this.closeKeys = [27];
 	}
 
-	_toggle() {
-		this.menu.style.willChange = 'transform';
+	toggle = () => {
+		this.menu.style.willChange = 'opacity';
 		this.container.classList.add(this.animatedClass);
 
 		if (this.container.classList.contains(this.animatedClass) && !this.container.classList.contains(this.openClass)) {
 			document.body.style.overflowY = 'hidden';
-			this._addEvents();
-			this.container.classList.add(this.openClass);
-			this._updateNav();
+			this.addEvents();
+			this.build();
 		} else {
-			document.body.style.overflowY = 'auto';
-			this._addEvents();
-			this.container.classList.remove(this.openClass);
-			this._updateNav();
+			this.close();
 		}
 
 		this.menu.style.willChange = 'auto';
 	}
 
-
-	_onTransitionEnd() {
-		this.container.classList.remove('mobile-menu-container--animatable');
-	}
-
-	_closeKeyHandler(e) {
-		if (this.closeKeys.indexOf(e.which) > -1) {
-			e.preventDefault();
-			this.toggle();
-		}
-	}
-
-	_updateNav() {
-		var nav = document.getElementById('nav');
+	close = () => {
+		this.menu.style.willChange = 'opacity';
+		this.container.classList.add(this.animatedClass);
 
 		if (this.container.classList.contains(this.openClass)) {
-			nav.classList.add('nav-mobile--open');
-		} else {
-			nav.classList.remove('nav-mobile--open');
+			document.body.style.overflowY = 'visible';
+			this.addEvents();
+			this.remove();
+			document.body.removeEventListener('keydown', this.closeKeyHandler);
+
 		}
 	}
 
-	_addEvents() {
-		let _onTransitionEnd = this._onTransitionEnd.bind(this);
+	onTransitionEnd = () => {
+		this.container.classList.remove(this.animatedClass);
+	}
 
-		this.container.addEventListener('transitionend', _onTransitionEnd);
+	closeKeyHandler = (e) => {
+		if (this.closeKeys.includes(e.which)) {
+			e.preventDefault();
+			this.close();
+		}
+	}
+
+	build = () => {
+		this.trigger.classList.add('is-active');
+		this.container.classList.add(this.openClass);
+		this.nav.classList.add(this.openClass);
+		document.body.addEventListener('keydown', this.closeKeyHandler);
+	}
+
+	remove = () => {
+		this.trigger.classList.remove('is-active');
+		this.container.classList.remove(this.openClass);
+		this.nav.classList.remove(this.openClass);
+		document.body.removeEventListener('keydown', this.closeKeyHandler);
+	}
+
+	addEvents = () => {
+		this.container.addEventListener('transitionend', this.onTransitionEnd);
 	}
 }
 

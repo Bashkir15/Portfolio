@@ -1,13 +1,13 @@
-import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
-import json from './json';
+const nodemailer = require('nodemailer');
+const fs = require('fs');
+const path = require('path');
+const json = require('./json');
 
 module.exports = () => {
-	let obj = {};
+	const obj = {};
 
-	obj.contact = function (req, res) {
-		const messageSender = req.body.email;
+	obj.contact = (req, res) => {
+		const { messageSender } = req.body.email;
 
 		const transporter = nodemailer.createTransport({
 			service: global.config.mailer.service,
@@ -20,7 +20,7 @@ module.exports = () => {
 		const mailOptions = {
 			from: messageSender,
 			to: global.config.mailer.auth.user,
-			subject: `New Contact From ${req.body.email}`,
+			subject: `New Contact From ${ messageSender }`,
 			text: req.body.message
 		};
 
@@ -55,9 +55,9 @@ module.exports = () => {
 
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
-				res.json(error, res);
+				json.bad(error, res);
 			} else {
-				json.good(info.response, );
+				json.good(info.response, res);
 			}
 		});
 	}

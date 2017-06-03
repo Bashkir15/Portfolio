@@ -8,28 +8,14 @@
 
 		<title>Forrdev -- Application Boilerplate Node Starter Kit</title>
 
-		<link rel='preload' href='../styles/main.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='../styles/main.min.css' as="style" onload="this.rel='stylesheet'">
 
 		<noscript>
-			<link rel='stylesheet' href='../styles/main.css'>
+			<link rel='stylesheet' href='../styles/main.min.css'>
 		</noscript>
-
-		<style>
-			body .main-container {
-				opacity: 0;
-				transition: all .4s ease-out;
-			}
-
-			body.loaded .main-container {
-				opacity: 1;
-			}
-			
-		</style>
 	</head>
 
 	<body>
-		<% include ../../shared/preloader %>
-
 		<main class='single-work-study-container main-container'>
 			<% include ../../shared/nav %>
 			<% include ../../shared/mobile-menu %>
@@ -83,6 +69,6 @@
 		<% include ../../shared/footer %>
 
 		
-		<script src='../scripts/main.build.min.js' ref='preload'></script>
+		 <script src='./main.build.js' ref='preload'></script>
 	</body>
 </html>	

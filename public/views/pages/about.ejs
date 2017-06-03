@@ -9,90 +9,118 @@
 		<title>Forrdev -- About Forrest The Developer</title>
 
 
-		<link rel='preload' href='./styles/main.css' as="style" onload="this.rel='stylesheet'">
+		<link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
 
 		<noscript>
-			<link rel='stylesheet' href='./styles/main.css'>
+			<link rel='stylesheet' href='./styles/main.min.css'>
 		</noscript>
 
 		<style>
-			body .main-container {
-				opacity: 0;
-				transition: all .4s ease-out;
-			}
-
-			body.loaded .main-container {
-				opacity: 1;
+			.about-page-container {
+				overflow-x: hidden!important;
 			}
 		</style>
 	</head>
 
 	<body>
-		<% include ../shared/preloader %>
 
 		<main class='about-page-container main-container'>
 			<% include ../shared/nav %>
 			<% include ../shared/mobile-menu %>
-			<header>
-				<h1>About Me</h1>
+			<header class="about-header">
+				<div class="wrapper standard">
+					<div class="intro">
+						<h1>Hi, I'm Forrest!</h1>
+						<p>I'm glad you decided to learn a little bit more about me. I'm all about producting functional and beautiful websites and apps for businesses of all sizes. I love what I do and am tons of fun to work with!</p>
+					</div>
+				</div>
+
+			    <div class='bg'>
+			        <span class='band band_1 top right rotate_cc origin_tr'></span>
+			        <span class='band band_2 top right rotate_cc origin_tr'></span>
+			        <span class='band band_3 top right rotate_cc origin_tr'></span>
+			        <span class='band band_4 top right rotate_cc origin_tr'></span>
+			        <span class='band band_5 top right rotate_cc origin_tr'></span>
+			        <span class='band band_6 top right rotate_cc origin_tr'></span>
+			        <span class='band band_7 top right rotate_cc origin_tr'></span>
+			    </div>
 			</header>
 
-			<section class='about-content'>
-				<ul>
-					<li>
-						<div class='timeline-marker'>
-							<p>1993</p>
+			<section class="about-info">
+				<div class="wrapper wide">
+					<div class="tiles">
+						<div class="column-left">
+							<div class="tile">
+								<h2>My First Days</h2>
+								<p>I was born in small town Muskogee, Oklahoma on October 24, 1993. I was raised in a fairly selcluded area without many neighbords, so as a child I spend much of my time outside and reading. It forced me to be more observant and take in my surroundings. The more I did this the more interested in nature I would become. This eventually would lead me to pursue science</p>
+							</div>
+
+							<div class="tile">
+								<h2>Starting College</h2>
+								<p>I was finally off to college. I was young and eager, my header brimming with visions of what my first year on campus would be like. I spent 3 years at the Univserity of Oklahoma, studying physics and getting to be a part and even guide a research team on our pursuit to make new discoveries. It was there that I had my first experience with programming and fell in love -- even if I didn't realize it at the time</p>
+							</div>
+
+							<div class="tile">
+								<h2>Now</h2>
+								<p>I would soon leave the university due to a myriad of issues, but my love of science and programming would stick with me. I was unsure of what my future would hold, but I knew what I wanted to do. I picked up books and read, then read some more, and when I had finished I read a few more. I studied and learned everything I could about programming and Web-Development, both Front and Backend. I found clients, I contracted work, I've held a few positions, and this is where we are today. I have around 6 years of programming experience and over 3 years of experience working with multiple different Web technologies in multiple different environments. I am just as passionate about learning and solving problems as I was then. In a way, I would venture to say even more so now. I'm always seeking new career opportunities, free-lance opportunities, writing outlets, and excuses to work with new, innovative web technologies</p>
+							</div>
+						</div>
+						<div class="column-right">
+							<div class="tile">
+								<h2>Early Life</h2>
+								<p>I become obsessed with the extreme facets of nature: tornados, volcanos, earthquakes and the like. I was going through school and was learning as much as I could about the chemisty and physics that were underlying these things. In my junior year of high school I decided I wanted to major and Mathematics and Physics and become a Physicist</p>
+							</div>
+
+							<div class="tile">
+								<h2>Ending College</h2>
+								<p>I spent a lot of time programming in ForTran and C++. If you have ever programmed in ForTran then I'm sure you can understand why I didn't realize my love immediately. The work I worked at the however the more I discovered that it wasn't the Math, the Science, or even the programming that really drove me to learn -- it was solving problems</p>
+							</div>														
 						</div>
 
-						<div class='timeline-widget'>
-							<p>I was born in small town Muskogee, Oklahoma on October 24, 1993. I was raised in a fairly secluded area without many neighbors, so as a child I spent much of my time outside and reading. It forced me to be observant and take in my surroundings. I become more interested in nature and that is what would lead me to science</p>
-						</div>
-					</li>
+						<div class="mobile-column">
+							<div class="tile">
+								<h2>My First Days</h2>
+								<p>I was born in small town Muskogee, Oklahoma on October 24, 1993. I was raised in a fairly selcluded area without many neighbords, so as a child I spend much of my time outside and reading. It forced me to be more observant and take in my surroundings. The more I did this the more interested in nature I would become. This eventually would lead me to pursue science</p>
+							</div>
 
-					<li>
-						<div class='timeline-marker'>
-							<p>2011</p>
-						</div>
+							<div class="tile">
+								<h2>Early Life</h2>
+								<p>I become obsessed with the extreme facets of nature: tornados, volcanos, earthquakes and the like. I was going through school and was learning as much as I could about the chemisty and physics that were underlying these things. In my junior year of high school I decided I wanted to major and Mathematics and Physics and become a Physicist</p>
+							</div>
 
-						<div class='timeline-widget'>
-							<p>I became interested in the extreme facets of nature, tornados, volcanos, earthquakes and the like. I was going through school and learning more about the chemistry and physics behind these events and it was there, in my junior year of high school that I decided I wanted to become a physicist</p>
-						</div>
-					</li>
+							<div class="tile">
+								<h2>Starting College</h2>
+								<p>I was finally off to college. I was young and eager, my header brimming with visions of what my first year on campus would be like. I spent 3 years at the Univserity of Oklahoma, studying physics and getting to be a part and even guide a research team on our pursuit to make new discoveries. It was there that I had my first experience with programming and fell in love -- even if I didn't realize it at the time</p>
+							</div>
 
-					<li>
-						<div class='timeline-marker'>
-							<p>2015</p>
-						</div>
+							<div class="tile">
+								<h2>Ending College</h2>
+								<p>I spent a lot of time programming in ForTran and C++. If you have ever programmed in ForTran then I'm sure you can understand why I didn't realize my love immediately. The work I worked at the however the more I discovered that it wasn't the Math, the Science, or even the programming that really drove me to learn -- it was solving problems</p>
+							</div>
 
-						<div class='timeline-widget'>
-							<p>I was off to college. I was young and eager, my head filled with visions of what it would be like. I spent two years at the University of Oklahoma studying physics and getting to be a part of and even guide a research team to making discoveries. It was here that I learned my love of programming, even if I didn't realize it at the time.</p>
+							<div class="tile">
+								<h2>Now</h2>
+								<p>I would soon leave the university due to a myriad of issues, but my love of science and programming would stick with me. I was unsure of what my future would hold, but I knew what I wanted to do. I picked up books and read, then read some more, and when I had finished I read a few more. I studied and learned everything I could about programming and Web-Development, both Front and Backend. I found clients, I contracted work, I've held a few positions, and this is where we are today. I have around 6 years of programming experience and over 3 years of experience working with multiple different Web technologies in multiple different environments. I am just as passionate about learning and solving problems as I was then. In a way, I would venture to say even more so now. I'm always seeking new career opportunities, free-lance opportunities, writing outlets, and excuses to work with new, innovative web technologies</p>
+							</div>
 						</div>
-					</li>
+					</div>
+				</div>
 
-					<li>
-						<div class='timeline-marker'>
-							<p>2015</p>
-						</div>
+				<div class="bg">
+					<span class="band band_1 top right rotate_cc origin_br"></span>
+					<span class="band band_2 bottom left rotate_cc origin_tl"></span>
+				</div>
+			</section>
 
-						<div class='timeline-widget'>
-							<p>I would be programming in ForTran and C++. If you have ever programmed in ForTran you will understand why I didn't realize my love. THe more I worked at it the more I discovered that it wasn't so much math, science, or programming that really made me driven -- it was solving problems. That is when I really knew I was in love with programming.</p>
-						</div>
-					</li>
-
-					<li>
-						<div class='timeline-marker'>
-							<p>2017</p>
-						</div>
-
-						<div class='timeline-widget'>
-							<p>I would soon leave the university due to a myriad of issues, but my love of science and programming would stick with me. I had just turned 22 years old and I was unsure of what was going to happen, but I knew what I wanted to do. I picked up books and read and read and read, studying and learning everythign that I could about programming and web development, client and server side. I found clients, I contracted work, and this is where we are today. I have around 2 years of experience working with multiple different technologies and in multiple different environments. I am just as passionate about learning and solving problems as I was then, in a way I would venture to say more so now. I'm now seeking a career in web-development and inovative web technologies</p>
-						</div>
-					</li>
+			<section class="about-image">
+				<div class="wrapper standard">
+					<img src="./images/me.jpg" alt="Me">
+				</div>
 			</section>
 		</main>
 
 		<% include ../shared/footer %>
 
-		<script src='./scripts/main.build.min.js'></script>
+		<script src='./main.build.js'></script>
 	</body>
 </html>

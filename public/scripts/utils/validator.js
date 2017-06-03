@@ -1,81 +1,101 @@
 const formWrapper = document.querySelectorAll('.form-wrapper');
 const submitButton = document.getElementById('contact-send');
-const wrapperLength = formWrapper.length;
 
-export function onBlur(nodes) {
-	let length = nodes.length;
-
-	for (let i = 0; i < length; i++) {
-		nodes[i].addEventListener('blur', inputBlur);
-	}
-}
-
-export function removeBlur(nodes) {
-	let length = nodes.length;
-
-	for (let i = 0; i < length; i++) {
-		nodes[i].addEventListener('blur', inputBlur);
+export function onBlur(nodes, callback) {
+	for (let node of nodes) {
+		node.addEventListener('blur', () => {
+			inputBlur(node, callback);
+		});
 	}
 }
 
 function validateEmail(node) {
 	let value = node.value;
 	let atpos = value.indexOf('@');
-	let dospos = value.lastIndexOf('.');
+	let dotpos = value.lastIndexOf('.');
 
 	if (atpos < 1 || (dotpos - atpos) < 2) {
 		if (node.parentNode.classList.contains('blank')) {
 			node.parentNode.classList.remove('blank');
 		}
 
-		node.parentNode.classList.add('email-invalid');
+		node.parentNode.classList.add('invalid');
 	} else {
 		if (node.parentNode.classList.contains('blank')) {
 			node.parentNode.classList.remove('blank');
 		}
 
-		if (node.parentNode.classList.contains('email-invalid')) {
-			node.parentNode.classList.remove('email-invalid');
+		if (node.parentNode.classList.contains('invalid')) {
+			node.parentNode.classList.remove('invalid');
 		}
 
-		node.parentNode.classList.add('email-valid');
+		node.parentNode.classList.add('valid');
 	}
 }
 
-function inputBlur() {
-	let formContent = this.value;
+function validatePhone(node) {
+	const phoneRe = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+	const parent = node.parentNode;
 
-	if (formContent == '') {
-		this.parentNode.classList.add('blank');
-	}
-
-	if (this.parentNode.classList.contains('form-email')) {
-		validateEmail(this);
-	}
-
-	if (formContent != '' && !this.parentNode.classList.contains('form-email')) {
-		if (this.parentNode.classList.contains('blank')) {
-			this.parentNode.classList.remove('blank');
+	if (node.value.match(phoneRe)) {
+		if (parent.classList.contains('invalid')) {
+			parent.classList.remove('invalid');
+			parent.classList.add('valid');
 		}
 
-		this.parentNode.classList.add('valid');
+		parent.classList.add('valid');
+	} else {
+		if (parent.classList.contains('valid')) {
+			parent.classList.remove('valid');
+			parent.classList.add('invalid');
+		}
+
+		parent.classList.add('invalid');
+	}
+}
+
+function inputBlur(node, callback) {
+	const formContent = node.value;
+	const parent = node.parentNode;
+
+	if (formContent == '') {
+		parent.classList.add('blank');
+	}
+
+	if (parent.classList.contains('form-email')) {
+		validateEmail(node);
+	}
+
+	if (parent.classList.contains('form-phone')) {
+		validatePhone(node);
+	}
+
+	if (formContent !== '' & !parent.classList.contains('form-email') && !parent.classList.contains('form-phone')) {
+		if (parent.classList.contains('blank')) {
+			parent.classList.remove('blank');
+		}
+
+		parent.classList.add('valid');
+	}
+
+	if (typeof callback === 'function') {
+		callback(node);
 	}
 
 	checkValidForm();
 }
 
 function checkValidForm() {
+	const length = formWrapper.length;
 	let valid = 0;
 
-	for (let i = 0; i < wrapperLength; i++) {
-		let wrapper = formWrapper[i];
-
-		if (wrapper.classList.contains('valid') || wrapper.classList.contains('email-valid')) {
+	for (let wrapper of formWrapper) {
+		if (wrapper.classList.contains('valid')) {
 			valid++;
 		}
 	}
 
-	if (valid == wrapperLength) {
+	if (valid === length) {
 		submitButton.classList.add('form-valid');
 	}
 }

@@ -1,11 +1,11 @@
-import express from 'express';
-import emailHelper from '../helpers/email';
+const express = require('express');
+const emailHelper = require('../helpers/email');
 
 const email = emailHelper();
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	res.render('newIndex');
+	res.render('index');
 });
 
 router.get('/works', (req, res) => {
@@ -49,7 +49,5 @@ router.get('/work/i-will-die', (req, res) => {
 });
 
 router.post('/contact', email.contact);
-
-
 
 module.exports = router;

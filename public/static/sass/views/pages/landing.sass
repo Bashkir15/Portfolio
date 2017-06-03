@@ -1,22 +1,27 @@
+@import "../displays/landing-animations"
+@import "../displays/header-phone"
+
 .landing-page-container
-    padding-top: 250px
+    overflow: hidden
 
 
 .landing-header
-    padding-bottom: 250px
+    position: relative
+    height: auto
+
+    > .wrapper
+        padding: 200px 0
 
     .content
         font-family: 'proxima-nova'
         text-align: center
         transition: opacity 0.75s ease, transform 0.75s ease
-        // tramsform: trams;ate(50px, 0) large screens
-        // transform: translate(0, 25px) small screens
-        // opacity: 0 before load
+        transform: translate(-50px, 0)
+        opacity: 0
 
         h1
             font-weight: 400
             margin-bottom: 30px
-            font-size: 35px
 
             span
                 display: block
@@ -24,12 +29,14 @@
 
                 &:nth-of-type(1)
                     color: #fff
+                    font-size: 35px
 
                 &:nth-of-type(2)
                     color: rgba(255, 255, 255, 0.8)
                     display: none
 
         p
+            font-family: 'Lato'
             font-weight: normal
             font-size: 20px
             line-height: 25px
@@ -62,7 +69,8 @@
 // Features //
 
 .landing-bubbles
-    padding-top: 140px
+    padding: 140px 0 90px
+    overflow: hidden
 
 .bubble-feature
     width: 100%
@@ -76,9 +84,9 @@
         background: #4daaf2
 
     &.development
-        background: #7259cd
+        background: #36ceb0
 
-    &.support
+    &.devops
         background: #7259cd
 
     .icon
@@ -88,14 +96,700 @@
         border-radius: 100%
         box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1)
 
+    h2
+        font-size: 22px
+        margin-bottom: 20px
+
     p
         max-width: 550px
-        margin: 0 auto
+        margin: 0 auto 20px
+        font-size: 17px
+        line-height: 23px
+
 
     a
         display: block
         margin-top: 10px
+        color: #fff
         font-size: 12px
         font-weight: 500
         letter-spacing: 1px
         text-transform: uppercase
+
+.landing-projects
+    position: relative
+    padding: 140px 0 90px
+    background: #1b222a
+    overflow: hidden
+    z-index: 1
+
+    header
+        padding: 30px 0
+        text-align: center
+
+        h2
+            color: #fff
+
+    .landing-phone
+        display: none
+
+.landing-projects-container
+    text-align: center
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    > div
+        display: flex
+        flex-direction: column
+        align-items: center
+
+    .btn.btn-link
+        height: 50px
+        margin-top: 15px
+        color: #fff
+        background: #36ceb0
+        text-decoration: none
+
+.single-project
+    position: relative
+    height: 340px
+    width: 100%
+    margin-bottom: 35px
+    overflow: hidden
+    cursor: pointer
+
+    img
+        position: relative
+        display: block
+        height: 100%
+        width: 100%
+        opacity: 0.95s
+        transition: opacity 0.45s
+
+    figcaption
+        height: 100%
+        width: 100%
+        padding: 30px 15px
+        color: #fff
+        background: rgba(158, 217, 196, 0.8)
+
+
+// about //
+.landing-about
+    position: relative
+    padding: 100px 0 140px
+    z-index: 1
+
+    header
+        padding: 30px 0
+        text-align: center
+
+        h2
+            color: #fff
+
+
+    p
+        color: #8895a6
+        line-height: 25px
+
+    .btn.btn-link
+        height: 50px
+        background: #7259cd
+        color: #fff
+        text-decoration: none
+
+    .bg
+        position: absolute
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+        background: #2b3642
+        overflow: hidden
+        z-index: 1
+
+    .band
+        background: #fff
+
+    .bands
+        position: absolute
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+        opacity: 0.75
+        z-index: 1
+
+        .band
+            height: 125px
+            top: 0
+
+        .band_1
+            width: 60%
+            background: linear-gradient(to right, rgba(235, 249, 251, 1) 30%, rgba(235, 249, 251, 0) 100%)
+
+        .band_2
+            top: 125px
+            width: 70%
+            background: linear-gradient(to right, rgba(248, 252, 255, 1) 30%, rgba(248, 252, 255, 0) 100%)
+
+
+// info //
+
+.landing-info
+    position: relative
+    padding: 130px 0 100px
+    z-index: 2
+
+    .wrapper
+        position: relative
+        width: 400px
+
+        .content
+            position: relative
+            z-index: 3
+
+    .bands
+        position: absolute
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+        overflow: hidden
+        z-index: 1
+
+        .band
+            height: 125px
+            top: 0
+            z-index: 1
+
+        .band_1
+            width: 60%
+            background: linear-gradient(to right, rgba(235, 249, 251, 1) 30%, rgba(235, 249, 251, 0) 100%)
+
+        .band_2
+            width: 70%
+            top: 125px
+            background: linear-gradient(to right, rgba(248, 252, 255, 1) 30%, rgba(248, 252, 255, 0) 100%)
+
+    .bg
+        position: absolute
+        top: -170px
+        left: 0
+        height: 160%
+        width: 100%
+        overflow: hidden
+        z-index: 1
+
+        .band
+            height: 240px
+
+        .band_1
+            display: none
+
+        .band_2
+            top: 145px
+            width: 95%
+            height: 240px
+            background: linear-gradient(to right, rgba(255, 255, 255, 1) 0, rgba(241, 248, 250, 1) 60%)
+
+        .band_3
+            display: none
+
+    h3
+        color: #64bbc5
+        line-height: 30px
+
+    p
+        font-family: 'Lato'
+        font-weight: 300
+        font-size: 17px
+        line-height: 1.4em
+        display: none
+
+.landing-info-content
+    position: relative
+    padding: 20px 30px 30px
+    background: #fff
+    border-radius: 3px
+    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.4)
+    overflow: hidden
+
+.info-links
+    width: 100%
+    padding: 0
+    z-index: 2
+
+    img
+        position: absolute
+        top: 0
+        left: 0
+        height: 35px
+        background: #e7f8fa
+        border-radius: 50%
+        pointer-events: none
+        transition: all 0.5s ease
+        
+    a
+        position: relative
+        display: block
+        height: 35px
+        padding-left: 55px
+        margin-bottom: 15px
+        color: #a0b1c5
+        text-decoration: none
+        font-size: 18px
+        line-height: 1em
+        transition: all 0.5s ease
+
+    span
+        display: block
+        padding-top: 6px
+
+.landing-contact
+    position: relative
+    z-index: 2
+
+    .intro
+        width: 100%
+        max-width: 600px
+        margin-bottom: 80px
+        text-align: center
+
+        h2
+            color: #262c33
+
+        p
+            font-size: 17px
+            line-height: 1.4em
+            color: #8895a6
+
+.landing-contact-form
+    position: relative
+    width: 100%
+
+    form
+        padding: 0 35px 8px
+        background: #fff
+    
+    .bg
+        display: none
+
+    .form-fields
+        width: 100%
+
+    .field
+        position: relative
+        min-height: 100px
+        width: 100%
+
+        label
+            display: block
+            margin: 0 0 5px
+            color: #617082
+            font-size: 12px
+            letter-spacing: 2px
+            text-transform: uppercase
+
+        input
+            height: 45px
+            width: 100%
+            padding: 0 18px
+            color: #262c33
+            background: #d8dbde
+            border: none
+            border-radius: 4px
+            font-size: 15px
+
+        textarea
+            width: 100%
+            max-width: 100%
+            height: 150px
+            max-height: 150px
+            padding: 14px 19px
+            margin-bottom: 40px
+            color: #262c33
+            background: #d8dbde
+            border: none
+            border-radius: 4px
+            font-size: 15px
+            outline: none
+
+        &.invalid
+            .error-message
+                transform: translateX(0)
+                opacity: 1
+
+        &.blank
+            .error-message
+                transform: translateX(0)
+                opacity: 1
+
+        .btn
+            width: 100%
+            padding: 20px 0
+            color: #f3f2f1
+            background: #6cb051
+            border: none
+            transition: background-color 0.4s ease-out
+
+            span
+                position: relative
+                display: block
+                z-index: 3
+                padding-top: 0
+
+            &:hover
+                background-color: darken(#6cb051, 10%)
+
+.error-message
+    margin-left: 10px
+    margin-top: 5px
+    color: #bf3757
+    transform: translateX(-50px)
+    opacity: 0
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out
+
+@media screen and (min-width: 600px)
+    .landing-contact-form
+
+        form
+            padding: 50px 50px 8px
+            border-radius: 4px
+            box-shadow: 0 0 200px 0 rgba(0, 0, 0, 0.1)
+
+        .bg
+            position: absolute
+            bottom: -1px
+            left: 0
+            display: block
+            height: 90%
+            width: 100%
+            overflow: hidden
+            background: #6cb051
+            z-index: 1
+
+        .band_1
+            background: #fff
+
+        .band_2
+            background: #262c33
+
+@media screen and (min-width: 800px)
+    .landing-header
+        > .wrapper
+            display: flex
+            padding: 250px 0 350px
+
+        .content
+            width: 50%
+            text-align: left
+
+            p
+                width: 80%
+                margin: 0
+                line-height: 30px
+
+    .landing-bubbles
+        .content
+            display: flex
+            flex-direction: row
+            align-items: center
+            width: 104%
+
+    .bubble-feature
+        display: flex
+        flex-direction: column
+        height: 400px
+        width: 29.333%
+        padding: 0
+        margin: 0 2%
+        text-align: left
+
+        &.design,
+        &.development,
+        &.devops
+            background: none
+
+        .icon
+            margin: 0 0 25px
+
+        h2
+            margin-bottom: 12px
+            color: #1b222a
+            font-size: 18px
+
+        p
+            color: #8895a6
+            font-family: 'Lato'
+            font-weight: 300
+            font-size: 15px
+            line-height: 22.5px
+
+    .landing-projects-container
+        > div
+            flex-direction: row
+            flex-wrap: wrap
+            width: 95%
+            margin: 0 auto
+
+    .single-project
+        height: 220px
+        width: 46%
+        margin: 0 2% 70px
+
+    .landing-about
+
+        p
+            width: 60%
+            color: #a0b1c5
+            font-family: 'Lato'
+            font-weight: 300
+            line-height: 25px
+
+            &:nth-of-type(1)
+                margin-bottom: 28px
+                font-size: 20px
+                line-height: 28px
+                color: #f3f2f1
+
+    .landing-info
+        .wrapper
+            width: 750px
+            margin: 0 auto
+
+        .bg
+            .band_3
+                top: 380px
+                display: block
+                height: 270px
+                width: 70%
+                background: linear-gradient(to right, rgba(255, 255, 255, 1) 0, rgba(246, 249, 252, 1) 100%)
+                opacity: 0.8
+
+
+        .content
+            display: flex
+
+            .intro
+                width: 49%
+
+                h3
+                    margin-bottom: 20px
+                    font-family: 'Lato'
+                    font-weight: 300
+                    font-size: 23px
+                    line-height: 1.4em
+
+                p
+                    display: block
+                    color: #8895a6
+
+            .info-links
+                width: 49%
+
+                a
+                    display: flex
+                    align-items: center
+                    height: 55px
+                    padding: 0 0 0 40px
+                    margin: 0 0 30px
+
+                    img
+                        position: relative
+                        height: 55px
+                        margin-right: 8px
+
+                    span
+                        padding: 0
+                        font-family: 'Lato'
+                        font-weight: 300
+
+    .landing-info-content
+        padding: 60px 70px 50px
+
+    .landing-contact
+        .wrapper
+            .intro
+                max-width: 100%
+
+                p
+                    font-family: 'Lato'
+                    font-weight: 300
+
+        .form-fields
+            display: flex
+            flex-wrap: wrap
+
+        .field
+            width: 44%
+            margin: 0 3%
+
+            &:nth-of-type(3),
+            &:nth-of-type(4)
+                width: 100%
+
+
+@media screen and (min-width: 1000px)
+    .landing-header
+        > .wrapper
+            width: 1050px
+            margin: 0 auto
+
+        .content
+            width: 40%
+            margin-left: 80px
+
+            h1
+                span
+                    &:nth-of-type(1)
+                        font-size: 40px
+
+            p
+                font-size: 23px
+                line-height: 42px
+
+    .landing-bubbles
+        .wrapper
+            .content
+                flex-direction: row
+                flex-wrap: wrap
+
+        .bubble-feature
+            display: flex
+            flex: 1
+            flex-direction: column
+            height: 440px
+            margin-right: 20px
+
+@media screen and (min-width: 1400px)
+    .landing-header
+        > .wrapper
+            justify-content: flex-end
+
+    .landing-bubbles
+        padding-top: 100px
+
+    .landing-projects
+        overflow: visible
+        padding-bottom: 300px
+
+        .wrapper
+            header
+                text-align: left
+
+                h2
+                    font-size: 38px
+                    letter-spacing: 2px
+                    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4)
+                    transform: translateY(-30px)
+        
+        .landing-phone
+            display: block
+
+    .landing-projects-container
+        width: 50%
+        transform: translateY(100px)
+
+        > div
+            display: none
+            margin-left: 0
+
+    .landing-phone
+        position: absolute
+        right: 150px
+        top: 0
+        display: block
+        height: 600px
+        width: 340px
+        padding: 65px 15px
+        background: #11161d
+        border-radius: 25px
+        box-shadow: 0 0 200px 0 rgba(0, 0, 0, 0.3)
+        transform: translate(90px, -198px)
+
+        .phone-camera
+            display: block
+            position: absolute
+            top: 29px
+            left: 50%
+            height: 7px
+            width: 7px
+            background: #000
+            border-radius: 50%
+            margin-left: -48px
+
+        .phone-speaker
+            display: block
+            position: absolute
+            top: 31px
+            left: 50%
+            height: 3px
+            width: 44px
+            margin-left: -22px
+            background: #000
+            border-radius: 4px
+
+        .phone-shadow
+            width: 310px
+            height: 455px
+            position: absolute
+            top: 65px
+            left: 15px
+            z-index: 2
+            pointer-events: none
+            box-shadow: inset 0 0 50px 0 rgba(0,0,0,0.75)
+
+        .phone-screen
+            width: 310px
+            height: 455px
+            background: #000
+            overflow: hidden
+            position: relative
+            margin-right: 0
+
+        .phone-screen-inner
+            width: 100%
+            height: 100%
+            position: relative
+            overflow: hidden
+            z-index: 1
+
+            .slide
+                position: absolute
+                top: 0
+                left: 350px
+                width: 100%
+                height: 100%
+                overflow: hidden
+                box-shadow: inset 0 0 100px 0 rgba(0,0,0,1)
+                transition: left 1s ease-in-out
+
+                img
+                    height: 100%
+                    width: 100%
+                    position: relative
+                    display: block
+                    pointer-events: none
+
+                &.active
+                    left: 0
+
+                &.slide_2
+                    z-index: 2
+
+                &.slide_3
+                    z-index: 3
+
+        .phone-button
+            display: block
+            position: absolute
+            bottom: 22px
+            left: 50%
+            background: #000
+            width: 30px
+            height: 30px
+            margin-left: -12px
+            border-radius: 100%
+

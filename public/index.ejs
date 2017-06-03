@@ -1,479 +1,323 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset='utf-8'>
-		<meta name='viewport' content="width=device-width, initial-scale=1">
-		<meta name='description' content="The Portfolio of Full-Stack Application Developer Forrest Collins">
-		<meta name='keywords' content="Developer Javascript Portfolio Frontend Backend Fullstack Node Web-Developer Application Programmer">
-
-		<title>Forrest Collins, Full-Stack Developer</title>
-
-		<link rel='preload' href='./styles/main.css' as="style" onload="this.rel='stylesheet'">
-
-		<noscript>
-			<link rel='stylesheet' href='./styles/main.css'>
-		</noscript>
-
-
-		<style>
-			body .main-container {
-				opacity: 0;
-				transition: all .4s ease;
-			}
-
-			body.loaded .main-container {
-				opacity: 1;
-			}
-
-			.landing-header-overlay {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-
-			.landing-header-overlay div {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				height: 100%;
-			}
-
-			.landing-header {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				overflow: hidden;
-				height: calc(100vh + 10vh);
-				background: rgba(233, 248, 183, 0.5);
-			}
-
-			.landing-header h1 {
-				position: relative;
-				font-family: 'Sintony';
-				text-shadow: 0 1px 1px rgba(0,0,0,0.3);
-				font-weight: 300;
-				text-transform: uppercase;
-				font-size: 38px;
-				line-height: 85px;
-				letter-spacing: 8px;
-				width: 90%;
-				text-align: center;
-				margin-bottom: 25px;
-				color: rgba(56, 73, 90, 0.7);
-				z-index: 10;
-			}
-
-			.landing-header p {
-				position: relative;
-				font-family: 'Muli';
-				font-weight: 600;
-				font-size: 20px;
-				letter-spacing: 2px;
-				line-height: 30px;
-				padding: 0 33px;
-				margin-bottom: 145px;
-				text-align: center;
-				color: rgba(56, 73, 80, 0.6);
-				z-index: 10;
-			}
-
-			.landing-header button {
-				position: relative;
-				height: 55px;
-				width: 220px;
-				padding: 0;
-				overflow: hidden;
-				background: rgba(255, 255, 255, 0.6);
-				transition: all .4s ease;
-			}
-
-			.landing-header button:after {
-				position: absolute;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				content: '';
-				width: 0;
-				left: -10%;
-				bottom: 0;
-				height: 120%;
-				background: #8cd1c4;
-				transition: all .4s ease;
-				transform: skewX(15deg);
-			}
-
-			.landing-header button span {
-				position: relative;
-				font-family: 'Muli';
-				font-weight: 400;
-				letter-spacing: 2px;
-				font-size: 18px;
-				color: #f1f3f3;
-				z-index: 20;
-			}
-
-			.landing-header button:hover:after {
-				width: 120%;
-			}
-
-			@media screen and (min-width: 630px) {
-				.landing-header {
-					height: 100vh;
-				}
-
-				.landing-header h1 {
-					font-size: 45px;
-					letter-spacing: 6px;
-				}
-
-				.landing-header p {
-					font-size: 21px;
-					letter-spacing: 3px;
-					margin-bottom: 120px;
-				}
-
-				.landing-header button {
-					height: 60px;
-					width: 260px;		
-				}
-
-				.landing-header button span {
-					font-size: 18px;
-				}
-			}
-
-			@media screen and (min-width: 731px) {
-
-				.landing-header h1 {
-					font-size: 52px;	
-				}
-
-				.landing-header p {
-					font-size: 23px
-					margin-bottom: 150px;
-				}
-			}
-
-			@media screen and (min-width: 1325px) {
-				.landing-header h1 {
-					font-size: 52px;
-					letter-spacing: 10px;
-					margin-bottom: 45px;		
-				}
-
-				.landing-header p {
-					font-family: 'Muli';
-					font-size: 25px;
-					letter-spacing: 6px;
-					margin-bottom: 135px;
-					font-weight: 300;
-				}
-
-				.landing-header button span {
-					font-size: 20px;				
-				}
-			}
-
-			@media screen and (min-width: 1600px) {
-				.landing-header {
-					height: 75vh;
-				}
-
-				.landing-header h1 {
-					font-size: 70px;
-					letter-spacing: 16px;
-					font-weight: 300;
-					margin-top: -120px;
-					margin-bottom: 38px;
-				}
-
-				.landing-header p {
-					margin-bottom: 450px
-					font-size: 30px;
-				}
-
-				.landing-header button {
-					height: 75px;
-					width: 300px;
-				}
-			}
-		</style>
-	</head>
-
-	<body class='home-body'>
-		
-		<% include ./views/shared/preloader %>
-
-		<main class='landing-page-container main-container'>
-			<% include ./views/shared/nav %>
-			<% include ./views/shared/mobile-menu %>			
-			<section class='landing-header'>
-				<div class='landing-header-overlay'>
-					<div>
-						<h1>I'm Forrest</h1>
-						<p>I engineer modern applications for the web</p> 
-
-					<button type='button' id='contact-scroller' aria-label='click to scroll to contact form' id='contact-scroller'>
-							<span>Let's Work Together</span></span>
-						</button>
-					</div>		
-				</div>
-			</section>
-
-			<section class='landing-projects'>
-				<header class='landing-section-header'>
-					<h2>Recent Projects</h2>
-				</header>
-
-				<div class='landing-projects-body'>
-					<div>
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./images/opinion-res.png' alt='Opinionable Project'>
-							<figcaption>
-								<h3>Opinionable</h3>
-								<div class='figure-info'>
-									<p>A news aggregate and social-sharing application</p>
-
-									<a href='/work/opinion'>
-										See More
-									</a>
-								</div>
-							</figcaption>
-						</figure>
-
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./images/boilerplate.png' alt='Application Boilerplate Project'>
-							<figcaption>
-								<h3>Application Boilerplate</h3>
-								<div class='figure-info'>
-									
-									<p>A boilerplate to provide essential features for many applications</p>
-
-									<a href='/work/application-boilerplate'>
-										See More
-									</a>
-								</div>
-							</figcaption>
-						</figure>
-
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./images/blog-res.png' alt='Blog Project'>
-							<figcaption>
-								<h3>Blog</h3>
-								<div class='figure-info'>
-									<p>This is my personal blog devoted to code and science</p>
-
-									<a href='/work/blog'>
-										See More
-									</a>
-								</div>
-							</figcaption>
-						</figure>
-
-						<figure class='landing-project' data-entrance='fade'>
-							<img src='./images/evo-res.png' alt='Evolution Project'>
-							<figcaption>
-								<h3>Evoltuion</h3>
-								<div class='figure-info'>
-									
-									<p>A demo project for a local smoke shop. Currently a WIP</p>
-
-									<a href='/work/evolution'>
-										See More
-									</a>
-								</div>
-							</figcaption>
-						</figure>
-					</div>
-
-					<div class='landing-projects-more'>
-						<a href='/works'>
-							<button type='button' aria-label='See the rest of my projects'>
-								<span>See the rest</span>
-							</button>
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<section class='landing-skills'>
-				<header class='landing-section-header'>
-					<h2>Some of my Skills</h2>
-				</header>
-
-				<div class='landing-skills-body'>
-					<div>
-						<div class='landing-skill' data-entrance='fade'>
-							<span class='icon-desktop'></span>
-							<div>
-								<h3>Fontend</h3>
-								<p>HTML5, CSS3(Sass), Javascipt(ES6+),
-								AngularJS, Vue, React, and  CSS/JS animations are just a few of my tools</p>
-							</div>
-						</div>
-
-						<div class='landing-skill' data-entrance='fade'>
-							<span class='icon-upload'></span>
-							<div>
-								<h3>Backend</h3>
-								<p>NodeJs, Express, Koa, Ngnix, and Websockets come together to create modern and secure backends</p>
-							</div>
-						</div>
-
-						<div class='landing-skill' data-entrance="fade">
-							<span class='icon-book-open'></span>
-							<div>
-								<h3>Database</h3>
-								<p>MongoDB, Redis, and SQL are my weapons of choice
-								to ensure well-organized data-structures</p>
-							</div>
-						</div>
-
-						<div class='landing-skill' data-entrance="fade">
-							<span class='icon-browser'></span>
-							<div>
-								<h3>UI/UX</h3>
-								<p>I am passionate about creating refreshing and interactive experiences that users cherish and want to come back to</p>
-							</div>
-						</div>
-
-						<div class='landing-skill' data-entrance="fade">
-							<span class='icon-mobile'></span>
-							<div>
-								<h3>Responsive Design</h3>
-								<p>Applications are not one size fits all, but with different devices and progressive enhancement, we can sweep this under the rug</p>
-							</div>
-						</div>
-
-						<div class='landing-skill' data-entrance='fade'>
-							<span class='icon-genius'></span>
-							<div>
-								<h3>Efficiency</h3>
-								<p>I like to waste as little time as possible, so I use tools like gulp, webpack, and rollup to the make development smoother</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class='landing-about'>
-				<div class='landing-about-overlay'></div>
-				<header class='landing-section-header'>
-					<h2>About Me</h2>
-				</header>
-
-				<div class='landing-about-body'>
-
-					<div class='landing-about-text'>
-						<blockquote>
-							As a Physicist turned Developer the transition from writing quantum simulations in ForTran to delegating events in Javascript has been a fascinating one. I have become obsessed with the fast-paced culture that surrounds web-based technologies. The constant need for problem solving, innovative solutions, and the desire to keep pushing the limitations of the web are the things that continue to make me strive to be the best developer that I can be</blockquote>  
-					</div>
-
-					<div class='landing-about-more'>
-						<a href='/about'>
-							Get to know me better
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<section class='landing-contact' id='contact-container'>
-				<header class='landing-section-header'>
-					<h2>Contact Me</h2>
-				</header>
-
-				<div class='landing-contact-body'>
-					<div class='contact-form'>
-						<form name='contact'>
-							<div class='form-wrapper'>
-								<span class='icon-person_outline'></span>
-								<input type='text' id='contact-name' class='contact-input'>
-								<label for='contact-name'>Name</label>
-							</div>
-
-							<div class='form-wrapper contact-email'>
-								<span class='icon-mail_outline'></span>
-								<input type='email' id='contact-email' class='contact-input'>
-								<label for='contact-email'>Email</label>
-							</div>
-
-							<div class='form-wrapper'>
-								
-								<span class='icon-mode_edit'></span>
-								<input type='text' id='contact-subject' class='contact-input'>
-								<label for='contact-subject'>Subject</label>
-							</div>
-
-							<div class='form-wrapper'>
-								
-								<textarea id='contact-message' cols='40' rows='7' class='contact-input'></textarea>
-								<label for='contact-message'>Message</label>
-
-							</div>
-
-							<div class='contact-submit'>
-								<button id='contact-send' type='button' aria-label='Submit contact form'>
-									<span>Message Me</span>
-									<div class='icon-loader'></div>
-								</button>
-							</div>
-						</form>
-					</div>
-
-					<div class='contact-details'>
-						<h3>Details</h3>
-						<p>If you don't want to send me a message, feel free to use any of these methods</p>
-
-						<div class='contact-detail'>
-							<span class='icon-envelope'></span>
-							<div>
-								<h4>Email</h4>
-								<p>Forest.D.Collins@gmail.com</p>
-							</div>
-						</div>
-
-						<div class='contact-detail'>
-							<span class='icon-phone'></span>
-							<div>
-								<h4>Phone</h4>
-								<p>918-351-8097</p>
-							</div>
-						</div>
-						
-						<div class='contact-detail'>
-							<span class='icon-map-pin'></span>
-							<div>	
-								<h4>Inhabits</h4>
-								<p>Denton, TX. 76209</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</main>
-
-		<% include ./views/utils/landing-notifications %>
-
-		<% include ./views/shared/footer %>
-
-
-		<script type='text/javascript'>
-			function downloadJS() {
-				let element1 = document.createElement('script');
-
-				element1.src = './scripts/vendors.min.js';
-				document.body.appendChild(element1);
-			}
-
-			window.addEventListener('load', downloadJS, false);
-		</script>
-
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js'></script>
-		<script src='./scripts/main.build.min.js'></script>
-	</body>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content="width=device-width, initial-scale=1">
+        <meta name='description' content="The Portfolio of Full-Stack Application Developer Forrest Collins">
+        <meta name='keywords' content="Developer Javascript Portfolio Frontend Backend Fullstack Node Web-Developer Application Programmer">
+
+        <title>Forrest Collins, Full-Stack Developer</title>
+
+        <link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+    </head>
+
+    <body>
+        <% include ./views/shared/nav %>
+        <% include ./views/shared/mobile-menu %>
+        <main class='landing-page-container page-container'>
+            <header class='landing-header header'>
+                <div class='wrapper standard'>
+                    <div class='content'>
+                        <h1>
+                            <span>Hi, I'm Forrest Collins</span>
+                            <span>I'm a Fullstack Engineer</span>
+                        </h1>
+
+                        <p>I design custom and innovative solutions for the modern web that are engineered to give the best user experience possible. At heart I'm just a big nerd who loves coffee, cats, and distributed systems. That's cool, right? <small>right..?</small></p>
+                    </div>
+                    <!-- content -->
+                    <% include ./views/pages/figures/header-phone %>
+                </div>
+                <!-- wrapper -->
+                <div class='bg'>
+                    <span class='band over bottom left rotate_cc origin_tl'></span>
+                    <span class='band under bottom right rotate_c origin_tr'></span>
+                </div>
+                <!-- bg -->
+            </header>
+
+            <section class='landing-bubbles'>
+                <div class='wrapper standard'>
+                    <div class='content'>
+                        <figure class='bubble-feature design'>
+                            <img class='icon design' src='./static/images/design.png' alt="Forrest's Design Principles">
+                            <h2>UI/UX Design</h2>
+                            <p>Great design starts with putting people first. Work with and you'll benefit from a collaborative user experience design approach that promises improved usability, accessibility, and effici600ency</p>
+                            <a href='/design'>Read More</a>
+                        </figure>
+
+                        <figure class='bubble-feature development'>
+                            <img class='icon development' src='./static/images/development.png' alt="Forrest's Development Principles">
+                            <h2>In-depth Development</h2>
+                            <p>I try to consider every detail, right down to each individual pixel. When we decide on a design, this is exactly how the finished product with look, complete with stunning animation and effects, and built with the latest technologies</p>
+                            <a href='/development'>Read More</a>
+                        </figure>
+
+                        <figure class='bubble-feature devops'>
+                            <img class='icon devops' src='./static/images/devops.png'>
+                            <h2>Devops</h2>
+                            <p>I use tools like AWS and NGINX to ensure that your product is optimized, distributed, and will perform to the best of its abilities regardless of the user's location or connection. All products are built with growth and scalability in mind</p>
+                            <a href='/devops'>Read More</a>
+                        </figure>
+                    </div>
+                    <!-- content -->
+                </div>
+                <!-- wrapper -->
+            </section>
+
+            <section class='landing-projects'>
+                <div class='wrapper standard'>
+                    <header>
+                        <h2>Here are some of my works</h2>
+                    </header>
+
+                    <div class='landing-projects-container'>
+                        <div>
+                            <figure class='single-project'>
+                                <img src='./images/opinion-res.png' alt="My project Opinionable">
+                                <figcaption>
+                                    <h3>Opinionable</h3>
+                                    <p>This project was one of my first real applications. Opinionable is a news aggregate and social-sharing application built with the MEAN stack</p>
+                                    <a href='/work/opinion'>
+                                        See More
+                                    </a>
+                                </figcaption>
+                            </figure>
+
+                            <figure class='single-project'>
+                                <img src='./images/boilerplate.png' alt='My Application Boilerplate'>
+                                <figcaption>
+                                    <h3>Application Boilerplate</h3>
+                                    <p>This started as a personal boilerplate to keep me from rewriting code when I started new application. It features almost everything you would need to get up and running with an application</p>
+                                    <a href='/work/application-boilerplate'>
+                                        See More
+                                    </a>
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <a class='btn btn-link' href='/works'>
+                            <span>See More Works</span>
+                        </a>
+                    </div> 
+
+                    <!-- landing-projects -->
+
+                    <figure class='landing-phone'>
+                        <span class='phone-camera'></span>
+                        <span class='phone-speaker'></span>
+                        <div class='phone-shadow'></div>
+                        <div class='phone-screen'>
+                            <div class='phone-screen-inner'>
+                                <a class="slide slide_1" id="phone_slide_1" href="work/application-boilerplate">
+                                    <img src='../images/boilerplate.png' alt="Boilerplate">
+                                </a>
+
+                                <a class="slide slide_2" id="phone_slide_2" href="work/blog">
+                                    <img src='../images/blog-res.png'>
+                                </a>
+
+                                <a class="slide slide_3" id="phone_slide_3" href="work/opinion">
+                                    <img src='../images/opinion-thread.png'>
+                                </a>
+                            </div>
+                        </div>
+
+                        <span class='phone-button'></span>
+                    </figure>
+                    <!-- Phone -->
+                </div>
+                <!-- wrapper -->
+            </section>
+
+            <section class='landing-about'>
+                <div class='wrapper standard'>
+                    <!-- <header>
+                        <h2>A small bit about me</h2>
+                    </header> -->
+
+                    <p>I started programming in college as part of my Physics and Mathematics major. I originally was working with ForTran and C++ simulating polyatomic molecular collisions.</p>
+
+                    <p>After leaving college I decided to put my programming skills and learn web-development. I soaked up all of the information that I could. Now, after almost 5 years as a programmer I have completely fallen in love with the web</p>
+
+                    <p>It is amazing the huge amount of progress the web has made in such a short amount of time. We now have the ability to access byte-code in Javascript, Universally rendered applications, Service-Workers and so much more. It is a great time to be a developer</p>
+
+                    <a class='btn btn-link' href='/about'>
+                        <span>Get to know me</span>
+                    </a>
+                </div>
+                <!-- wrapper -->
+                <div class='bg'>
+                    <span class='band white bottom left rotate_cc origin_tl'></span>
+                </div>
+            </section>
+
+            <section class='landing-info'>
+                <div class='wrapper narrow'>
+                    <div class='landing-info-content'>
+                        <div class="content">    
+                            <div class='intro'>
+                                <h3>Get in Touch</h3>
+                                <p>If you don't feel like contacting me here, you get ahold of me with any of these. Looking to contract me for work? I'd love to hear from you and start working with you to build something amazing</p>
+                            </div>
+
+                            <div class='info-links'>
+                                <a href="tel:9183518097">
+                                    <img src='./static/images/phone.png' alt="My phone number">
+                                    <span>918-351-8097</span>
+                                </a>
+
+                                <a href=':mailto:Forest.collins.portfolio@gmail.com'>
+                                    <img src='./static/images/message.png' alt='My email'>
+                                    <span>Forest.collins.portfolio@gmail</span>
+                                </a>
+
+                                <a href="https://twitter.com/fordocol" target="_blank">
+                                    <img src='./static/images/twitter.png' alt="My twitter">
+                                    <span>https://twitter.com/fordocol</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bands">
+                        <span class='band band_1 top left rotate_cc origin_bl'></span>
+                        <span class="band band_2 top left rotate_cc origin_bl"></span>
+                    </div>
+                </div>
+                <!-- wrapper -->
+                <div class='bg'>
+                    <span class='band band_1 top right rotate_cc origin_tr'></span>
+                    <span class='band band_2 top right rotate_cc origin_tr'></span>
+                    <span class='band band_3 top right rotate_cc origin_tr'></span>
+                </div>
+            </section>
+
+            <section class="landing-contact">
+                <div class="wrapper standard">
+                    <div class="intro">
+                        <h2>Send me a message!</h2>
+                        <p>You can send me a message directly below. I'd love to hear from you with anything you have to say</p>
+                    </div>
+                    <!-- intro -->
+                </div>
+                <!-- wrapper -->
+
+                <div class="landing-contact-form">
+                    <div class="wrapper standard">
+                        <form name="contact-form" class="contact-form">
+                            <div class="form-fields">
+                                <div class="field form-wrapper">
+                                    <label for="contact-name">Name</label>
+                                    <input type="text" id="contact-name" class="form-input">
+                                    <p class="error-message">
+                                        Sorry, I need your name!
+                                    </p>
+                                </div>
+
+                                <div class="field form-email form-wrapper">
+                                    <label for="contact-email">Email</label>
+                                    <input type="email" id="contact-email" class="form-input">
+                                    <p class="error-message">
+                                        Sorry, please enter a valid email!
+                                    </p>
+                                </div>
+
+                                <div class="field form-phone form-wrapper">
+                                    <label for="contact-phone">Phone</label>
+                                    <input type="text" id="contact-phone" class="form-input">
+                                    <p class="error-message">
+                                        Please enter your number XXX XXX XXXX
+                                    </p>
+                                </div>
+
+                                <div class="field full form-wrapper">
+                                    <label for="contact-message">Message</label>
+                                    <textarea id="contact-message" class="form-input"></textarea>
+                                    <p class="error-message">
+                                        I need to know what you want to say!
+                                    </p>
+                                </div>
+
+                                <div class="field">
+                                    <button class="btn form-submit" id="contact-send" type="button">
+                                        <span>Send!</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- fields -->
+                        </form>
+                    </div>
+
+                <!-- wrapper -->
+                    <div class="bg">
+                        <span class="band band_1 top right rotate_cc origin_br"></span>
+                        <span class="band band_2 bottom left rotate_cc origin_tl"></span>
+                    </div>
+                </div>
+            </section>
+
+            <% include ./views/shared/footer %> 
+        </main>
+
+        <script>
+            const wireframe = document.querySelector('.wireframe');
+            const phoneHeader = document.querySelector('.w_header.w_animate');
+            const phoneFeature = document.querySelector('.w_feature.w_animate');
+            const phonePortals = document.querySelector('.w_portals');
+            const phoneSplit = document.querySelector('.w_split');
+            const phoneServices = document.querySelector('.w_services');
+            const phoneForm = document.querySelector('.w_form');
+            const phoneNews = document.querySelector('.w_news');
+            const phoneFooter = document.querySelector('.w_footer');
+
+            function animateBody() {
+                document.body.classList.add('load-complete');
+                window.setTimeout(() => {
+                    phoneHeader.classList.add('show');
+                    window.setTimeout(() => {
+                        phoneFeature.classList.add('show');
+                        window.setTimeout(() => {
+                            phonePortals.classList.add('show');
+                            window.setTimeout(() => {
+                                phoneSplit.classList.add('show');
+                                window.setTimeout(() => {
+                                    phoneForm.classList.add('show');
+                                    window.setTimeout(() => {
+                                        phoneNews.classList.add('show');
+                                        window.setTimeout(() => {
+                                            phoneFooter.classList.add('show');
+                                        }, 800);
+                                    }, 1000);
+                                }, 3200);
+                            }, 950);
+                        }, 400);
+                    }, 400);
+                }, 600);
+            } 
+
+            function animateFrame() {
+                wireframe.classList.add('step-1');
+                window.setTimeout(() => {
+                    phoneServices.classList.add('show');
+                    window.setTimeout(() => {
+                        wireframe.classList.add('step-3');
+                        wireframe.classList.remove('step-1');
+                        window.setTimeout(() => {
+                            wireframe.classList.remove('step-3');
+                        }, 2600);
+                    }, 2200);
+                }, 400);
+            }
+
+             window.setTimeout(() => {
+                animateBody();
+                window.setTimeout(() => {
+                    animateFrame()
+                }, 3700);
+            }, 1200); 
+        </script>
+        <script src="./main.build.js"></script>
+    </body>
 </html>

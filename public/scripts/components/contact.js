@@ -1,18 +1,20 @@
-import { onBlur, removeBlur } from '../utils/validator'
+import { onBlur } from '../utils/validator'
 import notifications from './notifications'
-import axios from 'axios'
+import axios from 'axios';
 
 export default function contact() {
-	const formWrapper = document.querySelectorAll('.form-wrapper');
-	const formInputs = document.querySelectorAll('.contact-input');
-	const emailInput = document.getElementById('contact-email');
-	const nameInput = document.getElementById('contact-name');
-	const subjectInput = document.getElementById('contact-subject');
-	const messageInput = document.getElementById('contact-message');
-	const submitButton = document.getElementById('contact-send');
+	const formWrapper = document.querySelectorAll('.field');
+	const formInputs = document.querySelectorAll('.field input');
+	const submitButton = document.querySelector('.form-submit');
 	const successContent = document.getElementById('contact-success');
 	const failureContent = document.getElementById('contact-failure');
 	const errorContent = document.getElementById('contact-error');
+	const contactState = {
+		name: '',
+		email: '',
+		phone: '',
+		message: '',
+	};
 
 	const successNotify = new notifications({
 		content: successContent,
@@ -32,19 +34,19 @@ export default function contact() {
 		type: 'warning'
 	});
 
-	onBlur(formInputs);
+	function updateState(node) {
+		const value = node.value;
+
+		contactState[node.name] = value;
+	}
+
+	onBlur(formInputs, updateState);
 
 	function sendMessage() {
 		if (submitButton.classList.contains('form-valid')) {
 			submitButton.classList.add('contact-loading');
-		
 
-			axios.post('/contact', {
-				name: nameInput.value,
-				email: emailInput.value,
-				subject: subjectInput.value,
-				message: messageInput.value,
-
+			axios.post('/contact', contactState, {
 				headers: {
 					'Content-Type': 'Application/Json'
 				}
@@ -61,12 +63,16 @@ export default function contact() {
 					window.dispatchEvent(success);
 				} else {
 					submitButton.classList.remove('contact-loading');
-					console.log(response);
 
 					let failure = new Event('message-failed');
 
 					window.dispatchEvent(failure);
 				}
+			})
+			.catch(err => {
+				submitButton.classList.remove('contact-loading');
+				let failure = new Event('message-failed');
+				window.dispatchEvent(failure);
 			})
 		} else {
 			let error = new Event('message-error');
@@ -75,16 +81,9 @@ export default function contact() {
 	}
 
 	function resetForm() {
-		let length = formInputs.length;
-
-		for (let i = 0; i < length; i++) {
-			formInputs[i].value = '';
-
-			if (formInputs[i].parentNode.classList.contains('valid')) {
-				formInputs[i].parentNode.classList.remove('valid');
-			} else {
-				formInputs[i].parentNode.classList.remove('email-valid');
-			}
+		for (let input of formInputs) {
+			input.value = '';
+			input.classList.remove('valid');
 		}
 	}
 

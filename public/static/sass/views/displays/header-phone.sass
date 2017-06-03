@@ -1,0 +1,426 @@
+.header-phone
+    position: absolute
+    top: 170px
+    right: 0
+    height: 680px
+    width: 360px
+    padding: 65px 15px
+    background: #fff
+    box-shadow: 0 0 200px 0 rgba(0, 0, 0, 0.1)
+    border-radius: 25px
+    opacity: 0
+    display: none
+    transform: translate(0, 50%)
+    transition: opacity 0.75s ease, transform 0.75s ease
+
+    .shadow
+        position: absolute
+        top: 65px
+        left: 15px
+        height: inherit
+        width: calc(100% - 30px)
+        height: calc(100% - 130px)
+        box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.075)
+        z-index: 2
+        pointer-events: none
+
+    .button,
+    .camera,
+    .speaker
+        display: block
+        left: 50%
+
+    .camera
+        position: absolute
+        top: 29px
+        height: 7px
+        width: 7px
+        margin-left: -48px
+        background: #dbe3eb
+        border-radius: 100%
+
+    .speaker
+        position: absolute
+        top: 31px
+        height: 3px
+        width: 44px
+        margin-left: -22px
+        background: #ebf0f5
+        border-radius: 4px
+
+    .screen
+        position: relative
+        height: 100%
+        width: 100%
+        background: #000
+        overflow: hidden
+
+        .inner
+            position: relative
+            min-height: 100%
+            width: 100%
+            background: #fff
+            overflow: hidden
+            z-index: 1
+
+    .button
+        position: absolute
+        bottom: 17px
+        height: 30px
+        width: 30px
+        margin-left: -17px
+        background: #eeeff1
+        border-radius: 100%
+
+.w_header
+    .wrapper
+        display: flex
+        align-items: center
+
+.w_portals
+    display: flex
+    align-items: center
+    width: 108%
+    padding: 40px 0 32px
+
+    .w_portal
+        width: 25.333%
+        margin: 0 4%
+        opacity: 0
+        transform: scale(0)
+
+        .w_image
+            height: 32px
+            width: 100%
+            margin-bottom: 12px
+
+        .w_text
+            text-align: left
+
+    &.show
+        .w_portal
+            opacity: 1
+            transform: scale(1)
+
+            .w_text
+                &:nth-of-type(1)
+                    width: 80%
+
+                &:nth-of-type(2)
+                    width: 60%
+
+.w_split
+    padding: 20px 0
+    width: 0
+
+    .wrapper
+        display: flex
+
+    .w_image
+        height: 145px
+        width: 47%
+        margin-right: 3%
+        opacity: 0
+        transform: scale(0)
+
+    .w_text
+        width: 0
+
+    .w_content
+        width: 47%
+        margin-left: 3%
+        padding: 20px 0 0
+
+        .w_btn
+            margin-top: 20px
+            background: #2191cb
+            opacity: 0
+            transform: scale
+
+    &.show
+        width: 100%
+        
+        .w_image
+            opacity: 1
+            transform: scale(1)
+
+        .w_text
+            &:nth-of-type(1)
+                width: 70%
+
+            &:nth-of-type(2)
+                width: 100%
+
+            &:nth-of-type(3)
+                width: 90%
+
+            &:nth-of-type(4)
+                width: 75%
+
+            &:nth-of-type(5)
+                width: 85%
+
+        .w_content
+            .w_btn
+                opacity: 1
+                transform: scale
+
+.w_services
+    display: flex
+    flex-flow: row wrap
+    width: 110%
+    padding: 40px 0 14px
+
+    .w_service
+        display: flex
+        align-items: center
+        width: 23.333%
+        margin: 0 5% 25px
+        opacity: 0
+        transform: scale(0)
+
+        .w_image
+            height: 32px
+            width: 40%
+
+        .w_content
+            width: 45%
+            margin-left: 10px
+
+            .w_text
+                &:nth-of-type(3)
+                    display: none
+
+                &.title
+                    margin: 7px 0 8px
+
+    &.show
+        .w_service
+            opacity: 1
+            transform: scale(1)
+
+            .w_content
+                .w_text
+                    &:nth-of-type(1)
+                        width: 75%
+
+                    &:nth-of-type(2)
+                        width: 100%
+
+.w_form
+    padding: 20px 0
+    width: 0
+
+    .w_fields
+        display: flex
+        align-items: center
+        width: 104%
+
+    .w_field
+        height: 30px
+        width: 36%
+        margin: 0 2%
+        background: #fff
+        border-radius: 3px
+        opacity: 0
+        transform: scale(0)
+
+        .w_text
+            margin: 12px 0 0 15px
+            background: #dbe0e4
+
+    .w_btn
+        height: 30px
+        width: 16%
+        margin: 0 2%
+        background: #2191cb
+        opacity: 0
+        transform: scale(0)
+
+    &.show
+        width: 100%
+
+        .w_field
+            opacity: 1
+            transform: scale(1)
+
+        .w_btn
+            opacity: 1
+            transform: scale(1)
+
+.w_news
+    display: flex
+    flex-wrap: wrap
+    width: 104%
+    padding: 40px 0 22px
+
+    .w_article
+        position: relative
+        height: 90px
+        width: 46%
+        margin: 0 2% 4%
+        background: #8a98a4
+        border-radius: 3px
+        opacity: 0
+        transform: scale(0)
+
+        .w_content
+            position: absolute
+            bottom: 0
+            left: 0
+            width: 100%
+            padding: 0 20px 10px
+
+        .w_text
+            width: 0
+
+            &.title
+                background: #fff
+
+        &.large
+            height: 120px
+
+    &.show
+        .w_article
+            opacity: 1
+            transform: scale(1)
+
+            &:nth-of-type(1)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 75%
+
+                    &:nth-of-type(2)
+                        width: 85%
+
+                    &:nth-of-type(3)
+                        width: 75%
+
+
+            &:nth-of-type(2)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 55%
+
+                    &:nth-of-type(2)
+                        width: 65%
+
+                    &:nth-of-type(3)
+                        width: 60%
+
+            &:nth-of-type(3)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 35%
+
+                    &:nth-of-type(2)
+                        width: 45%
+
+                    &:nth-of-type(3)
+                        width: 40%
+
+            &:nth-of-type(4)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 60%
+
+                    &:nth-of-type(2)
+                        width: 70%
+
+                    &:nth-of-type(3)
+                        width: 65%
+
+.w_footer
+    width: 0
+    padding: 20px 0 12px
+    background: #2d3841
+
+    .wrapper
+        display: flex
+        align-items: center
+
+    .w_links
+        width: 30%
+
+        .w_text
+            width: 0
+            background: #5a5f63
+
+            &.title
+                background: #91969a
+
+    &.show
+        width: 100%
+
+        .w_links
+            &:nth-of-type(1)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 70%
+
+                    &:nth-of-type(2)
+                        width: 60%
+
+                    &:nth-of-type(3)
+                        width: 65%
+
+                    &:nth-of-type(4)
+                        width: 58%
+
+                    &:nth-of-type(5)
+                        width: 62%
+
+            &:nth-of-type(2)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 50%
+
+                    &:nth-of-type(2)
+                        width: 62%
+
+                    &:nth-of-type(3)
+                        width: 58%
+
+                    &:nth-of-type(4)
+                        width: 52%
+
+                    &:nth-of-type(5)
+                        width: 56%
+
+            &:nth-of-type(3)
+                .w_text
+                    &:nth-of-type(1)
+                        width: 65%
+
+                    &:nth-of-type(2)
+                        width: 60%
+
+                    &:nth-of-type(3)
+                        width: 62%
+
+                    &:nth-of-type(4)
+                        width: 58%
+
+                    &:nth-of-type(5)
+                        width: 57%
+
+@media screen and (min-width: 800px)
+    .header-phone
+        display: block
+
+@media screen and (min-width: 1000px)
+    .header-phone
+        right: 140px
+@media screen and (min-width: 1200px)
+    .header-phone
+        top: 190px
+        left: 0
+        height: 690px
+        width: 540px
+        padding: 65px 50px
+        box-shadow: 0 0 200px 0 rgba(0, 0, 0, 0.1)
+        border-radius: 25px
+
+        .screen
+            margin-left: -34px
+            width: calc(100% + 68px)

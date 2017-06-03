@@ -1,165 +1,182 @@
-.about-page-container
-	padding: 180px 0 220px 0
-	background: #dee0e5
+.about-header
+    position: relative
+    padding: 240px 0
+    overflow: hidden
 
-	> header
-		padding: 60px 0 90px 0
+    .intro
+        position: relative
+        max-width: 600px
+        margin: 0 auto
+        opacity: 1
+        text-align: left
+        transition: opacity .75s ease
+        transition-delay: .5s
+        z-index: 2
 
-		h1
-			@include muli()
-			font-weight: 300
-			font-size: 52px
-			letter-spacing: 6px
-			text-align: center
-			color: rgba(56, 73, 90, 0.7)
+        h1
+            font-size: 35px
+            margin-bottom: 30px
+            color: #fff
 
+        p
+            font-size: 18px
+            line-height: 24px
+            margin-bottom: 25px
+            color: rgba(255, 255, 255, 0.8)
 
-.about-content
-	ul
-		display: flex
-		flex-direction: column
-		align-items: center
+    .bg
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        overflow: hidden
+        z-index: 1
+        background: #20162c
 
+        .band
+            height: 1px
+            z-index: 1
+            background: linear-gradient(to right, rgba(44, 32, 58, 0) 0%, rgba(44, 32, 58, 1) 40%)
 
-	li
-		display: flex
-		flex-direction: column
-		align-items: center
-		position: relative
-		width: 6px
-		margin: 0 auto
-		background: #2c3f52
-		background: #fff
-		list-style-type: none
+        .band_1
+            width: 100%
+            top: 100px
 
-		&:nth-of-type(5)
-			.timeline-widget
-				margin-bottom: 0
+        .band_2
+            width: 80%
+            top: 200px
 
-		&:nth-child(odd)
-			.timeline-widget
-				transform: translate3d(100%, 0, 0)
+        .band_3
+            width: 60%
+            top: 300px
 
-		&:nth-child(even)
-			.timeline-widget
-				transform: translate3d(-100%, 0, 0)
+        .band_4
+            width: 50%
+            top: 400px
 
-		&.in-view
-			.timeline-marker
-				background: #429e97
+        .band_5
+            width: 40%
+            top: 500px
 
-			.timeline-widget
-				transform: none
-				visibility: visible
-				opacity: 1
+        .band_6
+            width: 60%
+            top: 600px
 
+        .band_7
+            width: 30%
+            top: 700px
 
-.timeline-marker
-	display: flex
-	align-items: center
-	justify-content: center
-	height: 65px
-	width: 65px
-	border-radius: 50%
-	background: #2c3f52
-	transition: all .4s ease-out
+.tiles
+    position: relative
+    width: 100%
+    z-index: 2
 
-	p
-		@include lato()
-		font-weight: 300
-		letter-spacing: 1px
-		line-height: 24px
-		font-size: 18px
-		color: #fff
+.tile
+    position: relative
+    padding: 50px
+    margin-bottom: 50px
+    color: #fff
+    background: #4c3967
+    border-radius: 3px
+    box-shadow: 0 0 150px 0 rgba(0, 0, 0, 0.13)
 
-.timeline-widget
-	position: relative
-	width: 80vw
-	left: 0
-	right: 0
-	padding: 15px
-	margin: 45px 0
-	border-radius: 4px
-	box-shadow: 0 2px 8px 0 rgba(0,0,0,0.12), 0 4px 12px 0 rgba(0,0,0,0.05)
-	background: #fff
-	visibility: hidden
-	opacity: 0
-	transition: all .4s ease
-	z-index: 50
+    p
+        font-size: 17px
+        line-height: 24px
+        color: rgba(255, 255, 255, 0.8)
 
-	p
-		@include lato()
-		font-weight: 300
-		letter-spacing: 1px
-		line-height: 28px
-		font-size: 14px
-		text-align: center
-		color: #757575
+.about-info
+    position: relative
 
+    .bg
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: #2e223e
+        overflow: hidden
+        z-index: 1
 
+        .band_1
+            background: #20162c
+
+        .band_2
+            background: #fff
+
+.about-image
+    padding: 80px 0 
+
+    .wrapper
+        display: flex
+        align-items: center
+        justify-content: center
+
+    img
+        height: 350px
+        width: 60%
 
 @media screen and (min-width: 800px)
-	.timeline-widget
-		width: 60vw
-		margin: 70px 0
+    .about-header
+        .intro
+            h1
+                font-size: 28px
+
+            p
+                font-size: 22px
+                line-height: 30px
+
+    .about-image
+        img
+            width: 50%
 
 @media screen and (min-width: 1000px)
-	.timeline-marker
-		height: 75px
-		width: 75px
+    .tiles
+        width: 70%
+        margin: 0 auto
 
-	.timeline-widget
-		width: 50vw
+    .about-image
+        img
+            width: 40%
 
-@media screen and (min-width: 1300px)
+@media screen and (min-width: 1200px)
+    .about-header
+        .intro
+            text-align: center
 
-	.timeline-widget
-		width: 400px
+    .mobile-column
+        display: none
 
-		&:before
-			content: ''
-			position: absolute
-			bottom: 7px
-			width: 0
-			height: 0
-			border-style: solid
+    .about-info
+        .wrapper
+            width: 70%
 
-	li
-		&:nth-child(odd)
-			.timeline-widget
-				left: 245px
-
-				&:before
-					content: ''
-					left: -15px
-					border-width: 8px 16px 8px 0
-					border-color: transparent #fff transparent transparent
-					z-index: 55
-
-		&:nth-child(even)
-			.timeline-widget
-				left: -245px
-
-				&:before
-					content: ''
-					right: -15px
-					border-width: 8px 0 8px 16px
-					border-color: transparent transparent transparent #fff
+    .tiles
+        display: flex
+        flex-wrap: wrap
+        width: 100%
 
 
-@media screen and (min-width: 1500px)
-	.timeline-marker
-		height: 90px
-		width: 90px
+    .column-left
+        width: 45%
+        margin: 0 2%
+        transform: translateY(-120px)
 
-	.timeline-widget
-		width: 480px
+        .tile
+            &:nth-of-type(1)
+                background: #3f3054
 
-	li
-		&:nth-child(odd)
-			.timeline-widget
-				left: 350px
+    .column-right
+        width: 45%
+        margin: 0 2%
 
-		&:nth-child(even)
-			.timeline-widget
-				left: -350px
+        .tile
+            &:nth-of-type(2)
+                background: #3f3054
+
+    .about-image
+       padding: 0 0 80px
+
+       img
+           width: 26%

@@ -1,11 +1,10 @@
-import express from 'express';
-import path from 'path';
-import compression from 'compression';
-import morgan from 'morgan';
-import ejs from 'ejs';
-import bodyParser from 'body-parser';
-
-import indexRoutes from '../routes/index.server.routes'
+const express = require('express');
+const path = require('path');
+const compression = require('compression');
+const morgan = require('morgan');
+const ejs = require('ejs');
+const bodyParser = require('body-parser');
+const indexRoutes = require('../routes/index.server.routes');
 
 module.exports = () => {
 	const app = express();

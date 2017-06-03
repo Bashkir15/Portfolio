@@ -1,123 +1,179 @@
-.footer
-	background: darken(#2c3f52, 10%)
-	background: rgba(233, 248, 183, 0.7)
-	display: flex
-	flex-direction: column
-	align-items: center
-	padding: 40px 0
+.footer-top
+    padding: 80px 0 45px
+    background: #262c33
 
-	p
-		@include sin()
-		font-weight: 400
-		font-size: 16px
-		letter-spacing: 2px
-		color: #9a9a9a
+    > div
+        width: 1000px
+        margin: 0 auto
 
-.footer-social-buttons
-	display: flex
-	flex-direction: row
-	align-items: center
-	justify-content: center
-	padding-top: 50px
-
-.footer-button
-	display: flex
-	flex: 1
-	padding-right: 12px
-
-	div
-		display: flex
-		align-items: center
-		justify-content: center
-		height: 45px
-		width: 45px
-		border-radius: 50%
-		box-shadow: 0 0 0 3px #9a9a9a
-		transition: all .4s ease-out
-
-		span
-			color: rgba(0,0,0,0.35)
-			font-size: 18px
-			transiton: all .4s ease-out
-
-		&:hover
-			box-shadow: 0 0 0 6px #f1f3f3
+.footer-columns
+    width: 90%
+    margin-left: 5%
+    display: flex
+    flex-direction: column
 
 
+    h6
+        font-size: 13px
+        letter-spacing: 1px
+        text-transform: uppercase
+        margin: 0 0 5px
 
-@media screen and (min-width: 630px)
-	.footer
-		p
-			font-size: 18px
-			letter-spacing: 3px
+.footer-col-1
+    display: inline-block
+    width: 20%
+    margin-bottom: 25px
 
-	.footer-button
-		padding-right: 18px
+    h6
+        color: #50abf1
 
-		div
-			span
-				font-size: 22px
+.footer-col-2
+    width: 20%
+    display: inline-block
+    margin-bottom: 25px
 
-@media screen and (min-width: 1325px)
-	.footer
-		flex-direction: row
-		padding: 40px 25px
+    h6
+        color: #b169cd
 
-	.footer-text
-		display: flex
-		flex: 1
-		flex-basis: 0
-		align-items: center
-		justify-content: flex-start
+.footer-col-3
+    width: 10%
+    display: none
 
-	.footer-social-buttons
-		flex: 1
-		flex-basis: 0
-		justify-content: flex-end
-		padding-top: 0
+    h6
+        color: #e8724d
 
-	.footer-button
-		flex: 0
+.footer-col-4
+    width: 45%
+    display: inline-block
 
-		button
-			position: relative
-			height: 40px
-			padding: 0 10px
-			transition: all .4s ease
+    h6
+        &:nth-of-type(1)
+            color: #6cb051
 
-			span
-				@include sin()
-				font-weight: 400
-				font-size: 18px
-				letter-spacing: 2px
-				color: #9a9a9a
-				transition: all .28s ease-in-out
+        &:nth-of-type(2)
+            color: #d63d6c
 
-			&:before,
-			&:after
-				display: block
-				content: ""
-				position: relative
-				width: 0px
-				margin: 0 auto
-				backface-visibility: hidden
-				border: 1px solid rgba(47,47,47,0.98)
-				transition: all .28s ease-in-out
+    p
+        line-height: 22px
+        margin: 0 0 20px
+        color: #c8ced5
 
-			&:after
-				bottom: -10px
+    form
+        display: flex
+        width: 100%
+        position: relative
+        margin-bottom: 30px
+        border-radius: 4px
 
-			&:before
-				top: -10px
+        > div
+            position: relative
 
-			&:hover
-				&:after,
-				&:before
-					width: 70%
-					transition: width .35s ease-in-out
-					border-color: #9a9a9a
+        label
+            position: absolute
+            top: 16px
+            left: 12px
+            font-size: 17px
+            color: #c8ced5
+            transition: all .4s ease-out
 
-				span
-					letter-spacing: 6px
+        input
+            width: 100%
+            height: 50px
+            padding: 0 18px
+            background: #1e2329
+            color: #fff
+            border: none
+            box-sizing: border-box
 
+            &:focus
+                & + label
+                    left: -42px
 
+        .newsletter-submit
+            width: 25%
+            height: 50px
+            padding: 0
+            border: none
+            border-top-right-radius: 4px
+            border-bottom-right-radius: 4px
+            text-align: center
+            display: block
+            background: #6cb051
+            color: #fff
+            font-family: 'Source Sans Pro'
+            font-weight: normal
+            line-height: 50px
+            letter-spacing: 1px
+            position: relative
+            cursor: pointer
+            text-transform: uppercase
+            transition: all .5s ease
+
+            &:hover
+                background: darken(#6cb051, 10%)
+
+        h6
+            color: #d63d6c
+
+        p
+            line-height: 22px
+            margin: 0 0 20px
+            color: #c8ced5
+
+            a
+                color: inherit
+                outline: 0
+
+.footer-links
+    margin: 0
+    padding: 0
+    line-height: 22px
+    font-weight: 300
+
+    li
+        margin: 0 0 2px
+
+        a
+            color: #fff
+            outline: 0
+
+.footer-bottom
+    padding: 25px 0 25px 5%
+    background: #1c2127
+
+    > div
+        width: auto
+        margin: 0 35px
+        text-align: center
+
+    p
+        letter-spacing: 1px
+        line-height: 20px
+        color: #c8ced5
+        font-size: 12px
+        margin: 0 0 20px
+
+    .space
+        width: 100%
+        height: 1px
+        margin: 0 10px
+        color: #4a525c
+
+    .highlight
+        color: #e3ebf5
+
+@media screen and (min-width: 900px)
+    .footer-columns
+        flex-direction: row
+
+    .footer-col-3
+        display: inline-block
+
+@media screen and (min-width: 1200px)
+    .footer-col-3
+        width: 20%
+
+    .footer-bottom
+        > div
+            width: 1000px
+            margin: 0 auto

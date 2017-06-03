@@ -1,33 +1,19 @@
-import routes from './scripts/pages/routes'
-import preloader from './scripts/utils/preloader'
-import navUtil from './scripts/components/nav'
-import scrollIn from './scripts/utils/scroll.in'
+import routes from './scripts/pages/routes';
+import mobileMenu from './scripts/components/mobile.menu';
 
-const scroller = new scrollIn();
-let scrollTimeout;
+function start() {
+    const mobileTrigger = document.querySelector('.nav-trigger');
 
-routes();
-preloader();
-navUtil();
+    if (window.innerWidth || document.documentElement.clientWidth < 1100) {
+        const mobile = new mobileMenu();
+        mobileTrigger.addEventListener('click', mobile.toggle);
+    }
 
-function scrollThrottle() {
-	if (!scrollTimeout) {
-		window.requestAnimationFrame(handleScroll);
-	}
-
-	scrollTimeout = false;
+    routes();
 }
 
-function handleScroll() {
-	scroller.viewPortChange();
-	scrollTimeout = true;
-}
+start();
 
-
-
-window.addEventListener('DOMContentLoaded', scroller.init);
-window.addEventListener('scroll', scrollThrottle);
-window.addEventListener('resize', scrollThrottle);	
 
 
 

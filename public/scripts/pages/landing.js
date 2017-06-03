@@ -1,19 +1,11 @@
 import contact from '../components/contact'
-import scrollTo from '../utils/scroll.to';
-import heading from '../components/heading'
+import slider from '../utils/slider';
 
 function landing() {
-	const contactScroller = document.getElementById('contact-scroller');
-	const contactContainer = document.getElementById('contact-container');
+    const slides = document.querySelectorAll('.slide');
 
-
-	heading();
+    slider(slides);
 	contact();
-
-	contactScroller.addEventListener('click', () => {
-		scrollTo.smoothScroll(contactContainer.offsetTop);
-	});
-
 }
 
 export default landing

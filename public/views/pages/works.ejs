@@ -1,157 +1,120 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset='utf-8'>
-		<meta name='viewport' content="width=device-width, initial-scale=1">
-		<meta name='description' content="These are the works of Fullstack developer Forrest Collins">
-		<meta name='keywords' content='Developer Programmer Mongo Node Angular React Javascript Web-Developer Application ES6'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content="width=device-width, initial-scale=1">
+        <meta name='description' content="These are the works of Fullstack developer Forrest Collins">
+        <meta name='keywords' content='Developer Programmer Mongo Node Angular React Javascript Web-Developer Application ES6'>
 
-		<title>Forrdev -- Forrest's Projects</title>
-		
-		<link rel='preload' href='./styles/main.css' as="style" onload="this.rel='stylesheet'">
+        <title>Forrdev -- Forrest's Projects</title>
+        
+        <link rel='preload' href='./styles/main.min.css' as="style" onload="this.rel='stylesheet'">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
 
-		<noscript>
-			<link rel='stylesheet' href='./styles/main.css'>
-		</noscript>
+        <noscript>
+            <link rel='stylesheet' href='./styles/main.min.css'>
+        </noscript>
+    </head>
 
-		<style>
-			body .main-container {
-				opacity: 0;
-				transition: all .4s ease-out;
-			}
+    <body>
+        <% include ../shared/nav %>
+        <% include ../shared/mobile-menu %>
 
-			body.loaded .main-container {
-				opacity: 1;
-			}
-			
-		</style>
-	</head>
+        <main class="works-page-container main-container">
+            <header class="works-header">
+                <div class="wrapper standard">
+                    <div class="content">
+                        <h1>My Projects</h1>
+                        <p>Below is a display of most of the public projects I have worked on along with some case studies. You can check those out, see the site, or view them on my github</p>
+                        <a class="btn">
+                            <span>See My Github</span>
+                        </a>
+                    </div>
+               </div>
+               <!-- wrapper -->
+               <div class="bg">
+                   <img src="./static/images/work-background.jpg" alt="My Works">
+                   <span class="band over bottom left rotate_cc origin_tl"></span>
+                   <span class="band under bottom left rotate_cc origin_tl offset">
+                </span>
+            </header>
 
-	<body>
-		<% include ../shared/preloader %>
+            <section class="works-container">
+                    <figure class="work" data-entrance="fade">
+                        <div>
+                            <img src="./images/opinion-res.png" alt="Opinionable Project">
+                        </div>
+                        <figcaption>
+                            <h3>Opinionable</h3>
+                            <span>Opinionable is a news aggregate and social sharing application</span>
+                            <div class="work-links">
+                                <a href="/work/opinion">See More</a>
+                                <a href="/">See Site</a>
+                            </div>
+                        </figcaption>
+                    </figure>
 
-		<main class='works-page-container main-container'>
-			<% include ../shared/nav %>
-			<% include ../shared/mobile-menu %>
-			<header>
-				<h1>My Works</h1>
-			</header>
+                <figure class="work" data-entrance="fade">
+                    <div><img src="./images/blog-res.png" alt="Blog Project"></div>
+                    <figcaption>
+                        <h3>Blog</h3>
+                        <span>This is my personal blog devoted to development</span>
+                        <div class="work-links">
+                        <a href="/work/blog">See More</a>
+                        <a href="/">See Site</a>
+                        </div>
+                    </figcaption>
+                </figure>
 
-			<section class='works-container'>
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/opinion-res.png' alt='Opinionable Project'>
-					<figcaption>
-						<h3>Opinionable</h3>
-						<div class='figure-info'>
-						<p>Opinionable is a news aggregate and social sharing application build.</p>
-						<a href='/work/opinion'>
-							See more
-						</a>
-						</div>
-					</figcaption>
-				</figure>
+                <figure class="work" data-entrance="fade">
+                    <div><img src="./images/boilerplate.png" alt="Application Boilerplate Project"></div>
+                    <figcaption>
+                        <h3>Application Boilerplate</h3>
+                        <span>A Node Boilerplate containing the most essential functionalities for creating a multitude of Applications</span>
+                        <div class="work-links boiler-links">
+                        <a href="/work/application-boilerplate">See More</a>
+                        <a href="">See Project</a>
+                        </div>
+                    </figcaption>
+                </figure>
 
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/blog-res.png' alt='Blog Project'>
-					<figcaption>
-						<h3>Blog</h3>
-						<div class='figure-info'>
-						<p>This is my personal blog devoted to development, the web, and science</p>
-						<a href='/work/blog'>
-							See More
-						</a>
-						</div>
-					</figcaption>
-				</figure>
+                <figure class="work" data-entrance="fade">
+                    <div><img src="./images/soft-res.png" alt="Softserve Project"></div>
+                    <figcaption>
+                        <h3>Softserve</h3>
+                        <span>Softserve is an in-progress Javascript UI Library built with modularity in mind</span>
+                        <div class="work-links">
+                        <a href="/work/softserve">See More</a>
+                        <a href="/">See Project</a>
+                        </div>
+                    </figcaption>
+                </figure>
 
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/evo-res.png' alt='Evolution Project'>
-					<figcaption>
-						<h3>Evolution</h3>
-						<div class='figure-info'>
-						<p>This is a rebranding for a local smokeshop who wanted a more modern appearance</p>
-						<a href='/work/evolution'>
-							See More
-						</a>
-						</div>
-					</figcaption>
-				</figure>
+                <figure class="work" data-entrance="fade">
+                    <div><img src="./images/die-top.png" alt="I will Die Project"></div>
+                    <figcaption>
+                        <h3>I Will Die</h3>
+                        <span>A collaborative project started on Reddied to fight against the repeal of the ACA</span>
+                        <div class="work-links">
+                        <a href="/work/i-will-die">See More</a>
+                        <a href="">See Project</a>
+                        </div>
+                    </figcaption>
+                </figure>
 
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/gol-res.png' alt='Golondrina Project'>
-					<figcaption>
-						<h3>Golondrina</h3>
-						<div class='figure-info'>
-						<p>This was a Portfolio project for a local artist seeking to advertize their services online</p>
-						<a href='/work/Golondrina'>
-							See more
-						</a>
-						</div>
-					</figcaption>
-				</figure>
-
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/boilerplate.png' alt='Application Boilerplate Project'>
-					<figcaption>
-						<h3>Application Boilerplate</h3>
-						<div class='figure-info'>
-						<p>A Node boilerplate containing the most common functionalities from applications</p>
-						<a href='/work/application-boilerplate'>See More</a>
-						</div>
-					</figcaption>
- 				</figure>
-
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/soft-res.png' alt='Softserve Project'>
-					<figcaption>
-						<h3>Softserve</h3>
-						<div class='figure-info'>
-						<p>Softserve is a VanillaJS UI and utility library that is modular, modern, and customizable</p>
-						<a href='/work/softserve'>
-							See More
-						</a>
-						</div>
-					</figcaption>
-				</figure>
-
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/math.jpg' alt='Math Projcet'>
-					<figcaption>
-						<h3>Math</h3>
-						<div class='figure-info'>
-						<p>A very small work-in-progress math utility library for Javascript</p>
-						<a href='/work/math'>
-							See More
-						</a>
-						</div>
-					</figcaption>
-				</figure>
-
-				<figure class='work' data-entrance='fade'>
-					<img src='./images/die-top.png' alt='I Will Die project'>
-					<figcaption>
-						<h3>I Will Die</h3>
-						<div class='figure-info'>
-						<p>A collaborative project started on Reddit to fight against the repeal of the ACA</p>
-						<a href='/work/i-will-die'>
-							See More
-						</a>
-						</div>
-					</figcaption>
-				</figure>
-			</section>
-
-			<div class='github-button'>
-				<p>Feel free to check out my github here</p>
-				<a href='https://github.com/Bashkir15' target="_blank">
-					<button type='button' aria-label='Go check out my github'>
-						<span class='icon-github'></span>
-					</button>
-				</a>
-			</div>
-		</main>
-
-		<% include ../shared/footer %>
-		<script src='./main.build.js'></script>
-	</body>
+                <figure class="work" data-entrance="fade">
+                    <div><img src="./images/math.jpg" alt="Math Project"></div>
+                    <figcaption>
+                        <h3>Math</h3>
+                        <span>A very small in-progress math utility library for Javascript</span>
+                        <div class="work-links">
+                        <a href="/work/math">See More</a>
+                        <a href="">See Project</a>
+                        </div>
+                    </figcaption>
+                </figure>
+            </section>
+        </main>
+        <script src=".main.build.js"></script>
+    </body>
 </html>
