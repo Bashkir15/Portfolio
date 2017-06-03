@@ -10,16 +10,16 @@ module.exports = () => {
 		const { messageSender } = req.body.email;
 
 		const transporter = nodemailer.createTransport({
-			service: global.config.mailer.service,
+			service: global.config.MAILER_SERVICE,
 			auth: {
-				user: global.config.mailer.auth.user,
-				pass: global.config.mailer.auth.pass
-			}
+				user: global.config.MAILER_USER,
+				pass: global.config.MAILER_PASS,
+			},
 		});
 
 		const mailOptions = {
 			from: messageSender,
-			to: global.config.mailer.auth.user,
+			to: global.config.MAILER_USER,
 			subject: `New Contact From ${ messageSender }`,
 			text: req.body.message
 		};
@@ -39,10 +39,10 @@ module.exports = () => {
 		const emailTemplate = fs.readFileSync('./server/templates/contact.html', {encoding: 'utf-8'});
 
 		const transporter = nodemailer.createTransport({
-			service: global.config.mailer.service,
+			service: global.config.MAILER_SERVICE,
 			auth: {
-				user: global.config.mailer.auth.user,
-				pass: global.config.mailer.auth.pass
+				user: global.config.MAILER_USER,
+				pass: global.config.MAILER_PASS,
 			}
 		});
 
