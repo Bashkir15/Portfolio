@@ -1,23 +1,22 @@
-import scrollIn from '../utils/scroll.in';
-
-export default function works() {
+import 'sass/views/pages/works.sass';
+import scrollIn from '../utils/scrollIn';
+import Nav from '../utils/nav';
+(() => {
     const scroller = new scrollIn();
     let scrollTimeout;
 
     function scrollThrottle() {
         if (!scrollTimeout) {
-            window.requestAnimationFrame(handleScroll);
+            scrollTimeout = window.setTimeout(() => {
+                scrollTimeout = false;
+                scroller.viewPortChange();
+            }, 300);
+            scrollTimeout = true;
         }
-
-        scrollTimeout = false;
     }
 
-    function handleScroll() {
-        scroller.viewPortChange();
-        scrollTimeout = true;
-    }
-
+    Nav();
     window.addEventListener('DOMContentLoaded', scroller.init);
     window.addEventListener('scroll', scrollThrottle);
     window.addEventListener('resize', scrollThrottle);
-}
+})();

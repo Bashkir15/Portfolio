@@ -1,0 +1,142 @@
+@import "../../config/base"
+@import "../../config/typography"
+@import "../shared/shared"
+
+.process-container section 
+    padding: 120px 0
+
+    &:nth-of-type(1) 
+        padding-top: 220px
+    
+
+.process-header 
+    outline: none
+    padding-top: 150px
+
+    .wrapper
+        color: rgba(255, 255, 255, 0.9)
+    
+    .content 
+        margin: 0 auto
+        max-width: 800px
+        transition: 0.5s opacity 0.75s ease
+        width: 90%
+    
+.process-btn 
+    background: #fff
+    border-radius: 2px
+    box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.1)
+    color: $design
+    cursor: pointer
+    margin-top: 1.8rem
+    position: relative
+    text-transform: uppercase
+    transition: all 0.5s ease-out
+    width: 235px
+
+.process-bg 
+    background: #fff
+    height: 90%
+    left: 0
+    overflow: hidden
+    position: absolute
+    top: 0
+    width: 100%
+    z-index: 1
+
+    > img 
+        height: 100%
+        position: absolute
+        top: 0
+        transition: 0.75s opacity 0.75s ease
+        width: 100%
+        z-index: 1
+
+
+    .band:nth-of-type(1) 
+        background-color: #fff
+    
+
+
+.process-intro 
+    h2 
+        color: #262c33
+    
+    p 
+        color: #8895a6
+    
+
+.process-image 
+    margin: 50px auto 0
+    max-width: 350px
+    overflow: hidden
+    position: relative
+    width: 100%
+
+    img 
+        height: 100%
+        width: 100%
+    
+
+.process-support 
+    background: #4daaf2
+
+    h2 
+        color: #fff
+    
+    p 
+        color: rgba(255, 255, 255, 0.8)
+
+
+@media screen and (min-width: 550px) 
+    .process-container section:nth-of-type(1) 
+        padding-top: 360px
+    
+@media screen and (min-width: 650px) 
+    .process-header .content 
+        align-items: center
+        display: flex
+        flex-direction: column
+        text-align: center
+
+        h1 
+            line-height: 1.3
+        
+        p 
+            line-height: 1.4
+    
+
+
+    .process-intro 
+        text-align: center
+    
+@media screen and (min-width: 900px) 
+    .process-section 
+        display: flex
+    
+    .process-intro 
+        margin: 0 1%
+        width: 48%
+    
+    .process-image 
+        margin-left: 5%
+        width: 30%
+
+        img 
+            height: 280px
+            width: 280px
+        
+    
+    .process-reverse 
+        flex-direction: row-reverse
+
+        .process-image 
+            margin-left: 0
+        
+        .process-intro 
+            margin-right: 5%
+    
+    
+    .process-support .wrapper 
+        display: flex
+    

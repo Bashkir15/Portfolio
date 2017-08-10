@@ -1,0 +1,159 @@
+.landing-works 
+    background: #1b222a
+    padding: 6rem 0 8rem
+    text-align: center
+
+    h2 
+        color: rgba(255, 255, 255, 0.8)
+    
+
+    .btn 
+        margin-top: 2.5rem
+        width: 100%
+
+        button 
+            color: #f7f8f9
+            text-transform: uppercase
+        
+.landing-work 
+    height: 370px
+    margin: 0 0 2rem
+    overflow: hidden
+
+    img 
+        height: 120%
+        width: 475px
+    
+.works-container-desktop 
+    display: none
+
+@media screen and (min-width: 800px) 
+    .works-container-small 
+        align-items: center
+        display: flex
+        justify-content: space-between
+    
+    .landing-work 
+        height: 220px;
+        width: 46%;
+
+    .landing-works 
+        .btn 
+            margin: 0 auto
+            width: 280px
+
+@media screen and (min-width: 1250px) 
+    .works-container-small 
+        display: none
+    
+    .works-container-desktop 
+        align-items: center
+        display: flex
+        justify-content: space-between
+        padding-left: 5.5rem
+    
+    .works-carousel-container 
+        height: 300px
+        margin: 7.5rem 0 0
+        perspective: 1000px
+        position: relative
+        width: 200px
+    
+    .works-carousel 
+        height: 100%
+        position: absolute
+        transform-style: preserve-3d
+        transition: transform 0.4s ease
+        width: 100%
+    
+    .works-slide 
+        display: block
+        position: absolute
+        height: 250px
+        width: 250px
+        opacity: 1
+        border-radius: 10px
+
+        &:nth-of-type(1) 
+            transform: rotateY(0) translateZ(250px)
+        
+        &:nth-of-type(2) 
+            transform: rotateY(60deg) translateZ(250px)
+        
+        &:nth-of-type(3) 
+            transform: rotateY(120deg) translateZ(250px)
+        
+        &:nth-of-type(4) 
+            transform: rotateY(180deg) translateZ(250px)
+        
+        &:nth-of-type(5) 
+            transform: rotateY(240deg) translateZ(250px)
+        
+        &:nth-of-type(6) 
+            transform: rotateY(300deg) translateZ(250px)
+        
+
+        img 
+            height: 100%
+            width: 100%
+        
+    
+    .works-carousel-info 
+        display: flex
+        flex-direction: column
+        height: 300px
+        padding-left: 6rem
+        text-align: left
+        width: 58%
+
+        h4, p 
+            opacity: 0
+            transition: opacity 0.4s ease-out
+        
+
+        h4 
+            color: #f3f2f1
+        
+        p 
+            color: #a0b1c5
+        
+
+        &.shown 
+            h4, p 
+                opacity: 1
+            
+        
+    
+    .carousel-controls 
+        align-items: center
+        display: flex
+        justify-content: space-between
+        padding: 3rem 0
+        position: relative
+        margin: 0 auto
+        width: 40%
+        z-index: 5
+    
+    .carousel-controls button 
+        color: rgba(255, 255, 255, 0.8)
+        cursor: pointer
+        height: 45px
+        pointer-events: auto
+        position: relative
+        width: 160px
+        z-index: 5
+        font-size: 0.9rem
+    
+    .carousel-dot 
+        background-color: rgba(0, 0, 0, 0.2)
+        border-radius: 50%
+        height: 17px
+        margin: 0 0.6rem
+        width: 17px
+        transition: transform 0.4s ease-out, background-color 0.4s ease-out
+    
+    .carousel-dot.active 
+        background-color: #fff
+        transform: translateY(-20px)
+    
+

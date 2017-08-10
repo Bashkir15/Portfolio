@@ -1,0 +1,68 @@
+.landing-bubbles 
+    padding: 8rem 0
+
+
+.bubble-feature 
+    color: rgba(255, 255, 255, 0.8)
+    margin: 0 0 3.5rem
+    padding: 0 0.75rem 2.2rem
+    text-align: center
+
+    &.design 
+        background: $design
+    
+    &.development 
+        background: $development
+    
+    &.devops 
+        background: $devops
+    
+    .icon 
+        border-radius: 50%
+        box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.1)
+        height: 62px
+        transform: translateY(-1.3rem)
+        width: 62px
+    
+    a 
+        border-bottom: 1px solid #fff
+        color: #fff
+
+@media screen and (min-width: 800px)
+    .landing-bubbles
+        padding-top: 13.5rem
+
+    .landing-bubbles .content 
+        align-items: center
+        display: flex
+        justify-content: space-between
+        width: 104%
+    
+
+    .bubble-feature 
+        display: flex
+        flex-direction: column
+        height: 400px
+        padding: 0
+        text-align: left
+        width: 29.333%
+
+        &.design,
+        &.development,
+        &.devops 
+            background: transparent
+        
+
+        h4 
+            color: #1b222a
+        
+        p 
+            color: #8895a6
+        
+    
+
+
+@media screen and (min-width: 1400px) 
+    .landing-bubbles 
+        padding: 12rem 0 2rem
+    

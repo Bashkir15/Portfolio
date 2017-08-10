@@ -1,3 +1,10 @@
+$design: #4daaf2
+$development: #36ceb0
+$devops: #7259cd
+
+*, *::after, *::before
+	box-sizing: border-box
+
 html
 	-ms-text-size-adjust: 100%
 	-webkit-text-size-adjust: 100%
@@ -135,6 +142,7 @@ img
 	transition: all .4s ease
 
 	> span
+		color: #f3f2f1
 		padding-top: 4px
 		position: relative
 		display: block
@@ -180,6 +188,8 @@ img
 		background: #7259cd
 
 
+.notification
+	display: none
 
 // media queries
 

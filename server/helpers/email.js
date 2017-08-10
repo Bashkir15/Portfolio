@@ -7,7 +7,7 @@ module.exports = () => {
 	const obj = {};
 
 	obj.contact = (req, res) => {
-		const { messageSender } = req.body.email;
+		const messageSender = req.body.email;
 
 		const transporter = nodemailer.createTransport({
 			service: global.config.MAILER_SERVICE,
@@ -26,16 +26,17 @@ module.exports = () => {
 
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
+
 				json.bad(error, res);
 			} else {
-				sendContactConfirm(messageSender);
-				json.good(info.response, res);
+				sendContactConfirm(messageSender, res);
+				json.good({}, res);
 			}
 		});
 	};
 
 
-	function sendContactConfirm(sender, res) {
+	function sendContactConfirm(sender) {
 		const emailTemplate = fs.readFileSync('./server/templates/contact.html', {encoding: 'utf-8'});
 
 		const transporter = nodemailer.createTransport({
@@ -55,9 +56,9 @@ module.exports = () => {
 
 		transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {
-				json.bad(error, res);
+				console.log(error);
 			} else {
-				json.good(info.response, res);
+				return;
 			}
 		});
 	}

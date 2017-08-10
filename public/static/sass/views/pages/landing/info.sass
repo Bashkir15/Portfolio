@@ -1,0 +1,126 @@
+.landing-info 
+    padding: 6.5rem 0 8rem
+    position: relative
+
+    .wrapper 
+        position: relative
+    
+    .bands 
+        height: 100%
+        left: 0
+        opacity: 0.75
+        position: absolute
+        top: 0
+        width: 100%
+    
+        .band 
+            height: 125px
+            top: 0
+        
+        .band_1 
+            background: linear-gradient(to right, rgba(235, 249, 251, 1) 30%, rgba(235, 249, 251, 0) 100%)
+            width: 60%
+        
+        .band_2 
+            background: linear-gradient(to right, rgba(248, 252, 255, 1) 30%, rgba(248, 252, 255, 0) 100%)
+            width: 70%
+        
+    
+
+    .bg 
+        height: 160%
+        top: -170px
+
+        .band
+            height: 240px
+        
+        .band_1 
+            display: none
+        
+        .band_2 
+            background: linear-gradient(to right, rgba(255, 255, 255, 1) 0, rgba(241, 248, 250, 1) 60%)
+            height: 240px
+            top: 145px
+            width: 95%
+        
+        .band_3 
+            display: none
+        
+    
+
+.landing-info-content 
+    border-radius: 3px
+    box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.4)
+    margin: 0 auto
+    max-width: 600px
+    padding: 1rem 2rem 2rem
+    position: relative
+    z-index: 2
+
+    h3 
+        color: #64bbc5
+    
+    p 
+        display: none
+    
+
+
+.info-links 
+    img 
+        background: #e7f8fa
+        border-radius: 50%
+        height: 35px
+        margin-right: 1rem
+        pointer-events: none
+    
+    a 
+        align-items: center
+        color: #a0b1c5
+        display: flex
+        height: 35px
+        position: relative
+        word-wrap: break-word
+
+    span 
+        display: block
+        margin-bottom: 0
+        width: 70%
+    
+
+
+@media screen and (min-width: 800px) 
+    .landing-info 
+        .bg .band_3 
+            background: linear-gradient(to right, rgba(255, 255, 255, 1) 0, rgba(246, 249, 252, 1) 100%)
+            display: block
+            height: 270px
+            opacity: 0.8
+            top: 380px
+            width: 70%
+        
+    
+    .landing-info-content 
+        padding: 2rem 2.5rem 2rem
+        .content 
+            display: flex
+        
+        .intro 
+            width: 49%
+
+            p 
+                color: #8895a6
+                display: block
+            
+    
+    
+    .info-links 
+        padding-left: 1.1rem
+        padding-top: 3.8rem
+        width: 49%
+
+        a
+            margin: 1.25rem 0
+
+            span
+                font-size: 0.8rem
+    

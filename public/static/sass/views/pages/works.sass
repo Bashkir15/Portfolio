@@ -1,5 +1,9 @@
+@import "../../config/base"
+@import "../../config/typography"
+@import "../shared/shared"
+
 .works-page-container
-	padding: 200px 0 150px
+	padding: 150px 0 0
 
 	.bg
 		position: absolute
@@ -36,6 +40,7 @@
 	align-items: center
 	width: 90%
 	padding-top: 320px
+	padding-bottom: 100px
 	margin: 0 auto
 
 
@@ -66,6 +71,7 @@
 		background: #fff
 
 		> span
+			color: $development
 			padding-top: 0
 
 .work
@@ -82,24 +88,10 @@
 	img
 		display: block
 		position: relative
-		height: 100%
+		height: 80%
 		width: 100%
-		transition: transform 0.4s ease-out
-
-	figcaption
-		position: absolute
-		top: 0
-		left: 0
-		height: 100%
-		width: 50%
-		padding: 20px
-		background: #36d2b4
-		color: #f3f2f1
-		opacity: 0
-		backface-visibility: hidden
-		transform-origin: 0 0
-		transform: rotateY(-90deg)
-		transition: transform 0.4s ease-out, opacity 0.1s 0.3s ease-out
+		filter: grayscale(100%)
+		transition: all 0.4s ease-out
 
 	a
 		text-align: center
@@ -108,18 +100,17 @@
 		background: #fff
 		color: #36ceb0
 
+	h4
+		color: rgba(0, 0, 0, 0.7)
+
 	span
 		font-size: 19px
 		line-height: 28px
 
 	&:hover
 		img
-			transform: translateX(25%)
+			filter: grayscale(0)
 
-		figcaption
-			opacity: 1
-			transform: rotateY(0deg)
-			transition: transform 0.4s ease-out, opacity 0.1s ease-out
 
 .work-links
 	position: absolute
@@ -156,6 +147,7 @@
 @media screen and (min-width: 1000px)
 	.works-header
 		.content
+			padding-bottom: 3rem
 			h1
 				font-size: 54px
 
@@ -167,6 +159,7 @@
 	.works-container
 		flex-direction: row
 		flex-wrap: wrap
+		padding-top: 40px
 
 	.work
 		width: 46%

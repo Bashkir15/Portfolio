@@ -1,0 +1,145 @@
+*, *::after, *::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html {
+	-ms-text-size-adjust: 100%;;
+	-webkit-text-size-adjust: 100%;
+}
+body {
+	font-family: 'Lato', 'Sans Source Pro', helvetica;
+	font-size: 14px;
+	font-weight: normal;
+	overflow-x: hidden;
+	transtion: all 0.4s ease;
+	width: 100%;
+}
+a, button {
+	cursor: pointer;
+}
+a {
+	text-decoration: none;
+}
+button {
+	background: none;
+	border: none;
+}
+.bg {
+	height: 100%;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+}
+.band {
+	height: 800px;
+	position: absolute;
+	z-index: 1;
+}
+.band.right {
+	right: 0;
+}
+.band.left {
+	left: 0;
+}
+.band.bottom {
+	bottom: -800px;
+}
+.band.top {
+	top: -800px;
+}
+.band.origin_tl {
+	transform-origin: top left;
+}
+.band.origin_tr {
+	transform-origin: top right;
+}
+.band.origin_bl {
+	transform-origin: bottom left;
+}
+.band.origin_br {
+	transform-origin: bottom right;
+}
+.band.rotate_c {
+	transform: rotate(12deg);
+}
+.band.rotate_cc {
+	transform: rotate(-12deg);
+}
+.band.rotate_c.offset {
+	transform: rotate(5deg);
+}
+.band.rotate_cc.offset {
+	transform: rotate(-5deg);
+}
+.wrapper {
+	margin: 0 35px;
+	position: relative;
+	width: auto;
+	z-index: 3;
+}
+.btn {
+	border-radius: 2px;
+	box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.1);
+	font-size: 15px;
+	oveflow: hidden;
+	text-align: center;
+	text-transform: uppercase;
+	transition: all 0.4s ease;
+}
+.btn::before, .btn::after {
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 50%;
+	content: '';
+	height: 500px;
+	opacity: 0;
+	position: absolute;
+	right: -250px;
+	top: -250px;
+	transform: scale(0);
+	transition: all 0.5s ease;
+	z-index: 1;
+}
+.btn::after {
+	background: inherit;
+	transition-delay: 0.15s;
+	z-index: 2;
+}
+.btn:hover {
+	box-shadow: 0 0 120px 0 rgba(0, 0, 0, 0.23);
+}
+.btn:hover::after, .btn:hover::before {
+	opacity: 1;
+	transform: scale(1);
+}
+.btn span {
+	display: block;
+	position: relative;
+	transition: all 0.5s ease;
+	z-index: 3;
+}
+
+
+@media screen and (min-width: 900px) {
+	.wrapper {
+		margin: 0 50px;
+	}
+}
+
+@media screen and (min-width: 1100px) {
+	.wrapper {
+		margin: 0 auto;
+	}
+	.wrapper.narrow {
+		width: 750px;
+	}
+	.wrapper.standard {
+		width: 1000px;
+	}
+	.wrapper.wide {
+		width: 1100px;
+	}
+}

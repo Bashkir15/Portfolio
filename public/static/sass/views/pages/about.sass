@@ -1,3 +1,7 @@
+@import "../../config/base"
+@import "../../config/typography"
+@import "../shared/shared"
+
 .about-header
     position: relative
     padding: 240px 0
@@ -114,8 +118,9 @@
         justify-content: center
 
     img
-        height: 350px
-        width: 60%
+        height: 250px
+        width: 250px
+        border-radius: 50%
 
 @media screen and (min-width: 800px)
     .about-header
@@ -127,18 +132,11 @@
                 font-size: 22px
                 line-height: 30px
 
-    .about-image
-        img
-            width: 50%
-
 @media screen and (min-width: 1000px)
     .tiles
         width: 70%
         margin: 0 auto
 
-    .about-image
-        img
-            width: 40%
 
 @media screen and (min-width: 1200px)
     .about-header
@@ -174,9 +172,13 @@
         .tile
             &:nth-of-type(2)
                 background: #3f3054
+            &:last-of-type
+                background: #f3f2f1
+
+                h2
+                    color: rgba(0, 0, 0, 0.65)
+                p
+                    color: #adadad
 
     .about-image
        padding: 0 0 80px
-
-       img
-           width: 26%

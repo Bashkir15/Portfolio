@@ -1,15 +1,15 @@
-export default function about() {
+import 'sass/views/pages/about.sass';
+import Nav from '../utils/nav';
 
+(() => {
 	let scrolling;
 
 	function timelineEffect() {
 		const widgets = document.querySelectorAll('.about-content li');
+		const { length } = widgets;
 		let i;
-		let len = widgets.length;
 
-		for (i = 0; i < len; i++) {
-			let widget = widgets[i];
-
+		for (i = 0; i < length; i++) {
 			if (isInView(widget)) {
 				widget.classList.add('in-view');
 			}
@@ -38,7 +38,8 @@ export default function about() {
 		scrolling = false;
 	}
 
+	Nav();
 
 	window.addEventListener('load', timelineEffect, false);
 	window.addEventListener('scroll',scrollThrottle, false);
-}
+})();

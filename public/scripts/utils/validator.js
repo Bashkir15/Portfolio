@@ -9,7 +9,7 @@ export function onBlur(nodes, callback) {
 	}
 }
 
-function validateEmail(node) {
+export function validateEmail(node) {
 	let value = node.value;
 	let atpos = value.indexOf('@');
 	let dotpos = value.lastIndexOf('.');
@@ -94,7 +94,6 @@ function checkValidForm() {
 			valid++;
 		}
 	}
-
 	if (valid === length) {
 		submitButton.classList.add('form-valid');
 	}

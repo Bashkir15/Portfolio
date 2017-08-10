@@ -1,0 +1,120 @@
+.contact-intro 
+    text-align: center
+
+    h2 
+        color: #262c33
+    
+    p
+        color: #8895a6
+    
+
+.landing-contact-form 
+    position: relative
+
+    form 
+        background: #fff
+        padding: 0 2rem 0.6rem
+    
+    .bg 
+        display: none
+    
+
+.field 
+    min-height: 100px
+    position: relative
+    width: 100%
+
+    label 
+        color: #617082
+        display: block
+        margin: 0 0 0.5rem
+        text-transform: uppercase
+    
+    input 
+        background: #d8dbde
+        border: none
+        border-radius: 4px
+        color: #262c33
+        height: 45px
+        padding: 0 1.2rem
+        width: 100%
+    
+    textarea 
+        background: #d8dbde
+        border: none
+        border-radius: 4px
+        color: #262c33
+        height: 150px
+        outline: none
+        padding: 1rem 1.3rem
+        width: 100%
+    
+
+    &.invalid .error-message 
+        opacity: 1
+        transform: translateX(0)
+    
+    &.blank .error-message 
+        opacity: 1
+        tansform: translateX(0)
+    
+    .btn 
+        background: #6cb051
+        color: #f3f2f1
+        transition: background-color 0.4s ease-out
+        width: 100%
+
+        span 
+            display: block
+            margin-bottom: 0
+            z-index: 3
+        
+        &:hover 
+            background-color: darken(#6cb051, 10%)
+     
+    
+
+.error-message 
+    color: #bf3757
+    margin: 0.3rem 0 0 0.7rem
+    opacity: 0
+    transform: translateX(-50px)
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out
+
+
+@media screen and (min-width: 600px) 
+    .landing-contact-form 
+        form 
+            border-radius: 4px
+            box-shadow: 0 0 200px 0 rgba(0, 0, 0, 0.1)
+            padding: 3rem 3rem 0.3rem
+        
+        .bg 
+            background: #6cb051
+            bottom: 0
+            display: block
+            z-index: 1
+        
+        .band_1 
+            background: #fff
+        
+        .band_2 
+            background: #262c33
+            left: -1rem
+        
+
+@media screen and (min-width: 800px) 
+    .form-fields 
+        display: flex
+        flex-wrap: wrap
+    
+    .field 
+        margin: 0 3%
+        width: 44%
+
+        &:nth-of-type(3),
+        &:nth-of-type(4) 
+            width: 100%
+        
+    
+

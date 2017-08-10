@@ -1,11 +1,10 @@
 import { onBlur } from '../utils/validator'
 import notifications from './notifications'
-import axios from 'axios';
 
 export default function contact() {
 	const formWrapper = document.querySelectorAll('.field');
-	const formInputs = document.querySelectorAll('.field input');
-	const submitButton = document.querySelector('.form-submit');
+	const formInputs = document.querySelectorAll('.contact-input');
+	const submitButton = document.querySelector('.contact-submit');
 	const successContent = document.getElementById('contact-success');
 	const failureContent = document.getElementById('contact-failure');
 	const errorContent = document.getElementById('contact-error');
@@ -45,37 +44,41 @@ export default function contact() {
 	function sendMessage() {
 		if (submitButton.classList.contains('form-valid')) {
 			submitButton.classList.add('contact-loading');
-
-			axios.post('/contact', contactState, {
-				headers: {
-					'Content-Type': 'Application/Json'
-				}
+			const headers = new Headers({
+				'Content-Type': 'Application/Json',
+			});
+			console.log(contactState);
+			const message = fetch('/contact', {
+				method : 'POST',
+				body   : JSON.stringify(contactState),
+				headers,
 			})
 			.then((response) => {
-				if (response.data.success) {
+				console.log(response);
+				return response.json()
+			})
+			.then((response) => {
+				console.log(response);
+				if (response.success) {
 					resetForm();
-
 					submitButton.classList.remove('contact-loading');
 					submitButton.classList.add('form-success');
-
-					let success = new Event('message-sent');
-
+					const success = new Event('message-sent');
 					window.dispatchEvent(success);
 				} else {
 					submitButton.classList.remove('contact-loading');
-
-					let failure = new Event('message-failed');
-
+					const failure = new Event('message-failed');
 					window.dispatchEvent(failure);
 				}
 			})
 			.catch(err => {
+				console.log(err);
 				submitButton.classList.remove('contact-loading');
-				let failure = new Event('message-failed');
+				const failure = new Event('message-failed');
 				window.dispatchEvent(failure);
 			})
 		} else {
-			let error = new Event('message-error');
+			const error = new Event('message-error');
 			window.dispatchEvent(error);
 		}
 	}

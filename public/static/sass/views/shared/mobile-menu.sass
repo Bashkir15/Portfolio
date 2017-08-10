@@ -1,8 +1,9 @@
+
 .mobile-menu-container
     position: fixed
     top: 0
     left: 0
-    width: 100%
+    width: 100vw
     height: 100vh
     overflow: hidden
     pointer-events: none
@@ -27,8 +28,16 @@
     height: 100%
     opacity: 0
     background: #5fade9
-    transition: opacity 0.8s ease-out
-    z-index: 100
+    transition: opacity 0.4s ease
+
+    &.works-theme
+        background: $development
+
+    &.process-theme
+        background: $design
+
+    &.about-theme
+        background: $devops
 
 .mobile-menu-list
     padding-top: 160px
@@ -42,3 +51,7 @@
             color: #fff
             letter-spacing: 1.5px
             font-size: 26px
+
+@media screen and (min-width: 1100px)
+    .mobile-menu-container
+        display: none

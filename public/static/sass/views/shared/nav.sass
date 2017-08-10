@@ -1,143 +1,145 @@
-.nav
-	display: flex
-	align-items: stretch
-	position: absolute
-	top: 0
-	left: 0
-	height: 70px
-	width: 100%
-	padding: 0 45px
-	background: transparent
-	z-index: 110
-	transition: all .4s ease-out
+.nav 
+    align-items: stretch
+    background-color: transparent
+    display: flex
+    height: 90px
+    left: 0
+    padding: 0 1.3rem
+    position: absolute
+    top: 0
+    transition: transform 0.4s ease-out
+    width: 100%
+    z-index: 110
 
-.nav-left
-	display: flex
-	flex: 1 0 0
-	align-items: center
-	justify-content: flex-start
 
-.nav-right
-	display: flex
-	flex: 1 0 0
-	align-items: center
-	justify-content: flex-end
+.nav-left 
+    align-items: center
+    display: flex
+    flex: 1 0 0
+    justify-content: flex-start
+
+
+.nav-right 
+    align-items: center
+    display: flex
+    flex: 1 0 0
+    justify-content: flex-end
+
+
+.nav-item 
+    align-items: center
+    display: none
+    justify-content: center
+    padding: 0.8rem
 
 .nav-menu
-	position: relative
-	display: flex
-	align-items: center
-	padding: 15px
-	cursor: pointer
-	transition-property: opacity
-	transition-duration: 0.15s
-	transition-timing-function: linear
-	overflow: visible
-	z-index: 120
+    align-items: center
+    cursor: pointer
+    display: flex
+    overflow: visible
+    position: relative
+    transition: opacity 0.15s linear
+    z-index: 120
 
-.nav-menu.is-active
-    pointer-events: auto
+    &.is-active 
+        pointer-events: auto
 
-    .menu-inner
-        transition-delay: 0.22s
-        background-color: transparent
+        .menu-inner 
+            background-color: transparent
+            transition-delay: 0.22s
 
-        &:before
-            top: -2px
-            transition: top 0.1s 0.15s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.62, 0.355, 1)
-            transform: translate3d(0, 12px, 0) rotate(45deg)
+            &::before 
+                top: -2px
+                transition: top 0.1s 0.15s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.62, 0.355, 1)
+                transform: translate3d(0, 12px, 0) rotate(45deg)
+            
 
-        &:after
-            top: -2px
-            transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.13s 0.22s cubic-bezier(0.215, 0.61, 0.355, 1)
-            translate3d(0, 12px, 0) rotate(-45deg)
-            transform: translate3d(0, 12px, 0) rotate(-45deg)
-.menu-box
-	position: relative
-	display: inline-block
-	width: 30px
-	height: 18px
+            &::after 
+                top: -2px
+                transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform(0.215, 0.61, 0.355, 1)
+                transform: translate3d(0, 12px, 0) rotate(-45deg)
+            
+       
+    
 
-.menu-inner
+
+.menu-box 
+    display: inline-block
+    height: 18px
+    position: relative
+    width: 30px
+
+
+.menu-inner 
+    background-color: #fff
     display: block
     height: 3px
     top: 2px
-    background-color: #fff
     transition: background-color 0s 0.13s linear
 
-    &:before,
-    &:after
+    &::before,
+    &::after 
+        background-color: #fff
+        border-radius: 4px
         content: ""
         display: block
         height: 3px
-        width: 30px
-        background-color: #fff
-        border-radius: 4px
         position: absolute
-        transition-property: transform
-        transition-duration: 0.15s
-        transition-timing-function: ease
+        transition: transform 0.15s ease
+        width: 30px
+    
 
-    &:before
+    &::before 
         top: 6px
         transition: top 0.1s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19)
-
-    &:after
+    
+    &::after 
         top: 12px
-        transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19)
+        transition: top 0.1s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1), transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19)
+    
 
 
+@media screen and (min-width: 1100px) 
+    .nav-menu 
+        display: none
+    
+    .nav 
+        height: 70px
+        left: 0
+        position: fixed
+        top: 0
+        transition: all 0.4 ease-in
 
-@media screen and (min-width: 1100px)
-	.nav-menu
-		display: none
+        &.nav-pinned 
+            background-color: #fff
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12)
+            transform: translateY(0)
 
-	.nav-item
-		height: 60px
+            .nav-item a
+                margin-bottom: 0
 
-		&.desktop
-			display: flex
+                button span 
+                    color: $design
+                    font-size: 0.98rem
+                
+        &.nav-unpinned 
+            transform: translateY(-70px)
+        
+    
+    .nav-item 
+        display: flex
 
-			button
-				position: relative
-				width: 90px
+        button 
+            cursor: pointer
+            position: relative
+        
 
-				span
-					@include lato()
-					font-weight: 300
-					font-size: 18px
-					letter-spacing: 3px
-					color: #f3f2f1
-					transition: all .4s ease-out
+        span 
+            color: #f3f2f1
+            transition: color 0.4s ease-out
+        
+    
 
-				&:before
-					content: ""
-					position: absolute
-					bottom: -8px
-					left: 0
-					height: 1px
-					width: 100%
-					opacity: 0
-					transform: translateY(30px)
-					background: #f3f2f1
-					transition: all .3s ease-out
-
-				&:hover
-					&:before
-						opacity: 1
-						transform: translateY(0)
-
-		.nav-link
-			display: flex
-			flex-direction: column
-			align-items: center
-			justify-content: center
-			text-decoration: none
-			
-			&.active
-				button
-					span
-						color: #429e97
 
 
 

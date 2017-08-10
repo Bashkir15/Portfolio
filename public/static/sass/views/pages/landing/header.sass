@@ -1,0 +1,75 @@
+.landing-header
+    position: relative
+
+    .landing-header-background 
+        background: linear-gradient(45deg, rgba(242, 61, 121, 1) 0%, rgba(230, 150, 70, 1) 100%)
+
+        .band.over 
+            background: #fff
+            left: -1rem
+            z-index: 3
+        
+        .band.under 
+            background: rgba(255, 255, 255, 0.05)
+            z-index: 2
+        
+    
+
+.landing-header-content 
+    opacity: 0
+    padding: 9rem 0
+    text-align: center
+    transition: opacity 0.75s ease, transform 0.75s ease
+    transform: translate(-50px, 0)
+
+    > h1 span 
+        color: #fff
+        display: block
+
+        &:nth-of-type(2) 
+            display: none
+        
+    
+    p 
+        color: rgba(255, 255, 255, 0.85)
+
+    small 
+        font-size: 0.8rem
+    
+
+@media screen and (min-width: 800px) 
+    .landing-header 
+        > .wrapper
+            display: flex
+            padding: 4.2rem 0
+        
+    
+    .landing-header-content 
+        text-align: left;
+        width: 50%;
+
+        > h1 
+            margin-bottom: 2rem
+        
+        p 
+            line-height: 1.5
+            width: 85%
+        
+    
+
+
+@media screen and (min-width: 1400px) 
+    .landing-header 
+        height: 95vh
+        padding-bottom: 4rem
+        > .wrapper 
+            justify-content: flex-end
+            padding-bottom: 6.5rem
+            margin: 0 auto
+            width: 1160px
+        
+        > .content 
+            margin-left: 5.5rem
+            width: 40%
+        
+    

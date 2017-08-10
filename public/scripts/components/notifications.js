@@ -11,14 +11,12 @@ class notifications {
 		}
 
 		this.count = 0;
-		this._applySettings(options);
-		this.open = this._open.bind(this);
-		this.close = this._close.bind(this);
+		this.applySettings(options);
 	}
 
-	_applySettings(options) {
+	applySettings = (options) => {
 		if (typeof options === 'object') {
-			for (var i in options) {
+			for (const i in options) {
 				if (options.hasOwnProperty(i)) {
 					this.settings[i] = options[i];
 				}
@@ -26,31 +24,30 @@ class notifications {
 		}
 	}
 
-	_buildOut() {
-		var _container = document.createElement('div');
-		var _contentHolder = document.createElement('div');
-		var _content;
+	buildOut = () => {
+		const container = document.createElement('div');
+		const contentHolder = document.createElement('div');
+		let content;
 
-		_container.className = 'notification-container';
-		_contentHolder.className = 'notification';
+		container.className = 'notification-container';
+		contentHolder.className = 'notification';
 
-		this.settings.container = _container;
+		this.settings.container = container;
 		this.settings.container.style.position = "fixed";
 
 		if (this.settings.content === "string") {
-			_content = this.settings.content;
+			content = this.settings.content;
 		} else {
-			_content = this.settings.content.innerHTML;
+			content = this.settings.content.innerHTML;
 		}
 
-		this._checkOptions(_contentHolder);
-
-		_contentHolder.innerHTML = _content;
-		this.settings.container.appendChild(_contentHolder);
+		this.checkOptions(contentHolder);
+		contentHolder.innerHTML = content;
+		this.settings.container.appendChild(contentHolder);
 		document.body.appendChild(this.settings.container);
 	}
 
-	_checkOptions(item) {
+	checkOptions = (item) => {
 		switch(this.settings.type) {
 			case "success":
 				item.classList.add('success');
@@ -88,9 +85,9 @@ class notifications {
 		}
 	}
 
-	_open() {
-		var notifyId = "notification-" + this.count;
-		this._buildOut.call(this);
+	open = () => {
+		const notifyId = "notification-" + this.count;
+		this.buildOut();
 
 		setTimeout(() => {
 			this.settings.container.classList.add('shown');
@@ -98,8 +95,9 @@ class notifications {
 		}, 100);
 
 		if (this.settings.timeout > 0) {
-			setTimeout(() => {
+			let notTimeout = window.setTimeout(() => {
 				this.close(notifyId);
+				window.clearTimeout(notTimeout);
 			}, this.settings.timeout);
 		}
 
@@ -108,8 +106,8 @@ class notifications {
 		return notifyId;
 	}
 
-	_close(notificationId) {
-		var notification = document.getElementById(notificationId);
+	close = (notificationId) => {
+		const notification = document.getElementById(notificationId);
 
 		if (notification) {
 			notification.classList.remove('shown');
