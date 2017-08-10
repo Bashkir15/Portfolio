@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const shrinkRay = require('shrink-ray');
 const parameterProtection = require('hpp');
 const helmet = require('helmet');
 const PrettyError = require('pretty-error');
@@ -48,7 +47,6 @@ module.exports = () => {
 	app.use(helmet.noSniff());
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
-	app.use(shrinkRay());
 	app.use(express.static(PATHS.public));
 	app.use(express.static(PATHS.build));
 	app.use(express.static(PATHS.dist));
